@@ -21,3 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.prompt_view, name="prompt_view"),
 ]
+
+admin.site.site_header = "Fabulari"
+admin.site.site_title = "Fabulari"
+admin.site.index_title = "Tables"
