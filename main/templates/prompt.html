@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prompt Response</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding-top: 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .continue-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .continue-button:hover {
+            background-color: #218838;
+        }
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        p {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+        .input-text {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="admin">Settings</a>
+        <h1>{{ english_sentence }}</h1>
+        
+        {% if response %}
+            <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
+            <p><strong>Feedback:</strong> {{ response }}</p>
+            <div>
+                <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
+            </div>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
