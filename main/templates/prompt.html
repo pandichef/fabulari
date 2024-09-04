@@ -88,17 +88,17 @@
 <body>
     <div class="container">
         <h1>{{ english_sentence }}</h1>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
-        </form>
-
         {% if response %}
             <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
             <p><strong>Feedback:</strong> {{ response }}</p>
             <div>
                 <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
             </div>
+        {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
+        </form>
         {% endif %}
     </div>
 </body>
