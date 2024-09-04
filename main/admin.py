@@ -10,7 +10,7 @@ class PhraseAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         return [
-            # "cosine_similarity",
+            "cosine_similarity",
         ]
 
     def relevance_indicator(self, obj):
