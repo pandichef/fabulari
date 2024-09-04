@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Response</title>
     <style>
         body {
@@ -10,89 +13,75 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 10px;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
+
         .container {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
+            width: 90%;
             max-width: 900px;
             box-sizing: border-box;
-            margin-top: 10px; /* Small gap at the top */
+            margin-top: 10px;
         }
+
         h1 {
             font-size: 24px;
-            margin: 0 0 20px;
-        }
-        form {
             margin-bottom: 20px;
-            width: 100%;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+            margin-bottom: 20px;
             font-size: 18px;
         }
+
         .continue-button {
             background-color: #28a745;
             color: #fff;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             transition: background-color 0.3s ease;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
         }
+
         .continue-button:hover {
             background-color: #218838;
         }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
         p {
             background-color: #f1f1f1;
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
-            font-size: 18px;
+            font-size: 16px;
             white-space: pre-wrap;
         }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 20px;
-            }
-            .continue-button {
-                font-size: 16px;
-                padding: 10px 20px;
-            }
-            input[type="text"] {
-                font-size: 16px;
-                padding: 12px;
-            }
-            p {
-                font-size: 16px;
-            }
-        }
-        @media (max-width: 400px) {
-            h1 {
-                font-size: 18px;
-            }
-            .continue-button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-            input[type="text"] {
-                font-size: 14px;
-                padding: 10px;
-            }
-            p {
-                font-size: 14px;
-            }
+
+        .input-text {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -103,10 +92,13 @@
             {% csrf_token %}
             <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
         </form>
+
         {% if response %}
             <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
             <p><strong>Feedback:</strong> {{ response }}</p>
-            <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
+            <div>
+                <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
+            </div>
         {% endif %}
     </div>
 </body>
