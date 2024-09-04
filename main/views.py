@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from purepython.gptsrs import (
     generate_full_sentence,
     to_english,
@@ -44,9 +44,14 @@ def prompt_view(request):
 
     # GET
     # Get most relevant phrase
-    next_phrase = Phrase.objects.all()[0]
-    # print(next_phrase.id)
-    # print(next_phrase.text)
+    qs = Phrase.objects.all()
+
+    if len(qs) == 0:
+        return HttpResponse(
+            "All least one phrase is required for app to work correctly."
+        )
+
+    next_phrase = qs[0]
 
     full_spanish_sentence = generate_full_sentence(next_phrase.text)
     equivalent_english_sentence = to_english(full_spanish_sentence)
