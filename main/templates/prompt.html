@@ -20,10 +20,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 100%;
             max-width: 900px;
             box-sizing: border-box;
-            margin-top: 20px;
+            margin: auto;
+            overflow: hidden;
         }
         h1 {
             font-size: 24px;
@@ -70,11 +71,43 @@
             font-size: 16px;
             margin-top: 20px;
         }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            .continue-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            input[type="text"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 18px;
+            }
+            .continue-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            input[type="text"] {
+                font-size: 12px;
+                padding: 6px;
+            }
+            p {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="admin/main/phrase">Settings</a>
+        <a href="admin/main/phrase" style="display: block; margin-bottom: 20px;">Settings</a>
         <h1>{{ english_sentence }}</h1>
         
         {% if response %}
