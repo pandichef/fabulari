@@ -128,7 +128,7 @@ For example, if the user types "por cierto has visto mi libro", don't point out 
             },
             {
                 "role": "user",
-                "content": f"""The user translated the sentence "{sentence_in_native_language}" as "{attempted_translation}".  Do not comment on accent marks or punctuation.""",
+                "content": f"""The user translated the sentence "{sentence_in_native_language}" as "{attempted_translation}".""",
             },
         ],
     )
