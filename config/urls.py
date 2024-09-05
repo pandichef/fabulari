@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main import views
+from main.export_phrase_list import export_csv
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.prompt_view, name="prompt_view"),
+    # path("download_csv/<int:pk>/", export_csv, name="download_csv"),
+    path("export_csv/", export_csv, name="export_csv"),
 ]
 
 admin.site.site_header = "Fabulari"

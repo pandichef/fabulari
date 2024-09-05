@@ -10,6 +10,7 @@ from main.models import Phrase
 
 
 class CustomUserAdmin(UserAdmin):
+    change_form_template = "custom_user_change_form.html"
     # add_form = CustomUserCreationForm
     # form = CustomUserChangeForm
     model = CustomUser
@@ -55,7 +56,7 @@ class CustomUserAdmin(UserAdmin):
                     "is_staff",
                     "is_superuser",
                     # "groups",
-                    "user_permissions",
+                    # "user_permissions",
                 )
             },
         ),

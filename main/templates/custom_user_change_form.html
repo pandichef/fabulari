@@ -1,0 +1,9 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools %}
+    {{ block.super }}
+    <form action="{% url 'export_csv' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <input type="submit" value="Export Phrase List" class="button">
+    </form>
+{% endblock %}
