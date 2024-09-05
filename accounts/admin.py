@@ -17,6 +17,7 @@ class CustomUserAdmin(UserAdmin):
     #     "email",
     #     "username",
     # ]
+    list_display = ["username", "is_staff", "native_language", "working_on"]
     fieldsets = (
         ("User Settings", {"fields": ("native_language", "working_on")}),
         ("Username/Password", {"fields": ("username", "password")}),

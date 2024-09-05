@@ -4,9 +4,20 @@ from .models import Phrase
 
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
-    list_display = ("text", "language", "cosine_similarity", "relevance_indicator")
+    list_display = (
+        "user",
+        "text",
+        "language",
+        "cosine_similarity",
+        "relevance_indicator",
+    )
     list_filter = ("language",)
     search_fields = ("text",)
+    fields = (
+        "text",
+        "language",
+        "cosine_similarity",
+    )
 
     def get_readonly_fields(self, request, obj=None):
         return ["cosine_similarity", "user"]

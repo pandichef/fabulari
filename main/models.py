@@ -66,7 +66,11 @@ class Phrase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
     text = models.CharField(max_length=255)
     language = models.CharField(
-        max_length=10, choices=LANGUAGE_CHOICES, null=False, blank=True
+        max_length=10,
+        choices=LANGUAGE_CHOICES,
+        null=False,
+        blank=True,
+        help_text="""If you leave this blank, we'll assume it's the current "working on" language.""",
     )
     cosine_similarity = models.FloatField(null=True, blank=False)
 
