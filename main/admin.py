@@ -63,7 +63,8 @@ class PhraseAdmin(admin.ModelAdmin):
         )
 
         # get_equivalent_object = Phrase.objects.get(cleaned_text=cleaned_text)
-        existing_object = Phrase.objects.get(cleaned_text=cleaned_text)
+        # existing_object = Phrase.objects.get(cleaned_text=cleaned_text)
+        existing_object = Phrase.objects.filter(cleaned_text=cleaned_text).first()
 
         if existing_object:
             # self.message_user(request, "This term already exists.")
