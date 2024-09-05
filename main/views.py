@@ -46,7 +46,7 @@ def prompt_view(request):
                 "response": feedback
                 # + "\n"
                 + f"\n"
-                + f"\nPhrase: {phrase_object.text}"
+                + f"\nPhrase: {phrase_object.cleaned_text}"
                 + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
                 + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
             },
