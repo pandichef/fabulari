@@ -23,7 +23,7 @@ class CustomUserAdmin(UserAdmin):
         extra_context = extra_context or {}
         # extra_context["save_on_top"] = True
         extra_context["show_save"] = False
-        # extra_context["show_save_and_add_another"] = False
+        extra_context["show_save_and_add_another"] = False
         # extra_context["show_close"] = False
         # extra_context["show_history"] = False
         return super().change_view(
@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin):
         extra_context = extra_context or {}
         # extra_context["save_on_top"] = True
         extra_context["show_save"] = False
-        # extra_context["show_save_and_add_another"] = False
+        extra_context["show_save_and_add_another"] = False
         # extra_context["show_history"] = False
         # return super().change_view(
         #     request, object_id, form_url, extra_context=extra_context
