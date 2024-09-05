@@ -45,6 +45,7 @@ Please translate the {working_on} word or phrase "{cleaned_phrase}" to {native_l
 {example_sentence}
 
 Do not include extra punctuation like leading and trailing quotes in the completion.
+Do not provide a translation of the example sentence, only a translation of the word or phrase above.
 """
 
     # If the {working_on} word is a verb, also indicate the grammatical form.  For example, "preguntar" would "preguntar".
@@ -64,4 +65,8 @@ Do not include extra punctuation like leading and trailing quotes in the complet
         ],
     )
     definition = completion.choices[0].message.content
+    print(definition)
+    print(definition)
+    print(definition)
+    print(definition)
     return (cleaned_phrase, example_sentence, definition)
