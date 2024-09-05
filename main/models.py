@@ -35,7 +35,9 @@ class PhraseManager(models.Manager):
         #     0.5 if mean_cosine_similarity is None else mean_cosine_similarity
         # )
 
-        mean_cosine_similarity += np.random.normal(loc=0.0, scale=0.25)
+        mean_cosine_similarity = float(mean_cosine_similarity) + np.random.normal(
+            loc=0.0, scale=0.25
+        )
 
         # if mean_cosine_similarity is None:
         #     return super().get_queryset().none()
