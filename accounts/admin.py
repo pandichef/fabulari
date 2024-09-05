@@ -17,6 +17,18 @@ class CustomUserAdmin(UserAdmin):
     #     "email",
     #     "username",
     # ]
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        obj = self.get_object(request, object_id)
+        extra_context = extra_context or {}
+        # extra_context["save_on_top"] = True
+        extra_context["show_save"] = False
+        extra_context["show_save_and_add_another"] = False
+        # extra_context["show_close"] = False
+        # extra_context["show_history"] = False
+        return super().change_view(
+            request, object_id, form_url, extra_context=extra_context
+        )
+
     list_display = ["username", "is_staff", "native_language", "working_on"]
     fieldsets = (
         ("User Settings", {"fields": ("native_language", "working_on")}),
@@ -30,7 +42,7 @@ class CustomUserAdmin(UserAdmin):
                     "is_staff",
                     "is_superuser",
                     # "groups",
-                    # "user_permissions",
+                    "user_permissions",
                 )
             },
         ),
@@ -57,10 +69,18 @@ class CustomUserAdmin(UserAdmin):
         )
         obj.user_permissions.add(*permissions)
 
-        permissions = Permission.objects.filter(
-            content_type=ContentType.objects.get_for_model(CustomUser)
+        content_type = ContentType.objects.get_for_model(CustomUser)
+        # permissions = Permission.objects.filter(
+        #     content_type=ContentType.objects.get_for_model(CustomUser)
+        # )
+
+        view_permission = Permission.objects.get(
+            content_type=content_type, codename="view_customuser"
         )
-        obj.user_permissions.add(*permissions)
+        change_permission = Permission.objects.get(
+            content_type=content_type, codename="change_customuser"
+        )
+        obj.user_permissions.add(view_permission, change_permission)
 
         # all_phrase_permissions = ContentType.objects.get_for_model(Phrase)
 
@@ -70,22 +90,17 @@ class CustomUserAdmin(UserAdmin):
         # )
 
     def get_readonly_fields(self, request, obj=None):
+        fields = [
+            "is_active",
+            "is_staff",
+            "is_superuser",
+            "groups",
+            # "user_permissions",
+        ]
         if not request.user.is_superuser:
-            return [
-                "is_active",
-                "is_staff",
-                "is_superuser",
-                "groups",
-                "user_permissions",
-            ]
+            return fields + ["is_superuser"]
         else:
-            return [
-                "is_active",
-                "is_staff",
-                # "is_superuser",
-                "groups",
-                "user_permissions",
-            ]
+            return fields
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

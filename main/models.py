@@ -73,7 +73,8 @@ class Phrase(models.Model):
         choices=LANGUAGE_CHOICES,
         null=False,
         blank=True,
-        help_text="""If you leave this blank, we'll assume it's the current "working on" language.""",
+        # help_text="""If you leave this blank, we'll assume it's the current "working on" language.""",
+        help_text=""""working on" language if blank""",
     )
     cosine_similarity = models.FloatField(null=True, blank=False)
 

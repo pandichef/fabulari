@@ -11,6 +11,18 @@ from purepython.cleantranslation import phrase_to_native_language
 
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
+    # change_form_template = "phrase_change_form.html"
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        obj = self.get_object(request, object_id)
+        extra_context = extra_context or {}
+        # extra_context["save_on_top"] = True
+        extra_context["show_save"] = False
+        extra_context["show_save_and_add_another"] = False
+        # extra_context["show_history"] = False
+        return super().change_view(
+            request, object_id, form_url, extra_context=extra_context
+        )
+
     list_display = (
         "user",
         "text",
