@@ -2,3 +2,15 @@
 
 {% block object-tools-items %}
 {% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var field = document.getElementById('id_text');  // Replace 'your_field' with the ID of the field you want to focus on
+            if (field) {
+                field.focus();
+            }
+        });
+    </script>
+{% endblock %}
