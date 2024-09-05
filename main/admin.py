@@ -90,25 +90,23 @@ class PhraseAdmin(admin.ModelAdmin):
             obj.user = request.user
         if not obj.language:
             obj.language = request.user.working_on
-        (cleaned_text, example_sentence, definition) = phrase_to_native_language(
-            phrase=obj.text,
-            working_on=request.user.working_on,
-            native_language=request.user.native_language,
-        )
 
-        # get_equivalent_object = Phrase.objects.get(cleaned_text=cleaned_text)
-        # existing_object = Phrase.objects.get(cleaned_text=cleaned_text)
-        existing_object = Phrase.objects.filter(cleaned_text=cleaned_text).first()
+        existing_object = Phrase.objects.filter(text=obj.text).first()
+
+        if not existing_object or existing_object and existing_object.text != obj.text:
+            from purepython.gptsrs import OPENAI_LLM_MODEL
+
+            self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
+            (cleaned_text, example_sentence, definition) = phrase_to_native_language(
+                phrase=obj.text,
+                working_on=request.user.working_on,
+                native_language=request.user.native_language,
+            )
+            existing_object = Phrase.objects.filter(cleaned_text=cleaned_text).first()
+        else:
+            existing_object = Phrase.objects.filter(cleaned_text=obj.text).first()
 
         if existing_object:
-            # self.message_user(request, "This term already exists.")
-            # Redirect to the change page of the existing object
-            # self.message_user(
-            #     request,
-            #     "Redirected to the existing object due to a unique constraint.",
-            #     # level="warning",
-            # )
-            # return redirect(change_url)
             obj.existing_obj_id = existing_object.id
 
         else:
