@@ -1,3 +1,4 @@
+import numpy as np
 from django.db import models
 from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value
 
@@ -25,15 +26,16 @@ class PhraseManager(models.Manager):
         """Return a queryset annotated with distance from the mean value."""
         # mean_cosine_similarity = self.get_mean_cosine_similarity()
         qs = super().get_queryset()
-        mean_cosine_similarity = qs.aggregate(Avg("cosine_similarity"))[
-            "cosine_similarity__avg"
-        ]  # todo: get the mean by user and language type
 
-        # mean_cosine_similarity = 0.5
+        # mean_cosine_similarity = qs.aggregate(Avg("cosine_similarity"))[
+        #     "cosine_similarity__avg"
+        # ]  # todo: get the mean by user and language type
 
-        mean_cosine_similarity = (
-            0.5 if mean_cosine_similarity is None else mean_cosine_similarity
-        )
+        # mean_cosine_similarity = (
+        #     0.5 if mean_cosine_similarity is None else mean_cosine_similarity
+        # )
+
+        mean_cosine_similarity = np.random.normal(loc=0.5, scale=0.25)
 
         # if mean_cosine_similarity is None:
         #     return super().get_queryset().none()
