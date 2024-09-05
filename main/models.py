@@ -1,6 +1,6 @@
 import numpy as np
 from django.db import models
-from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value
+from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
 
 # from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
@@ -27,17 +27,35 @@ class PhraseManager(models.Manager):
         # mean_cosine_similarity = self.get_mean_cosine_similarity()
         qs = super().get_queryset()
 
-        mean_cosine_similarity = qs.aggregate(Avg("cosine_similarity"))[
+        mean_value = qs.aggregate(Avg("cosine_similarity"))[
             "cosine_similarity__avg"
+        ]  # todo: get the mean by user and language type
+        stddev_value = qs.aggregate(StdDev("cosine_similarity"))[
+            "cosine_similarity__stddev"
         ]  # todo: get the mean by user and language type
 
         # mean_cosine_similarity = (
         #     0.5 if mean_cosine_similarity is None else mean_cosine_similarity
         # )
 
-        mean_cosine_similarity = float(mean_cosine_similarity) + np.random.normal(
-            loc=0.0, scale=0.25
-        )
+        # qs_values = self.values_list("cosine_similarity")
+        # # Step 2: Exclude None values
+        # filtered_values = [value for value in qs_values if value is not None]
+
+        # # Step 3: Convert to a NumPy array
+        # numpy_array = np.array(filtered_values)
+
+        # # Step 4: Calculate the mean value
+        # if numpy_array.size > 0:
+        #     mean_value = np.mean(numpy_array)
+        #     stddev_value = np.std(numpy_array)
+        # else:
+        #     mean_value = 0.50
+        #     stddev_value = 0.25
+
+        #     print("No valid values to calculate the mean.")
+
+        mean_cosine_similarity = np.random.normal(loc=mean_value, scale=stddev_value)
 
         # if mean_cosine_similarity is None:
         #     return super().get_queryset().none()
