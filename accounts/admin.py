@@ -93,6 +93,12 @@ class CustomUserAdmin(UserAdmin):
             return qs  # Return all objects for superusers
         return qs.filter(id=request.user.id)  # Filter objects for regular users
 
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        # Remove all actions
+        actions.clear()
+        return actions
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
 
