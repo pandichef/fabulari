@@ -29,6 +29,19 @@ class CustomUserAdmin(UserAdmin):
             request, object_id, form_url, extra_context=extra_context
         )
 
+    def add_view(self, request, form_url="", extra_context=None):
+        # def add_view(self, request, object_id, form_url="", extra_context=None):
+        # obj = self.get_object(request, object_id)
+        extra_context = extra_context or {}
+        # extra_context["save_on_top"] = True
+        extra_context["show_save"] = False
+        extra_context["show_save_and_add_another"] = False
+        # extra_context["show_history"] = False
+        # return super().change_view(
+        #     request, object_id, form_url, extra_context=extra_context
+        # )
+        return self.changeform_view(request, None, form_url, extra_context)
+
     list_display = ["username", "is_staff", "native_language", "working_on"]
     fieldsets = (
         ("User Settings", {"fields": ("native_language", "working_on")}),
