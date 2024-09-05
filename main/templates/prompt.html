@@ -87,7 +87,8 @@
 </head>
 <body>
     <div class="container">
-        <a href="admin/main/phrase"">Settings</a>
+        <a href="admin/main/phrase/add">Add New Phrase</a> |
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
         <h1>{{ english_sentence }}</h1>
         {% if response %}
             <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
@@ -96,10 +97,12 @@
                 <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
             </div>
         {% else %}
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
-        </form>
+            {% if not no_phrases %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
+                </form>
+            {% endif %}
         {% endif %}
     </div>
 </body>
