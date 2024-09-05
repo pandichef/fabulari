@@ -103,7 +103,7 @@ def get_feedback(
 You provide feedback on user's attempted translation from {native_language} to {working_on}.  
 Simply provide the raw feedback in {native_language} without judging the response or providing encouragement.  
 Also, ignore accent marks since the user might not have access the appropriate keyboard.
-For example, treat llegaré and llegare as synonyms.""",
+For example, if the user types llegare instead of llegaré, do not provide feedback on this.""",
             },
             {
                 "role": "user",
