@@ -42,7 +42,7 @@ def prompt_view(request):
                 + f"\n"
                 + f"\nPhrase: {phrase_object.text}"
                 + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
-                + f"\nEmbeddings Model: {OPENAI_EMBEDDINGS_MODEL}",
+                + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
             },
         )
 
