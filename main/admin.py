@@ -45,6 +45,7 @@ class PhraseAdmin(admin.ModelAdmin):
         # "language",
         "cosine_similarity",
         "relevance",
+        "language",
         "user",
     )
     list_filter = ("language",)
@@ -99,7 +100,7 @@ class PhraseAdmin(admin.ModelAdmin):
             self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
             (cleaned_text, example_sentence, definition) = phrase_to_native_language(
                 phrase=obj.text,
-                working_on=request.user.working_on,
+                working_on=obj.language,
                 native_language=request.user.native_language,
             )
             existing_object = Phrase.objects.filter(cleaned_text=cleaned_text).first()

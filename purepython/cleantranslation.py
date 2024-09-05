@@ -35,7 +35,7 @@ def phrase_to_native_language(
     openai_model=OPENAI_LLM_MODEL,
     # phrase=None,
 ) -> Tuple:
-    cleaned_phrase = clean_phrase(phrase)
+    cleaned_phrase = clean_phrase(phrase, working_on=working_on)
     example_sentence = generate_full_sentence(
         cleaned_phrase, working_on=working_on, openai_model=openai_model
     )
