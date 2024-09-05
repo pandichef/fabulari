@@ -38,9 +38,10 @@ class PhraseAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
-        "text",
+        # "text",
         "cleaned_text",
-        "language",
+        "definition",
+        # "language",
         "cosine_similarity",
         "relevance",
     )
