@@ -7,28 +7,10 @@
     {{ block.super }}
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            function focusField() {
-                var field = document.getElementById('id_text');  // Replace 'your_field' with the ID of the field you want to focus on
-                if (field) {
-                    // Check if the field is visible and in the viewport
-                    var rect = field.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)) {
-                        field.focus();
-                    } else {
-                        // Scroll into view and focus
-                        field.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
-                        field.addEventListener('focus', function() {
-                            // Delay focus to ensure scroll has happened
-                            setTimeout(function() {
-                                field.focus();
-                            }, 500); // Adjust delay as necessary
-                        });
-                    }
-                }
+            var field = document.getElementById('id_text');  // Replace 'your_field' with the ID of the field you want to focus on
+            if (field) {
+                field.focus();
             }
-
-            // Call focusField after a short delay to ensure all elements are loaded
-            setTimeout(focusField, 300); // Adjust delay as necessary
         });
     </script>
 {% endblock %}

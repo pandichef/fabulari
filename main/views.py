@@ -85,9 +85,6 @@ def prompt_view(request):
     full_working_on_sentence = generate_full_sentence(
         next_phrase.text, working_on=working_on
     )
-    print(full_working_on_sentence)
-    print(full_working_on_sentence)
-    print(full_working_on_sentence)
     equivalent_native_language_sentence = to_native_language(
         full_working_on_sentence,
         working_on=working_on,
@@ -106,5 +103,8 @@ def prompt_view(request):
     return render(
         request,
         "prompt.html",
-        {"english_sentence": request.session["equivalent_native_language_sentence"]},
+        {
+            "english_sentence": request.session["equivalent_native_language_sentence"],
+            "working_on": working_on,
+        },
     )

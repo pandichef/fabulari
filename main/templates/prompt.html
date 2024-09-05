@@ -100,10 +100,35 @@
             {% if not no_phrases %}
                 <form method="post">
                     {% csrf_token %}
-                    <input type="text" name="prompt" placeholder="Type your Spanish here..." autofocus>
+                    <input type="text" name="prompt" placeholder="Type your {{ working_on }} here..." autofocus>
                 </form>
             {% endif %}
         {% endif %}
     </div>
+
+    <!-- Javascript to focus on the Continue Button -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            function focusButton() {
+                var button = document.querySelector('.continue-button');  // Use the class of your button
+                if (button) {
+                    // Scroll the button into view and highlight it
+                    button.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
+                    button.focus(); // Attempt to focus the button (not all browsers support this)
+
+                    // Add visual indication if needed
+                    button.style.border = '2px solid red'; // Example of visual highlight
+                    
+                    // Optional: add a delay to ensure the scroll has happened before setting focus
+                    setTimeout(function() {
+                        button.focus(); // Reapply focus after scroll
+                    }, 500); // Adjust delay as necessary
+                }
+            }
+
+            // Call focusButton after a short delay to ensure all elements are loaded
+            setTimeout(focusButton, 300); // Adjust delay as necessary
+        });
+    </script>
 </body>
 </html>
