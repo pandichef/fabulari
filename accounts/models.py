@@ -6,6 +6,12 @@ LANGUAGE_CHOICES = [
     ("en", "English"),
     ("es", "Spanish"),
     ("ru", "Russian"),
+    ("he", "Hebrew"),
+    ("ar", "Arabic"),
+    ("zh", "Chinese"),
+    ("de", "German"),
+    ("la", "Latin"),
+    ("fr", "French"),
     # Add more languages as needed
 ]
 
