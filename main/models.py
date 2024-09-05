@@ -64,8 +64,8 @@ class Phrase(models.Model):
     # ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
-    text = models.CharField(max_length=255)
-    cleaned_text = models.CharField(max_length=255)
+    text = models.CharField(max_length=255, verbose_name="Raw text")
+    cleaned_text = models.CharField(max_length=255, verbose_name="Phrase")
     example_sentence = models.CharField(max_length=255)
     definition = models.CharField(max_length=255)
     language = models.CharField(
@@ -86,4 +86,4 @@ class Phrase(models.Model):
         unique_together = ("user", "cleaned_text")
 
     def __str__(self):
-        return f"{self.text}"
+        return f"{self.cleaned_text}"

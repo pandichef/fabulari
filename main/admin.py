@@ -39,19 +39,19 @@ class PhraseAdmin(admin.ModelAdmin):
         return self.changeform_view(request, None, form_url, extra_context)
 
     list_display = (
-        "user",
-        # "text",
         "cleaned_text",
+        # "text",
         "definition",
         # "language",
         "cosine_similarity",
         "relevance",
+        "user",
     )
     list_filter = ("language",)
     search_fields = ("cleaned_text",)
     fields = (
         "text",
-        "cleaned_text",
+        # "cleaned_text",
         "example_sentence",
         "definition",
         "language",
