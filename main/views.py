@@ -8,6 +8,7 @@ from purepython.gptsrs import (
     get_feedback,
 )
 from main.models import Phrase
+from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
 
 # phrase_list = ["en cuanto a"]
 
@@ -40,7 +41,8 @@ def prompt_view(request):
                 # + "\n"
                 + f"\n"
                 + f"\nPhrase: {phrase_object.text}"
-                + f"\nCosine Similarity: {str(cosine_similarity)}",
+                + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
+                + f"\nEmbeddings Model: {OPENAI_EMBEDDINGS_MODEL}",
             },
         )
 
