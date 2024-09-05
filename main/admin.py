@@ -42,7 +42,7 @@ class PhraseAdmin(admin.ModelAdmin):
         "cleaned_text",
         "language",
         "cosine_similarity",
-        "relevance_indicator",
+        "relevance",
     )
     list_filter = ("language",)
     search_fields = ("cleaned_text",)
@@ -69,11 +69,17 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             return fields
 
-    def relevance_indicator(self, obj):
+    def relevance(self, obj):
         if obj.distance_from_mean:
-            return obj.distance_from_mean
+            return round(obj.distance_from_mean, 4)
         else:
             return ""
+
+    # def cosine_similarity_(self, obj):
+    #     if obj.cosine_similarity:
+    #         return round(obj.cosine_similarity, 4)
+    #     else:
+    #         return ""
 
     def save_model(self, request, obj, form, change):
         # try:
