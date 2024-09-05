@@ -41,7 +41,7 @@ def phrase_to_native_language(
     )
     definition_prompt = f"""I am a native {native_language} speaker trying to learn {working_on}.
 
-Please translate the {working_on} word or phrase "{cleaned_phrase}" to English as it was used in the following sentence:
+Please translate the {working_on} word or phrase "{cleaned_phrase}" to {native_language} as it was used in the following sentence:
 {example_sentence}
 
 Do not include extra punctuation like leading and trailing quotes in the completion.
