@@ -115,20 +115,25 @@
                     // Scroll the button into view and highlight it
                     button.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
                     button.focus(); // Attempt to focus the button (not all browsers support this)
-
+    
                     // Add visual indication if needed
                     button.style.border = '2px solid red'; // Example of visual highlight
-                    
+    
                     // Optional: add a delay to ensure the scroll has happened before setting focus
                     setTimeout(function() {
                         button.focus(); // Reapply focus after scroll
                     }, 500); // Adjust delay as necessary
                 }
             }
-
-            // Call focusButton after a short delay to ensure all elements are loaded
-            setTimeout(focusButton, 300); // Adjust delay as necessary
+    
+            // Check if the user is on a desktop or mobile device
+            var isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    
+            if (isDesktop) {
+                // Call focusButton after a short delay to ensure all elements are loaded
+                setTimeout(focusButton, 300); // Adjust delay as necessary
+            }
         });
     </script>
-</body>
+    </body>
 </html>
