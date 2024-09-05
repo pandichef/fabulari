@@ -123,6 +123,7 @@ Simply provide the raw feedback in {native_language} without judging the respons
 Ignore accent marks since the user might not have access the appropriate keyboard.
 For example, if the user types llegare instead of llegaré, do not provide feedback on this.
 Ignore punctuation errors.
+For example, if the user types "por cierto has visto mi libro", don't point out the missing comma and question mark.
 """,
             },
             {
