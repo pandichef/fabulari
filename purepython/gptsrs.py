@@ -14,6 +14,21 @@ OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
 
 
 def generate_full_sentence(phrase, working_on="Spanish", openai_model=OPENAI_LLM_MODEL):
+    hebrew_arabic_suffix = """
+Even if the original {working_on} word or phrase doesn't have vowels, add the vowels in the output."""
+    if working_on == "Hebrew":
+        hebrew_arabic_suffix = (
+            hebrew_arabic_suffix.format(working_on)
+            + """\nFor example, if the user types בית, the clean phrase would be בַּיִת.  If the user types לישון, the clean phrase would be לִישׁוֹן."""
+        )
+    elif working_on == "Arabic":
+        hebrew_arabic_suffix = (
+            hebrew_arabic_suffix.format(working_on)
+            + """\nFor example, if the user types منزل, the clean phrase would be مَنْزِل.  If the user types للنوم, the clean phrase would be لِلنَّوْمِ."""
+        )
+    else:
+        hebrew_arabic_suffix = ""
+
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -22,9 +37,10 @@ def generate_full_sentence(phrase, working_on="Spanish", openai_model=OPENAI_LLM
                 "content": f"""You take a phrase in {working_on} generate a random but terse sentence that contains the exact phrase.  
 The sentence should have no more than 8 words.
 Make sure the actual phrase is being used.  For example, in the example "en cuanto a", 
-the sentence "El precio está en cuanto en mi opinión." contains a similarl string "en cuanto", 
+the sentence "El precio está en cuanto en mi opinión." contains a similar string "en cuanto", 
 but this obviously doesn't convey the correct sense of the phrase "en cuanto a".
-""",
+"""
+                + hebrew_arabic_suffix,
             },
             {"role": "user", "content": phrase},
         ],
@@ -37,12 +53,14 @@ def to_native_language(
     working_on="Spanish",
     native_language="English",
     openai_model=OPENAI_LLM_MODEL,
+    # phrase=None,
 ):
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
             {
                 "role": "system",
+                # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
                 "content": f"You translate sentences from {working_on} to {native_language}.",
             },
             {"role": "user", "content": sentence},
