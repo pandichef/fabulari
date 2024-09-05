@@ -11,6 +11,7 @@ from purepython.cleantranslation import phrase_to_native_language
 
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
+    change_form_template = "change_form_without_history.html"
     # change_list_template = "custom_change_list.html"
     # change_form_template = "phrase_change_form.html"
     def change_view(self, request, object_id, form_url="", extra_context=None):
