@@ -27,15 +27,15 @@ class PhraseManager(models.Manager):
         # mean_cosine_similarity = self.get_mean_cosine_similarity()
         qs = super().get_queryset()
 
-        # mean_cosine_similarity = qs.aggregate(Avg("cosine_similarity"))[
-        #     "cosine_similarity__avg"
-        # ]  # todo: get the mean by user and language type
+        mean_cosine_similarity = qs.aggregate(Avg("cosine_similarity"))[
+            "cosine_similarity__avg"
+        ]  # todo: get the mean by user and language type
 
         # mean_cosine_similarity = (
         #     0.5 if mean_cosine_similarity is None else mean_cosine_similarity
         # )
 
-        mean_cosine_similarity = np.random.normal(loc=0.5, scale=0.25)
+        mean_cosine_similarity += np.random.normal(loc=0.0, scale=0.25)
 
         # if mean_cosine_similarity is None:
         #     return super().get_queryset().none()
