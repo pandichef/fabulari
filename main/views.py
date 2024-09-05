@@ -37,8 +37,10 @@ def prompt_view(request):
                 "english_sentence": request.session["equivalent_english_sentence"],
                 "attempted_translation": attempted_translation,
                 "response": feedback
-                + "\n\nCosine Similarity: "
-                + str(cosine_similarity),
+                # + "\n"
+                + f"\n"
+                + f"\nPhrase: {phrase_object.text}"
+                + f"\nCosine Similarity: {str(cosine_similarity)}",
             },
         )
 
