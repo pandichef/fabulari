@@ -118,3 +118,35 @@ class Phrase(models.Model):
 
     def __str__(self):
         return f"{self.cleaned_text}"
+
+
+######################################################################
+######################################################################
+######################################################################
+# class Article(models.Model):
+#     title = models.CharField(max_length=255)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+#     url = models.URLField(max_length=255, null=True, blank=True)
+#     raw_html = models.TextField(blank=True, null=False, default="")
+#     content_html = models.TextField(blank=False, null=False)  # for link
+#     content_markdown = models.TextField(blank=False, null=False)  # sent to LLM
+
+
+# class Filter(models.Model):
+#     description = models.CharField(max_length=255)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+#     prompt_prefix = models.TextField(
+#         blank=True,
+#         null=False,
+#         default="Write three easy-to-read sentences summarizing the following text:\n\n===",
+#     )
+
+
+# class FilteredArticle(models.Model):
+#     article = models.ForeignKey(
+#         Article, on_delete=models.CASCADE, null=False, blank=False
+#     )
+#     filter = models.ForeignKey(
+#         Filter, on_delete=models.CASCADE, null=False, blank=False
+#     )
+#     content_html = models.TextField(blank=False, null=False)  # for link

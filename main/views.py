@@ -4,7 +4,7 @@ import numpy as np
 # from django.db.models.expressions import RawSQL
 # from django.db.models.functions import Abs, Coalesce
 from django.db.models.functions import Abs
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from purepython.gptsrs import (
     generate_full_sentence,
     to_native_language,
@@ -26,7 +26,16 @@ from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
 def prompt_view(request):
     if request.method == "POST":
         attempted_translation = request.POST.get("prompt", "")
+        # print(attempted_translation)
+        if attempted_translation == "":
+            return redirect("prompt_view")
         # response_text = prompt + "yes we can"
+        # print(attempted_translation)
+        # print(attempted_translation)
+        # print(request.session.get("full_working_on_sentence", ""))
+        # print(
+        #     [request.session.get("full_working_on_sentence", ""), attempted_translation]
+        # )
         embeddings = get_embeddings(
             [request.session.get("full_working_on_sentence", ""), attempted_translation]
         )
