@@ -125,12 +125,13 @@ def prompt_view(request):
     random_value = np.random.normal(loc=mean_value, scale=stddev_value)
     print(random_value)
     qs = qs.annotate(
-        noise_for_anon_user=ExpressionWrapper(
+        que_score=ExpressionWrapper(
             Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
         )
-    ).order_by("noise_for_anon_user")
+    ).order_by("que_score")
 
     # Generate template vars
+    # lowest que_score goes first
     next_phrase = qs[0]
 
     full_working_on_sentence = generate_full_sentence(
