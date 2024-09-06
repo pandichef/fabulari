@@ -161,7 +161,9 @@ def prompt_view(request):
             if next_phrase.cosine_similarity
             else "N/A",
             "random_value": round(random_value, 4),
-            "que_score": abs(float(next_phrase.cosine_similarity) - random_value)
+            "que_score": round(
+                abs(float(next_phrase.cosine_similarity) - random_value), 4
+            )
             if next_phrase.cosine_similarity
             else 0,
         },
