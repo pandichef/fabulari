@@ -164,8 +164,8 @@ class PhraseAdmin(admin.ModelAdmin):
     def get_actions(self, request):
         actions = super().get_actions(request)
         # Remove all actions
-        if not request.user.is_superuser:
-            actions.clear()
+        # if not request.user.is_superuser:
+        #     actions.clear()
         return actions
 
 
