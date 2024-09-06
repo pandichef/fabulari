@@ -99,10 +99,10 @@ def prompt_view(request):
 
     # Step 4: Calculate the mean value
     if numpy_array.size > 0:
-        mean_value = np.mean(numpy_array)
+        mean_value = float(np.mean(numpy_array)) + float(os.environ["FABULARI_PARAM0"])
         stddev_value = float(np.std(numpy_array)) * float(os.environ["FABULARI_PARAM1"])
     else:
-        mean_value = 0.50
+        mean_value = 0.50 + float(os.environ["FABULARI_PARAM0"])
         stddev_value = 0.25 * float(os.environ["FABULARI_PARAM1"])
 
     # if request.user.is_authenticated:
