@@ -23,6 +23,7 @@ urlpatterns = [
     path("", views.prompt_view, name="prompt_view"),
     # path("download_csv/<int:pk>/", export_csv, name="download_csv"),
     path("export_csv/", export_csv, name="export_csv"),
+    path("update_readwise/", views.update_readwise, name="update_readwise"),
 ]
 
 admin.site.site_header = "Fabulari"

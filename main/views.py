@@ -19,8 +19,18 @@ from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value,
 from main.models import Phrase
 from accounts.models import LANGUAGE_CHOICES
 from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
+from purepython.fetch_readwise import fetch_from_export_api, make_digest
+from django.contrib import messages
+import pprint
 
 # phrase_list = ["en cuanto a"]
+
+
+def update_readwise(request):
+    all_data = fetch_from_export_api()
+    digest = make_digest(all_data)
+    messages.success(request, pprint.pformat(digest))
+    return redirect("/admin/main/phrase")
 
 
 def prompt_view(request):
