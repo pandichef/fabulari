@@ -56,7 +56,7 @@ class CustomUserAdmin(UserAdmin):
                     "is_staff",
                     "is_superuser",
                     # "groups",
-                    # "user_permissions",
+                    "user_permissions",
                 )
             },
         ),
@@ -110,20 +110,24 @@ class CustomUserAdmin(UserAdmin):
     def get_readonly_fields(self, request, obj=None):
         fields = [
             "is_active",
-            "is_staff",
-            "is_superuser",
-            "groups",
-            # "user_permissions",
+            # "is_staff",
+            # "is_superuser",
             # "last_readwise_update",
         ]
         # if request.user.readwise_api_key:
         #     fields += [
         #         "last_readwise_update",
         #     ]
-        if not request.user.is_superuser:
-            return fields + ["is_superuser"]
-        else:
+        if request.user.is_superuser:
             return fields
+        else:
+            # extra fields for non-superuser
+            return fields + [
+                "is_staff",
+                "is_superuser",
+                "user_permissions",
+                "groups",
+            ]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
