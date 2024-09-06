@@ -104,22 +104,22 @@ def prompt_view(request):
         mean_value = 0.50
         stddev_value = 0.25
 
-    if request.user.is_authenticated:
-        qs.update(
-            noise=RawSQL(  # for MySQL
-                f"{mean_value} + {stddev_value} * SQRT(-2 * LOG(RAND())) * COS(2 * PI() * RAND())",
-                [],
-            )
+    # if request.user.is_authenticated:
+    #     qs.update(
+    #         noise=RawSQL(  # for MySQL
+    #             f"{mean_value} + {stddev_value} * SQRT(-2 * LOG(RAND())) * COS(2 * PI() * RAND())",
+    #             [],
+    #         )
+    #     )
+    #     qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
+    # else:
+    random_value = np.random.normal(loc=mean_value, scale=stddev_value)
+    print(random_value)
+    qs = qs.annotate(
+        noise_for_anon_user=ExpressionWrapper(
+            Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
         )
-        qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
-    else:
-        random_value = np.random.normal(loc=mean_value, scale=stddev_value)
-        # print(random_value)
-        qs = qs.annotate(
-            noise_for_anon_user=ExpressionWrapper(
-                Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
-            )
-        ).order_by("noise_for_anon_user")
+    ).order_by("noise_for_anon_user")
 
     # Generate template vars
     next_phrase = qs[0]
