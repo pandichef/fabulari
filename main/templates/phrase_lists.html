@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Words</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 10px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .load-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            margin-left: 0;
+        }
+
+        .load-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/">Play Game</a> | 
+        <a href="/admin/main/phrase/add">Add One Word/Phrase</a>
+        <h2>Load Multiple Words/Phrases</h2>
+        (Each word/phrase should be on a seperate line)
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="words_input" placeholder="Type your words here..." rows="5" cols="50" autofocus></textarea>
+            <!-- Dropdown Menu for Choice Field -->
+            Language: {{ form.choice_field }}<br><br>
+            <button type="submit" class="load-button">Load Words</button>
+        </form>
+    </div>
+</body>
+</html>
