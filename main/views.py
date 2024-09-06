@@ -116,7 +116,7 @@ def update_readwise(request):
     else:
         messages.success(
             request,
-            f"""Successfully retrieved {counter} new items from Readwise.  Previously updated {request.user.last_readwise_update.strftime("%B %d, %Y at %I:%M %p")}.""",
+            f"""Successfully retrieved {counter} new items from Readwise.  Previously updated {request.user.last_readwise_update.strftime("%B %d, %Y at %I:%M %p")} (UTC time).""",
         )
 
     request.user.last_readwise_update = datetime.now()
