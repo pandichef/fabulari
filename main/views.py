@@ -74,13 +74,22 @@ def save_phrase_model(request, obj, change=False, self=None):
             pass
         # super().save_model(request, obj, form, change)
 """
+from requests.exceptions import ProxyError
 
 
 def update_readwise(request):
-    all_data = fetch_from_export_api(
-        updated_after=request.user.last_readwise_update.isoformat(),
-        token=request.user.readwise_api_key,
-    )
+    try:
+        all_data = fetch_from_export_api(
+            updated_after=request.user.last_readwise_update.isoformat(),
+            token=request.user.readwise_api_key,
+        )
+    except ProxyError as e:
+        # see https://www.pythonanywhere.com/forums/topic/33818/
+        messages.success(
+            request,
+            f"""Encountered a proxy error.  The hosting service doesn't currently allow access to the Readwise API.""",
+        )
+        return redirect("/admin/main/phrase")
     digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
     # messages.success(request, pprint.pformat(digest))
     counter = 0
