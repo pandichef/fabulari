@@ -19,6 +19,7 @@ from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value,
 from main.models import Phrase
 from accounts.models import LANGUAGE_CHOICES
 from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
+from purepython.cleantranslation import phrase_to_native_language
 from purepython.fetch_readwise import fetch_from_export_api, make_digest
 from django.contrib import messages
 import pprint
@@ -26,10 +27,54 @@ import pprint
 # phrase_list = ["en cuanto a"]
 
 
+def save_phrase_model(request, obj, change=False):
+    # todo: integrate this with the admin version
+    # and make detailed notes
+    if not change:  # if the object is being created
+        obj.user = request.user
+    if not obj.language:
+        obj.language = request.user.working_on
+
+    existing_object = Phrase.objects.filter(text=obj.text, user=request.user).first()
+
+    if not existing_object or existing_object and existing_object.text != obj.text:
+
+        # self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
+        (cleaned_text, example_sentence, definition) = phrase_to_native_language(
+            phrase=obj.text,
+            working_on=obj.language,
+            native_language=request.user.native_language,
+        )
+        existing_object = Phrase.objects.filter(
+            cleaned_text=cleaned_text, user=request.user
+        ).first()
+    else:
+        existing_object = Phrase.objects.filter(
+            cleaned_text=obj.text, user=request.user
+        ).first()
+
+    if existing_object:
+        print("no obj created")
+        obj.existing_obj_id = existing_object.id
+    else:
+        try:
+            obj.cleaned_text = cleaned_text
+            obj.example_sentence = example_sentence
+            obj.definition = definition
+            obj.save()
+        except:
+            pass
+        # super().save_model(request, obj, form, change)
+
+
 def update_readwise(request):
     all_data = fetch_from_export_api()
     digest = make_digest(all_data)
-    messages.success(request, pprint.pformat(digest))
+    # messages.success(request, pprint.pformat(digest))
+    for item in digest:
+        obj = Phrase(user=request.user, text=item[0], language=item[1])
+        save_phrase_model(request, obj)
+    messages.success(request, "Successfully retrieved new items from Readwise")
     return redirect("/admin/main/phrase")
 
 
