@@ -20,6 +20,7 @@ def clean_phrase(
 You take potentially sloppily written words or phrases in {working_on} and return a cleaned up version of the same word or phrase.
 If the input word is a conjugated verb, convert the word to its infinitive.
 If the input word is a plural noun, convert the word to its singular version.
+Do not include extra commentary e.g., don't response with something like "vaca (singular form of vacas)".
 """,
             },
             {"role": "user", "content": phrase},

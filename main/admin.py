@@ -44,7 +44,9 @@ class PhraseAdmin(admin.ModelAdmin):
         "definition",
         # "language",
         "cosine_similarity",
-        "relevance",
+        "noise",
+        "que_score",
+        # "relevance",
         "language",
         "user",
     )
@@ -73,11 +75,11 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             return fields
 
-    def relevance(self, obj):
-        if obj.distance_from_mean:
-            return round(obj.distance_from_mean, 4)
-        else:
-            return ""
+    # def relevance(self, obj):
+    #     if obj.distance_from_mean:
+    #         return round(obj.distance_from_mean, 4)
+    #     else:
+    #         return ""
 
     # def cosine_similarity_(self, obj):
     #     if obj.cosine_similarity:

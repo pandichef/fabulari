@@ -7,6 +7,9 @@ from purepython.gptsrs import (
     get_embeddings,
     get_feedback,
 )
+
+# from django.db.models import F
+from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
 from main.models import Phrase
 from accounts.models import LANGUAGE_CHOICES
 from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
@@ -52,6 +55,7 @@ def prompt_view(request):
             },
         )
 
+    ########################################################################
     # GET
     # Get most relevant phrase
     # print(request.user)
@@ -68,9 +72,7 @@ def prompt_view(request):
     working_on = dict(LANGUAGE_CHOICES)[working_on_code]
 
     if len(qs) == 0:
-        # return HttpResponse(
-        #     "All least one phrase is required for app to work correctly."
-        # )
+        # Handle empty data
         return render(
             request,
             "prompt.html",
@@ -80,6 +82,46 @@ def prompt_view(request):
             },
         )
 
+    # Update que_score
+    import numpy as np
+    from django.db.models.expressions import RawSQL
+    from django.db.models.functions import Abs, Coalesce
+
+    # print("""qs.update(cosine_similarity=F("cosine_similarity") + 1)""")
+    qs_values = qs.values_list("cosine_similarity")
+    # Step 2: Exclude None values
+    first_elements = [t[0] for t in qs_values]
+    filtered_values = [value for value in first_elements if value is not None]
+
+    # Step 3: Convert to a NumPy array
+    numpy_array = np.array(filtered_values)
+
+    # Step 4: Calculate the mean value
+    if numpy_array.size > 0:
+        mean_value = np.mean(numpy_array)
+        stddev_value = np.std(numpy_array)
+    else:
+        mean_value = 0.50
+        stddev_value = 0.25
+
+    if request.user.is_authenticated:
+        qs.update(
+            noise=RawSQL(  # for MySQL
+                f"{mean_value} + {stddev_value} * SQRT(-2 * LOG(RAND())) * COS(2 * PI() * RAND())",
+                [],
+            )
+        )
+        qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
+    else:
+        random_value = np.random.normal(loc=mean_value, scale=stddev_value)
+        # print(random_value)
+        qs = qs.annotate(
+            noise_for_anon_user=ExpressionWrapper(
+                Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
+            )
+        ).order_by("noise_for_anon_user")
+
+    # Generate template vars
     next_phrase = qs[0]
 
     full_working_on_sentence = generate_full_sentence(

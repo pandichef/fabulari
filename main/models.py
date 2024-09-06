@@ -1,6 +1,7 @@
 import numpy as np
 from django.db import models
 from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
+from decimal import Decimal
 
 # from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
@@ -16,13 +17,15 @@ from accounts.models import LANGUAGE_CHOICES
 
 User = get_user_model()
 
-
+'''
 class PhraseManager(models.Manager):
     # def get_mean_cosine_similarity(self):
     #     """Calculate and return the mean cosine similarity."""
     #     return self.aggregate(mean=Avg("cosine_similarity"))["mean"]
 
     def get_queryset(self):
+        # todo: this doesn't work because relevance should be done within
+        # user and language
         """Return a queryset annotated with distance from the mean value."""
         # mean_cosine_similarity = self.get_mean_cosine_similarity()
         qs = super().get_queryset()
@@ -66,7 +69,7 @@ class PhraseManager(models.Manager):
                 output_field=FloatField(),
             )
         ).order_by("distance_from_mean")
-
+'''
 
 # class Setting(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -101,8 +104,14 @@ class Phrase(models.Model):
     cosine_similarity = models.DecimalField(
         null=True, blank=False, max_digits=5, decimal_places=4
     )
+    noise = models.DecimalField(
+        null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
+    )  # lowest value is queued up next
+    que_score = models.DecimalField(
+        null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
+    )  # lowest value is queued up next
 
-    objects = PhraseManager()
+    # objects = PhraseManager()
 
     class Meta:
         unique_together = ("user", "cleaned_text")
