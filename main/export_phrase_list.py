@@ -29,8 +29,8 @@ def export_csv(request):
             "Definition",
             "Example",
             "Cosine Similarity",
-            "Noise",
-            "Que Score",
+            # "Noise",
+            # "Que Score",
         ]
     )  # Replace with your model field names
     # import pandas as pd
@@ -56,8 +56,8 @@ def export_csv(request):
                 obj.definition,
                 obj.example_sentence,
                 obj.cosine_similarity,
-                obj.noise,
-                obj.que_score,
+                # obj.noise,
+                # obj.que_score,
             ]
         )  # Replace with your model fields
     # df.to_csv(path_or_buf=response, index=False)
