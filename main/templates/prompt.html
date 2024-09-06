@@ -83,6 +83,22 @@
             font-size: 16px;
             margin-top: 20px;
         }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            width: 50%;
+        }
     </style>
 </head>
 <body>
@@ -95,13 +111,47 @@
             <p><strong>Feedback:</strong> {{ response }}</p>
             <div>
                 <a href="{% url 'prompt_view' %}" class="continue-button">Continue</a>
-            </div>
+            </div><br>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Phrase</th>
+                        <td>{{phrase}}</td>
+                    </tr>
+                    <tr>
+                        <th>Cosine Similarity</th>
+                        <td>{{cosine_similarity}}</td>
+                    </tr>
+                    <tr>
+                        <th>Model</th>
+                        <td>{{model}}</td>
+                    </tr>
+                </tbody>
+            </table>
         {% else %}
             {% if not no_phrases %}
                 <form method="post">
                     {% csrf_token %}
                     <input type="text" name="prompt" placeholder="Type your {{ working_on }} here..." autofocus>
                 </form>
+                {% if user.is_superuser %}
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Cosine Similarity</th>
+                            <td>{{last_cosine_similarity}}</td>
+                        </tr>
+                        <tr>
+                            <th>Random Value</th>
+                            <td>{{random_value}}</td>
+                        </tr>
+                        <tr>
+                            <th>Que Score</th>
+                            <td>{{que_score}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>

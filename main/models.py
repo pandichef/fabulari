@@ -104,12 +104,12 @@ class Phrase(models.Model):
     cosine_similarity = models.DecimalField(
         null=True, blank=False, max_digits=5, decimal_places=4
     )
-    noise = models.DecimalField(
-        null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
-    )  # lowest value is queued up next
-    que_score = models.DecimalField(
-        null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
-    )  # lowest value is queued up next
+    # noise = models.DecimalField(
+    #     null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
+    # )  # lowest value is queued up next
+    # que_score = models.DecimalField(
+    #     null=False, blank=False, max_digits=5, decimal_places=4, default=Decimal(0.0000)
+    # )  # lowest value is queued up next
 
     # objects = PhraseManager()
 

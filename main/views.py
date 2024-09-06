@@ -1,3 +1,9 @@
+import os
+import numpy as np
+
+# from django.db.models.expressions import RawSQL
+# from django.db.models.functions import Abs, Coalesce
+from django.db.models.functions import Abs
 from django.shortcuts import render, HttpResponse
 from purepython.gptsrs import (
     generate_full_sentence,
@@ -46,12 +52,15 @@ def prompt_view(request):
                     "equivalent_native_language_sentence"
                 ],
                 "attempted_translation": attempted_translation,
-                "response": feedback
+                "response": feedback,
                 # + "\n"
-                + f"\n"
-                + f"\nPhrase: {phrase_object.cleaned_text}"
-                + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
-                + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
+                # + f"\n"
+                # + f"\nPhrase: {phrase_object.cleaned_text}"
+                # + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
+                # + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
+                "phrase": phrase_object.cleaned_text,
+                "cosine_similarity": str(round(cosine_similarity, 4)),
+                "model": OPENAI_EMBEDDINGS_MODEL,
             },
         )
 
@@ -68,6 +77,7 @@ def prompt_view(request):
         native_language_code = "en"
         working_on_code = "es"
         qs = Phrase.objects.filter(language=working_on_code)
+        qs = qs.filter(cosine_similarity__isnull=False)
     native_language = dict(LANGUAGE_CHOICES)[native_language_code]
     working_on = dict(LANGUAGE_CHOICES)[working_on_code]
 
@@ -83,11 +93,6 @@ def prompt_view(request):
         )
 
     # Update que_score
-    import numpy as np
-    from django.db.models.expressions import RawSQL
-    from django.db.models.functions import Abs, Coalesce
-    import os
-
     # print("""qs.update(cosine_similarity=F("cosine_similarity") + 1)""")
     qs_values = qs.values_list("cosine_similarity")
     # Step 2: Exclude None values
@@ -115,7 +120,7 @@ def prompt_view(request):
     #     qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
     # else:
     random_value = np.random.normal(loc=mean_value, scale=stddev_value)
-    print(random_value)
+    # print(random_value)
     qs = qs.annotate(
         noise_for_anon_user=ExpressionWrapper(
             Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
@@ -149,5 +154,12 @@ def prompt_view(request):
         {
             "english_sentence": request.session["equivalent_native_language_sentence"],
             "working_on": working_on,
+            "last_cosine_similarity": next_phrase.cosine_similarity
+            if next_phrase.cosine_similarity
+            else "N/A",
+            "random_value": round(random_value, 4),
+            "que_score": abs(float(next_phrase.cosine_similarity) - random_value)
+            if next_phrase.cosine_similarity
+            else 0,
         },
     )
