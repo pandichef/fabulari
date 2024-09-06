@@ -119,8 +119,11 @@ def prompt_view(request):
     #     )
     #     qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
     # else:
+    print(numpy_array)
+    print(mean_value)
+    print(stddev_value)
     random_value = np.random.normal(loc=mean_value, scale=stddev_value)
-    # print(random_value)
+    print(random_value)
     qs = qs.annotate(
         noise_for_anon_user=ExpressionWrapper(
             Abs(F("cosine_similarity") - random_value), output_field=FloatField(),

@@ -94,7 +94,9 @@ class PhraseAdmin(admin.ModelAdmin):
         if not obj.language:
             obj.language = request.user.working_on
 
-        existing_object = Phrase.objects.filter(text=obj.text).first()
+        existing_object = Phrase.objects.filter(
+            text=obj.text, user=request.user
+        ).first()
 
         if not existing_object or existing_object and existing_object.text != obj.text:
             from purepython.gptsrs import OPENAI_LLM_MODEL
@@ -105,13 +107,16 @@ class PhraseAdmin(admin.ModelAdmin):
                 working_on=obj.language,
                 native_language=request.user.native_language,
             )
-            existing_object = Phrase.objects.filter(cleaned_text=cleaned_text).first()
+            existing_object = Phrase.objects.filter(
+                cleaned_text=cleaned_text, user=request.user
+            ).first()
         else:
-            existing_object = Phrase.objects.filter(cleaned_text=obj.text).first()
+            existing_object = Phrase.objects.filter(
+                cleaned_text=obj.text, user=request.user
+            ).first()
 
         if existing_object:
             obj.existing_obj_id = existing_object.id
-
         else:
             obj.cleaned_text = cleaned_text
             obj.example_sentence = example_sentence
