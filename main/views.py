@@ -86,6 +86,7 @@ def prompt_view(request):
     import numpy as np
     from django.db.models.expressions import RawSQL
     from django.db.models.functions import Abs, Coalesce
+    import os
 
     # print("""qs.update(cosine_similarity=F("cosine_similarity") + 1)""")
     qs_values = qs.values_list("cosine_similarity")
@@ -99,10 +100,10 @@ def prompt_view(request):
     # Step 4: Calculate the mean value
     if numpy_array.size > 0:
         mean_value = np.mean(numpy_array)
-        stddev_value = np.std(numpy_array)
+        stddev_value = float(np.std(numpy_array)) * float(os.environ["FABULARI_PARAM1"])
     else:
         mean_value = 0.50
-        stddev_value = 0.25
+        stddev_value = 0.25 * float(os.environ["FABULARI_PARAM1"])
 
     # if request.user.is_authenticated:
     #     qs.update(
