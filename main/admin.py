@@ -1,8 +1,13 @@
+from langdetect import detect
+from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 from purepython.gptsrs import OPENAI_LLM_MODEL
 from django.contrib import admin
 from django.db.utils import IntegrityError
 from django.db.transaction import TransactionManagementError
 from django.contrib import messages
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.shortcuts import redirect
 from .models import Phrase
 from purepython.cleantranslation import phrase_to_native_language
 
@@ -53,53 +58,95 @@ class PhraseAdmin(admin.ModelAdmin):
         ]
 
         if obj:
-            return fields + ["language"]
+            # return fields + ["language"]
+            return fields
         else:
             return fields
 
-    def save_model(self, request, obj, form, change):
-        if not change:  # if the object is being created
+    def save_model(self, request, obj, form, change) -> bool:
+        if change:  # if the object is being created
+            last_obj = Phrase.objects.get(id=obj.id)
+            raw_text_changed = last_obj.text != obj.text
+        else:
+            raw_text_changed = False
             obj.user = request.user
-        if not obj.language:
-            obj.language = request.user.working_on
+            if not obj.language:
+                detected_language_code = detect(obj.text)
+                if not detected_language_code in SUPPORTED_LANGUAGES:
+                    obj.language = request.user.working_on
+                else:
+                    obj.language = detected_language_code
 
-        existing_object = Phrase.objects.filter(
-            text=obj.text, user=request.user
-        ).first()
-
-        if not existing_object or existing_object and existing_object.text != obj.text:
-
-            self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
-            (cleaned_text, example_sentence, definition) = phrase_to_native_language(
+        # get openai data if new object or raw_text changed
+        if not change or raw_text_changed:
+            native_language_metadata = phrase_to_native_language(
                 phrase=obj.text,
                 working_on=obj.language,
                 native_language=request.user.native_language,
             )
-            existing_object = Phrase.objects.filter(
-                cleaned_text=cleaned_text, user=request.user
-            ).first()
-        else:
-            existing_object = Phrase.objects.filter(
-                cleaned_text=obj.text, user=request.user
-            ).first()
+            if native_language_metadata:
+                (cleaned_text, example_sentence, definition) = native_language_metadata
+                if raw_text_changed:
+                    obj.cleaned_text = cleaned_text
+                    obj.example_sentence = example_sentence
+                    obj.definition = definition
+                    obj.save()
+                    if self:
+                        self.message_user(
+                            request, f"Retrieved values from {OPENAI_LLM_MODEL}."
+                        )
 
-        if existing_object:
-            obj.existing_obj_id = existing_object.id
-        else:
-            obj.cleaned_text = cleaned_text
-            obj.example_sentence = example_sentence
-            obj.definition = definition
-            obj.save()
-            super().save_model(request, obj, form, change)
+                if not change:
+                    existing_object = Phrase.objects.filter(
+                        cleaned_text=cleaned_text, user=request.user
+                    ).first()
+                    if existing_object:
+                        # just redirect if the object already exists
+                        # this line of code is needed for the response_add method
+                        obj.existing_obj_id = existing_object.id
+                        # existing_object.text = obj.text
+                        # existing_object.save()
+                        return False
+                    else:
+                        obj.cleaned_text = cleaned_text
+                        obj.example_sentence = example_sentence
+                        obj.definition = definition
+                        obj.save()
+                        if self:
+                            self.message_user(
+                                request, f"Retrieved values from {OPENAI_LLM_MODEL}."
+                            )
+            else:
+                obj.cleaned_text = "(proper noun)"  # hack
+                if self:
+                    self.message_user(request, f"Not saved.  Contains proper noun.")
+                return False
+        return True
+
+        # else:
+        # Do nothing
+        # existing_object = Phrase.objects.filter(
+        #     cleaned_text=obj.text, user=request.user
+        # ).first()
+
+        # if existing_object:
+        #     obj.existing_obj_id = existing_object.id
+        # else:
+        #     obj.cleaned_text = cleaned_text
+        #     obj.example_sentence = example_sentence
+        #     obj.definition = definition
+        #     obj.save()
+        # super().save_model(request, obj, form, change)
 
     def response_add(self, request, obj):
-        if obj.cleaned_text:
+        if obj.cleaned_text == "(proper noun)":
+            list_url = reverse(
+                "admin:main_phrase_changelist",  # Replace 'appname' with your app's name
+            )
+            return redirect(list_url)
+        elif obj.cleaned_text:
             return super().response_add(request, obj)
         else:
-            from django.shortcuts import redirect
-            from django.urls import reverse
-            from django.shortcuts import redirect
-
             self.message_user(request, "This term already exists.  Redirecting.")
 
             change_url = reverse(
@@ -117,7 +164,8 @@ class PhraseAdmin(admin.ModelAdmin):
     def get_actions(self, request):
         actions = super().get_actions(request)
         # Remove all actions
-        actions.clear()
+        if not request.user.is_superuser:
+            actions.clear()
         return actions
 
 

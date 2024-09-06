@@ -21,6 +21,7 @@ You take potentially sloppily written words or phrases in {working_on} and retur
 If the input word is a conjugated verb, convert the word to its infinitive.
 If the input word is a plural noun, convert the word to its singular version.
 Do not include extra commentary e.g., don't response with something like "vaca (singular form of vacas)".
+If the phrase appears to be or contain a proper name, the response should be the exact string "(proper name)".
 """,
             },
             {"role": "user", "content": phrase},
@@ -35,8 +36,12 @@ def phrase_to_native_language(
     native_language="English",
     openai_model=OPENAI_LLM_MODEL,
     # phrase=None,
-) -> Tuple:
+) -> Tuple | None:
+    if len(phrase) < 2:
+        return None
     cleaned_phrase = clean_phrase(phrase, working_on=working_on)
+    if "(proper name)" in cleaned_phrase:
+        return None
     example_sentence = generate_full_sentence(
         cleaned_phrase, working_on=working_on, openai_model=openai_model
     )
@@ -66,8 +71,5 @@ Do not provide a translation of the example sentence, only a translation of the 
         ],
     )
     definition = completion.choices[0].message.content
-    print(definition)
-    print(definition)
-    print(definition)
     print(definition)
     return (cleaned_phrase, example_sentence, definition)

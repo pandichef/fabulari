@@ -61,6 +61,10 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
         # ("Important dates", {"fields": ("last_login", "date_joined")}),
+        (
+            "Readwise Integration",
+            {"fields": ("readwise_api_key", "last_readwise_update")},
+        ),
     )
 
     def save_model(self, request, obj, form, change):
@@ -110,7 +114,12 @@ class CustomUserAdmin(UserAdmin):
             "is_superuser",
             "groups",
             # "user_permissions",
+            # "last_readwise_update",
         ]
+        # if request.user.readwise_api_key:
+        #     fields += [
+        #         "last_readwise_update",
+        #     ]
         if not request.user.is_superuser:
             return fields + ["is_superuser"]
         else:

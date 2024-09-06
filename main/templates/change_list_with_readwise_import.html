@@ -2,7 +2,7 @@
 
 {% block object-tools %}
 {{ block.super }}
-{% if user.is_superuser %}
+{% if user.readwise_api_key %}
       <a href="/update_readwise" class="button">
         Update Phrases from Readwise
       </a><br><br>

@@ -45,14 +45,14 @@ new_data = fetch_from_export_api(last_fetch_was_at.isoformat())
 """
 
 
-def make_digest(all_data):
+def make_digest(all_data, supported_languages=["en", "he", "ar"]):
     digest_list = []
     for article in all_data:
         for note in article["highlights"]:
             text = note["text"]
             language = detect(text)
-            if language in ["es", "he", "ar"] and len(text.split()) < 5:
-                digest_list.append((note["text"], language))
+            if language in supported_languages and len(text.split()) < 5:
+                digest_list.append((text, language))
     return digest_list
 
 

@@ -99,7 +99,8 @@ class Phrase(models.Model):
         null=False,
         blank=True,
         # help_text="""If you leave this blank, we'll assume it's the current "working on" language.""",
-        help_text=""""working on" language if blank""",
+        # help_text=""""working on" language if blank""",
+        help_text="""Dectected from text if blank""",
     )
     cosine_similarity = models.DecimalField(
         null=True, blank=False, max_digits=5, decimal_places=4

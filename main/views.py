@@ -1,5 +1,8 @@
+from datetime import datetime
 import os
 import numpy as np
+from accounts.models import supported_languages as SUPPORTED_LANGUAGES
+from django.utils import timezone
 
 # from django.db.models.expressions import RawSQL
 # from django.db.models.functions import Abs, Coalesce
@@ -23,23 +26,28 @@ from purepython.cleantranslation import phrase_to_native_language
 from purepython.fetch_readwise import fetch_from_export_api, make_digest
 from django.contrib import messages
 import pprint
+from purepython.gptsrs import OPENAI_LLM_MODEL
+from .admin import PhraseAdmin
 
 # phrase_list = ["en cuanto a"]
 
-
-def save_phrase_model(request, obj, change=False):
+"""
+def save_phrase_model(request, obj, change=False, self=None):
     # todo: integrate this with the admin version
-    # and make detailed notes
     if not change:  # if the object is being created
         obj.user = request.user
+
     if not obj.language:
         obj.language = request.user.working_on
 
+    # Check if a similar object already exists based on "text"
+    # fetch openai if the object doesn't exist or if the value of "text has changed"
     existing_object = Phrase.objects.filter(text=obj.text, user=request.user).first()
-
     if not existing_object or existing_object and existing_object.text != obj.text:
 
-        # self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
+        if self:
+            self.message_user(request, f"Retrieved values from {OPENAI_LLM_MODEL}.")
+
         (cleaned_text, example_sentence, definition) = phrase_to_native_language(
             phrase=obj.text,
             working_on=obj.language,
@@ -65,16 +73,45 @@ def save_phrase_model(request, obj, change=False):
         except:
             pass
         # super().save_model(request, obj, form, change)
+"""
 
 
 def update_readwise(request):
-    all_data = fetch_from_export_api()
-    digest = make_digest(all_data)
+    all_data = fetch_from_export_api(
+        updated_after=request.user.last_readwise_update.isoformat(),
+        token=request.user.readwise_api_key,
+    )
+    digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
     # messages.success(request, pprint.pformat(digest))
+    counter = 0
     for item in digest:
-        obj = Phrase(user=request.user, text=item[0], language=item[1])
-        save_phrase_model(request, obj)
-    messages.success(request, "Successfully retrieved new items from Readwise")
+        # print(request.user.native_language)
+        if item[1] != request.user.native_language:
+            print(item)
+            obj = Phrase(user=request.user, text=item[0], language=item[1])
+            # obj = Phrase(user=request.user, text=item)
+            was_retrieved = PhraseAdmin.save_model(
+                self=None, request=request, obj=obj, form=None, change=False
+            )
+            if was_retrieved:
+                counter += 1
+            # save_phrase_model(request, obj)
+    datetime_1901 = timezone.make_aware(
+        datetime(1901, 1, 1), timezone.get_current_timezone()
+    )
+    if request.user.last_readwise_update < datetime_1901:
+        messages.success(
+            request,
+            f"""Successfully retrieved {counter} items from Readwise.  Going forward, only new items will be retrieved.""",
+        )
+    else:
+        messages.success(
+            request,
+            f"""Successfully retrieved {counter} new items from Readwise.  Previously updated {request.user.last_readwise_update.strftime("%B %d, %Y at %I:%M %p")}.""",
+        )
+
+    request.user.last_readwise_update = datetime.now()
+    request.user.save()
     return redirect("/admin/main/phrase")
 
 
