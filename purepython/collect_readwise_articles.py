@@ -38,10 +38,10 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
         # except requests.exceptions.HTTPError as err:
         #     raise Exception(f"HTTP error occurred: {err}") from err
 
-        from pprint import pformat
+        # from pprint import pformat
 
         # assert False, pformat(response)
-        assert False, response.text
+        # assert False, response.text
 
         next_page_cursor = response.json().get("nextPageCursor")
         if not next_page_cursor:
