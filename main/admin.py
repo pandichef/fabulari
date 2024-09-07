@@ -38,7 +38,13 @@ class PhraseAdmin(admin.ModelAdmin):
         "language",
         "user",
     )
-    list_filter = ("language",)
+    # list_filter = ("language",)
+    def get_list_filter(self, request):
+        filters = ("language",)  # Default filters
+        if request.user.is_superuser:
+            filters += ("user",)  # Add 'user' filter if the user is a superuser
+        return filters
+
     search_fields = ("cleaned_text",)
     fields = (
         "text",
