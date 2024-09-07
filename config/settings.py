@@ -227,3 +227,11 @@ AUTH_USER_MODEL = "accounts.CustomUser"  # new
 # # OPENAI_EMBEDDINGS_MODEL = "text-embedding-ada-002"
 # OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
 # # OPENAI_EMBEDDINGS_MODEL = "text-similarity-davinci-001"
+
+# EMAIL SETTINGS FOR READER
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get("GMAIL_USERNAME", "")
+EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_PASSWORD", "")

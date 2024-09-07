@@ -47,7 +47,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ["username", "is_staff", "native_language", "working_on"]
     fieldsets = (
         ("User Settings", {"fields": ("native_language", "working_on")}),
-        ("Username/Password", {"fields": ("username", "password")}),
+        ("Username/Password", {"fields": ("username", "password", "email")}),
         # ("Personal info", {"fields": ("first_name", "last_name", "email")}),
         (
             "Permissions",
@@ -64,7 +64,14 @@ class CustomUserAdmin(UserAdmin):
         # ("Important dates", {"fields": ("last_login", "date_joined")}),
         (
             "Readwise Integration",
-            {"fields": ("readwise_api_key", "last_readwise_update")},
+            {
+                "fields": (
+                    "readwise_api_key",
+                    # "email",
+                    "last_readwise_update",
+                    "last_readwise_update_articles",
+                )
+            },
         ),
     )
 

@@ -81,13 +81,13 @@
     <div class="container">
         <a href="/">Play Game</a> | 
         <a href="/admin/main/phrase/add">Add One Phrase</a>
-        <h2>Add Multiple Phrases</h2>
+        <h2>Ask ChatGPT to Create an Article and Send It To Your Email</h2>
         <form method="post">
             {% csrf_token %}
-            <textarea name="words_input" placeholder="Paste your phrases here.  Each word/phrase should be on a separate line." rows="5" cols="50" autofocus></textarea>
-            <!-- Dropdown Menu for Choice Field -->
-            Language: {{ form.choice_field }}<br><br>
-            <button type="submit" class="load-button">Add Phrases</button>
+            <textarea name="words_input" placeholder="Type your ChatGPT Prompt Here" rows="5" cols="50" autofocus></textarea>
+            <!-- Dropdown Menu for Choice Field 
+            Language: {{ form.choice_field }}<br><br>-->
+            <button type="submit" class="load-button">Send Email</button>
         </form>
     </div>
 </body>

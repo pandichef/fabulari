@@ -10,8 +10,12 @@
 {% block nav-global %}{% endblock %}
 
 {% block userlinks %}
+<a href="{% url 'create_article' %}">{% translate 'Create Article' %}</a> /
+<a href="{% url 'collect_readwise_articles' %}">{% translate 'Collect Readwise Summaries' %}</a> /
+{% if user.is_superuser %}
+{% endif %}
 {% if site_url %}
-    <a href="{{ site_url }}">{% translate 'Play game' %}</a> /
+    <a href="{{ site_url }}">{% translate 'Play Translation Game' %}</a> /
 {% endif %}
 {% if user.is_active and user.is_staff %}
     {% url 'django-admindocs-docroot' as docsroot %}
@@ -20,7 +24,10 @@
     {% endif %}
 {% endif %}
 {% if user.has_usable_password %}
+<!--
 <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
+-->
+<a href="/admin/accounts/customuser/{{user.id}}/change/">{% translate 'Settings' %}</a> /
 {% endif %}
 <a href="{% url 'admin:logout' %}">{% translate 'Log out' %}</a>
 {% endblock %}

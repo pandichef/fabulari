@@ -17,9 +17,11 @@ LANGUAGE_CHOICES = [
 ]
 
 supported_languages = [code for code, _ in LANGUAGE_CHOICES]
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser):
+    # email = models.EmailField(_("email address"), blank=True, )
     native_language = models.CharField(
         max_length=10, choices=LANGUAGE_CHOICES, default="en", null=False, blank=False
     )
@@ -30,9 +32,18 @@ class CustomUser(AbstractUser):
         max_length=75,
         blank=True,
         null=True,
-        help_text='<a href="https://readwise.io/access_token" target="_blank">Generate API key here if you have an account.</a>',
+        help_text='Generate API key <a href="https://readwise.io/access_token" target="_blank">here</a> if you have an account.',
     )
     last_readwise_update = models.DateTimeField(default=datetime(1900, 1, 1, 0, 0))
+    last_readwise_update_articles = models.DateTimeField(
+        default=datetime(1900, 1, 1, 0, 0)
+    )
+    #     summarization_prompt_conditions = models.TextField(
+    #         default="""
+    # If the article is in Spanish, the response should be at a CEFR B1 level.
+    #     """,
+    #         help_text="Leave blank if there are no conditions.",
+    #     )
 
     class Meta:
         verbose_name = "Settings"

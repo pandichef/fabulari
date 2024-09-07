@@ -1,3 +1,8 @@
-# A SRS Tool for Learning Foreign Language Vocabulary
+# An SRS Tool for Learning Foreign Language Vocabulary and Vocabulary Rich Subjects
 
-Uses OpenAI
+## Features
+
+- Build phrase lists (in multiple ways)
+- The translation game
+- Create articles
+- Summarize articles

@@ -28,6 +28,12 @@ urlpatterns = [
     path(
         "add_multiple_phrases/", views.add_multiple_phrases, name="add_multiple_phrases"
     ),
+    path(
+        "collect_readwise_articles/",
+        views.collect_readwise_articles_view,
+        name="collect_readwise_articles",
+    ),
+    path("create_article/", views.create_article_view, name="create_article",),
 ]
 
 admin.site.site_header = "Fabulari"
