@@ -38,6 +38,7 @@ The first items is the phrase that the student is working on.  The second is a s
 A higher score indicates more proficiency.  The student hasn't been tested yet if the word is missing a score.
 Estimate the student's CEFR level based on these data and limit the response to 2 sentences.
 The first sentence provides the estimated level.  The second sentence provides justification for this score.
+The response should be expressed in the second person, as if you are speaking directly to the student.
 \n\n{tuple_list_to_csv(word_list)}""",
             },
         ],
