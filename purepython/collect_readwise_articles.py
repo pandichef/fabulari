@@ -20,7 +20,7 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
         if location:
             params["location"] = location
         print("Making export api request with params " + str(params) + "...")
-        # assert False, token
+        assert False, token
         try:
             response = requests.get(
                 url="https://readwise.io/api/v3/list/",
