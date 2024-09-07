@@ -80,15 +80,15 @@
 <body>
     <div class="container">
         <a href="/">Play Game</a> | 
-        <a href="/admin/main/phrase/add">Add One Word/Phrase</a>
-        <h2>Load Multiple Words/Phrases</h2>
-        (Each word/phrase should be on a seperate line)
+        <a href="/admin/main/phrase/add">Add One Phrase</a>
+        <h2>Add Multiple Phrases</h2>
+        (Each word/phrase should be on a separate line)
         <form method="post">
             {% csrf_token %}
             <textarea name="words_input" placeholder="Type your words here..." rows="5" cols="50" autofocus></textarea>
             <!-- Dropdown Menu for Choice Field -->
             Language: {{ form.choice_field }}<br><br>
-            <button type="submit" class="load-button">Load Words</button>
+            <button type="submit" class="load-button">Add Phrases</button>
         </form>
     </div>
 </body>

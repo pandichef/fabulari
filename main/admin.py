@@ -82,12 +82,42 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             raw_text_changed = False
             obj.user = request.user
+            detected_language_code = detect(obj.text)
             if not obj.language:
-                detected_language_code = detect(obj.text)
-                if not detected_language_code in SUPPORTED_LANGUAGES:
+                if detected_language_code == request.user.native_language:
                     obj.language = request.user.working_on
+                    from purepython.gptsrs import from_native_language
+
+                    obj.text = from_native_language(
+                        obj.text,
+                        working_on=obj.language,
+                        native_language=detected_language_code,
+                        openai_model=OPENAI_LLM_MODEL,
+                    )
                 else:
+                    if not detected_language_code in SUPPORTED_LANGUAGES:
+                        obj.language = request.user.working_on
+                    else:
+                        obj.language = detected_language_code
+            else:
+                if detected_language_code != obj.language:
+                    from accounts.models import LANGUAGE_CHOICES
+
+                    if self:
+                        self.message_user(
+                            request,
+                            f"The text you typed does not appear to be {dict(LANGUAGE_CHOICES)[obj.language]}.",
+                        )
                     obj.language = detected_language_code
+            # elif obj.language != request.user.native_language:
+            #     from purepython.gptsrs import from_native_language
+
+            #     obj.text = from_native_language(
+            #         obj.text,
+            #         working_on=obj.language,
+            #         native_language=detected_language_code,
+            #         openai_model=OPENAI_LLM_MODEL,
+            #     )
 
         # get openai data if new object or raw_text changed
         if not change or raw_text_changed:
