@@ -100,14 +100,27 @@ def create_article_view(request):
         else:
             subject = " ".join(subject_split) + "..."
         sanitized_subject = subject.replace("\n", "").replace("\r", "")
-        send_mail(
-            "[summary] " + sanitized_subject,
-            create_article(description_of_article),
-            "from@example.com",
-            [request.user.email],
-            fail_silently=False,
+        success = False
+        while not success:
+            try:
+                send_mail(
+                    "[summary] " + sanitized_subject,
+                    create_article(description_of_article),
+                    "from@example.com",
+                    [request.user.email],
+                    fail_silently=False,
+                )
+                success = True
+            except:
+                pass
+        messages.success(
+            request,
+            mark_safe(
+                f"""An article regarding {sanitized_subject} was sent to {request.user.email}."""
+            ),
         )
-        return redirect("/create_article")
+        return redirect("/admin/main/phrase")
+        # return redirect("/create_article")
     else:
         if not request.user.email:
             messages.success(
