@@ -138,6 +138,12 @@ def create_article_view(request):
 def collect_readwise_articles_view(request):
     from purepython.collect_readwise_articles import collect_readwise_articles
 
+    print("------------------------------")
+    print(request.user.email)
+    print(request.user.email)
+    print(request.user.email)
+    print("------------------------------")
+
     if request.user.email and request.user.readwise_api_key:
         print("yes")
         try:
