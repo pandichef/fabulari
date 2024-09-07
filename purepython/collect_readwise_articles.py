@@ -81,7 +81,7 @@ def collect_readwise_articles(
         token=token, updated_after=updated_after, location=location
     )
     print("------------------------------------")
-    # assert False, full_data[:3]
+    assert False, full_data[:10]
     print("------------------------------------")
     # summaries = filter_summaries(full_data)
     success_count = 0
