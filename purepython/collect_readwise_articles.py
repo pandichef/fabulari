@@ -20,15 +20,21 @@ def fetch_reader_document_list_api(updated_after=None, location=None):
         if location:
             params["location"] = location
         print("Making export api request with params " + str(params) + "...")
-        response = requests.get(
-            url="https://readwise.io/api/v3/list/",
-            params=params,
-            headers={"Authorization": f"Token {token}"},
-            verify=False,
-        )
-        from pprint import pformat
+        assert False, token
+        try:
+            response = requests.get(
+                url="https://readwise.io/api/v3/list/",
+                params=params,
+                headers={"Authorization": f"Token {token}"},
+                verify=False,
+            )
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            raise Exception(f"HTTP error occurred: {err}") from err
 
-        assert False, pformat(response)
+        # from pprint import pformat
+
+        # assert False, pformat(response)
 
         next_page_cursor = response.json().get("nextPageCursor")
         if not next_page_cursor:
