@@ -297,6 +297,48 @@ Note that Readwise is not a free service."""
             updated_after=request.user.last_readwise_update.isoformat(),
             token=request.user.readwise_api_key,
         )
+        digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
+        # messages.success(request, pprint.pformat(digest))
+        counter = 0
+        for item in digest:
+            # print(request.user.native_language)
+            if item[1] != request.user.native_language:
+                if populate_extra_fields_via_llm:  # slow!
+                    obj = Phrase(user=request.user, text=item[0], language=item[1])
+                    was_retrieved = PhraseAdmin.save_model(
+                        self=None, request=request, obj=obj, form=None, change=False
+                    )
+                    if was_retrieved:
+                        counter += 1
+                else:
+                    obj = Phrase(
+                        user=request.user,
+                        text=item[0],
+                        language=item[1],
+                        cleaned_text=item[0],
+                    )
+                    try:
+                        obj.save()
+                        counter += 1
+                    except IntegrityError:
+                        pass
+                # save_phrase_model(request, obj)
+        datetime_1901 = timezone.make_aware(
+            datetime(1901, 1, 1), timezone.get_current_timezone()
+        )
+        if request.user.last_readwise_update < datetime_1901:
+            messages.success(
+                request,
+                f"""Successfully retrieved {counter} items from Readwise.  Going forward, only new items will be retrieved.""",
+            )
+        else:
+            messages.success(
+                request,
+                f"""Successfully retrieved {counter} new items from Readwise.  Previously updated {request.user.last_readwise_update.strftime("%B %d, %Y at %I:%M %p")} (server time).""",
+            )
+
+        request.user.last_readwise_update = datetime.now()
+        request.user.save()
     except ProxyError as e:
         # see https://www.pythonanywhere.com/forums/topic/33818/
         messages.success(
@@ -308,48 +350,6 @@ Note that Readwise is not a free service."""
         messages.error(
             request, f"{err}",
         )
-    digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
-    # messages.success(request, pprint.pformat(digest))
-    counter = 0
-    for item in digest:
-        # print(request.user.native_language)
-        if item[1] != request.user.native_language:
-            if populate_extra_fields_via_llm:  # slow!
-                obj = Phrase(user=request.user, text=item[0], language=item[1])
-                was_retrieved = PhraseAdmin.save_model(
-                    self=None, request=request, obj=obj, form=None, change=False
-                )
-                if was_retrieved:
-                    counter += 1
-            else:
-                obj = Phrase(
-                    user=request.user,
-                    text=item[0],
-                    language=item[1],
-                    cleaned_text=item[0],
-                )
-                try:
-                    obj.save()
-                    counter += 1
-                except IntegrityError:
-                    pass
-            # save_phrase_model(request, obj)
-    datetime_1901 = timezone.make_aware(
-        datetime(1901, 1, 1), timezone.get_current_timezone()
-    )
-    if request.user.last_readwise_update < datetime_1901:
-        messages.success(
-            request,
-            f"""Successfully retrieved {counter} items from Readwise.  Going forward, only new items will be retrieved.""",
-        )
-    else:
-        messages.success(
-            request,
-            f"""Successfully retrieved {counter} new items from Readwise.  Previously updated {request.user.last_readwise_update.strftime("%B %d, %Y at %I:%M %p")} (server time).""",
-        )
-
-    request.user.last_readwise_update = datetime.now()
-    request.user.save()
     return redirect("/admin/main/phrase")
 
 
