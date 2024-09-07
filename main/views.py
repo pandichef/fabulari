@@ -116,7 +116,7 @@ def create_article_view(request):
         messages.success(
             request,
             mark_safe(
-                f"""An article regarding {sanitized_subject} was sent to {request.user.email}."""
+                f"""An article regarding "{sanitized_subject}" was sent to {request.user.email}."""
             ),
         )
         return redirect("/admin/main/phrase")
