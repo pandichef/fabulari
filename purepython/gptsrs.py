@@ -88,6 +88,28 @@ def from_native_language(
     return completion.choices[0].message.content
 
 
+def detect_language_code(
+    phrase, openai_model=OPENAI_LLM_MODEL,
+):
+    completion = client.chat.completions.create(
+        model=openai_model,
+        messages=[
+            {
+                "role": "system",
+                "content": f"""
+You identify the ISO language code for a given input phrase.
+In the response, just provide the ISO.  For example, if you detect Spanish, just return the two characters "es".
+If there is ambiguity, choose the language is that more commonly studied.
+For example, while "caravana" is used in both Spanish (es) and Italian (it), respond with "es" since
+Spanish is a much more commonly used and studied language. The reponse is almost always 2 or 3 characters and no more.
+""",
+            },
+            {"role": "user", "content": phrase},
+        ],
+    )
+    return completion.choices[0].message.content
+
+
 # def get_embedding(text, model=OPENAI_EMBEDDINGS_MODEL):
 #     text = text.replace("\n", " ")
 

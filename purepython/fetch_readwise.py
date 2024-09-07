@@ -1,5 +1,7 @@
 from pprint import pprint
-from langdetect import detect
+
+# from langdetect import detect
+from .gptsrs import detect_language_code as detect
 import os
 import datetime
 import requests  # This may need to be installed from pip
@@ -45,15 +47,19 @@ new_data = fetch_from_export_api(last_fetch_was_at.isoformat())
 """
 
 
-def make_digest(all_data, supported_languages=["en", "he", "ar"]):
+def make_digest(all_data, supported_languages=["es"]):
     digest_list = []
     for article in all_data:
         for note in article["highlights"]:
             text = note["text"]
-            language = detect(text)
-            if language in supported_languages and len(text.split()) < 5:
-                digest_list.append((text, language))
+            # if len(text) < 100:
+            #     print(text)
+            this_language_code = detect(text)
+            # if len(text) < 100:
+            #     print(this_language_code)
+            if this_language_code in supported_languages and len(text.split()) < 5:
+                digest_list.append((text, this_language_code))
     return digest_list
 
 
-# pprint(make_digest(all_data))
+# pprint(make_digest(all_data)

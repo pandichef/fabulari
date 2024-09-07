@@ -1,4 +1,5 @@
-from langdetect import detect
+# from langdetect import detect
+from purepython.gptsrs import detect_language_code as detect
 from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 from purepython.gptsrs import OPENAI_LLM_MODEL
 from django.contrib import admin
