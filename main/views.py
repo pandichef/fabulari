@@ -182,6 +182,11 @@ def collect_readwise_articles_view(request):
                 request,
                 f"The request do the Readwise API failed.  Try again in a few minutes.",
             )
+        except Exception as err:
+            messages.error(
+                request, f"{err}",
+            )
+
         request.user.last_readwise_update_articles = datetime.now()
         request.user.save()
     else:
@@ -296,9 +301,13 @@ Note that Readwise is not a free service."""
         # see https://www.pythonanywhere.com/forums/topic/33818/
         messages.success(
             request,
-            f"""Encountered a proxy error.  The hosting service doesn't currently allow access to the Readwise API.""",
+            f"""Encountered a proxy error.  The hosting service (PA) doesn't currently allow access to the Readwise API.""",
         )
         return redirect("/admin/main/phrase")
+    except Exception as err:
+        messages.error(
+            request, f"{err}",
+        )
     digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
     # messages.success(request, pprint.pformat(digest))
     counter = 0

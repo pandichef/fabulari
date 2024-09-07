@@ -26,6 +26,10 @@ def fetch_from_export_api(token, updated_after=None):
             headers={"Authorization": f"Token {token}"},
             verify=False,
         )
+        if response.status_code != 200:
+            raise Exception(
+                f"Request failed with status code {response.status_code}: {response.text}"
+            )
         full_data.extend(response.json()["results"])
         next_page_cursor = response.json().get("nextPageCursor")
         if not next_page_cursor:
