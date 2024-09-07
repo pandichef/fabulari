@@ -33,11 +33,12 @@ You assess the level of students' proficiency based on phrase lists that the stu
             },
             {
                 "role": "user",
-                "content": f"""Below is a set of phrases in CSV format.
+                "content": f"""Below is a set of {working_on} phrases in CSV format.
 The first items is the phrase that the student is working on.  The second is a score which indicates how well the student knows the phrase. 
 A higher score indicates more proficiency.  The student hasn't been tested yet if the word is missing a score.
-Estimate the student's CEFR level based on these data and limit the response to 2 sentences.
-The first sentence provides the estimated level.  The second sentence provides justification for this score.
+Estimate the student's {working_on} CEFR level based on these data and limit the response to 2 sentences.
+The first sentence provides the estimated level and should mention the language being evaluated.
+The second sentence provides justification for this score.
 The response should be expressed in the second person, as if you are speaking directly to the student.
 \n\n{tuple_list_to_csv(word_list)}""",
             },

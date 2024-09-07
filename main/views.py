@@ -84,9 +84,9 @@ from purepython.get_my_level import get_my_level, tuple_list_to_csv
 
 
 def get_my_level_view(request):
-    qs = Phrase.objects.filter(user=request.user).values_list(
-        "cleaned_text", "cosine_similarity"
-    )
+    qs = Phrase.objects.filter(
+        user=request.user, language=request.user.working_on
+    ).values_list("cleaned_text", "cosine_similarity")
     tuple_list = list(qs)
     # print(tuple_list_to_csv(tuple_list))
     llm_completion = get_my_level(
