@@ -138,17 +138,18 @@ def create_article_view(request):
 def collect_readwise_articles_view(request):
     from purepython.collect_readwise_articles import collect_readwise_articles
 
-    print("------------------------------")
-    print(request.user.email)
-    print(request.user.email)
-    print(request.user.email)
-    print("------------------------------")
+    # print("------------------------------")
+    # print(request.user.email)
+    # print(request.user.email)
+    # print(request.user.email)
+    # print("------------------------------")
 
     if request.user.email and request.user.readwise_api_key:
         print("yes")
         try:
             limit = 50
             success_count, fail_count = collect_readwise_articles(
+                token=request.user.readwise_api_key,
                 updated_after=request.user.last_readwise_update_articles.isoformat(),
                 # updated_after=None,
                 recipient_list=[request.user.email],

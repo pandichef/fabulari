@@ -5,10 +5,10 @@ import requests  # This may need to be installed from pip
 from django.core.mail import send_mail
 
 # token = 'XXX'
-token = os.getenv("READWISE_API_KEY", "")
+# token = os.getenv("READWISE_API_KEY", "")
 
 
-def fetch_reader_document_list_api(updated_after=None, location=None):
+def fetch_reader_document_list_api(token, updated_after=None, location=None):
     full_data = []
     next_page_cursor = None
     while True:
@@ -20,7 +20,7 @@ def fetch_reader_document_list_api(updated_after=None, location=None):
         if location:
             params["location"] = location
         print("Making export api request with params " + str(params) + "...")
-        assert False, token
+        # assert False, token
         try:
             response = requests.get(
                 url="https://readwise.io/api/v3/list/",
@@ -68,10 +68,10 @@ from typing import Tuple
 
 
 def collect_readwise_articles(
-    updated_after=None, location=None, recipient_list=[], limit=50
+    token, updated_after=None, location=None, recipient_list=[], limit=50
 ) -> Tuple[int, int]:
     full_data = fetch_reader_document_list_api(
-        updated_after=updated_after, location=location
+        token=token, updated_after=updated_after, location=location
     )
     print("------------------------------------")
     print("------------------------------------")

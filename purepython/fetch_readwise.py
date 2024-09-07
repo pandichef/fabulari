@@ -6,10 +6,10 @@ import os
 import datetime
 import requests  # This may need to be installed from pip
 
-token = os.getenv("READWISE_API_KEY", "")
+# token = os.getenv("READWISE_API_KEY", "")
 
 
-def fetch_from_export_api(updated_after=None, token=token):
+def fetch_from_export_api(token, updated_after=None):
     # Ref https://readwise.io/api_deets
     full_data = []
     next_page_cursor = None
