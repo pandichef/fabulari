@@ -85,9 +85,9 @@ def collect_readwise_articles(
     full_data = fetch_reader_document_list_api(
         token=token, updated_after=updated_after, location=location
     )
-    print("------------------------------------")
-    assert False, full_data[:10]
-    print("------------------------------------")
+    # print("------------------------------------")
+    # assert False, full_data[:10]
+    # print("------------------------------------")
     # summaries = filter_summaries(full_data)
     success_count = 0
     fail_count = 0
