@@ -18,13 +18,13 @@
         </a>
     </li>
     {% if user.readwise_api_key %}
+    {% endif %}
         <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="/update_readwise" class="addlink">
             {% blocktranslate with cl.opts.verbose_name as name %}Update Phrases from Readwise{% endblocktranslate %}
         </a>
         </li>
-    {% endif %}
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url 'export_csv' %}">

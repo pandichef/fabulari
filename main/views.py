@@ -161,7 +161,18 @@ def add_multiple_phrases(request):
         )
 
 
+from django.utils.safestring import mark_safe
+
+
 def update_readwise(request):
+    if not request.user.readwise_api_key:
+        messages.success(
+            request,
+            mark_safe(
+                f"""To highlight phrases using Readwise, you must create a <a href="https://readwise.io/access_token">Readwise API key</a> and save it in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>."""
+            ),
+        )
+        return redirect("/admin/main/phrase")
     try:
         all_data = fetch_from_export_api(
             updated_after=request.user.last_readwise_update.isoformat(),
