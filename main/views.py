@@ -177,6 +177,8 @@ def collect_readwise_articles_view(request):
                 + up_to_date_message
                 + limit_message,
             )
+            request.user.last_readwise_update_articles = datetime.now()
+            request.user.save()
         except ConnectionError:
             messages.success(
                 request,
@@ -186,9 +188,6 @@ def collect_readwise_articles_view(request):
             messages.error(
                 request, f"{err}",
             )
-
-        request.user.last_readwise_update_articles = datetime.now()
-        request.user.save()
     else:
         messages.success(
             request,
