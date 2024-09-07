@@ -21,9 +21,9 @@ You take potentially sloppily written words or phrases in {working_on} and retur
 If the input word is a conjugated verb, convert the word to its infinitive.
 If the input word is a plural noun, convert the word to its singular version.
 Do not include extra commentary e.g., don't response with something like "vaca (singular form of vacas)".
-If the phrase appears to be a proper name and nothing else, the response should be the exact string "(proper name)".
 If the phrase appears to contain a proper name but has additional content, the response should remove the proper noun from the cleaned phrase.
 For example, the cleaned version of "José va caminando a casa" would be "ir caminando a casa".
+If the phrase appears to be a proper name and nothing else, the response should be the exact string "(proper name)", which contains exactly 13 characters.
 """,
             },
             {"role": "user", "content": phrase},
