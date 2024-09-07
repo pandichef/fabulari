@@ -64,7 +64,9 @@ def collect_readwise_articles(
         updated_after=updated_after, location=location
     )
     print("------------------------------------")
-    print(full_data[:3])
+    from pprint import pformat
+
+    assert False, pformat(full_data[:3])
     print("------------------------------------")
     # summaries = filter_summaries(full_data)
     success_count = 0
