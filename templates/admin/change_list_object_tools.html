@@ -9,20 +9,27 @@
     </a>
   </li>
   {% endif %}
+
   {% if cl.opts.model_name == 'phrase' %}
-  <li>
-    {% url cl.opts|admin_urlname:'add' as add_url %}
-    <a href="/add_multiple_phrases" class="addlink">
-      {% blocktranslate with cl.opts.verbose_name as name %}Add Multiple Phrases{% endblocktranslate %}
-    </a>
-  </li>
-  {% if user.readwise_api_key %}
     <li>
-    {% url cl.opts|admin_urlname:'add' as add_url %}
-    <a href="/update_readwise" class="addlink">
-        {% blocktranslate with cl.opts.verbose_name as name %}Update Phrases from Readwise{% endblocktranslate %}
-    </a>
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+        <a href="/add_multiple_phrases" class="addlink">
+        {% blocktranslate with cl.opts.verbose_name as name %}Add Multiple Phrases{% endblocktranslate %}
+        </a>
     </li>
-  {% endif %}
+    {% if user.readwise_api_key %}
+        <li>
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+        <a href="/update_readwise" class="addlink">
+            {% blocktranslate with cl.opts.verbose_name as name %}Update Phrases from Readwise{% endblocktranslate %}
+        </a>
+        </li>
+    {% endif %}
+    <li>
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+        <a href="{% url 'export_csv' %}">
+        {% blocktranslate with cl.opts.verbose_name as name %}Export Phrases as CSV File ⬇{% endblocktranslate %}
+        </a>
+    </li>
   {% endif %}
 {% endblock %}
