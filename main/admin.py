@@ -129,7 +129,6 @@ class PhraseAdmin(admin.ModelAdmin):
                 if self:
                     self.message_user(request, f"Not saved.  Contains proper noun.")
                 return False
-        return True
 
         # else:
         # Do nothing
@@ -144,7 +143,9 @@ class PhraseAdmin(admin.ModelAdmin):
         #     obj.example_sentence = example_sentence
         #     obj.definition = definition
         #     obj.save()
-        # super().save_model(request, obj, form, change)
+        if change:
+            super().save_model(request, obj, form, change)
+        return True
 
     def response_add(self, request, obj):
         if obj.cleaned_text == "(proper noun)":
