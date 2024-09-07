@@ -41,7 +41,7 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
         # from pprint import pformat
 
         # assert False, pformat(response)
-        assert False, response.json()["results"]
+        # assert False, response.json()["results"]
 
         next_page_cursor = response.json().get("nextPageCursor")
         if not next_page_cursor:
@@ -81,6 +81,7 @@ def collect_readwise_articles(
         token=token, updated_after=updated_after, location=location
     )
     print("------------------------------------")
+    assert False, full_data[:3]
     print("------------------------------------")
     # summaries = filter_summaries(full_data)
     success_count = 0
