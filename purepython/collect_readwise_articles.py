@@ -28,11 +28,16 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
             headers={"Authorization": f"Token {token}"},
             verify=False,
         )
-        if response.status_code != 200:
+        if response.status_code == 429:
+            # 429 is a throttling error
+            # break assumes you don't actually need ALL the data
+            # this will occassionally fail
+            break
+        elif response.status_code != 200:
             raise Exception(
                 f"Request failed with status code {response.status_code}: {response.text}"
             )
-
+        # print(response.status_code)
         # response.raise_for_status()
 
         # except requests.exceptions.HTTPError as err:
