@@ -164,7 +164,7 @@ def add_multiple_phrases(request):
 from django.utils.safestring import mark_safe
 
 
-def update_readwise(request):
+def update_readwise(request, populate_extra_fields_via_llm=False):
     if not request.user.readwise_api_key:
         messages.success(
             request,
@@ -191,14 +191,25 @@ def update_readwise(request):
     for item in digest:
         # print(request.user.native_language)
         if item[1] != request.user.native_language:
-            print(item)
-            obj = Phrase(user=request.user, text=item[0], language=item[1])
-            # obj = Phrase(user=request.user, text=item)
-            was_retrieved = PhraseAdmin.save_model(
-                self=None, request=request, obj=obj, form=None, change=False
-            )
-            if was_retrieved:
-                counter += 1
+            if populate_extra_fields_via_llm:  # slow!
+                obj = Phrase(user=request.user, text=item[0], language=item[1])
+                was_retrieved = PhraseAdmin.save_model(
+                    self=None, request=request, obj=obj, form=None, change=False
+                )
+                if was_retrieved:
+                    counter += 1
+            else:
+                obj = Phrase(
+                    user=request.user,
+                    text=item[0],
+                    language=item[1],
+                    cleaned_text=item[0],
+                )
+                try:
+                    obj.save()
+                    counter += 1
+                except IntegrityError:
+                    pass
             # save_phrase_model(request, obj)
     datetime_1901 = timezone.make_aware(
         datetime(1901, 1, 1), timezone.get_current_timezone()

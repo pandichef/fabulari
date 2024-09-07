@@ -74,7 +74,11 @@ class PhraseAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change) -> bool:
         if change:  # if the object is being created
             last_obj = Phrase.objects.get(id=obj.id)
-            raw_text_changed = last_obj.text != obj.text
+            raw_text_changed = (
+                last_obj.text != obj.text
+                or not last_obj.definition
+                or not last_obj.example_sentence
+            )
         else:
             raw_text_changed = False
             obj.user = request.user
