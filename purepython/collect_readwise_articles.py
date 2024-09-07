@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 def fetch_reader_document_list_api(token, updated_after=None, location=None):
     full_data = []
     next_page_cursor = None
+    got_at_least_one_page = False
     while True:
         params = {}
         if next_page_cursor:
@@ -29,10 +30,15 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
             verify=False,
         )
         if response.status_code == 429:
-            # 429 is a throttling error
-            # break assumes you don't actually need ALL the data
-            # this will occassionally fail
-            break
+            if got_at_least_one_page:
+                # 429 is a throttling error
+                # break assumes you don't actually need ALL the data
+                # this will occassionally fail
+                break
+            else:
+                raise Exception(
+                    f"Request failed with status code {response.status_code}: {response.text}"
+                )
         elif response.status_code != 200:
             raise Exception(
                 f"Request failed with status code {response.status_code}: {response.text}"
@@ -52,6 +58,7 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
         if not next_page_cursor:
             break
         full_data.extend(response.json()["results"])
+        got_at_least_one_page = True
     return full_data
 
 
