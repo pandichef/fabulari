@@ -3,6 +3,16 @@
 {% block object-tools-items %}
 {% endblock %}
 
+{% block object-tools %}
+    {{ block.super }}
+    <div class="object-tools">
+        <a href="/add_multiple_phrases">
+            Add Multiple Phrases <b>+</b>
+        </a>
+    </div>
+{% endblock %}
+
+<!--
 {% block extrahead %}
     {{ block.super }}
     <script type="text/javascript">
@@ -14,3 +24,4 @@
         });
     </script>
 {% endblock %}
+-->

@@ -14,8 +14,9 @@ from purepython.cleantranslation import phrase_to_native_language
 
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
-    change_list_template = "change_list_with_readwise_import.html"
-    change_form_template = "change_form_without_history.html"
+    # change_list_template = "change_list_with_readwise_import.html"
+    # change_form_template = "change_form_without_history.html"
+    change_form_template = "change_form_with_bulk_add_button.html"
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         obj = self.get_object(request, object_id)
