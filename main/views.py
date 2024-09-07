@@ -80,6 +80,27 @@ from requests.exceptions import ProxyError
 
 # from purepython.phrase_lists_utils import get_all_phrase_lists
 
+from purepython.get_my_level import get_my_level, tuple_list_to_csv
+
+
+def get_my_level_view(request):
+    qs = Phrase.objects.filter(user=request.user).values_list(
+        "cleaned_text", "cosine_similarity"
+    )
+    tuple_list = list(qs)
+    # print(tuple_list_to_csv(tuple_list))
+    llm_completion = get_my_level(
+        word_list=tuple_list,
+        working_on=request.user.working_on,
+        openai_model=OPENAI_LLM_MODEL,
+    )
+    llm_completion = llm_completion if llm_completion else ""
+    messages.success(
+        request, llm_completion,
+    )
+    return redirect("/admin/main/phrase")
+    # return redirect("https://www.nytimes.com")
+
 
 # def view_phrase_lists(request):
 #     phrase_lists = get_all_phrase_lists(os.path.join(settings.BASE_DIR, "purepython"))

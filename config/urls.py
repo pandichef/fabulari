@@ -24,6 +24,7 @@ urlpatterns = [
     # path("download_csv/<int:pk>/", export_csv, name="download_csv"),
     path("export_csv/", export_csv, name="export_csv"),
     path("update_readwise/", views.update_readwise, name="update_readwise"),
+    path("get_my_level/", views.get_my_level_view, name="get_my_level"),
     path(
         "add_multiple_phrases/", views.add_multiple_phrases, name="add_multiple_phrases"
     ),

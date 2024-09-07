@@ -10,7 +10,8 @@ from main.models import Phrase
 
 
 class CustomUserAdmin(UserAdmin):
-    change_form_template = "change_form_with_export_button.html"
+    # change_form_template = "change_form_with_export_button.html"
+    change_form_template = "change_form_without_history_button.html"
     # add_form = CustomUserCreationForm
     # form = CustomUserChangeForm
     model = CustomUser
