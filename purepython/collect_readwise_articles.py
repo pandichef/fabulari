@@ -41,7 +41,7 @@ def fetch_reader_document_list_api(token, updated_after=None, location=None):
         # from pprint import pformat
 
         # assert False, pformat(response)
-        # assert False, response.text
+        assert False, response.json()["results"]
 
         next_page_cursor = response.json().get("nextPageCursor")
         if not next_page_cursor:
