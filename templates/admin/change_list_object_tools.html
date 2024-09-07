@@ -22,19 +22,19 @@
         <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="/update_readwise" class="addlink">
-            {% blocktranslate with cl.opts.verbose_name as name %}Update Phrases from Readwise{% endblocktranslate %}
+            {% blocktranslate with cl.opts.verbose_name as name %}Import Phrases from Readwise{% endblocktranslate %}
         </a>
         </li>
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url 'export_csv' %}">
-        {% blocktranslate with cl.opts.verbose_name as name %}Export Phrases as CSV File ⬇{% endblocktranslate %}
+        {% blocktranslate with cl.opts.verbose_name as name %}Export Phrases to CSV File ⬇{% endblocktranslate %}
         </a>
     </li>
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url 'get_my_level' %}">
-        {% blocktranslate with cl.opts.verbose_name as name %}My Level 🛈{% endblocktranslate %}
+        {% blocktranslate with cl.opts.verbose_name as name %}My Level 💡{% endblocktranslate %}
         </a>
     </li>
   {% endif %}
