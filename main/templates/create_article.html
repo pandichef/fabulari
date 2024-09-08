@@ -81,7 +81,7 @@
     <div class="container">
         <a href="/">Play Game</a> | 
         <a href="/admin/main/phrase/add">Add One Phrase</a>
-        <h2>Create Learning Materials</h2>
+        <h2>Create Study Materials</h2>
         <form method="post">
             {% csrf_token %}
             <textarea id="words_input" name="words_input" placeholder="" rows="5" cols="50" autofocus></textarea>
@@ -99,9 +99,9 @@
         // Function to update the placeholder based on the selected radio button
         function updatePlaceholder() {
             if (radioButtons[0].checked) {
-                textarea.placeholder = "The text you type here will be sent without modification i.e., you already have the text for an article";
+                textarea.placeholder = "The text you type here will be sent without modification i.e., you already have the text for an article and just want to sent it to a reader app";
             } else if (radioButtons[1].checked) {
-                textarea.placeholder = "The text you type here will be sent after passing it through ChatGPT e.g., you want to create an article about the history of cats";
+                textarea.placeholder = "The text you type here will be sent after passing it through ChatGPT e.g., history of cats in A2 level Spanish";
             }
         }
 
