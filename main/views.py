@@ -27,7 +27,11 @@ from main.models import Phrase
 from accounts.models import LANGUAGE_CHOICES
 from purepython.gptsrs import OPENAI_EMBEDDINGS_MODEL
 from purepython.cleantranslation import phrase_to_native_language
-from purepython.fetch_readwise import fetch_from_export_api, make_digest
+from purepython.fetch_readwise import (
+    fetch_from_export_api,
+    make_digest,
+    make_digest_multithreaded,
+)
 from django.contrib import messages
 import pprint
 from purepython.gptsrs import OPENAI_LLM_MODEL
@@ -364,13 +368,18 @@ Note that Readwise is not a free service."""
             updated_after=request.user.last_readwise_update.isoformat(),
             token=request.user.readwise_api_key,
         )
-        digest = make_digest(all_data, supported_languages=SUPPORTED_LANGUAGES)
+        digest = make_digest_multithreaded(
+            all_data, supported_languages=SUPPORTED_LANGUAGES
+        )
         # messages.success(request, pprint.pformat(digest))
         counter = 0
         for item in digest:
             # print(request.user.native_language)
-            if item[1] != request.user.native_language:
-                if populate_extra_fields_via_llm:  # slow!
+            if (
+                item[1] != request.user.native_language
+                or request.user.retrieve_native_language_from_readwise
+            ):
+                if populate_extra_fields_via_llm:  # slow! off by default
                     obj = Phrase(user=request.user, text=item[0], language=item[1])
                     was_retrieved = PhraseAdmin.save_model(
                         self=None, request=request, obj=obj, form=None, change=False

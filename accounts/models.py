@@ -44,6 +44,10 @@ class CustomUser(AbstractUser):
         default=False,
         help_text='Send study materials to <a href="https://readwise.io/" target="_blank">Readwise</a> (instead of email) if <a href="https://readwise.io/access_token" target="_blank">API key</a> is available.',
     )
+    retrieve_native_language_from_readwise = models.BooleanField(
+        default=False,
+        help_text="By default, only foreign vocabulary is retrieved from Readwise.  Turn this on to import from your native language as well.",
+    )
 
     class Meta:
         verbose_name = "Settings"

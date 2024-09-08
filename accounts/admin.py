@@ -71,6 +71,7 @@ class CustomUserAdmin(UserAdmin):
                     "last_readwise_update",
                     # "last_readwise_update_articles",
                     "use_readwise_for_study_materials",
+                    "retrieve_native_language_from_readwise",
                 )
             },
         ),
