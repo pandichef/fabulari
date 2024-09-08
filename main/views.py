@@ -148,7 +148,7 @@ def create_article_view(request):
             messages.success(
                 request,
                 mark_safe(
-                    f"""The "Create Article" feature lets you use AI to create a new article and send it to your email address.  To do so, you must provide an email address in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>."""
+                    f""""Create Study Materials" lets you use ChatGPT to create new articles and send it to your email address.  To do so, you must provide an email address in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>."""
                 ),
             )
             return redirect("/admin/main/phrase")
