@@ -4,6 +4,7 @@ import numpy as np
 from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 from django.utils import timezone
 from django.conf import settings
+from purepython.collect_readwise_articles import collect_readwise_articles
 
 # from django.db.models.expressions import RawSQL
 # from django.db.models.functions import Abs, Coalesce
@@ -85,14 +86,29 @@ from requests.exceptions import ProxyError
 from django.core.mail import send_mail
 from purepython.get_my_level import get_my_level, tuple_list_to_csv
 from purepython.create_article import create_article
+from django import forms
 
 
 def redirect_to_previous_page(request, fallback_url="/"):
     return redirect(request.META.get("HTTP_REFERER", fallback_url))
 
 
+from django import forms
+
+
+class UseGPTRadioButtonForm(forms.Form):
+    choice_field = forms.ChoiceField(
+        choices=[(0, "Don't filter through GPT"), (1, "Filter through GPT First")],
+        required=True,
+        widget=forms.RadioSelect,
+        initial=1,
+    )
+
+
 def create_article_view(request):
     if request.method == "POST":
+        gpt_first = int(request.POST.get("choice_field"))
+        print(gpt_first)
         description_of_article = request.POST.get("words_input")
         subject_split = description_of_article.split()[:10]
         if len(subject_split):
@@ -100,12 +116,18 @@ def create_article_view(request):
         else:
             subject = " ".join(subject_split) + "..."
         sanitized_subject = subject.replace("\n", "").replace("\r", "")
+        if gpt_first:
+            print("first")
+            article = create_article(description_of_article)
+        else:
+            print("not first")
+            article = description_of_article
         success = False
         while not success:
             try:
                 send_mail(
                     "[summary] " + sanitized_subject,
-                    create_article(description_of_article),
+                    article,
                     "from@example.com",
                     [request.user.email],
                     fail_silently=False,
@@ -132,18 +154,13 @@ def create_article_view(request):
             return redirect("/admin/main/phrase")
             # return redirect_to_previous_page(request)
 
-        return render(request, "create_article.html", {},)
+        return render(
+            request, "create_article.html", {"form": UseGPTRadioButtonForm()},
+        )
 
 
 def collect_readwise_articles_view(request):
-    from purepython.collect_readwise_articles import collect_readwise_articles
-
-    # print("------------------------------")
-    # print(request.user.email)
-    # print(request.user.email)
-    # print(request.user.email)
-    # print("------------------------------")
-
+    # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
     if request.user.email and request.user.readwise_api_key:
         print("yes")
         try:

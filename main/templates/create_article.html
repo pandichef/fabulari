@@ -81,14 +81,36 @@
     <div class="container">
         <a href="/">Play Game</a> | 
         <a href="/admin/main/phrase/add">Add One Phrase</a>
-        <h2>Ask ChatGPT to Create an Article and Send It To Your Email</h2>
+        <h2>Create Learning Materials</h2>
         <form method="post">
             {% csrf_token %}
-            <textarea name="words_input" placeholder="Type your ChatGPT Prompt Here" rows="5" cols="50" autofocus></textarea>
-            <!-- Dropdown Menu for Choice Field 
-            Language: {{ form.choice_field }}<br><br>-->
+            <textarea id="words_input" name="words_input" placeholder="" rows="5" cols="50" autofocus></textarea>
+            <!-- Dropdown Menu for Choice Field -->
+            {{ form.choice_field }}<br><br>
             <button type="submit" class="load-button">Send Email</button>
         </form>
     </div>
-</body>
-</html>
+
+    <script>
+        // Get references to the radio buttons and the textarea
+        const radioButtons = document.getElementsByName('choice_field');
+        const textarea = document.getElementById('words_input');
+
+        // Function to update the placeholder based on the selected radio button
+        function updatePlaceholder() {
+            if (radioButtons[0].checked) {
+                textarea.placeholder = "The text you type here will be sent without modification i.e., you already have the text for an article";
+            } else if (radioButtons[1].checked) {
+                textarea.placeholder = "The text you type here will be sent after passing it through ChatGPT e.g., you want to create an article about the history of cats";
+            }
+        }
+
+        // Attach event listeners to the radio buttons to detect changes
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', updatePlaceholder);
+        });
+
+        // Call the function on page load to set the initial placeholder
+        updatePlaceholder();
+    </script>
+</body></html>

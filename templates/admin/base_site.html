@@ -10,12 +10,14 @@
 {% block nav-global %}{% endblock %}
 
 {% block userlinks %}
-<a href="{% url 'create_article' %}">{% translate 'Create Article' %}</a> /
-<a href="{% url 'collect_readwise_articles' %}">{% translate 'Collect Readwise Summaries' %}</a> /
 {% if user.is_superuser %}
+<a href="{% url 'create_article' %}">{% translate 'Create Study Materials' %}</a> /
+{% comment %}
+<a href="{% url 'collect_readwise_articles' %}">{% translate 'Collect Readwise Summaries' %}</a> /
+{% endcomment %}
 {% endif %}
 {% if site_url %}
-    <a href="{{ site_url }}">{% translate 'Play Translation Game' %}</a> /
+    <a href="{{ site_url }}">{% translate 'Practice Translation' %}</a> /
 {% endif %}
 {% if user.is_active and user.is_staff %}
     {% url 'django-admindocs-docroot' as docsroot %}

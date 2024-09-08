@@ -28,7 +28,7 @@ urlpatterns = [
     path(
         "add_multiple_phrases/", views.add_multiple_phrases, name="add_multiple_phrases"
     ),
-    path(
+    path(  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
         "collect_readwise_articles/",
         views.collect_readwise_articles_view,
         name="collect_readwise_articles",

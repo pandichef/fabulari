@@ -1,3 +1,4 @@
+# STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
 # from .fetch_readwise import fetch_from_export_api
 import os
 import datetime
@@ -99,7 +100,7 @@ def collect_readwise_articles(
     success_count = 0
     fail_count = 0
     for article in full_data[:limit]:
-        if article["summary"] and not article["title"].startswith("[summary]"):
+        if article["summary"] and "[summary]" not in article["title"]:
             subject = "[summary] " + article["title"]
             body = article["summary"]
 

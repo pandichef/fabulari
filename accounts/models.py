@@ -36,7 +36,9 @@ class CustomUser(AbstractUser):
     )
     last_readwise_update = models.DateTimeField(default=datetime(1900, 1, 1, 0, 0))
     last_readwise_update_articles = models.DateTimeField(
-        default=datetime(1900, 1, 1, 0, 0)
+        default=datetime(
+            1900, 1, 1, 0, 0
+        )  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
     )
     #     summarization_prompt_conditions = models.TextField(
     #         default="""
