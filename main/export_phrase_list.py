@@ -7,7 +7,8 @@ from .views import messages
 
 def export_csv(request):
     # You might want to add permission checks here
-    queryset = get_list_or_404(Phrase.objects.filter(user=request.user))
+    # queryset = get_list_or_404(Phrase.objects.filter(user=request.user))
+    queryset = Phrase.objects.filter(user=request.user)
     # queryset = queryset.filter(user=request.user)
     # data = list(Phrase.objects.filter(user=request.user).values())
 

@@ -25,14 +25,12 @@
             {% blocktranslate with cl.opts.verbose_name as name %}Import Phrases from Readwise{% endblocktranslate %}
         </a>
         </li>
-    {% if phrases.exists %}
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url 'export_csv' %}">
         {% blocktranslate with cl.opts.verbose_name as name %}Export Phrases to CSV File ⬇{% endblocktranslate %}
         </a>
     </li>
-    {% endif %}
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url 'get_my_level' %}">
