@@ -130,6 +130,7 @@ def compute_cosine_similarity(a, b):
 def get_feedback(
     sentence_in_native_language,
     attempted_translation,
+    phrase_being_studied,
     working_on="Spanish",
     native_language="English",
     openai_model=OPENAI_LLM_MODEL,
@@ -150,7 +151,8 @@ The feedback may include corrected versions of individual words or even the enti
             },
             {
                 "role": "user",
-                "content": f"""The user translated the sentence "{sentence_in_native_language}" as "{attempted_translation}".""",
+                "content": f"""The user translated the sentence "{sentence_in_native_language}" as "{attempted_translation}".  
+Since the {working_on} phrase being studied here is {phrase_being_studied}, use this phrase in the corrected translation, where possible.""",
             },
         ],
     )

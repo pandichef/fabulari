@@ -450,6 +450,7 @@ def prompt_view(request):
         feedback = get_feedback(
             request.session.get("equivalent_native_language_sentence", ""),
             attempted_translation,
+            request.session["phrase_cleaned_text"],
             working_on=request.session.get("working_on", ""),
             native_language=request.session.get("native_language", ""),
         )
@@ -560,6 +561,7 @@ def prompt_view(request):
 
     # store session variables
     request.session["phrase_id"] = next_phrase.id
+    request.session["phrase_cleaned_text"] = next_phrase.cleaned_text
     request.session["full_working_on_sentence"] = full_working_on_sentence
     request.session[
         "equivalent_native_language_sentence"
