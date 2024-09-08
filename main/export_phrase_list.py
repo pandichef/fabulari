@@ -2,6 +2,7 @@ import csv
 from django.http import HttpResponse
 from django.shortcuts import get_list_or_404
 from main.models import Phrase
+from .views import messages
 
 
 def export_csv(request):
