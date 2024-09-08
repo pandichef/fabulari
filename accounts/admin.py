@@ -69,7 +69,8 @@ class CustomUserAdmin(UserAdmin):
                     "readwise_api_key",
                     # "email",
                     "last_readwise_update",
-                    "last_readwise_update_articles",
+                    # "last_readwise_update_articles",
+                    "use_readwise_for_study_materials",
                 )
             },
         ),

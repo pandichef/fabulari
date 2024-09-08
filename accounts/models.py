@@ -35,17 +35,15 @@ class CustomUser(AbstractUser):
         help_text='Generate API key <a href="https://readwise.io/access_token" target="_blank">here</a> if you have an account.',
     )
     last_readwise_update = models.DateTimeField(default=datetime(1900, 1, 1, 0, 0))
-    last_readwise_update_articles = models.DateTimeField(
-        default=datetime(
-            1900, 1, 1, 0, 0
-        )  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
+    # last_readwise_update_articles = models.DateTimeField(
+    #     default=datetime(
+    #         1900, 1, 1, 0, 0
+    #     )  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
+    # )
+    use_readwise_for_study_materials = models.BooleanField(
+        default=False,
+        help_text='Send study materials to <a href="https://readwise.io/" target="_blank">Readwise</a> (instead of email) if <a href="https://readwise.io/access_token" target="_blank">API key</a> is available.',
     )
-    #     summarization_prompt_conditions = models.TextField(
-    #         default="""
-    # If the article is in Spanish, the response should be at a CEFR B1 level.
-    #     """,
-    #         help_text="Leave blank if there are no conditions.",
-    #     )
 
     class Meta:
         verbose_name = "Settings"

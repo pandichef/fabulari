@@ -4,7 +4,8 @@ import numpy as np
 from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 from django.utils import timezone
 from django.conf import settings
-from purepython.collect_readwise_articles import collect_readwise_articles
+
+# from purepython.collect_readwise_articles import collect_readwise_articles
 
 # from django.db.models.expressions import RawSQL
 # from django.db.models.functions import Abs, Coalesce
@@ -34,7 +35,7 @@ from .admin import PhraseAdmin
 
 # phrase_list = ["en cuanto a"]
 from django.utils.safestring import mark_safe
-
+from purepython.create_article import create_readwise_item
 
 """
 def save_phrase_model(request, obj, change=False, self=None):
@@ -85,7 +86,7 @@ from requests.exceptions import ProxyError
 
 from django.core.mail import send_mail
 from purepython.get_my_level import get_my_level, tuple_list_to_csv
-from purepython.create_article import create_article
+from purepython.create_article import create_article, create_article_title
 from django import forms
 
 
@@ -110,41 +111,93 @@ def create_article_view(request):
         gpt_first = int(request.POST.get("choice_field"))
         print(gpt_first)
         description_of_article = request.POST.get("words_input")
-        subject_split = description_of_article.split()[:10]
-        if len(subject_split):
-            subject = description_of_article
-        else:
-            subject = " ".join(subject_split) + "..."
-        sanitized_subject = subject.replace("\n", "").replace("\r", "")
+        # subject_split = description_of_article.split()[:10]
+        # if len(subject_split):
+        # subject = description_of_article
+        # else:
+        # subject = " ".join(subject_split) + "..."
+        # sanitized_subject = subject.replace("\n", "").replace("\r", "")
         if gpt_first:
-            print("first")
+            # print("first")
             article = create_article(description_of_article)
         else:
-            print("not first")
+            # print("not first")
             article = description_of_article
+        subject = create_article_title(article)
+        from markdown2 import markdown
+
+        article_in_html = markdown(article)
         success = False
-        while not success:
-            try:
-                send_mail(
-                    "[summary] " + sanitized_subject,
-                    article,
-                    "from@example.com",
-                    [request.user.email],
-                    fail_silently=False,
+        if request.user.use_readwise_for_study_materials:
+            # hack
+            protocol_and_domain = f"{request.scheme}://{request.get_host()}"
+            domain = request.get_host().split(":")[0]
+            image_url = (
+                protocol_and_domain + "/static/fabularilogo.jpg"
+                if not domain in ["127.0.0.1", "localhost"]
+                else None
+            )
+            # print(request.get_host())
+            res = create_readwise_item(
+                token=request.user.readwise_api_key,
+                title="[summary] " + subject,
+                body_in_html=article_in_html,
+                url=protocol_and_domain,
+                image_url=image_url,
+            )
+            if res.status_code == 201:
+                messages.success(
+                    request,
+                    mark_safe(
+                        f"""An article regarding "{subject}" was sent to Reader using the API."""
+                    ),
                 )
-                success = True
-            except:
-                pass
-        messages.success(
-            request,
-            mark_safe(
-                f"""An article regarding "{sanitized_subject}" was sent to {request.user.email}."""
-            ),
-        )
+            elif res.status_code == 200:
+                messages.success(
+                    request,
+                    mark_safe(
+                        f"""Readwise API determined that an article regarding "{subject}" already exists.  New item not created."""
+                    ),
+                )
+            else:
+                raise Exception(f"""[{res.status_code}] {res.content}""")
+        else:
+            while not success:
+                try:
+                    send_mail(
+                        "[summary] " + subject,
+                        article_in_html,
+                        "from@example.com",
+                        [request.user.email],
+                        fail_silently=False,
+                    )
+                    success = True
+                except:
+                    pass
+            messages.success(
+                request,
+                mark_safe(
+                    f"""An article regarding "{subject}" was sent to {request.user.email}."""
+                ),
+            )
+            # messages.success(
+            #     request, f"""{res.content}""",
+            # )
         return redirect("/admin/main/phrase")
         # return redirect("/create_article")
     else:
-        if not request.user.email:
+        if (
+            request.user.use_readwise_for_study_materials
+            and not request.user.readwise_api_key
+        ):
+            messages.success(
+                request,
+                mark_safe(
+                    f""""Create Study Materials" lets you use ChatGPT to create new articles and send it to Readwise.  To do so, you must add a Readwise API Key in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>.  Alternatively, you can opt to use email."""
+                ),
+            )
+            return redirect("/admin/main/phrase")
+        if not request.user.use_readwise_for_study_materials and not request.user.email:
             messages.success(
                 request,
                 mark_safe(
@@ -159,65 +212,63 @@ def create_article_view(request):
         )
 
 
-def collect_readwise_articles_view(request):
-    # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
-    if request.user.email and request.user.readwise_api_key:
-        print("yes")
-        try:
-            limit = 50
-            success_count, fail_count = collect_readwise_articles(
-                token=request.user.readwise_api_key,
-                updated_after=request.user.last_readwise_update_articles.isoformat(),
-                # updated_after=None,
-                recipient_list=[request.user.email],
-                limit=limit,
-            )
-            fail_message = (
-                f"""{fail_count} failed to send, likely due to an SMTP server issue.  """
-                if fail_count
-                else ""
-            )
-            up_to_date_message = (
-                "There are no new summaries currently.  "
-                if success_count + fail_count == 0
-                else ""
-            )
-            limit_message = (
-                f"Collecting summarizes is limited to {limit} articles due to server constraints.  "
-                if success_count + fail_count == limit
-                else ""
-            )
-            messages.success(
-                request,
-                f"""Successfully forwarded {success_count} emails.  """
-                + fail_message
-                + up_to_date_message
-                + limit_message,
-            )
-            request.user.last_readwise_update_articles = datetime.now()
-            request.user.save()
-        except ConnectionError:
-            messages.success(
-                request,
-                f"The request do the Readwise API failed.  Try again in a few minutes.",
-            )
-        except Exception as err:
-            messages.error(
-                request, f"{err}",
-            )
-    else:
-        messages.success(
-            request,
-            mark_safe(
-                f"""The "Collect Readwise Summaries" feature collects article summarizies generated by Readwise and forwards them to your email address.
-You must provide an email address and a <a href="https://readwise.io/access_token">Readwise API key</a> in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>.
-Note that Readwise is not a free service.
-"""
-            ),
-        )
-    return redirect_to_previous_page(request)
-
-    # return redirect("/admin/main/phrase")
+# def collect_readwise_articles_view(request):
+#     # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
+#     if request.user.email and request.user.readwise_api_key:
+#         print("yes")
+#         try:
+#             limit = 50
+#             success_count, fail_count = collect_readwise_articles(
+#                 token=request.user.readwise_api_key,
+#                 updated_after=request.user.last_readwise_update_articles.isoformat(),
+#                 # updated_after=None,
+#                 recipient_list=[request.user.email],
+#                 limit=limit,
+#             )
+#             fail_message = (
+#                 f"""{fail_count} failed to send, likely due to an SMTP server issue.  """
+#                 if fail_count
+#                 else ""
+#             )
+#             up_to_date_message = (
+#                 "There are no new summaries currently.  "
+#                 if success_count + fail_count == 0
+#                 else ""
+#             )
+#             limit_message = (
+#                 f"Collecting summarizes is limited to {limit} articles due to server constraints.  "
+#                 if success_count + fail_count == limit
+#                 else ""
+#             )
+#             messages.success(
+#                 request,
+#                 f"""Successfully forwarded {success_count} emails.  """
+#                 + fail_message
+#                 + up_to_date_message
+#                 + limit_message,
+#             )
+#             request.user.last_readwise_update_articles = datetime.now()
+#             request.user.save()
+#         except ConnectionError:
+#             messages.success(
+#                 request,
+#                 f"The request do the Readwise API failed.  Try again in a few minutes.",
+#             )
+#         except Exception as err:
+#             messages.error(
+#                 request, f"{err}",
+#             )
+#     else:
+#         messages.success(
+#             request,
+#             mark_safe(
+#                 f"""The "Collect Readwise Summaries" feature collects article summarizies generated by Readwise and forwards them to your email address.
+# You must provide an email address and a <a href="https://readwise.io/access_token">Readwise API key</a> in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>.
+# Note that Readwise is not a free service.
+# """
+#             ),
+#         )
+#     return redirect_to_previous_page(request)
 
 
 def get_my_level_view(request):

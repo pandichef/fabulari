@@ -28,14 +28,20 @@ urlpatterns = [
     path(
         "add_multiple_phrases/", views.add_multiple_phrases, name="add_multiple_phrases"
     ),
-    path(  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
-        "collect_readwise_articles/",
-        views.collect_readwise_articles_view,
-        name="collect_readwise_articles",
-    ),
+    # path(  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
+    #     "collect_readwise_articles/",
+    #     views.collect_readwise_articles_view,
+    #     name="collect_readwise_articles",
+    # ),
     path("create_article/", views.create_article_view, name="create_article",),
 ]
 
 admin.site.site_header = "Fabulari"
 admin.site.site_title = "Fabulari"
 admin.site.index_title = "Tables"
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
