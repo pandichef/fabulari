@@ -133,7 +133,7 @@ def create_article_view(request):
             protocol_and_domain = f"{request.scheme}://{request.get_host()}"
             domain = request.get_host().split(":")[0]
             image_url = (
-                protocol_and_domain + "/static/fabularilogo.jpg"
+                protocol_and_domain + "/static/fabularilogo.webp"
                 if not domain in ["127.0.0.1", "localhost"]
                 else None
             )
