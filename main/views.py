@@ -228,7 +228,7 @@ def get_my_level_view(request):
     # print(tuple_list_to_csv(tuple_list))
     llm_completion = get_my_level(
         word_list=tuple_list,
-        working_on=request.user.working_on,
+        working_on=dict(LANGUAGE_CHOICES)[request.user.working_on],
         openai_model=OPENAI_LLM_MODEL,
     )
     llm_completion = llm_completion if llm_completion else ""
