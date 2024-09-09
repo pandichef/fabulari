@@ -138,6 +138,7 @@ class CustomUserAdmin(UserAdmin):
                 "is_superuser",
                 "user_permissions",
                 "groups",
+                "openai_llm_model_complex_tasks",
             ]
 
     def get_queryset(self, request):
