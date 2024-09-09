@@ -34,7 +34,9 @@ Note that Readwise is not a free service."""
             token=request.user.readwise_api_key,
         )
         digest = make_digest_multithreaded(
-            all_data, supported_languages=SUPPORTED_LANGUAGES
+            all_data,
+            supported_language_codes=SUPPORTED_LANGUAGES,
+            openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
         )
         # messages.success(request, pprint.pformat(digest))
         counter = 0
@@ -45,6 +47,7 @@ Note that Readwise is not a free service."""
                 or request.user.retrieve_native_language_from_readwise
             ):
                 if populate_extra_fields_via_llm:  # slow! off by default
+                    # todo: make this multithreaded
                     obj = Phrase(user=request.user, text=item[0], language=item[1])
                     was_retrieved = PhraseAdmin.save_model(
                         self=None, request=request, obj=obj, form=None, change=False
