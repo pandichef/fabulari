@@ -1,5 +1,5 @@
 from typing import Tuple
-from purepython.gptsrs import (
+from purepython.practice_translation import (
     generate_full_sentence,
     OPENAI_LLM_MODEL,
     client,

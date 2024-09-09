@@ -2,10 +2,10 @@ import csv
 from django.http import HttpResponse
 from django.shortcuts import get_list_or_404
 from main.models import Phrase
-from .views import messages
+from django.contrib import messages
 
 
-def export_csv(request):
+def export_phrases_to_csv_view(request):
     # You might want to add permission checks here
     # queryset = get_list_or_404(Phrase.objects.filter(user=request.user))
     queryset = Phrase.objects.filter(user=request.user)

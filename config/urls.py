@@ -16,24 +16,44 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main import views
-from main.export_phrase_list import export_csv
+from main.views.export_phrases_to_csv import export_phrases_to_csv_view
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", views.prompt_view, name="prompt_view"),
-    # path("download_csv/<int:pk>/", export_csv, name="download_csv"),
-    path("export_csv/", export_csv, name="export_csv"),
-    path("update_readwise/", views.update_readwise, name="update_readwise"),
-    path("get_my_level/", views.get_my_level_view, name="get_my_level"),
+    # 0
+    path("admin/", admin.site.urls),  # this is like an add_one_phrase app
+    # 1
+    path("", views.practice_translation_view, name="practice_translation"),
+    # 2
     path(
-        "add_multiple_phrases/", views.add_multiple_phrases, name="add_multiple_phrases"
+        "export_phrases_to_csv/",
+        export_phrases_to_csv_view,
+        name="export_phrases_to_csv",
+    ),
+    # 3
+    path(
+        "import_from_readwise/",
+        views.import_from_readwise_view,
+        name="import_from_readwise",
+    ),
+    # 4
+    path("assess_cefr_level/", views.assess_cefr_level_view, name="assess_cefr_level",),
+    # 5
+    path(
+        "add_multiple_phrases/",
+        views.add_multiple_phrases_view,
+        name="add_multiple_phrases",
+    ),
+    # 6
+    path(
+        "create_study_materials/",
+        views.create_study_materials_view,
+        name="create_study_materials",
     ),
     # path(  # STOPPED USING THIS; TOO COMPLICATED TO MAINTAIN
     #     "collect_readwise_articles/",
     #     views.collect_readwise_articles_view,
     #     name="collect_readwise_articles",
     # ),
-    path("create_article/", views.create_article_view, name="create_article",),
 ]
 
 admin.site.site_header = "Fabulari"

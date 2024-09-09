@@ -1,7 +1,7 @@
 from pprint import pprint
 
 # from langdetect import detect
-from .gptsrs import detect_language_code as detect
+from .practice_translation import detect_language_code as detect
 import os
 import datetime
 import requests  # This may need to be installed from pip

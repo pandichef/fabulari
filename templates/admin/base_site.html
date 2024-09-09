@@ -10,11 +10,9 @@
 {% block nav-global %}{% endblock %}
 
 {% block userlinks %}
-<a href="{% url 'create_article' %}">{% translate 'Create Study Materials' %}</a> /
+<a href="{% url 'create_study_materials' %}">{% translate 'Create Study Materials' %}</a> /
 {% comment %}
-{% if user.is_superuser %}
 <a href="{% url 'collect_readwise_articles' %}">{% translate 'Collect Readwise Summaries' %}</a> /
-{% endif %}
 {% endcomment %}
 {% if site_url %}
     <a href="{{ site_url }}">{% translate 'Practice Translation' %}</a> /

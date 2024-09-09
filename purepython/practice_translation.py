@@ -13,7 +13,7 @@ OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
 # OPENAI_EMBEDDINGS_MODEL = "text-similarity-davinci-001"
 
 
-def generate_full_sentence(phrase, working_on="Spanish", openai_model=OPENAI_LLM_MODEL):
+def generate_full_sentence(phrase, working_on="Spanish", openai_model="gpt-4o-mini"):
     hebrew_arabic_suffix = """
 Even if the original {working_on} word or phrase doesn't have vowels, add the vowels in the output."""
     if working_on == "Hebrew":
@@ -52,7 +52,7 @@ def to_native_language(
     sentence,
     working_on="Spanish",
     native_language="English",
-    openai_model=OPENAI_LLM_MODEL,
+    openai_model="gpt-4o-mini",
     # phrase=None,
 ):
     completion = client.chat.completions.create(

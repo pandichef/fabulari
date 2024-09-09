@@ -1,7 +1,7 @@
 # from langdetect import detect
-from purepython.gptsrs import detect_language_code as detect
+from purepython.practice_translation import OPENAI_LLM_MODEL
+from purepython.practice_translation import detect_language_code as detect
 from accounts.models import supported_languages as SUPPORTED_LANGUAGES
-from purepython.gptsrs import OPENAI_LLM_MODEL
 from django.contrib import admin
 from django.db.utils import IntegrityError
 from django.db.transaction import TransactionManagementError
@@ -10,14 +10,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import redirect
 from .models import Phrase
-from purepython.cleantranslation import phrase_to_native_language
+from purepython.create_phrase_object import phrase_to_native_language
 
 
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
     # change_list_template = "change_list_with_readwise_import.html"
     # change_form_template = "change_form_without_history.html"
-    change_form_template = "change_form_with_bulk_add_button.html"
+    change_form_template = "admin/change_form_with_bulk_add_button.html"
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         obj = self.get_object(request, object_id)

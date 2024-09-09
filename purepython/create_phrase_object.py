@@ -1,5 +1,5 @@
 from typing import Tuple
-from purepython.gptsrs import (
+from purepython.practice_translation import (
     generate_full_sentence,
     OPENAI_LLM_MODEL,
     client,
@@ -10,6 +10,7 @@ from purepython.gptsrs import (
 def clean_phrase(
     phrase: str, working_on: str = "Spanish", openai_model: str = OPENAI_LLM_MODEL
 ) -> str:
+    """User is assume to input imperfect phrase.  This function sanitizes the phrase."""
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -33,13 +34,14 @@ If the phrase appears to be a proper name and nothing else, the response should 
 
 
 def phrase_to_native_language(
-    phrase,
-    working_on="Spanish",
-    native_language="English",
-    openai_model=OPENAI_LLM_MODEL,
+    phrase: str,
+    working_on: str = "Spanish",
+    native_language: str = "English",
+    openai_model: str = "gpt-4o-mini",
     # phrase=None,
-) -> Tuple | None:
-    if len(phrase) < 2:
+) -> Tuple[str, str, str] | None:
+    """Gets extra data e.g., cleaned_phrase, definition, example sentence"""
+    if len(phrase) < 2:  # at least 2 characters
         return None
     cleaned_phrase = clean_phrase(phrase, working_on=working_on)
     if "(proper name)" in cleaned_phrase:

@@ -13,7 +13,7 @@
   {% if cl.opts.model_name == 'phrase' %}
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a href="/add_multiple_phrases" class="addlink">
+        <a href="{% url 'add_multiple_phrases' %}" class="addlink">
         {% blocktranslate with cl.opts.verbose_name as name %}Add Multiple Phrases{% endblocktranslate %}
         </a>
     </li>
@@ -21,19 +21,19 @@
     {% endif %}
         <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a href="/update_readwise" class="addlink">
+        <a href="{% url 'import_from_readwise' %}" class="addlink">
             {% blocktranslate with cl.opts.verbose_name as name %}Import Phrases from Readwise{% endblocktranslate %}
         </a>
         </li>
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a href="{% url 'export_csv' %}">
+        <a href="{% url 'export_phrases_to_csv' %}">
         {% blocktranslate with cl.opts.verbose_name as name %}Export Phrases to CSV File ⬇{% endblocktranslate %}
         </a>
     </li>
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a href="{% url 'get_my_level' %}">
+        <a href="{% url 'assess_cefr_level' %}">
         {% blocktranslate with cl.opts.verbose_name as name %}My Level 💡{% endblocktranslate %}
         </a>
     </li>
