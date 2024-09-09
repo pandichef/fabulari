@@ -1,14 +1,16 @@
 from typing import Tuple
 from purepython.practice_translation import (
     generate_full_sentence,
-    OPENAI_LLM_MODEL,
+    # OPENAI_LLM_MODEL,
     client,
     to_native_language,
 )
 
 
 def clean_phrase(
-    phrase: str, working_on: str = "Spanish", openai_model: str = OPENAI_LLM_MODEL
+    phrase: str,  # e.g., "tener"
+    working_on: str,  # e.g., Spanish
+    openai_model: str,  # e.g., "gpt-4o-mini"
 ) -> str:
     """User is assume to input imperfect phrase.  This function sanitizes the phrase."""
     completion = client.chat.completions.create(
@@ -35,15 +37,17 @@ If the phrase appears to be a proper name and nothing else, the response should 
 
 def phrase_to_native_language(
     phrase: str,
-    working_on: str = "Spanish",
-    native_language: str = "English",
-    openai_model: str = "gpt-4o-mini",
+    working_on: str,  # = "Spanish",
+    native_language: str,  # = "English",
+    openai_model: str  # = "gpt-4o-mini",
     # phrase=None,
 ) -> Tuple[str, str, str] | None:
     """Gets extra data e.g., cleaned_phrase, definition, example sentence"""
     if len(phrase) < 2:  # at least 2 characters
         return None
-    cleaned_phrase = clean_phrase(phrase, working_on=working_on)
+    cleaned_phrase = clean_phrase(
+        phrase=phrase, working_on=working_on, openai_model=openai_model
+    )
     if "(proper name)" in cleaned_phrase:
         return None
     example_sentence = generate_full_sentence(

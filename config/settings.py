@@ -235,3 +235,22 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get("GMAIL_USERNAME", "")
 EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_PASSWORD", "")
+
+# OPENAI MODELS
+OPENAI_LLM_MODEL_SIMPLE_TASKS = "gpt-4o-mini"
+OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
+
+LANGUAGE_CHOICES = [
+    ("en", "English"),
+    ("es", "Spanish"),
+    ("ru", "Russian"),
+    ("he", "Hebrew"),
+    ("ar", "Arabic"),
+    ("zh", "Chinese"),
+    ("de", "German"),
+    ("la", "Latin"),
+    ("fr", "French"),
+    # Add more languages as needed
+]
+
+supported_languages = [code for code, _ in LANGUAGE_CHOICES]

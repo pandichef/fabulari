@@ -1,44 +1,20 @@
-from main.models import LANGUAGE_CHOICES
-from django import forms
-from markdown2 import markdown
-from datetime import datetime
 import os
 import numpy as np
-from accounts.models import supported_languages as SUPPORTED_LANGUAGES
-from requests.exceptions import ProxyError
-from django.core.mail import send_mail
-from purepython.assess_cefr_level import get_my_level, tuple_list_to_csv
-from purepython.create_study_materials import create_article, create_article_title
-from django import forms
-from django.utils import timezone
 from django.conf import settings
 from django.db.models.functions import Abs
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
+from django.db.models import FloatField, F, ExpressionWrapper
 from purepython.practice_translation import (
     generate_full_sentence,
     to_native_language,
-    from_native_language,
     compute_cosine_similarity,
     get_embeddings,
     get_feedback,
 )
-from django.db import IntegrityError
-from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
 from main.models import Phrase
-from accounts.models import LANGUAGE_CHOICES
-from purepython.practice_translation import OPENAI_EMBEDDINGS_MODEL
-from purepython.create_phrase_object import phrase_to_native_language
-from purepython.import_from_readwise import (
-    fetch_from_export_api,
-    make_digest,
-    make_digest_multithreaded,
-)
-from django.contrib import messages
-import pprint
-from purepython.practice_translation import OPENAI_LLM_MODEL
-from ..admin import PhraseAdmin
-from django.utils.safestring import mark_safe
-from purepython.create_study_materials import create_readwise_item
+
+LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
+SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
 def practice_translation_view(request):
@@ -55,7 +31,11 @@ def practice_translation_view(request):
         #     [request.session.get("full_working_on_sentence", ""), attempted_translation]
         # )
         embeddings = get_embeddings(
-            [request.session.get("full_working_on_sentence", ""), attempted_translation]
+            [
+                request.session.get("full_working_on_sentence", ""),
+                attempted_translation,
+            ],
+            openai_embeddings_model=settings.OPENAI_EMBEDDINGS_MODEL,
         )
         cosine_similarity = compute_cosine_similarity(embeddings[0], embeddings[1])
         # print(attempted_translation)
@@ -65,6 +45,7 @@ def practice_translation_view(request):
             request.session["phrase_cleaned_text"],
             working_on=request.session.get("working_on", ""),
             native_language=request.session.get("native_language", ""),
+            openai_model=request.user.openai_llm_model_complex_tasks,
         )
 
         phrase_object = Phrase.objects.get(id=request.session.get("phrase_id", ""))
@@ -88,7 +69,7 @@ def practice_translation_view(request):
                 # + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
                 "phrase": phrase_object.cleaned_text,
                 "cosine_similarity": str(round(cosine_similarity, 4)),
-                "model": OPENAI_EMBEDDINGS_MODEL,
+                "model": settings.OPENAI_EMBEDDINGS_MODEL,
             },
         )
 
@@ -163,12 +144,15 @@ def practice_translation_view(request):
     next_phrase = qs[0]
 
     full_working_on_sentence = generate_full_sentence(
-        next_phrase.text, working_on=working_on
+        phrase=next_phrase.text,
+        working_on=working_on,
+        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
     )
     equivalent_native_language_sentence = to_native_language(
-        full_working_on_sentence,
+        sentence=full_working_on_sentence,
         working_on=working_on,
         native_language=native_language,
+        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
     )
 
     # store session variables

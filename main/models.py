@@ -2,11 +2,13 @@ import numpy as np
 from django.db import models
 from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
 from decimal import Decimal
+from django.conf import settings
 
 # from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
 
-from accounts.models import LANGUAGE_CHOICES
+# from accounts.models import LANGUAGE_CHOICES
+LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 
 # LANGUAGE_CHOICES = [
 #     ("en", "English"),

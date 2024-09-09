@@ -1,10 +1,4 @@
-from typing import Tuple
-from purepython.practice_translation import (
-    generate_full_sentence,
-    OPENAI_LLM_MODEL,
-    client,
-    to_native_language,
-)
+from purepython.practice_translation import client
 
 
 def tuple_list_to_csv(tuple_list):
@@ -18,10 +12,10 @@ def tuple_list_to_csv(tuple_list):
     return csv_string
 
 
-def get_my_level(
-    word_list=[("casa", 0.80), ("perro", None), ("hijo", 0.5)],
-    working_on="Spanish",
-    openai_model=OPENAI_LLM_MODEL,
+def assess_cefr_level(
+    word_list,  # e.g., [("casa", 0.80), ("perro", None), ("hijo", 0.5)],
+    working_on,  # e.g., "Spanish"
+    openai_model,  # e.g., "gpt-4o-mini"
 ) -> str:
     completion = client.chat.completions.create(
         model=openai_model,

@@ -1,16 +1,14 @@
-# from langdetect import detect
-from purepython.practice_translation import OPENAI_LLM_MODEL
-from purepython.practice_translation import detect_language_code as detect
-from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 from django.contrib import admin
-from django.db.utils import IntegrityError
-from django.db.transaction import TransactionManagementError
-from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import redirect
-from .models import Phrase
+from django.conf import settings
 from purepython.create_phrase_object import phrase_to_native_language
+from purepython.practice_translation import detect_language_code as detect
+from .models import Phrase
+
+LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
+SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
 @admin.register(Phrase)
@@ -92,7 +90,7 @@ class PhraseAdmin(admin.ModelAdmin):
                         obj.text,
                         working_on=obj.language,
                         native_language=detected_language_code,
-                        openai_model=OPENAI_LLM_MODEL,
+                        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
                     )
                 else:
                     if not detected_language_code in SUPPORTED_LANGUAGES:
@@ -135,7 +133,8 @@ class PhraseAdmin(admin.ModelAdmin):
                     obj.save()
                     if self:
                         self.message_user(
-                            request, f"Retrieved values from {OPENAI_LLM_MODEL}."
+                            request,
+                            f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
                         )
 
                 if not change:
@@ -156,7 +155,8 @@ class PhraseAdmin(admin.ModelAdmin):
                         obj.save()
                         if self:
                             self.message_user(
-                                request, f"Retrieved values from {OPENAI_LLM_MODEL}."
+                                request,
+                                f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
                             )
             else:
                 obj.cleaned_text = "(proper noun)"  # hack

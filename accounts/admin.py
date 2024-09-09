@@ -62,6 +62,7 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
         # ("Important dates", {"fields": ("last_login", "date_joined")}),
+        ("OpenAI", {"fields": ("openai_llm_model_complex_tasks",)},),
         (
             "Readwise Integration",
             {

@@ -1,44 +1,16 @@
-from main.models import LANGUAGE_CHOICES
-from django import forms
 from markdown2 import markdown
-from datetime import datetime
-import os
-import numpy as np
-from accounts.models import supported_languages as SUPPORTED_LANGUAGES
-from requests.exceptions import ProxyError
-from django.core.mail import send_mail
-from purepython.assess_cefr_level import get_my_level, tuple_list_to_csv
-from purepython.create_study_materials import create_article, create_article_title
 from django import forms
-from django.utils import timezone
-from django.conf import settings
-from django.db.models.functions import Abs
-from django.shortcuts import render, HttpResponse, redirect
-from purepython.practice_translation import (
-    generate_full_sentence,
-    to_native_language,
-    from_native_language,
-    compute_cosine_similarity,
-    get_embeddings,
-    get_feedback,
-)
-from django.db import IntegrityError
-from django.db.models import Avg, FloatField, F, ExpressionWrapper, Func, Value, StdDev
-from main.models import Phrase
-from accounts.models import LANGUAGE_CHOICES
-from purepython.practice_translation import OPENAI_EMBEDDINGS_MODEL
-from purepython.create_phrase_object import phrase_to_native_language
-from purepython.import_from_readwise import (
-    fetch_from_export_api,
-    make_digest,
-    make_digest_multithreaded,
-)
+from django.core.mail import send_mail
+from django import forms
+from django.shortcuts import render, redirect
 from django.contrib import messages
-import pprint
-from purepython.practice_translation import OPENAI_LLM_MODEL
-from ..admin import PhraseAdmin
+from django.conf import settings
 from django.utils.safestring import mark_safe
-from purepython.create_study_materials import create_readwise_item
+from purepython.create_study_materials import (
+    create_article,
+    create_article_title,
+    create_readwise_item,
+)
 
 
 class UseGPTRadioButtonForm(forms.Form):
@@ -53,7 +25,6 @@ class UseGPTRadioButtonForm(forms.Form):
 def create_study_materials_view(request):
     if request.method == "POST":
         gpt_first = int(request.POST.get("choice_field"))
-        print(gpt_first)
         description_of_article = request.POST.get("words_input")
         # subject_split = description_of_article.split()[:10]
         # if len(subject_split):
@@ -63,11 +34,16 @@ def create_study_materials_view(request):
         # sanitized_subject = subject.replace("\n", "").replace("\r", "")
         if gpt_first:
             # print("first")
-            article = create_article(description_of_article)
+            article = create_article(
+                description_of_article=description_of_article,
+                openai_model=request.user.openai_llm_model_complex_tasks,
+            )
         else:
             # print("not first")
             article = description_of_article
-        subject = create_article_title(article)
+        subject = create_article_title(
+            body_of_article=article, openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+        )
 
         article_in_html = markdown(article)
         success = False
@@ -85,6 +61,7 @@ def create_study_materials_view(request):
                 token=request.user.readwise_api_key,
                 title="[summary] " + subject,
                 body_in_html=article_in_html,
+                author="fabulari",
                 url=protocol_and_domain,
                 image_url=image_url,
             )

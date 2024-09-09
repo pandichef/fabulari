@@ -5,15 +5,21 @@ from openai import OpenAI
 
 client = OpenAI()
 
+# OPENAI_LLM_MODEL = "gpt-4o-mini"
+# OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
+
+
 # LANGUAGE = "Spanish"
-OPENAI_LLM_MODEL = "gpt-4o-mini"
 # OPENAI_LLM_MODEL = model="gpt-4o-mini"
 # OPENAI_EMBEDDINGS_MODEL = "text-embedding-ada-002"
-OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
 # OPENAI_EMBEDDINGS_MODEL = "text-similarity-davinci-001"
 
 
-def generate_full_sentence(phrase, working_on="Spanish", openai_model="gpt-4o-mini"):
+def generate_full_sentence(
+    phrase: str,  # e.g., tener
+    working_on: str,  # ="Spanish",
+    openai_model: str,  # ="gpt-4o-mini"
+) -> str | None:
     hebrew_arabic_suffix = """
 Even if the original {working_on} word or phrase doesn't have vowels, add the vowels in the output."""
     if working_on == "Hebrew":
@@ -49,12 +55,12 @@ but this obviously doesn't convey the correct sense of the phrase "en cuanto a".
 
 
 def to_native_language(
-    sentence,
-    working_on="Spanish",
-    native_language="English",
-    openai_model="gpt-4o-mini",
+    sentence: str,
+    working_on: str,  # ="Spanish",
+    native_language: str,  # ="English",
+    openai_model: str,  # ="gpt-4o-mini",
     # phrase=None,
-):
+) -> str | None:
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -70,11 +76,11 @@ def to_native_language(
 
 
 def from_native_language(
-    sentence,
-    working_on="Spanish",
-    native_language="English",
-    openai_model=OPENAI_LLM_MODEL,
-):
+    sentence: str,
+    working_on: str,  # ="Spanish",
+    native_language: str,  # ="English",
+    openai_model: str,  # ="gpt-4o-mini",
+) -> str | None:
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -88,9 +94,7 @@ def from_native_language(
     return completion.choices[0].message.content
 
 
-def detect_language_code(
-    phrase, openai_model=OPENAI_LLM_MODEL,
-):
+def detect_language_code(phrase: str, openai_model: str):  # e.g., "gpt-4o-mini",
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -114,10 +118,15 @@ Spanish is a much more commonly used and studied language. The reponse is almost
 #     text = text.replace("\n", " ")
 
 #     return client.embeddings.create(input=[text], model=model).data[0].embedding
+# from typing import List
 
 
-def get_embeddings(sentences, openai_model=OPENAI_EMBEDDINGS_MODEL):
-    objects = client.embeddings.create(model=openai_model, input=sentences).data
+def get_embeddings(
+    sentences: list, openai_embeddings_model: str
+):  # e.g., "text-embedding-3-large"
+    objects = client.embeddings.create(
+        model=openai_embeddings_model, input=sentences
+    ).data
     # embeddings = [np.array(data["embedding"]) for data in response["data"]]
     embedding_vectors = [object.embedding for object in objects]
     return embedding_vectors
@@ -128,13 +137,13 @@ def compute_cosine_similarity(a, b):
 
 
 def get_feedback(
-    sentence_in_native_language,
-    attempted_translation,
-    phrase_being_studied,
-    working_on="Spanish",
-    native_language="English",
-    openai_model=OPENAI_LLM_MODEL,
-) -> str:
+    sentence_in_native_language: str,
+    attempted_translation: str,
+    phrase_being_studied: str,
+    working_on: str,  # ="Spanish",
+    native_language: str,  # ="English",
+    openai_model: str,  # ="gpt-4o-mini",
+) -> str | None:
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -159,14 +168,14 @@ Since the {working_on} phrase being studied here is {phrase_being_studied}, use 
     return completion.choices[0].message.content
 
 
-if __name__ == "__main__":
-    phrase_list = ["en cuanto a"]
-    full_spanish_sentence = generate_full_sentence(phrase_list[0])
-    equivalent_english_sentence = to_native_language(full_spanish_sentence)
-    attempted_translation = input(f"{equivalent_english_sentence} >>> ")
-    embeddings = get_embeddings([full_spanish_sentence, attempted_translation])
-    cosine_similarity = compute_cosine_similarity(embeddings[0], embeddings[1])
-    print("-----------------------------------------------")
-    print(get_feedback(equivalent_english_sentence, attempted_translation))
-    print("-----------------------------------------------")
-    print("[Cosine Similarity: ", cosine_similarity, "]")
+# if __name__ == "__main__":
+#     phrase_list = ["en cuanto a"]
+#     full_spanish_sentence = generate_full_sentence(phrase_list[0])
+#     equivalent_english_sentence = to_native_language(full_spanish_sentence)
+#     attempted_translation = input(f"{equivalent_english_sentence} >>> ")
+#     embeddings = get_embeddings([full_spanish_sentence, attempted_translation])
+#     cosine_similarity = compute_cosine_similarity(embeddings[0], embeddings[1])
+#     print("-----------------------------------------------")
+#     print(get_feedback(equivalent_english_sentence, attempted_translation))
+#     print("-----------------------------------------------")
+#     print("[Cosine Similarity: ", cosine_similarity, "]")

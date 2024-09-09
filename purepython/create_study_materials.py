@@ -1,15 +1,16 @@
+import requests
 from typing import Tuple
 from purepython.practice_translation import (
     generate_full_sentence,
-    OPENAI_LLM_MODEL,
+    # OPENAI_LLM_MODEL,
     client,
     to_native_language,
 )
 
 
 def create_article(
-    description_of_article="The history of Mongolia in 300 words",
-    openai_model=OPENAI_LLM_MODEL,
+    description_of_article: str,  # e.g., "The history of Mongolia in 300 words",
+    openai_model,  # e.g., ="gpt-4o-mini"
 ) -> str:
     completion = client.chat.completions.create(
         model=openai_model,
@@ -26,7 +27,7 @@ history of Mongolia".  The article must be less than or equal to 10 paragraphs."
     return completion.choices[0].message.content
 
 
-def create_article_title(body_of_article, openai_model=OPENAI_LLM_MODEL,) -> str:
+def create_article_title(body_of_article, openai_model) -> str:  # ="gpt-4o-mini"
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -43,15 +44,12 @@ The context will contain the body of the article and nothing else.
     return completion.choices[0].message.content
 
 
-import requests
-
-
 def create_readwise_item(
     token,
     title,
     body_in_html,
-    author="fabulari",
-    url="https://yourapp.com#document1",
+    author,  # ="fabulari",
+    url,  # ="https://yourapp.com#document1",
     image_url=None,
 ):
     params = {

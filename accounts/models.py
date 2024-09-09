@@ -1,27 +1,51 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
-
-LANGUAGE_CHOICES = [
-    ("en", "English"),
-    ("es", "Spanish"),
-    ("ru", "Russian"),
-    ("he", "Hebrew"),
-    ("ar", "Arabic"),
-    ("zh", "Chinese"),
-    ("de", "German"),
-    ("la", "Latin"),
-    ("fr", "French"),
-    # Add more languages as needed
-]
-
-supported_languages = [code for code, _ in LANGUAGE_CHOICES]
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+
+LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
+
+# supported_languages = settings.supported_languages
+# supported_languages = [code for code, _ in LANGUAGE_CHOICES]
+# print(supported_languages)
 
 
 class CustomUser(AbstractUser):
     # email = models.EmailField(_("email address"), blank=True, )
+    openai_llm_model_complex_tasks = models.CharField(  # https://openai.com/api/pricing/
+        max_length=100,
+        default="gpt-4o-mini",
+        null=False,
+        blank=False,
+        choices=[
+            ("gpt-4o-mini", "gpt-4o-mini (cheapest model)"),
+            ("gpt-4o", "gpt-4o (~30x more expensive than gpt-4o-mini)"),
+            (
+                "chatgpt-4o-latest",
+                "chatgpt-4o-latest (~30x more expensive than gpt-4o-mini)",
+            ),
+            # ("gpt-4-turbo", "gpt-4-turbo"),
+            # ("gpt-4", "gpt-4"),
+            # ("gpt-3.5-turbo", "gpt-3.5-turbo"),
+            # ("chatgpt-4o-latest", "chatgpt-4o-latest"),
+        ],
+        help_text=f"""Used for creating study materials and translation feedback.  
+Cost estimates are as of September 2024.
+Note that {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS} is used for simple translation and classification tasks.
+""",
+        verbose_name="OpenAI LLM Model",
+    )
+    # openai_embeddings_model = models.CharField(
+    #     max_length=100,
+    #     default="text-embedding-3-large",
+    #     null=False,
+    #     blank=False,
+    #     choices=[("text-embedding-3-large", "text-embedding-3-large"),],
+    # )
+    native_language = models.CharField(
+        max_length=10, choices=LANGUAGE_CHOICES, default="en", null=False, blank=False
+    )
     native_language = models.CharField(
         max_length=10, choices=LANGUAGE_CHOICES, default="en", null=False, blank=False
     )
