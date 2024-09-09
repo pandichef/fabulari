@@ -67,9 +67,10 @@
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s ease;
-            display: block;
+            display: inline-block;
             margin: 0 auto;
             margin-left: 0;
+            margin-right: 10px;
         }
 
         .load-button:hover {
@@ -84,10 +85,18 @@
         <h2>Create Study Materials</h2>
         <form method="post">
             {% csrf_token %}
+            {% if not preview_page %}
             <textarea id="words_input" name="words_input" placeholder="" rows="5" cols="50" autofocus></textarea>
             <!-- Dropdown Menu for Choice Field -->
             {{ form.choice_field }}<br><br>
-            <button type="submit" class="load-button">Send Email</button>
+            {% endif %}
+            <button type="submit" id="send-button" class="load-button" name="action" value="send_now">Send Now</button>
+            {% if not preview_page %}
+            <button type="submit" id="preview-button" class="load-button" name="action" value="preview_first">Preview First</button>
+            {% else %}
+            <button type="submit" id="tryagain-button" class="load-button" name="action" value="try_again">Try Again</button>
+            {% endif %}
+            {{ article|safe }}
         </form>
     </div>
 
@@ -95,13 +104,19 @@
         // Get references to the radio buttons and the textarea
         const radioButtons = document.getElementsByName('choice_field');
         const textarea = document.getElementById('words_input');
+        var previewButton = document.getElementById('preview-button');
+        var sendButton = document.getElementById('send-button');
 
         // Function to update the placeholder based on the selected radio button
         function updatePlaceholder() {
             if (radioButtons[0].checked) {
                 textarea.placeholder = "The text you type here will be sent without modification i.e., you already have the text for an article and just want to send it to a reader app";
+                previewButton.style.display = 'inline-block';
+                sendButton.style.display = 'inline-block';
             } else if (radioButtons[1].checked) {
                 textarea.placeholder = "The text you type here will be sent after passing it through ChatGPT e.g., history of cats in A2 level Spanish";
+                previewButton.style.display = 'inline-block';
+                sendButton.style.display = 'inline-block';
             }
         }
 

@@ -18,8 +18,12 @@ def create_article(
             {
                 "role": "system",
                 "content": f"""
-You generate new articles based on a user's prompt.  For example, the user might ask "write me an article about the
-history of Mongolia".  The article must be less than or equal to 10 paragraphs.""",
+You generate new content based on a user's prompt.  There are two possibilities.
+One possibility is to create a new content from scrach.  For example, the user might type "the history of Mongolia" or "a haiku about Richard Nixon".
+In either case, the content should be the length of a typical newspaper article, unless the user explicitly requests a different length.
+The other possibility is to fetch existing content.  For example, the user might type "The lyrics to Stairway to Heaven" 
+or "The first act of Hamlet". In such cases, return the content verbatim without regard to the length of the text.
+""",
             },
             {"role": "user", "content": f"""{description_of_article}""",},
         ],
@@ -36,6 +40,8 @@ def create_article_title(body_of_article, openai_model) -> str:  # ="gpt-4o-mini
                 "content": f"""
 You generate a title for articles given the body of the article.  The title must be less than or equal to 10 words.
 The context will contain the body of the article and nothing else.
+The text provide might also be a well known document, for example the lyrics to "Stairway to Heaven".
+If so, the title should be "Lyrics to Stairway to Heaven by Led Zeppelin".
 """,
             },
             {"role": "user", "content": f"""{body_of_article}""",},
