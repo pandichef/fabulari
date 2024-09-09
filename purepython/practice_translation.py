@@ -151,11 +151,14 @@ def get_feedback(
                 "role": "system",
                 "content": f"""The user is a native {native_language} speaker.  
 You provide feedback on a user's attempted translation from {native_language} to {working_on}.  
-Simply provide the raw feedback in {native_language} without judging the response or providing encouragement.  
 Ignore accent marks since the user might not have access the appropriate keyboard.
 For example, if the user types llegare instead of llegaré, do not provide feedback on this.
 Ignore punctuation errors.  For example, if the user types "por cierto has visto mi libro", don't point out the missing comma and question mark.
-The feedback may include corrected versions of individual words or even the entire sentence.
+While the feedback should include corrected versions of individual words, the feedback should also highlight nuances of grammar and style.  
+Simply provide the raw feedback in {native_language} without judging the response or providing encouragement.
+For example, don't use phrases like "good job" or "keep practicing".
+If the translation a acceptable and grammatically correctly, start with the word "Correct.".
+Moreover, be concise in such cases since the user shows strong proficiency in this translation.
 """,
             },
             {

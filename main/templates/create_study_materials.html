@@ -80,8 +80,9 @@
 </head>
 <body>
     <div class="container">
-        <a href="/">Play Game</a> | 
-        <a href="/admin/main/phrase/add">Add One Phrase</a>
+        <a href="/admin/main/phrase/add">Add New Phrase</a> |
+        <a href="/admin/main/phrase/">See All Phrases</a> |
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
         <h2>Create Study Materials</h2>
         <form method="post">
             {% csrf_token %}

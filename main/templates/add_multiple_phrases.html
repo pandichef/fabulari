@@ -79,8 +79,8 @@
 </head>
 <body>
     <div class="container">
-        <a href="/">Play Game</a> | 
-        <a href="/admin/main/phrase/add">Add One Phrase</a>
+        <a href="/admin/main/phrase/">Go Back</a> | 
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
         <h2>Add Multiple Phrases</h2>
         <form method="post">
             {% csrf_token %}
