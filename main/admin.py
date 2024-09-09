@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from purepython.create_phrase_object import phrase_to_native_language
 from purepython.practice_translation import detect_language_code as detect
+from purepython.practice_translation import from_native_language
 from .models import Phrase
 
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
@@ -80,11 +81,12 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             raw_text_changed = False
             obj.user = request.user
-            detected_language_code = detect(obj.text)
+            detected_language_code = detect(
+                phrase=obj.text, openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+            )
             if not obj.language:
                 if detected_language_code == request.user.native_language:
                     obj.language = request.user.working_on
-                    from purepython.gptsrs import from_native_language
 
                     obj.text = from_native_language(
                         obj.text,
@@ -99,7 +101,6 @@ class PhraseAdmin(admin.ModelAdmin):
                         obj.language = detected_language_code
             else:
                 if detected_language_code != obj.language:
-                    from accounts.models import LANGUAGE_CHOICES
 
                     if self:
                         self.message_user(
@@ -123,6 +124,7 @@ class PhraseAdmin(admin.ModelAdmin):
                 phrase=obj.text,
                 working_on=obj.language,
                 native_language=request.user.native_language,
+                openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
             )
             if native_language_metadata:
                 (cleaned_text, example_sentence, definition) = native_language_metadata
