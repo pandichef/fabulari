@@ -2,7 +2,7 @@ from typing import Tuple, List
 import requests
 from .practice_translation import detect_language_code as detect
 import requests  # This may need to be installed from pip
-from .parallel_map import parallel_map
+from .parallel_map import threadpool_map
 
 
 def fetch_from_export_api(token, updated_after=None) -> list:
@@ -88,7 +88,7 @@ def get_language_codes_multithreaded(
         return result if result is not None else "en"  # Handle None case
 
     # Use parallel_map to detect languages for each phrase
-    return list(parallel_map(detect_language, phrases))
+    return list(threadpool_map(detect_language, phrases))
 
 
 def make_digest_multithreaded(

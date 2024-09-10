@@ -11,7 +11,7 @@ from purepython.practice_translation import (
 def create_article(
     description_of_article: str,  # e.g., "The history of Mongolia in 300 words",
     openai_model,  # e.g., ="gpt-4o-mini"
-) -> str:
+) -> str | None:
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -31,7 +31,7 @@ or "The first act of Hamlet". In such cases, return the content verbatim without
     return completion.choices[0].message.content
 
 
-def create_article_title(body_of_article, openai_model) -> str:  # ="gpt-4o-mini"
+def create_article_title(body_of_article, openai_model) -> str | None:  # ="gpt-4o-mini"
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[

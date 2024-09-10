@@ -11,7 +11,7 @@ def clean_phrase(
     phrase: str,  # e.g., "tener"
     working_on: str,  # e.g., Spanish
     openai_model: str,  # e.g., "gpt-4o-mini"
-) -> str:
+) -> str | None:
     """User is assume to input imperfect phrase.  This function sanitizes the phrase."""
     completion = client.chat.completions.create(
         model=openai_model,
