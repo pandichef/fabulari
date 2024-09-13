@@ -105,13 +105,9 @@ def main():
 
     # Step 2: Run database migrations on PythonAnywhere
     console_id = get_pythonanywhere_console_id()
-    print(f"Found console ID {console_id}.")
-    print(f"Found console ID {console_id}.")
-    print(f"Found console ID {console_id}.")
-    print(f"Found console ID {console_id}.")
     # Step 3: Run database migrations on PythonAnywhere
     print("Running console commands.")
-    # run_pythonanywhere_command("python manage.py migrate")
+    run_pythonanywhere_console_command("ls -la")
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     print("Collecting static files...")
