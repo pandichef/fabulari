@@ -13,10 +13,8 @@ REPO_PATH = "."
 def get_pythonanywhere_account_status():
     # Account Status
     response = requests.get(
-        "https://www.pythonanywhere.com/api/v0/user/{username}/cpu/".format(
-            username=PA_USERNAME
-        ),
-        headers={"Authorization": "Token {token}".format(token=PA_API_TOKEN)},
+        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/cpu/",
+        headers={"Authorization": f"Token {PA_API_TOKEN}"},
     )
     if response.status_code == 200:
         print("--- CPU quota info ---")
@@ -38,9 +36,38 @@ def git_commit(commit_message):
 
 
 # Step 2: Call PythonAnywhere API to run commands
-def run_pythonanywhere_command(command):
+def get_pythonanywhere_console_id():
+    # url = f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/consoles/"
+    # headers = {"Content-Type": "application/json"}
+    # headers =
+    # data = {"command": command, "bash": True}
+    response = requests.get(
+        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/consoles/",
+        headers={"Authorization": f"Token {PA_API_TOKEN}"},
+    )
+    try:
+        response_dict = json.loads(response.content.decode("utf-8"))[
+            0
+        ]  # Get the first avaiable console
+    except IndexError:
+        raise IndexError(
+            "There are no open consoles on pythonanywhere.com.  Create one in the browser first and try again."
+        )
+    # print(response.status_code)
+    # pprint(response_dict)
+    if response.status_code == 200:
+        print(f"Found console ID {response_dict['id']}.")
+        return response_dict["id"]
+    else:
+        print(f"Failed to run get_pythonanywhere_console_id.")
+        return None
+
+
+# Step 3: Call PythonAnywhere API to run commands
+def run_pythonanywhere_console_command(command):
     url = f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/consoles/"
-    headers = {"Content-Type": "application/json"}
+    # headers = {"Content-Type": "application/json"}
+    headers = {"Authorization": "Token {token}".format(token=PA_API_TOKEN)}
     data = {"command": command, "bash": True}
     response = requests.post(
         url, headers=headers, json=data, auth=(PA_USERNAME, PA_API_TOKEN)
@@ -77,16 +104,22 @@ def main():
     git_commit(commit_message)
 
     # Step 2: Run database migrations on PythonAnywhere
-    print("Running migrations...")
-    run_pythonanywhere_command("python manage.py migrate")
+    console_id = get_pythonanywhere_console_id()
+    print(f"Found console ID {console_id}.")
+    print(f"Found console ID {console_id}.")
+    print(f"Found console ID {console_id}.")
+    print(f"Found console ID {console_id}.")
+    # Step 3: Run database migrations on PythonAnywhere
+    print("Running console commands.")
+    # run_pythonanywhere_command("python manage.py migrate")
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     print("Collecting static files...")
-    run_pythonanywhere_command("python manage.py collectstatic --noinput")
+    # run_pythonanywhere_command("python manage.py collectstatic --noinput")
 
     # Step 4: Reload the web application
     print("Reloading the web app...")
-    reload_web_app()
+    # reload_web_app()
 
 
 if __name__ == "__main__":
