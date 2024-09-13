@@ -125,7 +125,7 @@ def main():
 
     # Step 4: Reload the web application
     print("Reloading the web app...")
-    # reload_web_app()
+    reload_web_app()
 
 
 if __name__ == "__main__":
