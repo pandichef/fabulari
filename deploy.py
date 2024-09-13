@@ -6,8 +6,8 @@ import subprocess
 
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
-WEBAPP_NAME = PA_USERNAME
-REPO_PATH = "."
+# WEBAPP_NAME = PA_USERNAME
+# REPO_PATH = "."
 
 # Step 0: Get account status
 def get_pythonanywhere_account_status():
@@ -29,7 +29,7 @@ def get_pythonanywhere_account_status():
 
 # Step 1: Commit and push to git
 def git_commit(commit_message):
-    os.chdir(REPO_PATH)
+    # os.chdir(REPO_PATH)
     subprocess.run(["git", "add", "."])
     subprocess.run(["git", "commit", "-m", commit_message])
     subprocess.run(["git", "push"])
@@ -64,13 +64,14 @@ def get_pythonanywhere_console_id():
 
 
 # Step 3: Call PythonAnywhere API to run commands
-def run_pythonanywhere_console_command(command):
-    url = f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/consoles/"
+def run_pythonanywhere_console_command(command, console_id):
     # headers = {"Content-Type": "application/json"}
-    headers = {"Authorization": "Token {token}".format(token=PA_API_TOKEN)}
-    data = {"command": command, "bash": True}
+    # headers = {"Authorization": "Token {token}".format(token=PA_API_TOKEN)}
+    # data = {"command": command, "bash": True}
     response = requests.post(
-        url, headers=headers, json=data, auth=(PA_USERNAME, PA_API_TOKEN)
+        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/consoles/{console_id}/send_input/",
+        headers={"Authorization": f"Token {PA_API_TOKEN}"},
+        json={"input": command + "\n"},
     )
     if response.status_code == 201:
         print(f"Command '{command}' executed successfully.")
@@ -82,8 +83,12 @@ def run_pythonanywhere_console_command(command):
 
 # Step 3: Reload the PythonAnywhere web app
 def reload_web_app():
-    url = f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/webapps/{WEBAPP_NAME}/reload/"
-    response = requests.post(url, auth=(PA_USERNAME, PA_API_TOKEN))
+    webapp_url = PA_USERNAME + "pythonanywhere.com"
+    # url =
+    response = requests.post(
+        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/webapps/{webapp_url}/reload/",
+        headers={"Authorization": f"Token {PA_API_TOKEN}"},
+    )
     if response.status_code == 200:
         print("Web app reloaded successfully.")
     else:
@@ -107,7 +112,12 @@ def main():
     console_id = get_pythonanywhere_console_id()
     # Step 3: Run database migrations on PythonAnywhere
     print("Running console commands.")
-    run_pythonanywhere_console_command("ls -la")
+    run_pythonanywhere_console_command("cd ~/fabulari", console_id)
+    run_pythonanywhere_console_command("git pull", console_id)
+    run_pythonanywhere_console_command("python manage.py migrate", console_id)
+    run_pythonanywhere_console_command(
+        "python manage.py collectstatic --no-input", console_id
+    )
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     print("Collecting static files...")
