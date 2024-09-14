@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from django.contrib import messages
 from main.models import Phrase
+from django.contrib.admin.sites import site
 
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 
@@ -13,6 +14,8 @@ class LanguageChoiceForm(forms.Form):
 
 
 def add_multiple_phrases_view(request):
+    admin_context = site.each_context(request)
+
     if request.method == "POST":
         # print("post")
         new_phrases = request.POST.get("words_input")
@@ -45,12 +48,11 @@ def add_multiple_phrases_view(request):
         )
         return redirect("/admin/main/phrase")
     else:
-        return render(
-            request,
-            "add_multiple_phrases.html",
+        admin_context.update(
             {
                 "form": LanguageChoiceForm(
                     initial={"choice_field": request.user.working_on}
                 )
-            },
+            }
         )
+        return render(request, "add_multiple_phrases.html", admin_context,)
