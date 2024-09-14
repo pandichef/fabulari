@@ -115,7 +115,11 @@
                 previewButton.style.display = 'inline-block';
                 sendButton.style.display = 'inline-block';
             } else if (radioButtons[1].checked) {
-                textarea.placeholder = "The text you type here will be sent after passing it through ChatGPT e.g., history of cats in A2 level Spanish";
+                textarea.placeholder = "The text you type here will be sent after passing it through {{ openai_model }} e.g., history of cats in A2 level Spanish";
+                previewButton.style.display = 'inline-block';
+                sendButton.style.display = 'inline-block';
+            } else if (radioButtons[2].checked) {
+                textarea.placeholder = "You can leave this space blank and {{ openai_model }} will build an article that utilizes your phrase list.  However, you can also pass additional context here.";
                 previewButton.style.display = 'inline-block';
                 sendButton.style.display = 'inline-block';
             }

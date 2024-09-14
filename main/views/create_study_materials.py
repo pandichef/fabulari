@@ -8,12 +8,17 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from purepython.create_study_materials import (
-    create_article,
+    create_article_user_prompt,
+    create_article_phrase_list,
     create_article_title,
     create_readwise_item,
 )
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.conf import settings
+
+# from .assess_cefr_level import tuple_list_to_csv
+from main.models import Phrase
 
 
 def convert_to_markdown_if_plain_text(text: str) -> str:
@@ -85,7 +90,11 @@ def convert_to_markdown_if_plain_text(text: str) -> str:
 
 class UseGPTRadioButtonForm(forms.Form):
     choice_field = forms.ChoiceField(
-        choices=[(0, "Don't filter through GPT"), (1, "Filter through GPT First")],
+        choices=[
+            (0, "Don't filter through GPT"),
+            (1, "Filter through GPT First"),
+            (2, "Focus on My Phrase List"),
+        ],
         required=True,
         widget=forms.RadioSelect,
         initial=1,
@@ -115,16 +124,36 @@ def create_study_materials_view(request):
             subject = request.session["article_title"]
         else:
             gpt_first = int(request.POST.get("choice_field"))
+            print(gpt_first)
             description_of_article = request.POST.get("words_input")
-            if gpt_first:
+            if gpt_first == 1:
                 # print("first")
-                article = create_article(
+                article = create_article_user_prompt(
                     description_of_article=description_of_article,
                     openai_model=request.user.openai_llm_model_complex_tasks,
                 )
+            elif gpt_first == 2:
+                qs = Phrase.objects.filter(
+                    user=request.user, language=request.user.working_on
+                ).values_list("cleaned_text", "cosine_similarity")
+                tuple_list = list(qs)
+                # print(tuple_list_to_csv(tuple_list))
+                article = create_article_phrase_list(
+                    word_list=tuple_list,
+                    working_on=dict(settings.LANGUAGE_CHOICES)[request.user.working_on],
+                    additional_context=description_of_article,
+                    openai_model=request.user.openai_llm_model_complex_tasks,
+                )
+            # article = create_article_phrase_list(
+            #     word_list='',working_on=''
+            #     additional_context=description_of_article,
+            #     openai_model=request.user.openai_llm_model_complex_tasks,
+            # )
             else:
                 # print("not first")
                 article = description_of_article
+
+            # Ask GPT to create a reasonable title
             subject = create_article_title(
                 body_of_article=article,
                 openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
@@ -236,5 +265,10 @@ def create_study_materials_view(request):
             # return redirect_to_previous_page(request)
 
         return render(
-            request, "create_study_materials.html", {"form": UseGPTRadioButtonForm()},
+            request,
+            "create_study_materials.html",
+            {
+                "form": UseGPTRadioButtonForm(),
+                "openai_model": request.user.openai_llm_model_complex_tasks,
+            },
         )
