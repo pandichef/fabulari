@@ -258,3 +258,12 @@ supported_languages = [code for code, _ in LANGUAGE_CHOICES]
 
 # LANGUAGE_CODE = "en-us"
 # USE_I18N = True
+# LANGUAGE_CODE = "en"  # Spanish
+USE_I18N = True  # browser language
+USE_L10N = True  # local datetime
+USE_TZ = True
+
+# LANGUAGES = [
+#     ("es", "Spanish"),
+#     ("en", "English"),  # Add other languages you want to support
+# ]
