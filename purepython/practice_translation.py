@@ -170,7 +170,7 @@ Ignore punctuation errors.  For example, if the user types "por cierto has visto
 While the feedback should include corrected versions of individual words, the feedback should also highlight nuances of grammar and style.  
 Simply provide the raw feedback in {native_language} without judging the response or providing encouragement.
 For example, don't use phrases like "good job" or "keep practicing".
-If the translation a acceptable is perfect, start with the word "Correct."
+If the translation is 100% perfect, start with the word "Correct."
 """,
             },
             {
