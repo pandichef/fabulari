@@ -86,24 +86,6 @@
 </style>
 {% endblock %}
 
-
-{% block content %}
-<div class="container">
-    <a href="/admin/main/phrase/">Go Back to Phrase List</a> 
-    {% comment %}
-    <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
-    {% endcomment %}
-    <h2>Add Multiple Phrases</h2>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="words_input" placeholder="Paste your phrases here.  Each word/phrase should be on a separate line." rows="5" cols="50" autofocus></textarea>
-        <!-- Dropdown Menu for Choice Field -->
-        Language: {{ form.choice_field }}<br><br>
-        <button type="submit" class="load-button">Add Phrases</button>
-    </form>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="container">
     <a href="/admin/main/phrase/">Go Back to Phrase List</a> 
