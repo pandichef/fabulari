@@ -41,13 +41,18 @@ def practice_translation_view(request, phrase_id=None):
         )
         cosine_similarity = compute_cosine_similarity(embeddings[0], embeddings[1])
         # print(attempted_translation)
+        if request.user.is_authenticated:
+            openai_llm_model = request.user.openai_llm_model_complex_tasks
+        else:
+            openai_llm_model = settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+
         feedback = get_feedback(
             request.session.get("equivalent_native_language_sentence", ""),
             attempted_translation,
             request.session["phrase_cleaned_text"],
             working_on=request.session.get("working_on", ""),
             native_language=request.session.get("native_language", ""),
-            openai_model=request.user.openai_llm_model_complex_tasks,
+            openai_model=openai_llm_model,
         )
 
         phrase_object = Phrase.objects.get(id=request.session.get("phrase_id", ""))
@@ -140,11 +145,11 @@ def practice_translation_view(request, phrase_id=None):
         #     )
         #     qs.update(que_score=Coalesce(Abs(F("cosine_similarity") - F("noise")), 0))
         # else:
-        print(numpy_array)
-        print(mean_value)
-        print(stddev_value)
+        # print(numpy_array)
+        # print(mean_value)
+        # print(stddev_value)
         random_value = np.random.normal(loc=mean_value, scale=stddev_value)
-        print(random_value)
+        # print(random_value)
         qs = qs.annotate(
             que_score=ExpressionWrapper(
                 Abs(F("cosine_similarity") - random_value), output_field=FloatField(),
@@ -183,6 +188,7 @@ def practice_translation_view(request, phrase_id=None):
         request,
         "practice_translation.html",
         {
+            "host_email": settings.EMAIL_HOST_USER,
             "phrase_id": phrase_id,
             "english_sentence": request.session["equivalent_native_language_sentence"],
             "working_on": working_on,
