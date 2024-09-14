@@ -45,6 +45,7 @@ The sentence should have no more than 8 words.
 Make sure the actual phrase is being used.  For example, in the example "en cuanto a", 
 the sentence "El precio está en cuanto en mi opinión." contains a similar string "en cuanto", 
 but this obviously doesn't convey the correct sense of the phrase "en cuanto a".
+The result should only contain UTF characters in {working_on}.
 """
                 + hebrew_arabic_suffix,
             },
@@ -61,15 +62,27 @@ def to_native_language(
     openai_model: str,  # ="gpt-4o-mini",
     # phrase=None,
 ) -> str | None:
+    # Sometimes Chinese appears in the output randomly in gpt-4o-mini;
+    # this isn't a problem in gpt-4o
+    if native_language != "Chinese":
+        chinese_character_hack = f"  The output cannot contain Chinese characters.  Translate any Chinese characters to {native_language} first."
+    else:
+        chinese_character_hack = ""
+
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
             {
                 "role": "system",
                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
-                "content": f"You translate sentences from {working_on} to {native_language}.",
+                "content": f"""You translate sentences from {working_on} to {native_language}.""",
             },
-            {"role": "user", "content": sentence},
+            {
+                "role": "user",
+                "content": sentence
+                + f"""\n\nPlease translate this to {native_language} and use only {native_language} characters."""
+                + chinese_character_hack,
+            },
         ],
     )
     return completion.choices[0].message.content

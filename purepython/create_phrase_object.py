@@ -28,6 +28,7 @@ If the phrase appears to contain a proper name but has additional content, the r
 For example, the cleaned version of "José va caminando a casa" would be "ir caminando a casa".
 If the phrase appears to be a proper name and nothing else, the response should be the exact string "(proper name)", which contains exactly 13 characters.
 Ensure that the cleaned phrase is syntactically correct.  For example, the cleaned phrase can be "chica bonita", not "chica bonito".
+Do not include any excess punctuation e.g., the clean phrase should not be "(jainism)", just "jainism".
 """,
             },
             {"role": "user", "content": phrase},

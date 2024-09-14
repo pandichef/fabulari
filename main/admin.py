@@ -22,6 +22,10 @@ class PhraseAdmin(admin.ModelAdmin):
         obj = self.get_object(request, object_id)
         extra_context = extra_context or {}
         extra_context["show_save"] = False
+        # extra_context["being_edited"] = (
+        #     obj is not None
+        # )  # Assuming this condition for 'being_edited'
+        extra_context["phrase_id"] = object_id  # The phrase_id you want to use
         return super().change_view(
             request, object_id, form_url, extra_context=extra_context
         )

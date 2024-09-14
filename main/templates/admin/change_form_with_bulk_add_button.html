@@ -5,11 +5,13 @@
 
 {% block object-tools %}
     {{ block.super }}
+    {% if phrase_id %}
     <div class="object-tools">
-        <a href="/add_multiple_phrases" class="addlink">
-            Add Multiple Phrases
+        <a href="/{{ phrase_id }}">
+            Practice Translation on This Phrase
         </a>
     </div>
+    {% endif %}
 {% endblock %}
 
 <!--

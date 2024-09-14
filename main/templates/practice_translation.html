@@ -36,11 +36,12 @@
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 15px;
+            padding: 20px;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
@@ -48,21 +49,48 @@
             font-size: 18px;
         }
 
-        .continue-button {
-            background-color: #28a745;
+        textarea {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: flex-start; /* Align buttons to the left */
+            gap: 10px; /* Optional: Space between buttons */
+        }
+
+        .load-button {
+            background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             transition: background-color 0.3s ease;
+            display: inline-block;
+            margin: 0 auto;
+            margin-left: 0;
+            margin-right: 10px;
             text-decoration: none;
         }
 
-        .continue-button:hover {
-            background-color: #218838;
+        .load-button:hover {
+            background-color: #0056b3;
         }
+
+
+
+        /* .continue-button:hover {
+            background-color: #218838;
+        } */
 
         h2 {
             margin-top: 20px;
@@ -111,15 +139,33 @@
 </head>
 <body>
     <div class="container">
+        {% if phrase_id %}
+        <a href="admin/main/phrase/{{ phrase_id }}/change/">{% translate 'Go Back to Phrase' %}</a> |
+        {% else %}
         <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
+        {% endif %}
         <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
-        <h1>{{ english_sentence }}</h1>
+        <h2>{{ english_sentence }}</h2>
         {% if response %}
             <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
             <p><strong>Feedback:</strong> {{ response }}</p>
+            <div class="button-container">
+                <div>
+                    <a href="{% url 'practice_translation' %}" class="load-button">{% translate 'Continue' %}</a>
+                </div>
+                <div>
+                    <a href="{% url 'practice_translation' phrase_id %}" class="load-button">{% translate 'Repeat This Phrase' %}</a>
+                </div>
+            </div>
+            {% comment %}
+            {% if phrase_id %}
+            {% else %}
             <div>
-                <a href="{% url 'practice_translation' %}" class="continue-button">{% translate 'Continue' %}</a>
-            </div><br>
+                <a href="{% url 'practice_translation' %}" class="load-button">{% translate 'Continue' %}</a>
+            </div>
+            {% endif %}
+            {% endcomment %}
+            <br>
             <table>
                 <tbody>
                     <tr>

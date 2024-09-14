@@ -22,6 +22,9 @@ urlpatterns = [
     # 0
     path("admin/", admin.site.urls),  # this is like an add_one_phrase app
     # 1
+    path(
+        "<int:phrase_id>", views.practice_translation_view, name="practice_translation"
+    ),
     path("", views.practice_translation_view, name="practice_translation"),
     # 2
     path(

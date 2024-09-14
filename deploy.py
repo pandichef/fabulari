@@ -97,44 +97,45 @@ def reload_web_app():
         )
 
 
-def get_untracked_files():
-    result = subprocess.run(
-        ["git", "ls-files", "--others", "--exclude-standard"],
-        stdout=subprocess.PIPE,
-        text=True,
-    )
-    # Split the output by newline to get a list of files
-    untracked_files = result.stdout.splitlines()
-    return untracked_files
+# def get_untracked_files():
+#     result = subprocess.run(
+#         ["git", "ls-files", "--others", "--exclude-standard"],
+#         stdout=subprocess.PIPE,
+#         text=True,
+#     )
+#     # Split the output by newline to get a list of files
+#     untracked_files = result.stdout.splitlines()
+#     return untracked_files
 
 
-def get_modified_files():
-    result = subprocess.run(
-        ["git", "diff", "--name-only"], stdout=subprocess.PIPE, text=True
-    )
-    # Split the output by newline to get a list of files
-    modified_files = result.stdout.splitlines()
-    return modified_files
+# def get_modified_files():
+#     result = subprocess.run(
+#         ["git", "diff", "--name-only"], stdout=subprocess.PIPE, text=True
+#     )
+#     # Split the output by newline to get a list of files
+#     modified_files = result.stdout.splitlines()
+#     return modified_files
 
 
 # Main script flow
 def main():
     commit_message = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "unnamed commit"
 
-    untracked_files = get_untracked_files()
-    modified_files = get_modified_files()
+    # untracked_files = get_untracked_files()
+    # modified_files = get_modified_files()
     # if untracked_files:
     #     print("Untracked files:", untracked_files)
     # else:
     #     print("No untracked files.")
 
     # print("######################################################")
-    print(f"NEW FILES     : {', '.join(untracked_files)}")
-    print(f"MODIFIED FILES: {', '.join(modified_files)}")
-    # print("######################################################")
-    # print("######################################################")
+    # print(f"NEW FILES     : {', '.join(untracked_files)}")
+    # print(f"MODIFIED FILES: {', '.join(modified_files)}")
+    print("######################################################")
+    subprocess.run(["git", "status"])
+    print("######################################################")
     print(f"COMMIT MESSAGE: {commit_message}")
-    # print("######################################################")
+    print("######################################################")
     user_input = (
         input("Do you want to continue with this deployment (yes/no): ").strip().lower()
     )
