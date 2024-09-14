@@ -82,7 +82,7 @@
 <body>
     <div class="container">
         <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
-        <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Setttings' %}</a>
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
         <h2>{% translate 'Create Study Materials' %}</h2>
         <form method="post">
             {% csrf_token %}

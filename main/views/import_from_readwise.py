@@ -20,7 +20,7 @@ LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
-@login_required(login_url=reverse("admin:login"))
+@login_required(login_url="/admin/login/")
 def import_from_readwise_view(request, populate_extra_fields_via_llm=False):
     if not request.user.readwise_api_key:
         messages.success(

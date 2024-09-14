@@ -11,7 +11,7 @@ LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
-@login_required(login_url=reverse("admin:login"))
+@login_required(login_url="/admin/login/")
 def assess_cefr_level_view(request):
     qs = Phrase.objects.filter(
         user=request.user, language=request.user.working_on

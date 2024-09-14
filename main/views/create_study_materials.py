@@ -96,7 +96,7 @@ def redirect_to_previous_page(request, fallback_url="/"):
     return redirect(request.META.get("HTTP_REFERER", fallback_url))
 
 
-@login_required(login_url=reverse("admin:login"))
+@login_required(login_url="/admin/login/")
 def create_study_materials_view(request):
     if request.method == "POST":
         action = request.POST.get("action")
