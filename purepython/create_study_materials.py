@@ -64,7 +64,7 @@ Then you create an article using the phrase list at the CEFR level implied by th
 The article should emphasize new words (i.e., the ones that don't have a score) and the one that are neither too easy nor too hard 
 (i.e., the ones that have scores generally near the middle of the range).  Do provide any commentary about the CEFR score of the user.
 For example, don't say things like "the student appears to be operating at a CEFR level of A2 or possibly early B1" in either English or
-{working_on}.  Only provide the text of the article.  Words and phrases from the word list should be bold.
+{working_on}.  Only provide the text of the article.  Words and phrases from the word list should be in bold (using ** markdown syntax).
 The content should be the length of a typical newspaper article, unless the user explicitly requests a different length. {additional_context}
 \n\n{tuple_list_to_csv(word_list)}""",
             },
