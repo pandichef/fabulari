@@ -8,12 +8,9 @@ import subprocess
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
 DOMAIN_NAME = PA_USERNAME + ".pythonanywhere.com"
-# WEBAPP_NAME = PA_USERNAME
-# REPO_PATH = "."
 
 # Step 0: Get account status
 def get_pythonanywhere_account_status():
-    # Account Status
     response = requests.get(
         f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/cpu/",
         headers={"Authorization": f"Token {PA_API_TOKEN}"},
@@ -75,7 +72,7 @@ def run_pythonanywhere_console_command(command, console_id):
         headers={"Authorization": f"Token {PA_API_TOKEN}"},
         json={"input": command + "\n"},
     )
-    print(response.status_code)
+    # print(response.status_code)
     if response.status_code == 200:
         print(f"Command '{command}' executed successfully.")
     else:
