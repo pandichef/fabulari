@@ -54,6 +54,16 @@
         box-sizing: border-box;
         margin-bottom: 20px;
         font-size: 18px;
+        background-color: #fff; /* Explicitly set background color */
+        color: #333; /* Explicitly set text color */
+    }
+
+    /* Make sure the text area appears properly even in dark mode */
+    textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        background-color: #fff; /* Ensure light background on focus */
+        color: #333; /* Ensure dark text on focus */
     }
 
     .load-button {
@@ -75,7 +85,6 @@
     }
 </style>
 {% endblock %}
-
 
 {% block content %}
 <div class="container">
