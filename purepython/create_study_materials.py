@@ -24,6 +24,8 @@ One possibility is to create a new content from scratch.  For example, the user 
 In either case, the content should be the length of a typical newspaper article, unless the user explicitly requests a different length.
 The other possibility is to fetch existing content.  For example, the user might type "The lyrics to Stairway to Heaven" 
 or "The first act of Hamlet". In such cases, return the content verbatim without regard to the length of the text.
+Do not invent imaginary stories.  If the user asks for details regarding an event that never happened, 
+say "I don't have any knowledge of this event".  However, if the user explicitly asks for an imagined story, then provide it.
 """,
             },
             {"role": "user", "content": f"""{description_of_article}""",},
@@ -50,6 +52,8 @@ def create_article_from_phrase_list(
                 "content": f"""The CEFR organises {working_on} language proficiency into six levels from A1 to C2.
 You assess the level of students' proficiency based on phrase lists that the student is currently working on.
 Then you create an article using the phrase list at the CEFR level implied by the phrase list.
+Do not invent imaginary stories.  If the user asks for details regarding an event that never happened, 
+say "I don't have any knowledge of this event".  However, if the user explicitly asks for an imagined story, then provide it.
 Do provide any commentary about the CEFR score of the user and do not provide a title to the article.
 """,
             },
