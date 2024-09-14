@@ -75,6 +75,7 @@ def run_pythonanywhere_console_command(command, console_id):
         headers={"Authorization": f"Token {PA_API_TOKEN}"},
         json={"input": command + "\n"},
     )
+    print(response.status_code)
     if response.status_code == 201:
         print(f"Command '{command}' executed successfully.")
     else:
@@ -123,7 +124,7 @@ def main():
     )
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
-    print("Collecting static files...")
+    # print("Collecting static files...")
     # run_pythonanywhere_command("python manage.py collectstatic --noinput")
 
     # Step 4: Reload the web application
