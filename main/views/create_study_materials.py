@@ -12,6 +12,7 @@ from purepython.create_study_materials import (
     create_article_title,
     create_readwise_item,
 )
+from django.contrib.auth.decorators import login_required
 
 
 def convert_to_markdown_if_plain_text(text: str) -> str:
@@ -94,6 +95,7 @@ def redirect_to_previous_page(request, fallback_url="/"):
     return redirect(request.META.get("HTTP_REFERER", fallback_url))
 
 
+@login_required
 def create_study_materials_view(request):
     if request.method == "POST":
         action = request.POST.get("action")

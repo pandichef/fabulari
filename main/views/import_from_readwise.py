@@ -12,12 +12,14 @@ from purepython.import_from_readwise import (
 )
 from main.models import Phrase
 from ..admin import PhraseAdmin
+from django.contrib.auth.decorators import login_required
 
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 # from accounts.models import supported_languages as SUPPORTED_LANGUAGES
 SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
+@login_required
 def import_from_readwise_view(request, populate_extra_fields_via_llm=False):
     if not request.user.readwise_api_key:
         messages.success(
