@@ -140,6 +140,7 @@
 <body>
     <div class="container">
         {% if user.is_authenticated %}
+        <a href="/">{% translate 'Skip This Phrase' %}</a> |
         <a href="admin/main/phrase/{{ phrase_id }}/change/">{% translate 'Edit This Phrase' %}</a> |
         <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
         <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
@@ -175,7 +176,7 @@
                         <td>{{phrase}}</td>
                     </tr>
                     <tr>
-                        <th>Cosine Similarity</th>
+                        <th>{% translate 'Score' %}</th>
                         <td>{{cosine_similarity}}</td>
                     </tr>
                     <tr>
@@ -190,15 +191,16 @@
                     {% csrf_token %}
                     <input type="text" name="prompt" placeholder="Type your {{ working_on }} here..." autofocus>
                 </form>
+                {% comment %}
                 {% if user.is_superuser %}
                 <table>
                     <tbody>
                         <tr>
-                            <th>Cosine Similarity</th>
+                            <th>{% translate 'Last Score' %}</th>
                             <td>{{last_cosine_similarity}}</td>
                         </tr>
                         <tr>
-                            <th>Random Value</th>
+                            <th>{% translate 'Random Value' %}</th>
                             <td>{{random_value}}</td>
                         </tr>
                         <tr>
@@ -208,9 +210,10 @@
                     </tbody>
                 </table>
                 {% endif %}
-            {% endif %}
-        {% endif %}
-    </div>
+                {% endcomment %}
+                {% endif %}
+                {% endif %}
+            </div>
 
     <!-- Javascript to focus on the Continue Button -->
     <script type="text/javascript">

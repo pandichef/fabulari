@@ -16,6 +16,8 @@ from main.models import Phrase
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
+zero_to_ten_multiplier = 10  # score from 0 to 10 is more intuitive
+
 
 def practice_translation_view(request, phrase_id=None):
     # if request.method == "POST" and phrase_id:
@@ -76,7 +78,9 @@ def practice_translation_view(request, phrase_id=None):
                 # + f"\nCosine Similarity: {str(round(cosine_similarity,4))}"
                 # + f"\nModel: {OPENAI_EMBEDDINGS_MODEL}",
                 "phrase": phrase_object.cleaned_text,
-                "cosine_similarity": str(round(cosine_similarity, 4)),
+                "cosine_similarity": str(
+                    round(cosine_similarity * zero_to_ten_multiplier, 1)
+                ),
                 "model": settings.OPENAI_EMBEDDINGS_MODEL,
             },
         )
@@ -100,7 +104,7 @@ def practice_translation_view(request, phrase_id=None):
 
     if phrase_id:
         next_phrase = Phrase.objects.get(id=phrase_id)
-        random_value = None
+        # random_value = request.session["random_value"]
     else:
 
         if len(qs) == 0:
@@ -159,6 +163,11 @@ def practice_translation_view(request, phrase_id=None):
         # Generate template vars
         # lowest que_score goes first
         next_phrase = qs[0]
+        print("random_value: ", random_value)
+        print("next_phrase.cosine_similarity: ", next_phrase.cosine_similarity)
+        print("next_phrase.id: ", next_phrase.id)
+        # request.session["random_value"] = random_value
+        # request.session["prev_cosine_similarity"] = float(next_phrase.cosine_similarity)
 
         return redirect(f"/{next_phrase.id}")
 
@@ -192,14 +201,24 @@ def practice_translation_view(request, phrase_id=None):
             "phrase_id": phrase_id,
             "english_sentence": request.session["equivalent_native_language_sentence"],
             "working_on": working_on,
-            "last_cosine_similarity": next_phrase.cosine_similarity
-            if next_phrase.cosine_similarity
-            else None,
-            "random_value": round(random_value, 4) if random_value else None,
-            "que_score": round(
-                abs(float(next_phrase.cosine_similarity) - random_value), 4
-            )
-            if random_value and next_phrase.cosine_similarity
-            else None,
+            # "last_cosine_similarity": round(
+            #     request.session.get("prev_cosine_similarity") * zero_to_ten_multiplier,
+            #     1,
+            # )
+            # if request.session.get("prev_cosine_similarity")
+            # else None,
+            # "random_value": round(
+            #     request.session.get("random_value") * zero_to_ten_multiplier, 1
+            # ),
+            # "que_score": round(
+            #     abs(
+            #         float(request.session.get("prev_cosine_similarity"))
+            #         - request.session.get("random_value")
+            #     )
+            #     * zero_to_ten_multiplier,
+            #     1,
+            # )
+            # if request.session.get("prev_cosine_similarity")
+            # else None,
         },
     )
