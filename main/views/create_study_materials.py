@@ -191,7 +191,8 @@ def create_study_materials_view(request):
                 # print(request.get_host())
                 res = create_readwise_item(
                     token=request.user.readwise_api_key,
-                    title="[summary] " + subject,
+                    # title="[summary] " + subject,
+                    title=subject,
                     body_in_html=article_in_html,
                     author="fabulari",
                     url=protocol_and_domain,
@@ -218,7 +219,8 @@ def create_study_materials_view(request):
                 while not success:
                     try:
                         send_mail(
-                            "[summary] " + subject,
+                            # "[summary] " + subject,
+                            subject,
                             article_in_html,
                             "from@example.com",
                             [request.user.email],
