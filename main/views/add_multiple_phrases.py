@@ -6,6 +6,8 @@ from django.contrib import messages
 from main.models import Phrase
 from django.contrib.admin.sites import site
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 
@@ -14,7 +16,7 @@ class LanguageChoiceForm(forms.Form):
     choice_field = forms.ChoiceField(choices=LANGUAGE_CHOICES, required=True)
 
 
-@login_required
+@login_required(login_url=reverse("admin:login"))
 def add_multiple_phrases_view(request):
     admin_context = site.each_context(request)
 

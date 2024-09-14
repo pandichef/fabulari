@@ -4,9 +4,10 @@ from django.shortcuts import get_list_or_404
 from main.models import Phrase
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
-@login_required
+@login_required(login_url=reverse("admin:login"))
 def export_phrases_to_csv_view(request):
     # You might want to add permission checks here
     # queryset = get_list_or_404(Phrase.objects.filter(user=request.user))
