@@ -255,3 +255,6 @@ LANGUAGE_CHOICES = [
 ]
 
 supported_languages = [code for code, _ in LANGUAGE_CHOICES]
+
+LANGUAGE_CODE = "en-us"
+USE_I18N = True
