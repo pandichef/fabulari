@@ -8,8 +8,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from purepython.create_study_materials import (
-    create_article_user_prompt,
-    create_article_phrase_list,
+    create_article_from_user_prompt,
+    create_article_from_phrase_list,
     create_article_title,
     create_readwise_item,
 )
@@ -128,7 +128,7 @@ def create_study_materials_view(request):
             description_of_article = request.POST.get("words_input")
             if gpt_first == 1:
                 # print("first")
-                article = create_article_user_prompt(
+                article = create_article_from_user_prompt(
                     description_of_article=description_of_article,
                     openai_model=request.user.openai_llm_model_complex_tasks,
                 )
@@ -138,7 +138,7 @@ def create_study_materials_view(request):
                 ).values_list("cleaned_text", "cosine_similarity")
                 tuple_list = list(qs)
                 # print(tuple_list_to_csv(tuple_list))
-                article = create_article_phrase_list(
+                article = create_article_from_phrase_list(
                     word_list=tuple_list,
                     working_on=dict(settings.LANGUAGE_CHOICES)[request.user.working_on],
                     additional_context=description_of_article,

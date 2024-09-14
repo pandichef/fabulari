@@ -9,7 +9,7 @@ from purepython.practice_translation import (
 from .assess_cefr_level import tuple_list_to_csv
 
 
-def create_article_user_prompt(
+def create_article_from_user_prompt(
     description_of_article: str,  # e.g., "The history of Mongolia in 300 words",
     openai_model,  # e.g., ="gpt-4o-mini"
 ) -> str | None:
@@ -32,7 +32,7 @@ or "The first act of Hamlet". In such cases, return the content verbatim without
     return completion.choices[0].message.content
 
 
-def create_article_phrase_list(
+def create_article_from_phrase_list(
     word_list: list,  # e.g., [("casa", 0.80), ("perro", None), ("hijo", 0.5)],
     working_on: str,  # e.g., "Spanish"
     additional_context: str,  # e.g., "The history of Mongolia in 300 words",
@@ -40,7 +40,7 @@ def create_article_phrase_list(
 ) -> str | None:
     word_list_as_str = tuple_list_to_csv(word_list)
     if additional_context:
-        additional_context = f'If possible in the context of the word list, choose a theme that is closely related to "{additional_context}".'
+        additional_context = f'If possible, in the context of the phrase list, choose a theme that is closely related to "{additional_context}".'
 
     completion = client.chat.completions.create(
         model=openai_model,
@@ -61,11 +61,11 @@ A higher score indicates more proficiency.  The student hasn't been tested yet i
 You can assume such words are quite new to the student and she would find them relatively challenging to use.
 Estimate the student's {working_on} CEFR level based on these data.
 Then you create an article using the phrase list at the CEFR level implied by the phrase list.
-The article should emphsize new words (i.e., the ones that don't have a score) and the one that are neither too easy nor too hard 
+The article should emphasize new words (i.e., the ones that don't have a score) and the one that are neither too easy nor too hard 
 (i.e., the ones that have scores generally near the middle of the range).  Do provide any commentary about the CEFR score of the user.
 For example, don't say things like "the student appears to be operating at a CEFR level of A2 or possibly early B1" in either English or
-{working_on}.  Only provide the text of the article and emphasize the phrases used.  In either case, the content should be the length of a typical 
-newspaper article, unless the user explicitly requests a different length. {additional_context}
+{working_on}.  Only provide the text of the article.  Words and phrases from the word list should be bold.
+The content should be the length of a typical newspaper article, unless the user explicitly requests a different length. {additional_context}
 \n\n{tuple_list_to_csv(word_list)}""",
             },
         ],
