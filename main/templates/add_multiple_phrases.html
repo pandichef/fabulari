@@ -46,7 +46,7 @@
         font-size: 18px;
     }
 
-    textarea {
+    textarea, select {
         width: 100%;
         padding: 20px;
         border: 1px solid #ddd;
@@ -58,8 +58,8 @@
         color: #333; /* Explicitly set text color */
     }
 
-    /* Make sure the text area appears properly even in dark mode */
-    textarea:focus {
+    /* Make sure the textarea and select appear properly even in dark mode */
+    textarea:focus, select:focus {
         outline: none;
         border-color: #007bff;
         background-color: #fff; /* Ensure light background on focus */
@@ -84,6 +84,24 @@
         background-color: #0056b3;
     }
 </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <a href="/admin/main/phrase/">Go Back to Phrase List</a> 
+    {% comment %}
+    <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
+    {% endcomment %}
+    <h2>Add Multiple Phrases</h2>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="words_input" placeholder="Paste your phrases here.  Each word/phrase should be on a separate line." rows="5" cols="50" autofocus></textarea>
+        <!-- Dropdown Menu for Choice Field -->
+        Language: {{ form.choice_field }}<br><br>
+        <button type="submit" class="load-button">Add Phrases</button>
+    </form>
+</div>
 {% endblock %}
 
 {% block content %}
