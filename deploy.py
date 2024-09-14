@@ -76,7 +76,7 @@ def run_pythonanywhere_console_command(command, console_id):
         json={"input": command + "\n"},
     )
     print(response.status_code)
-    if response.status_code == 201:
+    if response.status_code == 200:
         print(f"Command '{command}' executed successfully.")
     else:
         print(
