@@ -144,7 +144,7 @@
         <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
         <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
         {% else %}
-        <a href="mailto:{{ host_email }}?subject=Sign%20Me%20Up">Email host to request credentials</a>
+        <a href="mailto:{{ host_email }}?subject=Sign%20Me%20Up" target="_blank">Email host to request credentials</a>
         {% endif %}
         <h2>{{ english_sentence }}</h2>
         {% if response %}
