@@ -1,10 +1,11 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Study Materials</title>
+    <title>{% translate 'Create Study Materials' %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -80,10 +81,9 @@
 </head>
 <body>
     <div class="container">
-        <a href="/admin/main/phrase/add">Add New Phrase</a> |
-        <a href="/admin/main/phrase/">See All Phrases</a> |
-        <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
-        <h2>Create Study Materials</h2>
+        <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Setttings' %}</a>
+        <h2>{% translate 'Create Study Materials' %}</h2>
         <form method="post">
             {% csrf_token %}
             {% if not preview_page %}

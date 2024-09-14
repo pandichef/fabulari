@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,20 +111,19 @@
 </head>
 <body>
     <div class="container">
-        <a href="/admin/main/phrase/add">Add New Phrase</a> |
-        <a href="/admin/main/phrase/">See All Phrases</a> |
-        <a href="{% url 'admin:accounts_customuser_change' user.id %}">Settings</a>
+        <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
+        <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Setttings' %}</a>
         <h1>{{ english_sentence }}</h1>
         {% if response %}
             <p><strong>Attempted Translation:</strong> {{ attempted_translation }}</p>
             <p><strong>Feedback:</strong> {{ response }}</p>
             <div>
-                <a href="{% url 'practice_translation' %}" class="continue-button">Continue</a>
+                <a href="{% url 'practice_translation' %}" class="continue-button">{% translate 'Continue' %}</a>
             </div><br>
             <table>
                 <tbody>
                     <tr>
-                        <th>Phrase</th>
+                        <th>{% translate 'Phrase' %}</th>
                         <td>{{phrase}}</td>
                     </tr>
                     <tr>
@@ -131,7 +131,7 @@
                         <td>{{cosine_similarity}}</td>
                     </tr>
                     <tr>
-                        <th>Model</th>
+                        <th>{% translate 'Model' %}</th>
                         <td>{{model}}</td>
                     </tr>
                 </tbody>
