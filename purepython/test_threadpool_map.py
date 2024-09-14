@@ -1,3 +1,4 @@
+from typing import List, Any, Dict
 from .parallel_map import threadpool_map
 
 # Test cases for the parallel_map function

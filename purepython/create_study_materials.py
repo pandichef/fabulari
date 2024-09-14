@@ -99,7 +99,7 @@ Assess the article's CEFR level and indicate this level at the end of the title.
     return completion.choices[0].message.content
 
 
-def create_readwise_item(
+def create_readwise_reader_item(
     token,
     title,
     body_in_html,

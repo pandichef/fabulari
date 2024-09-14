@@ -49,22 +49,34 @@
 
     textarea, select {
         width: 100%;
-        padding: 20px;
+        padding: 12px;
         border: 1px solid #ddd;
         border-radius: 4px;
         box-sizing: border-box;
         margin-bottom: 20px;
         font-size: 18px;
-        background-color: #fff; /* Explicitly set background color */
-        color: #333; /* Explicitly set text color */
+        background-color: #fff; /* Explicit background color */
+        color: #333; /* Explicit text color */
+        height: auto;
     }
 
-    /* Make sure the textarea and select appear properly even in dark mode */
+    select {
+        appearance: auto; /* Restore default appearance to avoid rendering issues */
+        background-color: #fff; /* Ensure background color */
+        color: #333; /* Ensure text color */
+        line-height: 1.5; /* Center text vertically */
+    }
+
     textarea:focus, select:focus {
         outline: none;
         border-color: #007bff;
-        background-color: #fff; /* Ensure light background on focus */
-        color: #333; /* Ensure dark text on focus */
+        background-color: #fff;
+        color: #333;
+    }
+
+    option {
+        background-color: #fff; /* Set background for dropdown options */
+        color: #333; /* Set text color for dropdown options */
     }
 
     .load-button {

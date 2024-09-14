@@ -172,7 +172,7 @@ def practice_translation_view(request, phrase_id=None):
         return redirect(f"/{next_phrase.id}")
 
     full_working_on_sentence = generate_full_sentence(
-        phrase=next_phrase.text,
+        phrase=next_phrase.raw_text,
         working_on=working_on,
         openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
     )

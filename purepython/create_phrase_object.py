@@ -1,10 +1,11 @@
-from typing import Tuple
+from typing import Tuple, Dict, Any
 from purepython.practice_translation import (
     generate_full_sentence,
     # OPENAI_LLM_MODEL,
     client,
     to_native_language,
 )
+from .settings import LANGUAGE_CHOICE_DICT
 
 
 def clean_phrase(
@@ -37,27 +38,41 @@ Do not include any excess punctuation e.g., the clean phrase should not be "(jai
     return completion.choices[0].message.content
 
 
-def phrase_to_native_language(
-    phrase: str,
-    working_on: str,  # = "Spanish",
-    native_language: str,  # = "English",
+from purepython.parallel_map import mapify
+
+# from purepython.create_phrase_object import get_phrase_metadata
+
+# get_phrase_metadata_multithreaded = mapify(get_phrase_metadata)
+
+
+@mapify
+def get_phrase_metadata(
+    input_dict: Dict[str, Any],
+    # phrase: str,
+    # working_on_code: str,  # = "es",
+    native_language: str,  # = "en",
     openai_model: str  # = "gpt-4o-mini",
     # phrase=None,
-) -> Tuple[str, str, str] | None:
+) -> Dict[str, Any] | None:
+
+    phrase = input_dict["raw_text"]
+    working_on_verbose = LANGUAGE_CHOICE_DICT[input_dict["language"]]
+    native_language_verbose = LANGUAGE_CHOICE_DICT[native_language]
+
     """Gets extra data e.g., cleaned_phrase, definition, example sentence"""
     if len(phrase) < 2:  # at least 2 characters
         return None
     cleaned_phrase = clean_phrase(
-        phrase=phrase, working_on=working_on, openai_model=openai_model
+        phrase=phrase, working_on=working_on_verbose, openai_model=openai_model
     )
     if "(proper name)" in cleaned_phrase:
         return None
     example_sentence = generate_full_sentence(
-        cleaned_phrase, working_on=working_on, openai_model=openai_model
+        cleaned_phrase, working_on=working_on_verbose, openai_model=openai_model
     )
-    definition_prompt = f"""I am a native {native_language} speaker trying to learn {working_on}.
+    definition_prompt = f"""I am a native {native_language_verbose} speaker trying to learn {working_on_verbose}.
 
-Please translate the {working_on} word or phrase "{cleaned_phrase}" to {native_language} as it was used in the following sentence:
+Please translate the {working_on_verbose} word or phrase "{cleaned_phrase}" to {native_language_verbose} as it was used in the following sentence:
 {example_sentence}
 
 Do not include extra punctuation like leading and trailing quotes in the completion.
@@ -75,11 +90,17 @@ Do not provide a translation of the example sentence, only a translation of the 
             {
                 "role": "system",
                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
-                "content": f"You translate phrases from {working_on} to {native_language}.",
+                "content": f"You translate phrases from {working_on_verbose} to {native_language_verbose}.",
             },
             {"role": "user", "content": definition_prompt},
         ],
     )
     definition = completion.choices[0].message.content
     print(definition)
-    return (cleaned_phrase, example_sentence, definition)
+    return_dict = {
+        "cleaned_text": cleaned_phrase,
+        "example_sentence": example_sentence,
+        "definition": definition,
+    }
+    input_dict.update(return_dict)
+    return input_dict

@@ -89,9 +89,12 @@ class Phrase(models.Model):
     #     ("ru", "Russian"),
     #     # Add more languages as needed
     # ]
-
+    created = models.DateTimeField(auto_now_add=True)  # Set once when created
+    modified = models.DateTimeField(
+        auto_now=True
+    )  # Update every time the object is saved
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
-    text = models.CharField(max_length=255, verbose_name="Raw text")
+    raw_text = models.CharField(max_length=255, verbose_name="Raw text")
     cleaned_text = models.CharField(max_length=255, verbose_name="Phrase")
     example_sentence = models.CharField(max_length=255)
     definition = models.CharField(max_length=255)

@@ -177,11 +177,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "America"
+TIME_ZONE = "America/Chicago"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = True  # to store all dates as UTC in the database
 
 
 # Static files (CSS, JavaScript, Images)
@@ -241,27 +242,29 @@ EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_PASSWORD", "")
 OPENAI_LLM_MODEL_SIMPLE_TASKS = "gpt-4o-mini"
 OPENAI_EMBEDDINGS_MODEL = "text-embedding-3-large"
 
-LANGUAGE_CHOICES = [
-    ("en", "English"),
-    ("es", "Spanish"),
-    ("ru", "Russian"),
-    ("he", "Hebrew"),
-    ("ar", "Arabic"),
-    ("zh", "Chinese"),
-    ("de", "German"),
-    ("la", "Latin"),
-    ("fr", "French"),
-    # Add more languages as needed
-]
+# LANGUAGE_CHOICES = [
+#     ("en", "English"),
+#     ("es", "Spanish"),
+#     ("ru", "Russian"),
+#     ("he", "Hebrew"),
+#     ("ar", "Arabic"),
+#     ("zh", "Chinese"),
+#     ("de", "German"),
+#     ("la", "Latin"),
+#     ("fr", "French"),
+#     # Add more languages as needed
+# ]
 
-supported_languages = [code for code, _ in LANGUAGE_CHOICES]
+from purepython.settings import LANGUAGE_CHOICES, SUPPORTED_LANGUAGES
+
+# SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 # LANGUAGE_CODE = "en-us"
 # USE_I18N = True
 # LANGUAGE_CODE = "en"  # Spanish
-USE_I18N = True  # browser language
-USE_L10N = True  # local datetime
-USE_TZ = True
+# USE_I18N = True  # browser language
+# USE_L10N = True  # local datetime
+# USE_TZ = True
 
 # LANGUAGES = [
 #     ("es", "Spanish"),

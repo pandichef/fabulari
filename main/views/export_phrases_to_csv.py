@@ -55,7 +55,7 @@ def export_phrases_to_csv_view(request):
     for obj in queryset:
         writer.writerow(
             [
-                obj.text,
+                obj.raw_text,
                 obj.cleaned_text,
                 obj.language,
                 obj.definition,

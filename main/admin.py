@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.conf import settings
-from purepython.create_phrase_object import phrase_to_native_language
+from purepython.create_phrase_object import get_phrase_metadata
 from purepython.practice_translation import detect_language_code as detect
 from purepython.practice_translation import from_native_language
 from .models import Phrase
@@ -42,6 +42,7 @@ class PhraseAdmin(admin.ModelAdmin):
         "cosine_similarity",
         "language",
         "user",
+        "created",
     )
     # list_filter = ("language",)
     def get_list_filter(self, request):
@@ -52,7 +53,7 @@ class PhraseAdmin(admin.ModelAdmin):
 
     search_fields = ("cleaned_text",)
     fields = (
-        "text",
+        "raw_text",
         "example_sentence",
         "definition",
         "language",
@@ -78,7 +79,7 @@ class PhraseAdmin(admin.ModelAdmin):
         if change:  # if the object is being created
             last_obj = Phrase.objects.get(id=obj.id)
             raw_text_changed = (
-                last_obj.text != obj.text
+                last_obj.raw_text != obj.raw_text
                 or not last_obj.definition
                 or not last_obj.example_sentence
             )
@@ -86,14 +87,14 @@ class PhraseAdmin(admin.ModelAdmin):
             raw_text_changed = False
             obj.user = request.user
             detected_language_code = detect(
-                phrase=obj.text, openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+                phrase=obj.raw_text, openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
             )
             if not obj.language:
                 if detected_language_code == request.user.native_language:
                     obj.language = request.user.working_on
 
-                    obj.text = from_native_language(
-                        obj.text,
+                    obj.raw_text = from_native_language(
+                        obj.raw_text,
                         working_on=obj.language,
                         native_language=detected_language_code,
                         openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
@@ -124,14 +125,18 @@ class PhraseAdmin(admin.ModelAdmin):
 
         # get openai data if new object or raw_text changed
         if not change or raw_text_changed:
-            native_language_metadata = phrase_to_native_language(
-                phrase=obj.text,
-                working_on=obj.language,
-                native_language=request.user.native_language,
-                openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
-            )
+            native_language_metadata = list(
+                get_phrase_metadata(
+                    [{"raw_text": obj.raw_text, "language": obj.language}],
+                    native_language=request.user.native_language,
+                    openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                )
+            )[0]
             if native_language_metadata:
-                (cleaned_text, example_sentence, definition) = native_language_metadata
+                # (cleaned_text, example_sentence, definition) = native_language_metadata
+                cleaned_text = native_language_metadata["cleaned_text"]
+                example_sentence = native_language_metadata["example_sentence"]
+                definition = native_language_metadata["definition"]
                 if raw_text_changed:
                     obj.cleaned_text = cleaned_text
                     obj.example_sentence = example_sentence

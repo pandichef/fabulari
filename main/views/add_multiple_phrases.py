@@ -33,7 +33,7 @@ def add_multiple_phrases_view(request):
         added_count = 0
         for phrase_str in new_phrases:
             phrase_obj = Phrase(
-                text=phrase_str,
+                raw_text=phrase_str,
                 cleaned_text=phrase_str,
                 language=language_code,
                 user=request.user,

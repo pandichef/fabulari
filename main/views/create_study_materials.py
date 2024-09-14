@@ -11,7 +11,7 @@ from purepython.create_study_materials import (
     create_article_from_user_prompt,
     create_article_from_phrase_list,
     create_article_title,
-    create_readwise_item,
+    create_readwise_reader_item,
 )
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -189,7 +189,7 @@ def create_study_materials_view(request):
                     else None
                 )
                 # print(request.get_host())
-                res = create_readwise_item(
+                res = create_readwise_reader_item(
                     token=request.user.readwise_api_key,
                     # title="[summary] " + subject,
                     title=subject,
