@@ -1,3 +1,4 @@
+import sys
 import os
 import json
 import requests
@@ -6,6 +7,7 @@ import subprocess
 
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
+DOMAIN_NAME = PA_USERNAME + ".pythonanywhere.com"
 # WEBAPP_NAME = PA_USERNAME
 # REPO_PATH = "."
 
@@ -83,10 +85,10 @@ def run_pythonanywhere_console_command(command, console_id):
 
 # Step 3: Reload the PythonAnywhere web app
 def reload_web_app():
-    webapp_url = PA_USERNAME + "pythonanywhere.com"
+    # webapp_url = PA_USERNAME + "pythonanywhere.com"
     # url =
     response = requests.post(
-        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/webapps/{webapp_url}/reload/",
+        f"https://www.pythonanywhere.com/api/v0/user/{PA_USERNAME}/webapps/{DOMAIN_NAME}/reload/",
         headers={"Authorization": f"Token {PA_API_TOKEN}"},
     )
     if response.status_code == 200:
@@ -100,9 +102,10 @@ def reload_web_app():
 # Main script flow
 def main():
     # Get commit message from the user
-    commit_message = (
-        input("Enter commit message (default: 'unnamed commit'): ") or "unnamed commit"
-    )
+    # commit_message = (
+    #     input("Enter commit message (default: 'unnamed commit'): ") or "unnamed commit"
+    # )
+    commit_message = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "unnamed commit"
 
     # Step 1: Commit and push to git
     print("Committing and pushing to git...")
