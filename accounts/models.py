@@ -82,5 +82,5 @@ class CustomUser(AbstractUser):
     )
 
     class Meta:
-        verbose_name = "Settings"
-        verbose_name_plural = "Settings"
+        verbose_name = _("Settings")
+        verbose_name_plural = _("Settings")

@@ -38,6 +38,8 @@ class Phrase(models.Model):
 
     class Meta:
         unique_together = ("user", "cleaned_text")
+        verbose_name = _("Phrase")
+        verbose_name_plural = _("Phrases")
 
     def __str__(self):
         return f"{self.cleaned_text}"

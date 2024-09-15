@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:08-0500\n"
+"POT-Creation-Date: 2024-09-15 05:13-0500\n"
 "PO-Revision-Date: 2022-01-15 11:22+0000\n"
 "Last-Translator: Florian Apolloner <florian@apolloner.eu>\n"
 "Language-Team: German (http://www.transifex.com/django/django/language/de/)\n"
@@ -85,6 +85,13 @@ msgstr ""
 "Standardmäßig wird nur fremdsprachiger Wortschatz aus Readwise abgerufen. "
 "Schalte dies ein um auch aus deiner lingua materna zu importieren."
 
+#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "Einstellungen"
+
 #: .\main\models.py:15
 msgid "created"
 msgstr "erstellt"
@@ -101,7 +108,8 @@ msgstr "Benutzer"
 msgid "Raw text"
 msgstr "Rohtext"
 
-#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+#: .\main\models.py:24 .\main\models.py:41
+#: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Phrase"
 
@@ -122,6 +130,12 @@ msgstr "Sprache"
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
 msgstr "Erkannt aus Text wenn leer"
+
+#: .\main\models.py:42
+#, fuzzy
+#| msgid "Phrase"
+msgid "Phrases"
+msgstr "Phrase"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -153,12 +167,6 @@ msgstr "Übe Übersetzung bei diesem Satz"
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
 msgstr "Erstellen Sie Lernmaterialien"
-
-#: .\main\templates\create_study_materials.html:85
-#: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
-msgid "Settings"
-msgstr "Einstellungen"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""

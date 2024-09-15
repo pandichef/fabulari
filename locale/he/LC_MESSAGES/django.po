@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:08-0500\n"
+"POT-Creation-Date: 2024-09-15 05:13-0500\n"
 "PO-Revision-Date: 2021-11-02 07:48+0000\n"
 "Last-Translator: Menachem G.\n"
 "Language-Team: Hebrew (http://www.transifex.com/django/django/language/he/)\n"
@@ -81,6 +81,13 @@ msgstr ""
 "ברירת מחדל רק אוצר מילים זר משוחזר מראדוויז  הפעל זאת כדי לייבא משפת האם שלך"
 " גם."
 
+#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "הגדרות"
+
 #: .\main\models.py:15
 msgid "created"
 msgstr "נוצר"
@@ -97,7 +104,8 @@ msgstr "משתמש"
 msgid "Raw text"
 msgstr "טקסט גולמי"
 
-#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+#: .\main\models.py:24 .\main\models.py:41
+#: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "ביטוי"
 
@@ -118,6 +126,12 @@ msgstr "שפה"
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
 msgstr "זוהה מטקסט אם ריק"
+
+#: .\main\models.py:42
+#, fuzzy
+#| msgid "Phrase"
+msgid "Phrases"
+msgstr "ביטוי"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -149,12 +163,6 @@ msgstr "תרגול תרגום על ביטוי זה"
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
 msgstr "צור חומרים ללימוד"
-
-#: .\main\templates\create_study_materials.html:85
-#: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
-msgid "Settings"
-msgstr "הגדרות"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:08-0500\n"
+"POT-Creation-Date: 2024-09-15 05:13-0500\n"
 "PO-Revision-Date: 2021-10-15 21:11+0000\n"
 "Last-Translator: Bashar Al-Abdulhadi\n"
 "Language-Team: Arabic (http://www.transifex.com/django/django/language/ar/)\n"
@@ -83,6 +83,13 @@ msgstr ""
 "افتراضيًا يتم استرجاع المفردات الأجنبية فقط من Readwise قم بتفعيل ذلك "
 "لاستيراد من لغتك الأم أيضًا"
 
+#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "الإعدادات"
+
 #: .\main\models.py:15
 msgid "created"
 msgstr "تم إنشاء"
@@ -99,7 +106,8 @@ msgstr "المستخدم"
 msgid "Raw text"
 msgstr "نص خام"
 
-#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+#: .\main\models.py:24 .\main\models.py:41
+#: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "عبارة"
 
@@ -120,6 +128,12 @@ msgstr "لغة"
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
 msgstr "تم الكشف عن النص إذا كان فارغاً"
+
+#: .\main\models.py:42
+#, fuzzy
+#| msgid "Phrase"
+msgid "Phrases"
+msgstr "عبارة"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -151,12 +165,6 @@ msgstr "ممارسة الترجمة على هذه العبارة"
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
 msgstr "إنشاء مواد دراسية"
-
-#: .\main\templates\create_study_materials.html:85
-#: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
-msgid "Settings"
-msgstr "الإعدادات"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:08-0500\n"
+"POT-Creation-Date: 2024-09-15 05:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,13 @@ msgid ""
 "on to import from your native language as well."
 msgstr "默认情况下，仅从 Readwise 中检索外语词汇。 开启此功能以便从您的母语中导入。"
 
+#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "设置"
+
 #: .\main\models.py:15
 msgid "created"
 msgstr "创建"
@@ -91,7 +98,8 @@ msgstr "用户"
 msgid "Raw text"
 msgstr "原文文本"
 
-#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+#: .\main\models.py:24 .\main\models.py:41
+#: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "短语"
 
@@ -110,6 +118,12 @@ msgstr "语言"
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
 msgstr "从文本中检测是否为空"
+
+#: .\main\models.py:42
+#, fuzzy
+#| msgid "Phrase"
+msgid "Phrases"
+msgstr "短语"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -139,12 +153,6 @@ msgstr "练习翻译这个短语"
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
 msgstr "创建学习资料"
-
-#: .\main\templates\create_study_materials.html:85
-#: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
-msgid "Settings"
-msgstr "设置"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""

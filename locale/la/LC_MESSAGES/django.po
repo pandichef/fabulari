@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:08-0500\n"
+"POT-Creation-Date: 2024-09-15 05:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,13 @@ msgstr ""
 "Plerumque solum vocabula externa a Readwise conquiruntur.  Activa hoc ad "
 "importandum ex tua lingua materna etiam."
 
+#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "Instauratio"
+
 #: .\main\models.py:15
 msgid "created"
 msgstr "creatus"
@@ -94,7 +101,8 @@ msgstr "usus"
 msgid "Raw text"
 msgstr "Textus rudis"
 
-#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+#: .\main\models.py:24 .\main\models.py:41
+#: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Frase"
 
@@ -113,6 +121,12 @@ msgstr "lingua"
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
 msgstr "Detectum ex texto si vacuum"
+
+#: .\main\models.py:42
+#, fuzzy
+#| msgid "Phrase"
+msgid "Phrases"
+msgstr "Frase"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -142,12 +156,6 @@ msgstr "Practica Translatio in Hoc Phrasi"
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
 msgstr "Creare Materias Studii"
-
-#: .\main\templates\create_study_materials.html:85
-#: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
-msgid "Settings"
-msgstr "Instauratio"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""
