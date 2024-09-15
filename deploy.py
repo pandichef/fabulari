@@ -46,6 +46,10 @@ def update_locale_files():
 
         # Loop through each msgid and translate if msgstr is empty
         for entry in po:
+            if entry.obsolete:
+                # script was marking this obsolete before
+                entry.obsolete = False
+
             if not entry.msgstr:
                 # Check if the entry is pluralized and has values in msgstr[0] or msgstr[1]
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 05:13-0500\n"
+"POT-Creation-Date: 2024-09-15 05:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,12 +23,12 @@ msgid ""
 "        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
 "        "
 msgstr ""
-"Adhibetur ad creandum materiam studiosam et ad feedback translationis  \n"
-"        aestimationes sumptuum sunt ad Septembrem 2024. Nota quod gpt-4o-mini adhibetur pro simplicibus translationis et classificationis operibus"
+"Adhibetur ad creandum materias studii et feedback translationis  \n"
+"       aestimationes costorum sunt ut Septembri 2024 nota quod gpt-4o-mini adhibetur ad simplices translationes et munera classificationis"
 
 #: .\accounts\models.py:35
 msgid "OpenAI LLM Model"
-msgstr "OpenAI LLM Modulus"
+msgstr "OpenAI LLM Model"
 
 #: .\accounts\models.py:38
 msgid "native language"
@@ -36,14 +36,14 @@ msgstr "lingua materna"
 
 #: .\accounts\models.py:46
 msgid "working on"
-msgstr "laborando in"
+msgstr "operando in"
 
 #: .\accounts\models.py:58
 msgid ""
 "Generate API key <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">here</a> if you have an account."
 msgstr ""
-"Generare clave API <a href=\"https://readwise.io/access_token\" "
+"Genera clave API <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">hic</a> si habes rationem."
 
 #: .\accounts\models.py:62
@@ -52,7 +52,7 @@ msgstr "ultima readwise renovatio"
 
 #: .\accounts\models.py:70
 msgid "use readwise for study materials"
-msgstr "utere readwise pro materialibus studii"
+msgstr "uta readwise pro materia studiorum"
 
 #: .\accounts\models.py:73
 msgid ""
@@ -61,9 +61,9 @@ msgid ""
 "href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
 "available."
 msgstr ""
-"Mitte materiam studiorum ad <a href=\"https://readwise.io/\" "
-"target=\"_blank\">Readwise</a> (pro loco epistulae) si <a "
-"href=\"https://readwise.io/access_token\" target=\"_blank\">clavis API</a> "
+"Mitte materia studiorum ad <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (pro loco email) si <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">API clavis</a> "
 "praesto est."
 
 #: .\accounts\models.py:77
@@ -75,15 +75,15 @@ msgid ""
 "By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
 "on to import from your native language as well."
 msgstr ""
-"Plerumque solum vocabula externa a Readwise conquiruntur.  Activa hoc ad "
-"importandum ex tua lingua materna etiam."
+"Per defaultum tantum vocabula externa parata sunt ex Readwise. Convertere "
+"hoc ad importandum etiam ex tua lingua materna."
 
 #: .\accounts\models.py:85 .\accounts\models.py:86
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
 #: .\templates\admin\base_site.html:30
 msgid "Settings"
-msgstr "Instauratio"
+msgstr "Instalaciones"
 
 #: .\main\models.py:15
 msgid "created"
@@ -91,7 +91,7 @@ msgstr "creatus"
 
 #: .\main\models.py:18
 msgid "modified"
-msgstr "mutatus"
+msgstr "modificatus"
 
 #: .\main\models.py:21
 msgid "user"
@@ -104,7 +104,7 @@ msgstr "Textus rudis"
 #: .\main\models.py:24 .\main\models.py:41
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
-msgstr "Frase"
+msgstr "Frasa"
 
 #: .\main\models.py:25
 msgid "example sentence"
@@ -120,24 +120,22 @@ msgstr "lingua"
 
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
-msgstr "Detectum ex texto si vacuum"
+msgstr "Detecta de texto si vacio"
 
 #: .\main\models.py:42
-#, fuzzy
-#| msgid "Phrase"
 msgid "Phrases"
-msgstr "Frase"
+msgstr "Phrases"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
 msgid "Add Multiple Phrases"
-msgstr "Adde plures phrases"
+msgstr "Adde plura phrasis"
 
 #: .\main\templates\add_multiple_phrases.html:104
 #: .\main\templates\create_study_materials.html:84
 #: .\main\templates\practice_translation.html:145
 msgid "Go Back to Phrase List"
-msgstr "Redi ad indicem sententiarum"
+msgstr "Revertere ad indicem phrasium"
 
 #: .\main\templates\add_multiple_phrases.html:114
 msgid "Language"
@@ -149,27 +147,27 @@ msgstr "Add Phrases"
 
 #: .\main\templates\admin\change_form_with_bulk_add_button.html:12
 msgid "Practice Translation on This Phrase"
-msgstr "Practica Translatio in Hoc Phrasi"
+msgstr "Practicare Translationem in Hac Phrases"
 
 #: .\main\templates\create_study_materials.html:8
 #: .\main\templates\create_study_materials.html:86
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
-msgstr "Creare Materias Studii"
+msgstr "Creare materia studii"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""
 "The text you type here will be sent without modification i.e., you already "
 "have the text for an article and just want to send it to a reader app"
 msgstr ""
-"Textus quem hic scribis mittetur sine mutatione id est iam habes textum pro "
-"articulo et tantum vis mittere ad applicationem lectoris"
+"Textum quod hic scribis in absque mutatione mittetur id est iam habes textum"
+" pro articulo et solum vis mittere ad legentem app"
 
 #: .\main\templates\create_study_materials.html:119
 msgid ""
 "The text you type here will be sent after passing it through an LLM model "
 "e.g., history of cats in A2 level Spanish"
-msgstr "Historia felinum in A2 gradu"
+msgstr "Historia felineorum"
 
 #: .\main\templates\create_study_materials.html:124
 msgid ""
@@ -177,33 +175,33 @@ msgid ""
 "utilizes your phrase list.  However, you can also pass additional context "
 "here."
 msgstr ""
-"Potes hanc spatiam vacuam relinquere et exemplar LLM articulam aedificabit "
-"quod tuas phrasis rationes utetur Sed etiam huc contextum additum transire "
-"potes"
+"Potes relinquere hanc spatium vacuum et model LLM articulus aedificabit quod"
+" utitur tua phrasium indice. Tamen etiam potes praeterire contextum "
+"additicum hic."
 
 #: .\main\templates\practice_translation.html:143
 msgid "Skip This Phrase"
-msgstr "Skip This Phrase"
+msgstr "Skipping haec locutio"
 
 #: .\main\templates\practice_translation.html:144
 msgid "Edit This Phrase"
-msgstr "Editare hanc phrasim"
+msgstr "Edere hanc phrasing"
 
 #: .\main\templates\practice_translation.html:148
 msgid "Sign In"
-msgstr "Incipe"
+msgstr "Signare In"
 
 #: .\main\templates\practice_translation.html:149
 msgid "Email host to request credentials"
-msgstr "Email host ad postulandum testimonia"
+msgstr "Email hospes ut postulet credentia"
 
 #: .\main\templates\practice_translation.html:157
 msgid "Continue"
-msgstr "Continua"
+msgstr "Continuare"
 
 #: .\main\templates\practice_translation.html:160
 msgid "Repeat This Phrase"
-msgstr "Repete hoc verbum"
+msgstr "Itera hanc phrasem"
 
 #: .\main\templates\practice_translation.html:180
 msgid "Score"
@@ -211,7 +209,7 @@ msgstr "Punctum"
 
 #: .\main\templates\practice_translation.html:184
 msgid "Model"
-msgstr "Modello"
+msgstr "Modulus"
 
 #: .\main\views\create_study_materials.py:95
 msgid "Don't filter through GPT"
@@ -219,23 +217,23 @@ msgstr "Noli filtrare per GPT"
 
 #: .\main\views\create_study_materials.py:96
 msgid "Filter through GPT First"
-msgstr "Filtrare per GPT Primum"
+msgstr "Filtra per GPT Prima"
 
 #: .\main\views\create_study_materials.py:97
 msgid "Focus on My Phrase List"
-msgstr "Concentrari in Mea Lista Phrasium"
+msgstr "Concentrate in mea lista locutionum"
 
 #: .\templates\admin\base_site.html:4
 msgid "Django site admin"
-msgstr "Django situs administrator"
+msgstr "Django situs admin"
 
 #: .\templates\admin\base_site.html:7
 msgid "Django administration"
-msgstr "administratio django"
+msgstr "Django administratio"
 
 #: .\templates\admin\base_site.html:18
 msgid "Practice Translation"
-msgstr "practicare translationem"
+msgstr "Practicare Translation"
 
 #: .\templates\admin\base_site.html:23
 msgid "Documentation"
@@ -247,32 +245,32 @@ msgstr "Mutare tessera"
 
 #: .\templates\admin\base_site.html:32
 msgid "Report Issues"
-msgstr "Reportare Incommoditates"
+msgstr "Referre quaestiones"
 
 #: .\templates\admin\base_site.html:33
 msgid "Log out"
-msgstr "Log out"
+msgstr "Disconnectere"
 
 #: .\templates\admin\change_list_object_tools.html:8
 #, python-format
 msgid "Add %(name)s"
-msgstr "Add %(name)s"
+msgstr "Add %(nomen)s"
 
 #: .\templates\admin\change_list_object_tools.html:25
 msgid "Import Phrases from Readwise"
-msgstr "Importare Phrases ex Readwise"
+msgstr "Importa Phrases ex Readwise"
 
 #: .\templates\admin\change_list_object_tools.html:31
 msgid "Export Phrases to CSV File ⬇"
-msgstr "Exportare Phrases in CSV File ⬇"
+msgstr "Exportare Phasium ad Fasciculum CSV ⬇"
 
 #: .\templates\admin\change_list_object_tools.html:37
 msgid "My Level 💡"
-msgstr "Meum Gradus 💡"
+msgstr "Meus Latus 💡"
 
 #: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
 msgid "Save"
-msgstr "Serva"
+msgstr "Servare"
 
 #: .\templates\admin\submit_line.html:11
 msgid "Delete"
@@ -280,7 +278,7 @@ msgstr "Delere"
 
 #: .\templates\admin\submit_line.html:13
 msgid "Save as new"
-msgstr "Servare ut novum"
+msgstr "Salva ut novum"
 
 #: .\templates\admin\submit_line.html:14
 msgid "Save and add another"
