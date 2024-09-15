@@ -47,6 +47,14 @@ def update_locale_files():
         # Loop through each msgid and translate if msgstr is empty
         for entry in po:
             if not entry.msgstr:
+                # Check if the entry is pluralized and has values in msgstr[0] or msgstr[1]
+
+                if entry.msgid_plural:
+                    # Skip certain django admin entries
+                    continue  # Skip if both plural forms are already translated
+                elif entry.msgstr:
+                    continue  # Skip if singular form is already translated
+
                 translated_text = from_native_language(
                     sentence=entry.msgid,
                     working_on_verbose=language_verbose,  # Adjust this for the target language
