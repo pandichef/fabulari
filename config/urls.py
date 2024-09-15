@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from main import views
 from main.views.export_phrases_to_csv import export_phrases_to_csv_view
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     # 0
     path("admin/", admin.site.urls),  # this is like an add_one_phrase app
     # 1
     path(
-        "<int:phrase_id>", views.practice_translation_view, name="practice_translation"
+        "<int:phrase_id>", views.practice_translation_view, name="practice_translation",
     ),
     path("", views.practice_translation_view, name="practice_translation"),
     # 2
@@ -57,7 +58,7 @@ urlpatterns = [
     #     views.collect_readwise_articles_view,
     #     name="collect_readwise_articles",
     # ),
-]
+)
 
 admin.site.site_header = "Fabulari"
 admin.site.site_title = "Fabulari"

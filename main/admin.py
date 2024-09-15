@@ -87,7 +87,8 @@ class PhraseAdmin(admin.ModelAdmin):
             raw_text_changed = False
             obj.user = request.user
             detected_language_code = detect(
-                phrase=obj.raw_text, openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+                phrase=obj.raw_text,
+                openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
             )
             if not obj.language:
                 if detected_language_code == request.user.native_language:
@@ -95,9 +96,9 @@ class PhraseAdmin(admin.ModelAdmin):
 
                     obj.raw_text = from_native_language(
                         obj.raw_text,
-                        working_on=obj.language,
-                        native_language=detected_language_code,
-                        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                        working_on_verbose=obj.language,
+                        native_language_verbose=detected_language_code,
+                        openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
                     )
                 else:
                     if not detected_language_code in SUPPORTED_LANGUAGES:

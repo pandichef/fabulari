@@ -117,7 +117,7 @@ def make_digest(
             text = note["text"]
             # if len(text) < 100:
             #     print(text)
-            this_language_code = detect(phrase=text, openai_model=openai_model)
+            this_language_code = detect(phrase=text, openai_llm_model=openai_model)
             # if len(text) < 100:
             #     print(this_language_code)
             if this_language_code in supported_language_codes and len(text.split()) < 5:

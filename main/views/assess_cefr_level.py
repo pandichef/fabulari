@@ -27,5 +27,6 @@ def assess_cefr_level_view(request):
     messages.success(
         request, llm_completion,
     )
-    return redirect("/admin/main/phrase")
+    # return redirect("/admin/main/phrase")
+    return redirect(reverse("admin:main_phrase_changelist"))
     # return redirect("https://www.nytimes.com")

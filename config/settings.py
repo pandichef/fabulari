@@ -63,7 +63,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.locale.LocaleMiddleware"  # for internationalization
+    "django.middleware.locale.LocaleMiddleware",  # for internationalization
+    "config.middleware.UserLanguageMiddleware"
     # "base_app.check_job_status.CheckJobStatus",
 ]
 
@@ -175,7 +176,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 # TIME_ZONE = "America"
 TIME_ZONE = "America/Chicago"
@@ -184,6 +186,7 @@ USE_I18N = True
 
 USE_TZ = True  # to store all dates as UTC in the database
 
+# USE_L10N = True  # This setting is deprecated. Starting with Django 5.0, localized formatting of data will always be enabled.
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -270,3 +273,6 @@ from purepython.settings import LANGUAGE_CHOICES, SUPPORTED_LANGUAGES
 #     ("es", "Spanish"),
 #     ("en", "English"),  # Add other languages you want to support
 # ]
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+

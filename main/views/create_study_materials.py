@@ -19,6 +19,7 @@ from django.conf import settings
 
 # from .assess_cefr_level import tuple_list_to_csv
 from main.models import Phrase
+from django.utils.translation import gettext_lazy as _
 
 
 def convert_to_markdown_if_plain_text(text: str) -> str:
@@ -91,9 +92,9 @@ def convert_to_markdown_if_plain_text(text: str) -> str:
 class UseGPTRadioButtonForm(forms.Form):
     choice_field = forms.ChoiceField(
         choices=[
-            (0, "Don't filter through GPT"),
-            (1, "Filter through GPT First"),
-            (2, "Focus on My Phrase List"),
+            (0, _("Don't filter through GPT")),
+            (1, _("Filter through GPT First")),
+            (2, _("Focus on My Phrase List")),
         ],
         required=True,
         widget=forms.RadioSelect,
@@ -240,7 +241,8 @@ def create_study_materials_view(request):
                 # )
             request.session["article_title"] = None
             request.session["article_in_html"] = None
-            return redirect("/admin/main/phrase")
+            # return redirect("/admin/main/phrase")
+            return redirect(reverse("admin:main_phrase_changelist"))
             # return redirect("/create_article")
     else:
         request.session["article_title"] = None
@@ -255,7 +257,8 @@ def create_study_materials_view(request):
                     f""""Create Study Materials" lets you use ChatGPT to create new articles and send it to Readwise.  To do so, you must add a Readwise API Key in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>.  Alternatively, you can opt to use email."""
                 ),
             )
-            return redirect("/admin/main/phrase")
+            # return redirect("/admin/main/phrase")
+            return redirect(reverse("admin:main_phrase_changelist"))
         if not request.user.use_readwise_for_study_materials and not request.user.email:
             messages.success(
                 request,
@@ -263,7 +266,8 @@ def create_study_materials_view(request):
                     f""""Create Study Materials" lets you use ChatGPT to create new articles and send it to your email address.  To do so, you must provide an email address in your <a href="/admin/accounts/customuser/{request.user.id}/change">Settings</a>."""
                 ),
             )
-            return redirect("/admin/main/phrase")
+            # return redirect("/admin/main/phrase")
+            return redirect(reverse("admin:main_phrase_changelist"))
             # return redirect_to_previous_page(request)
 
         return render(

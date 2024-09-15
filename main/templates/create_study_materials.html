@@ -81,7 +81,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
+        <a href="{% url 'admin:main_phrase_changelist' %}">{% translate 'Go Back to Phrase List' %}</a> |
         <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
         <h2>{% translate 'Create Study Materials' %}</h2>
         <form method="post">
@@ -111,15 +111,17 @@
         // Function to update the placeholder based on the selected radio button
         function updatePlaceholder() {
             if (radioButtons[0].checked) {
-                textarea.placeholder = "The text you type here will be sent without modification i.e., you already have the text for an article and just want to send it to a reader app";
+                textarea.placeholder = "{% translate 'The text you type here will be sent without modification i.e., you already have the text for an article and just want to send it to a reader app' %}";
                 previewButton.style.display = 'inline-block';
                 sendButton.style.display = 'inline-block';
             } else if (radioButtons[1].checked) {
-                textarea.placeholder = "The text you type here will be sent after passing it through {{ openai_model }} e.g., history of cats in A2 level Spanish";
+                // textarea.placeholder = "The text you type here will be sent after passing it through {{ openai_model }} e.g., history of cats in A2 level Spanish";
+                textarea.placeholder = "{% translate 'The text you type here will be sent after passing it through an LLM model e.g., history of cats in A2 level Spanish' %}";
                 previewButton.style.display = 'inline-block';
                 sendButton.style.display = 'inline-block';
             } else if (radioButtons[2].checked) {
-                textarea.placeholder = "You can leave this space blank and {{ openai_model }} will build an article that utilizes your phrase list.  However, you can also pass additional context here.";
+                // textarea.placeholder = "You can leave this space blank and {{ openai_model }} will build an article that utilizes your phrase list.  However, you can also pass additional context here.";
+                textarea.placeholder = "{% translate 'You can leave this space blank and an LLM model will build an article that utilizes your phrase list.  However, you can also pass additional context here.' %}";
                 previewButton.style.display = 'inline-block';
                 sendButton.style.display = 'inline-block';
             }

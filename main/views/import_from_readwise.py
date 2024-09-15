@@ -32,7 +32,8 @@ def import_from_readwise_view(request, populate_extra_fields_via_llm=False):
 Note that Readwise is not a free service."""
             ),
         )
-        return redirect("/admin/main/phrase")
+        # return redirect("/admin/main/phrase")
+        return redirect(reverse("admin:main_phrase_changelist"))
     try:
         from pprint import pprint
 
@@ -140,9 +141,11 @@ Note that Readwise is not a free service."""
             request,
             f"""Encountered a proxy error.  The hosting service (PA) doesn't currently allow access to the Readwise API.""",
         )
-        return redirect("/admin/main/phrase")
+        # return redirect("/admin/main/phrase")
+        return redirect(reverse("admin:main_phrase_changelist"))
     except Exception as err:
         messages.error(
             request, f"{err}",
         )
-    return redirect("/admin/main/phrase")
+    # return redirect("/admin/main/phrase")
+    return redirect(reverse("admin:main_phrase_changelist"))

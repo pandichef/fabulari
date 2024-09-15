@@ -140,12 +140,12 @@
 <body>
     <div class="container">
         {% if user.is_authenticated %}
-        <a href="/">{% translate 'Skip This Phrase' %}</a> |
-        <a href="admin/main/phrase/{{ phrase_id }}/change/">{% translate 'Edit This Phrase' %}</a> |
-        <a href="/admin/main/phrase/">{% translate 'Go Back to Phrase List' %}</a> |
+        <a href="{% url 'practice_translation' %}">{% translate 'Skip This Phrase' %}</a> |
+        <a href="{% url 'admin:main_phrase_change' phrase_id %}">{% translate 'Edit This Phrase' %}</a> |
+        <a href="{% url 'admin:main_phrase_changelist' %}">{% translate 'Go Back to Phrase List' %}</a> |
         <a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a>
         {% else %}
-        <a href="/admin/login/">{% translate 'Sign In' %}</a> |
+        <a href="{% url 'admin:login' %}">{% translate 'Sign In' %}</a> |
         <a href="mailto:{{ host_email }}?subject=Sign%20Me%20Up%20To%20{{ request.get_host }}" target="_blank">{% translate 'Email host to request credentials' %}</a>
         {% endif %}
         <h2>{{ english_sentence }}</h2>

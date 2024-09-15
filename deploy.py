@@ -1,13 +1,18 @@
 import sys
+from copy import copy
 import os
 import json
 import requests
 from pprint import pprint
 import subprocess
+from purepython.settings import SUPPORTED_LANGUAGES, LANGUAGE_CHOICE_DICT
+from purepython.practice_translation import from_native_language
+from polib import pofile
 
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
 DOMAIN_NAME = PA_USERNAME + ".pythonanywhere.com"
+
 
 # Step 0: Get account status
 def get_pythonanywhere_account_status():
@@ -27,6 +32,40 @@ def get_pythonanywhere_account_status():
 
 
 # Step 1: Commit and push to git
+def update_locale_files():
+    def populate_pofile(language: str):
+        language_verbose = LANGUAGE_CHOICE_DICT[language]
+        po = pofile(f"locale/{language}/LC_MESSAGES/django.po")
+
+        # Loop through each msgid and translate if msgstr is empty
+        for entry in po:
+            if not entry.msgstr:
+                translated_text = from_native_language(
+                    sentence=entry.msgid,
+                    working_on_verbose=language_verbose,  # Adjust this for the target language
+                    native_language_verbose="English",  # Adjust this for the source language
+                    openai_llm_model="gpt-4o-mini",  # You can use other OpenAI models as well
+                    is_phrases=True,
+                )
+                print(language, " | ", entry.msgid, " | ", translated_text)
+                if translated_text:
+                    entry.msgstr = translated_text
+        po.save()
+
+    # os.chdir(REPO_PATH)
+    supported_languages_excluding_english = copy(SUPPORTED_LANGUAGES)
+    supported_languages_excluding_english.remove("en")
+    # supported_languages_excluding_english = ["es"]
+    # supported_languages_excluding_english.remove("la")  # hack: remove latin
+    for language_code in supported_languages_excluding_english:
+        os.makedirs(f"locale\\{language_code}\\LC_MESSAGES", exist_ok=True)
+        # subprocess.run(["mkdir", f"locale\\{language_code}\\LC_MESSAGES"])
+    subprocess.run(["django-admin", "makemessages", "--all"])
+    for language_code in supported_languages_excluding_english:
+        populate_pofile(language=language_code)
+    subprocess.run(["django-admin", "compilemessages"])
+
+
 def git_commit(commit_message):
     # os.chdir(REPO_PATH)
     subprocess.run(["git", "add", "."])
@@ -128,6 +167,8 @@ def main():
     # else:
     #     print("No untracked files.")
 
+    print("Updating locale files...")
+    update_locale_files()
     # print("######################################################")
     # print(f"NEW FILES     : {', '.join(untracked_files)}")
     # print(f"MODIFIED FILES: {', '.join(modified_files)}")

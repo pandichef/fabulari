@@ -15,7 +15,7 @@
 <a href="{% url 'collect_readwise_articles' %}">{% translate 'Collect Readwise Summaries' %}</a> /
 {% endcomment %}
 {% if site_url %}
-    <a href="{{ site_url }}">{% translate 'Practice Translation' %}</a> /
+    <a href="{% url 'practice_translation' %}">{% translate 'Practice Translation' %}</a> /
 {% endif %}
 {% if user.is_active and user.is_staff %}
     {% url 'django-admindocs-docroot' as docsroot %}
@@ -27,7 +27,7 @@
 <!--
 <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
 -->
-<a href="/admin/accounts/customuser/{{user.id}}/change/">{% translate 'Settings' %}</a> /
+<a href="{% url 'admin:accounts_customuser_change' user.id %}">{% translate 'Settings' %}</a> /
 {% endif %}
 <a href="https://github.com/pandichef/fabulari/issues">{% translate 'Report Issues' %}</a> /
 <a href="{% url 'admin:logout' %}">{% translate 'Log out' %}</a>

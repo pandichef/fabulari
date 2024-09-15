@@ -50,7 +50,8 @@ def add_multiple_phrases_view(request):
             request,
             f"""Added {added_count} new {language} words out of {total_count}.  ({total_count-added_count} already existed in the database.)  Note that metadata is not retrieved from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS} when adding data in bulk.""",
         )
-        return redirect("/admin/main/phrase")
+        # from  django.urls import reverse
+        return redirect(reverse("admin:main_phrase_changelist"))
     else:
         admin_context.update(
             {

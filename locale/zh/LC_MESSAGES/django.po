@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 04:12-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\accounts\models.py:25
+msgid ""
+"Used for creating study materials and translation feedback.\n"
+"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+"        "
+msgstr ""
+"用于创建学习材料和翻译反馈  \n"
+"        成本估算截至2024年9月 请注意 gpt-4o-mini 用于简单翻译和分类任务"
+
+#: .\accounts\models.py:35
+msgid "OpenAI LLM Model"
+msgstr "OpenAI LLM 模型"
+
+#: .\accounts\models.py:38
+msgid "native language"
+msgstr "母语"
+
+#: .\accounts\models.py:46
+msgid "working on"
+msgstr "工作中"
+
+#: .\accounts\models.py:58
+msgid ""
+"Generate API key <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">here</a> if you have an account."
+msgstr ""
+"生成 API 密钥 <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">在这里</a> 如果你有账户。"
+
+#: .\accounts\models.py:62
+msgid "last readwise update"
+msgstr "上次的 readwise 更新"
+
+#: .\accounts\models.py:70
+msgid "use readwise for study materials"
+msgstr "使用readwise进行学习材料"
+
+#: .\accounts\models.py:73
+msgid ""
+"Send study materials to <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (instead of email) if <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
+"available."
+msgstr ""
+"如果<a href=\"https://readwise.io/access_token\" target=\"_blank\">API "
+"密钥</a>可用请将学习材料发送到<a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a>（而不是电子邮件）"
+
+#: .\accounts\models.py:77
+msgid "retrieve native language from readwise"
+msgstr "从Readwise获取母语"
+
+#: .\accounts\models.py:80
+msgid ""
+"By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
+"on to import from your native language as well."
+msgstr "默认情况下，只有外语词汇会从 Readwise 中提取。打开此选项以从您的母语中导入。"
+
+#: .\main\models.py:15
+msgid "created"
+msgstr "创建"
+
+#: .\main\models.py:18
+msgid "modified"
+msgstr "修改过的"
+
+#: .\main\models.py:21
+msgid "user"
+msgstr "用户"
+
+#: .\main\models.py:23
+msgid "Raw text"
+msgstr "原始文本"
+
+#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+msgid "Phrase"
+msgstr "短语"
+
+#: .\main\models.py:25
+msgid "example sentence"
+msgstr "例句"
+
+#: .\main\models.py:26
+msgid "definition"
+msgstr "定义"
+
+#: .\main\models.py:28
+msgid "language"
+msgstr "语言"
+
+#: .\main\models.py:33
+msgid "Dectected from text if blank"
+msgstr "从文本中检测是否为空"
+
+#: .\main\templates\add_multiple_phrases.html:4
+#: .\templates\admin\change_list_object_tools.html:17
+msgid "Add Multiple Phrases"
+msgstr "添加多个短语"
+
+#: .\main\templates\add_multiple_phrases.html:104
+#: .\main\templates\create_study_materials.html:84
+#: .\main\templates\practice_translation.html:145
+msgid "Go Back to Phrase List"
+msgstr "返回短语列表"
+
+#: .\main\templates\add_multiple_phrases.html:114
+msgid "Language"
+msgstr "语言"
+
+#: .\main\templates\add_multiple_phrases.html:115
+msgid "Add Phrases"
+msgstr "添加短语"
+
+#: .\main\templates\admin\change_form_with_bulk_add_button.html:12
+msgid "Practice Translation on This Phrase"
+msgstr "练习翻译这个短语"
+
+#: .\main\templates\create_study_materials.html:8
+#: .\main\templates\create_study_materials.html:86
+#: .\templates\admin\base_site.html:13
+msgid "Create Study Materials"
+msgstr "创建学习材料"
+
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "设置"
+
+#: .\main\templates\create_study_materials.html:114
+msgid ""
+"The text you type here will be sent without modification i.e., you already "
+"have the text for an article and just want to send it to a reader app"
+msgstr "您在这里输入的文本将不经过修改发送 即您已经拥有一篇文章的文本并且只想将其发送给阅读应用"
+
+#: .\main\templates\create_study_materials.html:119
+msgid ""
+"The text you type here will be sent after passing it through an LLM model "
+"e.g., history of cats in A2 level Spanish"
+msgstr "你在这里输入的文本将在通过LLM模型后发送例如猫的历史 A2级西班牙语"
+
+#: .\main\templates\create_study_materials.html:124
+msgid ""
+"You can leave this space blank and an LLM model will build an article that "
+"utilizes your phrase list.  However, you can also pass additional context "
+"here."
+msgstr "您可以将此空间留空，LLM模型将构建一篇利用您的短语列表的文章。然而，您也可以在此处传递额外的上下文。"
+
+#: .\main\templates\practice_translation.html:143
+msgid "Skip This Phrase"
+msgstr "跳过此短语"
+
+#: .\main\templates\practice_translation.html:144
+msgid "Edit This Phrase"
+msgstr "编辑这个短语"
+
+#: .\main\templates\practice_translation.html:148
+msgid "Sign In"
+msgstr "登录"
+
+#: .\main\templates\practice_translation.html:149
+msgid "Email host to request credentials"
+msgstr "邮件主机请求凭证"
+
+#: .\main\templates\practice_translation.html:157
+msgid "Continue"
+msgstr "继续"
+
+#: .\main\templates\practice_translation.html:160
+msgid "Repeat This Phrase"
+msgstr "重复这个短语"
+
+#: .\main\templates\practice_translation.html:180
+msgid "Score"
+msgstr "得分"
+
+#: .\main\templates\practice_translation.html:184
+msgid "Model"
+msgstr "模型"
+
+#: .\main\views\create_study_materials.py:95
+msgid "Don't filter through GPT"
+msgstr "不要通过GPT筛选"
+
+#: .\main\views\create_study_materials.py:96
+msgid "Filter through GPT First"
+msgstr "先通过GPT筛选"
+
+#: .\main\views\create_study_materials.py:97
+msgid "Focus on My Phrase List"
+msgstr "关注我的短语列表"
+
+#: .\templates\admin\base_site.html:4
+msgid "Django site admin"
+msgstr "Django网站管理员"
+
+#: .\templates\admin\base_site.html:7
+msgid "Django administration"
+msgstr "Django 管理界面"
+
+#: .\templates\admin\base_site.html:18
+msgid "Practice Translation"
+msgstr "练习翻译"
+
+#: .\templates\admin\base_site.html:23
+msgid "Documentation"
+msgstr "文档"
+
+#: .\templates\admin\base_site.html:28
+msgid "Change password"
+msgstr "更改密码"
+
+#: .\templates\admin\base_site.html:32
+msgid "Report Issues"
+msgstr "报告问题"
+
+#: .\templates\admin\base_site.html:33
+msgid "Log out"
+msgstr "注销"
+
+#: .\templates\admin\change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr "添加 %(name)s"
+
+#: .\templates\admin\change_list_object_tools.html:25
+msgid "Import Phrases from Readwise"
+msgstr "从 Readwise 导入短语"
+
+#: .\templates\admin\change_list_object_tools.html:31
+msgid "Export Phrases to CSV File ⬇"
+msgstr "导出短语到CSV文件⬇"
+
+#: .\templates\admin\change_list_object_tools.html:37
+msgid "My Level 💡"
+msgstr "我的水平💡"
+
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+msgid "Save"
+msgstr "保存"
+
+#: .\templates\admin\submit_line.html:11
+msgid "Delete"
+msgstr "删除"
+
+#: .\templates\admin\submit_line.html:13
+msgid "Save as new"
+msgstr "另存为新文件"
+
+#: .\templates\admin\submit_line.html:14
+msgid "Save and add another"
+msgstr "保存并添加另一个"
+
+#: .\templates\admin\submit_line.html:19
+msgid "Save and view"
+msgstr "保存并查看"
+
+#: .\templates\admin\submit_line.html:20
+msgid "Close"
+msgstr "关闭"

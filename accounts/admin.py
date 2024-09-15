@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from .models import CustomUser
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import redirect
 from main.models import Phrase
 
 
@@ -92,6 +93,7 @@ class CustomUserAdmin(UserAdmin):
             # obj.user_permissions.add(*permissions_for_phrase_model)
             # user.save()
         # obj.save()
+
         super().save_model(request, obj, form, change)
         permissions = Permission.objects.filter(
             content_type=ContentType.objects.get_for_model(Phrase)
@@ -117,6 +119,25 @@ class CustomUserAdmin(UserAdmin):
         # permissions_for_phrase_model = Permission.objects.filter(
         #     content_type=ContentType.objects.get_for_model(Phrase)
         # )
+        # print(obj.native_language)
+        # print(obj.native_language)
+        # print(obj.native_language)
+        # activate(obj.native_language)
+        # activate(obj.native_language)
+        # activate(obj.native_language)
+        # request.session[translation.LANGUAGE_SESSION_KEY] = obj.native_language
+
+        # return redirect(f"https://www.nytimes.com")
+        # return redirect(
+        #     f"/{obj.native_language}/admin/accounts/customuser/{request.user.id}/change/"
+        # )
+
+    def response_change(self, request, obj):
+
+        # Redirect to the same page with the new language
+        return redirect(
+            f"/{obj.native_language}/admin/accounts/customuser/{obj.id}/change/"
+        )
 
     def get_readonly_fields(self, request, obj=None):
         fields = [

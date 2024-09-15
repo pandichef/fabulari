@@ -57,30 +57,30 @@ The result should only contain UTF characters in {working_on}.
 
 def to_native_language(
     sentence: str,
-    working_on: str,  # ="Spanish",
-    native_language: str,  # ="English",
-    openai_model: str,  # ="gpt-4o-mini",
+    working_on_verbose: str,  # ="Spanish",
+    native_language_verbose: str,  # ="English",
+    openai_llm_model: str,  # ="gpt-4o-mini",
     # phrase=None,
 ) -> str | None:
     # Sometimes Chinese appears in the output randomly in gpt-4o-mini;
     # this isn't a problem in gpt-4o
-    if native_language != "Chinese":
-        chinese_character_hack = f"  The output cannot contain Chinese characters.  Translate any Chinese characters to {native_language} first."
+    if native_language_verbose != "Chinese":
+        chinese_character_hack = f"  The output cannot contain Chinese characters.  Translate any Chinese characters to {native_language_verbose} first."
     else:
         chinese_character_hack = ""
 
     completion = client.chat.completions.create(
-        model=openai_model,
+        model=openai_llm_model,
         messages=[
             {
                 "role": "system",
                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
-                "content": f"""You translate sentences from {working_on} to {native_language}.""",
+                "content": f"""You translate sentences from {working_on_verbose} to {native_language_verbose}.""",
             },
             {
                 "role": "user",
                 "content": sentence
-                + f"""\n\nPlease translate this to {native_language} and use only {native_language} characters."""
+                + f"""\n\nPlease translate this to {native_language_verbose} and use only {native_language_verbose} characters."""
                 + chinese_character_hack,
             },
         ],
@@ -90,26 +90,34 @@ def to_native_language(
 
 def from_native_language(
     sentence: str,
-    working_on: str,  # ="Spanish",
-    native_language: str,  # ="English",
-    openai_model: str,  # ="gpt-4o-mini",
+    working_on_verbose: str,  # ="Spanish",
+    native_language_verbose: str,  # ="English",
+    openai_llm_model: str,  # ="gpt-4o-mini",
+    is_phrases=False,
 ) -> str | None:
+    if is_phrases:  # for deploy.py
+        system_content = f"""You translate phrases from {native_language_verbose} to {working_on_verbose}.  
+The number of words in the translation should be roughly similar to the number of words in the original text.
+The formatting should also be similar.  For example, "native language" would be "lengua materna" in Spanish with 
+2 words and all lower case letters.  The reponse should not contain any punctuation unless the punctuation is also
+in the original text.  For example, "native language" should not be translated as "lengua materna." with a trailing period character.
+"""
+    else:
+        system_content = f"You translate sentences from {native_language_verbose} to {working_on_verbose}."
+
     completion = client.chat.completions.create(
-        model=openai_model,
+        model=openai_llm_model,
         messages=[
-            {
-                "role": "system",
-                "content": f"You translate sentences from {native_language} to {working_on}.",
-            },
+            {"role": "system", "content": system_content,},
             {"role": "user", "content": sentence},
         ],
     )
     return completion.choices[0].message.content
 
 
-def detect_language_code(phrase: str, openai_model: str):  # e.g., "gpt-4o-mini",
+def detect_language_code(phrase: str, openai_llm_model: str):  # e.g., "gpt-4o-mini",
     completion = client.chat.completions.create(
-        model=openai_model,
+        model=openai_llm_model,
         messages=[
             {
                 "role": "system",

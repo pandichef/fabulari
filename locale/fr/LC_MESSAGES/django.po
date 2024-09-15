@@ -1,0 +1,291 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 04:12-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\accounts\models.py:25
+msgid ""
+"Used for creating study materials and translation feedback.\n"
+"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+"        "
+msgstr ""
+"Utilisé pour créer des matériels d'étude et des retours de traduction  \n"
+"        Les estimations de coût sont à partir de septembre 2024 Remarque que gpt-4o-mini est utilisé pour des tâches de traduction et de classification simples"
+
+#: .\accounts\models.py:35
+msgid "OpenAI LLM Model"
+msgstr "modèle LLM OpenAI"
+
+#: .\accounts\models.py:38
+msgid "native language"
+msgstr "langue maternelle"
+
+#: .\accounts\models.py:46
+msgid "working on"
+msgstr "travaillant sur"
+
+#: .\accounts\models.py:58
+msgid ""
+"Generate API key <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">here</a> if you have an account."
+msgstr ""
+"Générez une clé API <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">ici</a> si vous avez un compte"
+
+#: .\accounts\models.py:62
+msgid "last readwise update"
+msgstr "dernière mise à jour readwise"
+
+#: .\accounts\models.py:70
+msgid "use readwise for study materials"
+msgstr "utiliser readwise pour le matériel d'étude"
+
+#: .\accounts\models.py:73
+msgid ""
+"Send study materials to <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (instead of email) if <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
+"available."
+msgstr ""
+"Envoyez des matériaux d'étude à <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (au lieu d'email) si <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">la clé API</a> "
+"est disponible"
+
+#: .\accounts\models.py:77
+msgid "retrieve native language from readwise"
+msgstr "récupérer langue maternelle depuis readwise"
+
+#: .\accounts\models.py:80
+msgid ""
+"By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
+"on to import from your native language as well."
+msgstr ""
+"Par défaut, seul le vocabulaire étranger est récupéré de Readwise. Activez "
+"cela pour importer dans votre langue maternelle aussi."
+
+#: .\main\models.py:15
+msgid "created"
+msgstr "créé"
+
+#: .\main\models.py:18
+msgid "modified"
+msgstr "modifié"
+
+#: .\main\models.py:21
+msgid "user"
+msgstr "utilisateur"
+
+#: .\main\models.py:23
+msgid "Raw text"
+msgstr "Texte brut"
+
+#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+msgid "Phrase"
+msgstr "Phrase"
+
+#: .\main\models.py:25
+msgid "example sentence"
+msgstr "phrase d'exemple"
+
+#: .\main\models.py:26
+msgid "definition"
+msgstr "définition"
+
+#: .\main\models.py:28
+msgid "language"
+msgstr "langue"
+
+#: .\main\models.py:33
+msgid "Dectected from text if blank"
+msgstr "détecté du texte si vide"
+
+#: .\main\templates\add_multiple_phrases.html:4
+#: .\templates\admin\change_list_object_tools.html:17
+msgid "Add Multiple Phrases"
+msgstr "Ajouter plusieurs phrases"
+
+#: .\main\templates\add_multiple_phrases.html:104
+#: .\main\templates\create_study_materials.html:84
+#: .\main\templates\practice_translation.html:145
+msgid "Go Back to Phrase List"
+msgstr "Retourner à la liste des phrases"
+
+#: .\main\templates\add_multiple_phrases.html:114
+msgid "Language"
+msgstr "langue"
+
+#: .\main\templates\add_multiple_phrases.html:115
+msgid "Add Phrases"
+msgstr "ajouter des phrases"
+
+#: .\main\templates\admin\change_form_with_bulk_add_button.html:12
+msgid "Practice Translation on This Phrase"
+msgstr "pratique traduction sur cette phrase"
+
+#: .\main\templates\create_study_materials.html:8
+#: .\main\templates\create_study_materials.html:86
+#: .\templates\admin\base_site.html:13
+msgid "Create Study Materials"
+msgstr "créer du matériel d'étude"
+
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "paramètres"
+
+#: .\main\templates\create_study_materials.html:114
+msgid ""
+"The text you type here will be sent without modification i.e., you already "
+"have the text for an article and just want to send it to a reader app"
+msgstr ""
+"Le texte que vous tapez ici sera envoyé sans modification c est à dire que "
+"vous avez déjà le texte d un article et que vous voulez simplement l envoyer"
+" à une application de lecture"
+
+#: .\main\templates\create_study_materials.html:119
+msgid ""
+"The text you type here will be sent after passing it through an LLM model "
+"e.g., history of cats in A2 level Spanish"
+msgstr ""
+"Le texte que vous tapez ici sera envoyé après être passé par un modèle LLM "
+"par exemple histoire des chats en niveau A2 espagnol"
+
+#: .\main\templates\create_study_materials.html:124
+msgid ""
+"You can leave this space blank and an LLM model will build an article that "
+"utilizes your phrase list.  However, you can also pass additional context "
+"here."
+msgstr ""
+"Vous pouvez laisser cet espace vide et un modèle LLM construira un article "
+"qui utilise votre liste de phrases  Cependant vous pouvez également passer "
+"un contexte supplémentaire ici"
+
+#: .\main\templates\practice_translation.html:143
+msgid "Skip This Phrase"
+msgstr "Ignorer cette phrase"
+
+#: .\main\templates\practice_translation.html:144
+msgid "Edit This Phrase"
+msgstr "Modifier cette phrase"
+
+#: .\main\templates\practice_translation.html:148
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: .\main\templates\practice_translation.html:149
+msgid "Email host to request credentials"
+msgstr "envoyer un email à l’hôte pour demander des identifiants"
+
+#: .\main\templates\practice_translation.html:157
+msgid "Continue"
+msgstr "Continuer"
+
+#: .\main\templates\practice_translation.html:160
+msgid "Repeat This Phrase"
+msgstr "Répétez cette phrase"
+
+#: .\main\templates\practice_translation.html:180
+msgid "Score"
+msgstr "score"
+
+#: .\main\templates\practice_translation.html:184
+msgid "Model"
+msgstr "modèle"
+
+#: .\main\views\create_study_materials.py:95
+msgid "Don't filter through GPT"
+msgstr "ne filtrez pas par GPT"
+
+#: .\main\views\create_study_materials.py:96
+msgid "Filter through GPT First"
+msgstr "Filtrer à travers GPT d'abord"
+
+#: .\main\views\create_study_materials.py:97
+msgid "Focus on My Phrase List"
+msgstr "concentrez-vous sur ma liste de phrases"
+
+#: .\templates\admin\base_site.html:4
+msgid "Django site admin"
+msgstr "administration du site Django"
+
+#: .\templates\admin\base_site.html:7
+msgid "Django administration"
+msgstr "administration django"
+
+#: .\templates\admin\base_site.html:18
+msgid "Practice Translation"
+msgstr "pratiquer la traduction"
+
+#: .\templates\admin\base_site.html:23
+msgid "Documentation"
+msgstr "documentation"
+
+#: .\templates\admin\base_site.html:28
+msgid "Change password"
+msgstr "changer le mot de passe"
+
+#: .\templates\admin\base_site.html:32
+msgid "Report Issues"
+msgstr "rapporter des problèmes"
+
+#: .\templates\admin\base_site.html:33
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: .\templates\admin\change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr "ajouter %(name)s"
+
+#: .\templates\admin\change_list_object_tools.html:25
+msgid "Import Phrases from Readwise"
+msgstr "Importer des phrases depuis Readwise"
+
+#: .\templates\admin\change_list_object_tools.html:31
+msgid "Export Phrases to CSV File ⬇"
+msgstr "Exporter des phrases vers un fichier CSV ⬇"
+
+#: .\templates\admin\change_list_object_tools.html:37
+msgid "My Level 💡"
+msgstr "Mon niveau 💡"
+
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+msgid "Save"
+msgstr "sauvegarder"
+
+#: .\templates\admin\submit_line.html:11
+msgid "Delete"
+msgstr "supprimer"
+
+#: .\templates\admin\submit_line.html:13
+msgid "Save as new"
+msgstr "enregistrer sous un nouveau"
+
+#: .\templates\admin\submit_line.html:14
+msgid "Save and add another"
+msgstr "Enregistrez et ajoutez un autre"
+
+#: .\templates\admin\submit_line.html:19
+msgid "Save and view"
+msgstr "enregistrer et voir"
+
+#: .\templates\admin\submit_line.html:20
+msgid "Close"
+msgstr "fermer"

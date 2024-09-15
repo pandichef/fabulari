@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 04:12-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\accounts\models.py:25
+msgid ""
+"Used for creating study materials and translation feedback.\n"
+"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+"        "
+msgstr ""
+"مستخدم لإنشاء مواد دراسية وردود الفعل على الترجمة  \n"
+"تقديرات التكلفة كما هو في سبتمبر 2024 لاحظ أن gpt-4o-mini مستخدم للترجمة البسيطة ومهام التصنيف"
+
+#: .\accounts\models.py:35
+msgid "OpenAI LLM Model"
+msgstr "نموذج LLM من OpenAI"
+
+#: .\accounts\models.py:38
+msgid "native language"
+msgstr "اللغة الأم"
+
+#: .\accounts\models.py:46
+msgid "working on"
+msgstr "يعمل على"
+
+#: .\accounts\models.py:58
+msgid ""
+"Generate API key <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">here</a> if you have an account."
+msgstr ""
+"قم بإنشاء مفتاح API <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">هنا</a> إذا كان لديك حساب."
+
+#: .\accounts\models.py:62
+msgid "last readwise update"
+msgstr "آخر تحديث لريدوايز"
+
+#: .\accounts\models.py:70
+msgid "use readwise for study materials"
+msgstr "استخدم ريدوايز لمواد الدراسة"
+
+#: .\accounts\models.py:73
+msgid ""
+"Send study materials to <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (instead of email) if <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
+"available."
+msgstr ""
+"أرسل مواد الدراسة إلى <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (بدلاً من البريد الإلكتروني) إذا كان <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">مفتاح API</a> "
+"متاحًا"
+
+#: .\accounts\models.py:77
+msgid "retrieve native language from readwise"
+msgstr "استرجاع اللغة الأم من ريد وايز"
+
+#: .\accounts\models.py:80
+msgid ""
+"By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
+"on to import from your native language as well."
+msgstr ""
+"بشكل افتراضي، يتم استرداد المفردات الأجنبية فقط من ريدوايز. قم بتفعيل ذلك "
+"للاستيراد من لغتك الأم أيضًا"
+
+#: .\main\models.py:15
+msgid "created"
+msgstr "تم إنشاء"
+
+#: .\main\models.py:18
+msgid "modified"
+msgstr "معدل"
+
+#: .\main\models.py:21
+msgid "user"
+msgstr "مستخدم"
+
+#: .\main\models.py:23
+msgid "Raw text"
+msgstr "نص خام"
+
+#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+msgid "Phrase"
+msgstr "عبارة"
+
+#: .\main\models.py:25
+msgid "example sentence"
+msgstr "جملة مثال"
+
+#: .\main\models.py:26
+msgid "definition"
+msgstr "تعريف"
+
+#: .\main\models.py:28
+msgid "language"
+msgstr "لغة"
+
+#: .\main\models.py:33
+msgid "Dectected from text if blank"
+msgstr "اكتشف من النص إذا كان فارغا"
+
+#: .\main\templates\add_multiple_phrases.html:4
+#: .\templates\admin\change_list_object_tools.html:17
+msgid "Add Multiple Phrases"
+msgstr "إضافة عبارات متعددة"
+
+#: .\main\templates\add_multiple_phrases.html:104
+#: .\main\templates\create_study_materials.html:84
+#: .\main\templates\practice_translation.html:145
+msgid "Go Back to Phrase List"
+msgstr "العودة إلى قائمة العبارات"
+
+#: .\main\templates\add_multiple_phrases.html:114
+msgid "Language"
+msgstr "لغة"
+
+#: .\main\templates\add_multiple_phrases.html:115
+msgid "Add Phrases"
+msgstr "إضافة عبارات"
+
+#: .\main\templates\admin\change_form_with_bulk_add_button.html:12
+msgid "Practice Translation on This Phrase"
+msgstr "ممارسة الترجمة على هذه العبارة"
+
+#: .\main\templates\create_study_materials.html:8
+#: .\main\templates\create_study_materials.html:86
+#: .\templates\admin\base_site.html:13
+msgid "Create Study Materials"
+msgstr "إنشاء مواد دراسية"
+
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "إعدادات"
+
+#: .\main\templates\create_study_materials.html:114
+msgid ""
+"The text you type here will be sent without modification i.e., you already "
+"have the text for an article and just want to send it to a reader app"
+msgstr ""
+"النص الذي تكتبه هنا سيتم إرساله دون تعديل أي أنك بالفعل تمتلك النص لمقال "
+"وتريد فقط إرساله إلى تطبيق القراءة"
+
+#: .\main\templates\create_study_materials.html:119
+msgid ""
+"The text you type here will be sent after passing it through an LLM model "
+"e.g., history of cats in A2 level Spanish"
+msgstr ""
+"النص الذي تكتبه هنا سيتم إرساله بعد مروره عبر نموذج LLM مثل تاريخ القطط "
+"بمستوى A2 في الإسبانية"
+
+#: .\main\templates\create_study_materials.html:124
+msgid ""
+"You can leave this space blank and an LLM model will build an article that "
+"utilizes your phrase list.  However, you can also pass additional context "
+"here."
+msgstr ""
+"يمكنك ترك هذه المساحة فارغة وسينشئ نموذج LLM مقالة تستخدم قائمة عباراتك. ومع"
+" ذلك يمكنك أيضًا تمرير سياق إضافي هنا"
+
+#: .\main\templates\practice_translation.html:143
+msgid "Skip This Phrase"
+msgstr "تخطى هذه العبارة"
+
+#: .\main\templates\practice_translation.html:144
+msgid "Edit This Phrase"
+msgstr "حرر هذه العبارة"
+
+#: .\main\templates\practice_translation.html:148
+msgid "Sign In"
+msgstr "تسجيل الدخول"
+
+#: .\main\templates\practice_translation.html:149
+msgid "Email host to request credentials"
+msgstr "البريد الإلكتروني للمضيف لطلب بيانات الاعتماد"
+
+#: .\main\templates\practice_translation.html:157
+msgid "Continue"
+msgstr "تابع"
+
+#: .\main\templates\practice_translation.html:160
+msgid "Repeat This Phrase"
+msgstr "كرر هذه العبارة"
+
+#: .\main\templates\practice_translation.html:180
+msgid "Score"
+msgstr "درجات"
+
+#: .\main\templates\practice_translation.html:184
+msgid "Model"
+msgstr "نموذج"
+
+#: .\main\views\create_study_materials.py:95
+msgid "Don't filter through GPT"
+msgstr "لا تُصفّي عبر GPT"
+
+#: .\main\views\create_study_materials.py:96
+msgid "Filter through GPT First"
+msgstr "تصفية من خلال جي بي تي أولاً"
+
+#: .\main\views\create_study_materials.py:97
+msgid "Focus on My Phrase List"
+msgstr "ركز على قائمة عباراتى"
+
+#: .\templates\admin\base_site.html:4
+msgid "Django site admin"
+msgstr "مدير موقع جانغو"
+
+#: .\templates\admin\base_site.html:7
+msgid "Django administration"
+msgstr "إدارة جانغو"
+
+#: .\templates\admin\base_site.html:18
+msgid "Practice Translation"
+msgstr "ممارسة الترجمة"
+
+#: .\templates\admin\base_site.html:23
+msgid "Documentation"
+msgstr "توثيق"
+
+#: .\templates\admin\base_site.html:28
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+#: .\templates\admin\base_site.html:32
+msgid "Report Issues"
+msgstr "الإبلاغ عن المشكلات"
+
+#: .\templates\admin\base_site.html:33
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: .\templates\admin\change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr "أضف %(name)s"
+
+#: .\templates\admin\change_list_object_tools.html:25
+msgid "Import Phrases from Readwise"
+msgstr "استورد العبارات من ريد وايز"
+
+#: .\templates\admin\change_list_object_tools.html:31
+msgid "Export Phrases to CSV File ⬇"
+msgstr "تصدير العبارات إلى ملف CSV ⬇"
+
+#: .\templates\admin\change_list_object_tools.html:37
+msgid "My Level 💡"
+msgstr "مستواي 💡"
+
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+msgid "Save"
+msgstr "حفظ"
+
+#: .\templates\admin\submit_line.html:11
+msgid "Delete"
+msgstr "احذف"
+
+#: .\templates\admin\submit_line.html:13
+msgid "Save as new"
+msgstr "احفظ كجديد"
+
+#: .\templates\admin\submit_line.html:14
+msgid "Save and add another"
+msgstr "احفظ وأضف آخر"
+
+#: .\templates\admin\submit_line.html:19
+msgid "Save and view"
+msgstr "احفظ وعرض"
+
+#: .\templates\admin\submit_line.html:20
+msgid "Close"
+msgstr "قريب"

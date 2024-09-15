@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 04:12-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+
+#: .\accounts\models.py:25
+msgid ""
+"Used for creating study materials and translation feedback.\n"
+"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+"        "
+msgstr ""
+"משמש ליצירת חומרי לימוד ומענה על משוב תרגום  \n"
+"הערכות עלויות הן מיום ספטמבר 2024 שים לב שgpt-4o-mini משמש למשימות תרגום וסיווג פשוטות"
+
+#: .\accounts\models.py:35
+msgid "OpenAI LLM Model"
+msgstr "מודל LLM של OpenAI"
+
+#: .\accounts\models.py:38
+msgid "native language"
+msgstr "שפה האם"
+
+#: .\accounts\models.py:46
+msgid "working on"
+msgstr "עובד על"
+
+#: .\accounts\models.py:58
+msgid ""
+"Generate API key <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">here</a> if you have an account."
+msgstr ""
+"צור מפתח API <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">כאן</a> אם יש לך חשבון."
+
+#: .\accounts\models.py:62
+msgid "last readwise update"
+msgstr "עדכון רידווייז האחרון"
+
+#: .\accounts\models.py:70
+msgid "use readwise for study materials"
+msgstr "השתמש בreadwise לחומרי לימוד"
+
+#: .\accounts\models.py:73
+msgid ""
+"Send study materials to <a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (instead of email) if <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
+"available."
+msgstr ""
+"שלח חומרי לימוד ל<a href=\"https://readwise.io/\" "
+"target=\"_blank\">Readwise</a> (במקום אימייל) אם <a "
+"href=\"https://readwise.io/access_token\" target=\"_blank\">מפתח API</a> "
+"זמין."
+
+#: .\accounts\models.py:77
+msgid "retrieve native language from readwise"
+msgstr "שחזור שפה האם מראדווייז"
+
+#: .\accounts\models.py:80
+msgid ""
+"By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
+"on to import from your native language as well."
+msgstr ""
+"ברירת מחדל רק אוצר מילים זר מוצא מReadwise  הפעל זאת כדי לייבא גם משפת האם "
+"שלך"
+
+#: .\main\models.py:15
+msgid "created"
+msgstr "נוצר"
+
+#: .\main\models.py:18
+msgid "modified"
+msgstr "שונה"
+
+#: .\main\models.py:21
+msgid "user"
+msgstr "משתמש"
+
+#: .\main\models.py:23
+msgid "Raw text"
+msgstr "טקסט גולמי"
+
+#: .\main\models.py:24 .\main\templates\practice_translation.html:176
+msgid "Phrase"
+msgstr "ביטוי"
+
+#: .\main\models.py:25
+msgid "example sentence"
+msgstr "משפט דוגמה"
+
+#: .\main\models.py:26
+msgid "definition"
+msgstr "הגדרה"
+
+#: .\main\models.py:28
+msgid "language"
+msgstr "שפה"
+
+#: .\main\models.py:33
+msgid "Dectected from text if blank"
+msgstr "זוהה מתוך הטקסט אם ריק"
+
+#: .\main\templates\add_multiple_phrases.html:4
+#: .\templates\admin\change_list_object_tools.html:17
+msgid "Add Multiple Phrases"
+msgstr "הוסף ביטויים מרובים"
+
+#: .\main\templates\add_multiple_phrases.html:104
+#: .\main\templates\create_study_materials.html:84
+#: .\main\templates\practice_translation.html:145
+msgid "Go Back to Phrase List"
+msgstr "לחזור לרשימת ביטויים"
+
+#: .\main\templates\add_multiple_phrases.html:114
+msgid "Language"
+msgstr "שפה"
+
+#: .\main\templates\add_multiple_phrases.html:115
+msgid "Add Phrases"
+msgstr "הוסף ביטויים"
+
+#: .\main\templates\admin\change_form_with_bulk_add_button.html:12
+msgid "Practice Translation on This Phrase"
+msgstr "תרגל תרגום על ביטוי זה"
+
+#: .\main\templates\create_study_materials.html:8
+#: .\main\templates\create_study_materials.html:86
+#: .\templates\admin\base_site.html:13
+msgid "Create Study Materials"
+msgstr "יצירת חומרים ללימוד"
+
+#: .\main\templates\create_study_materials.html:85
+#: .\main\templates\practice_translation.html:146
+#: .\templates\admin\base_site.html:30
+msgid "Settings"
+msgstr "הגדרות"
+
+#: .\main\templates\create_study_materials.html:114
+msgid ""
+"The text you type here will be sent without modification i.e., you already "
+"have the text for an article and just want to send it to a reader app"
+msgstr ""
+"הטקסט שתקליד כאן יישלח ללא שינוי כלומר כבר יש לך את הטקסט למאמר ופשוט רצית "
+"לשלוח אותו לאפליקציית קוראים"
+
+#: .\main\templates\create_study_materials.html:119
+msgid ""
+"The text you type here will be sent after passing it through an LLM model "
+"e.g., history of cats in A2 level Spanish"
+msgstr ""
+"הטקסט שאתה מקליד כאן יישלח לאחר שיתווך במודל LLM לדוגמה היסטוריה של חתולים "
+"ברמת A2 בעברית"
+
+#: .\main\templates\create_study_materials.html:124
+msgid ""
+"You can leave this space blank and an LLM model will build an article that "
+"utilizes your phrase list.  However, you can also pass additional context "
+"here."
+msgstr ""
+"אתה יכול להשאיר את החלל הזה ריק ודגם LLM יבנה מאמר שישתמש ברשימת הביטויים "
+"שלך  עם זאת אתה יכול גם להעביר הקשר נוסף כאן"
+
+#: .\main\templates\practice_translation.html:143
+msgid "Skip This Phrase"
+msgstr "דלג על ביטוי זה"
+
+#: .\main\templates\practice_translation.html:144
+msgid "Edit This Phrase"
+msgstr "ערוך את הביטוי הזה"
+
+#: .\main\templates\practice_translation.html:148
+msgid "Sign In"
+msgstr "כניסה"
+
+#: .\main\templates\practice_translation.html:149
+msgid "Email host to request credentials"
+msgstr "אימייל לחברה לבקש אישורי גישה"
+
+#: .\main\templates\practice_translation.html:157
+msgid "Continue"
+msgstr "להמשיך"
+
+#: .\main\templates\practice_translation.html:160
+msgid "Repeat This Phrase"
+msgstr "חזור על ביטוי זה"
+
+#: .\main\templates\practice_translation.html:180
+msgid "Score"
+msgstr "ציון"
+
+#: .\main\templates\practice_translation.html:184
+msgid "Model"
+msgstr "מודל"
+
+#: .\main\views\create_study_materials.py:95
+msgid "Don't filter through GPT"
+msgstr "אל תסנן דרך GPT"
+
+#: .\main\views\create_study_materials.py:96
+msgid "Filter through GPT First"
+msgstr "סנן דרך GPT קודם"
+
+#: .\main\views\create_study_materials.py:97
+msgid "Focus on My Phrase List"
+msgstr "מקד על רשימת הביטויים שלי"
+
+#: .\templates\admin\base_site.html:4
+msgid "Django site admin"
+msgstr "מנהל אתר דיג'אנגו"
+
+#: .\templates\admin\base_site.html:7
+msgid "Django administration"
+msgstr "ניהול דג'אנגו"
+
+#: .\templates\admin\base_site.html:18
+msgid "Practice Translation"
+msgstr "תרגול תרגום"
+
+#: .\templates\admin\base_site.html:23
+msgid "Documentation"
+msgstr "תיעוד"
+
+#: .\templates\admin\base_site.html:28
+msgid "Change password"
+msgstr "שנה סיסמה"
+
+#: .\templates\admin\base_site.html:32
+msgid "Report Issues"
+msgstr "דווח על בעיות"
+
+#: .\templates\admin\base_site.html:33
+msgid "Log out"
+msgstr "להתנתק"
+
+#: .\templates\admin\change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr "הוסף %(name)s"
+
+#: .\templates\admin\change_list_object_tools.html:25
+msgid "Import Phrases from Readwise"
+msgstr "ייבוא ביטויים מראדווייז"
+
+#: .\templates\admin\change_list_object_tools.html:31
+msgid "Export Phrases to CSV File ⬇"
+msgstr "ייצוא ביטויים לקובץ CSV ⬇"
+
+#: .\templates\admin\change_list_object_tools.html:37
+msgid "My Level 💡"
+msgstr "המדרגה שלי 💡"
+
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+msgid "Save"
+msgstr "שמור"
+
+#: .\templates\admin\submit_line.html:11
+msgid "Delete"
+msgstr "מחק"
+
+#: .\templates\admin\submit_line.html:13
+msgid "Save as new"
+msgstr "שמור כחדש"
+
+#: .\templates\admin\submit_line.html:14
+msgid "Save and add another"
+msgstr "שמור והוסף נוסף"
+
+#: .\templates\admin\submit_line.html:19
+msgid "Save and view"
+msgstr "שמור וצפה"
+
+#: .\templates\admin\submit_line.html:20
+msgid "Close"
+msgstr "סגור"

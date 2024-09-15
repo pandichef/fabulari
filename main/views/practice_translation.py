@@ -2,6 +2,7 @@ import os
 import numpy as np
 from django.conf import settings
 from django.db.models.functions import Abs
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.db.models import FloatField, F, ExpressionWrapper
 from purepython.practice_translation import (
@@ -169,7 +170,14 @@ def practice_translation_view(request, phrase_id=None):
         # request.session["random_value"] = random_value
         # request.session["prev_cosine_similarity"] = float(next_phrase.cosine_similarity)
 
-        return redirect(f"/{next_phrase.id}")
+        # return redirect(f"/{next_phrase.id}")
+
+        # from django.utils.translation import activate
+
+        # activate(request.user.native_language)
+        # print("activate(request.user.native_language)")
+
+        return redirect(reverse("practice_translation", args=[next_phrase.id]))
 
     full_working_on_sentence = generate_full_sentence(
         phrase=next_phrase.raw_text,
@@ -178,9 +186,9 @@ def practice_translation_view(request, phrase_id=None):
     )
     equivalent_native_language_sentence = to_native_language(
         sentence=full_working_on_sentence,
-        working_on=working_on,
-        native_language=native_language,
-        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        working_on_verbose=working_on,
+        native_language_verbose=native_language,
+        openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
     )
 
     # store session variables
