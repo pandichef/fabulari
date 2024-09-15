@@ -63,7 +63,7 @@ def update_locale_files():
     subprocess.run(["django-admin", "makemessages", "--all"])
     for language_code in supported_languages_excluding_english:
         populate_pofile(language=language_code)
-    subprocess.run(["django-admin", "compilemessages"])
+    subprocess.run(["django-admin", "compilemessages"])  # mo files not in repo
 
 
 def git_commit(commit_message):
@@ -198,6 +198,7 @@ def main():
     run_pythonanywhere_console_command(
         "python manage.py collectstatic --no-input", console_id
     )
+    run_pythonanywhere_console_command("python manage.py compilemessages", console_id)
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     # print("Collecting static files...")
