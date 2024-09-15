@@ -276,7 +276,7 @@ def main():
         url="https://" + DOMAIN_NAME + "/download_dbbackup_json",
         username=FABULARI_USERNAME,
         password=FABULARI_PASSWORD,
-        output_filename="../dbbackup.json",
+        output_filename="./dbbackup.json",
     )
 
 
