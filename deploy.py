@@ -278,6 +278,7 @@ def main():
         password=FABULARI_PASSWORD,
         output_filename="notinrepo/dbbackup.json",
     )
+    run_pythonanywhere_console_command("rm ../dbbackup.json", console_id)
 
 
 if __name__ == "__main__":
