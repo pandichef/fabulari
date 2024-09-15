@@ -101,6 +101,8 @@ The number of words in the translation should be roughly similar to the number o
 The formatting should also be similar.  For example, "native language" would be "lengua materna" in Spanish with 
 2 words and all lower case letters.  The reponse should not contain any punctuation unless the punctuation is also
 in the original text.  For example, "native language" should not be translated as "lengua materna." with a trailing period character.
+The response should mimic the punctuation of the original text as much as possible.  For example, "Save as new" should be translated as 
+"Guardar como nuevo" not "guardar como nuevo".
 """
     else:
         system_content = f"You translate sentences from {native_language_verbose} to {working_on_verbose}."

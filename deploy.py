@@ -8,6 +8,13 @@ import subprocess
 from purepython.settings import SUPPORTED_LANGUAGES, LANGUAGE_CHOICE_DICT
 from purepython.practice_translation import from_native_language
 from polib import pofile
+import site
+import shutil
+
+# Get the site-packages path
+django_admin_locale_path = os.path.join(
+    site.getsitepackages()[1], "django", "contrib", "admin", "locale"
+)
 
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
@@ -58,8 +65,30 @@ def update_locale_files():
     # supported_languages_excluding_english = ["es"]
     # supported_languages_excluding_english.remove("la")  # hack: remove latin
     for language_code in supported_languages_excluding_english:
-        os.makedirs(f"locale\\{language_code}\\LC_MESSAGES", exist_ok=True)
+        # os.makedirs(f"locale\\{language_code}\\LC_MESSAGES", exist_ok=True)
+        # Create the target locale directory for your project
+        target_locale_dir = os.path.join("locale", language_code, "LC_MESSAGES")
+        os.makedirs(target_locale_dir, exist_ok=True)
+
+        # Path to the admin .po file in Django's locale folder
+        admin_po_file = os.path.join(
+            django_admin_locale_path, language_code, "LC_MESSAGES", "django.po"
+        )
+
+        # Path to the target .po file in your project's locale directory
+        target_po_file = os.path.join(target_locale_dir, "django.po")
+
+        # Check if the admin .po file exists and the target .po file does not
+        if os.path.exists(admin_po_file) and not os.path.exists(target_po_file):
+            # Copy the admin .po file to your project's locale folder
+            shutil.copy(admin_po_file, target_po_file)
+            print(f"Copied {admin_po_file} to {target_po_file}")
+        elif os.path.exists(target_po_file):
+            print(f"Target .po file already exists: {target_po_file}")
+        else:
+            print(f"No admin .po file found for {language_code}")
         # subprocess.run(["mkdir", f"locale\\{language_code}\\LC_MESSAGES"])
+    # assert False
     subprocess.run(["django-admin", "makemessages", "--all"])
     for language_code in supported_languages_excluding_english:
         populate_pofile(language=language_code)

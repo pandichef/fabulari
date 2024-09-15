@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 04:20-0500\n"
+"POT-Creation-Date: 2024-09-15 04:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,11 +24,11 @@ msgid ""
 "        "
 msgstr ""
 "用于创建学习材料和翻译反馈  \n"
-"        成本估算截至2024年9月 请注意 gpt-4o-mini 用于简单翻译和分类任务"
+"        成本估算截止到2024年9月 注意gpt-4o-mini用于简单翻译和分类任务"
 
 #: .\accounts\models.py:35
 msgid "OpenAI LLM Model"
-msgstr "OpenAI LLM 模型"
+msgstr "开放AI LLM模型"
 
 #: .\accounts\models.py:38
 msgid "native language"
@@ -36,19 +36,19 @@ msgstr "母语"
 
 #: .\accounts\models.py:46
 msgid "working on"
-msgstr "工作中"
+msgstr "正在进行"
 
 #: .\accounts\models.py:58
 msgid ""
 "Generate API key <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">here</a> if you have an account."
 msgstr ""
-"生成 API 密钥 <a href=\"https://readwise.io/access_token\" "
-"target=\"_blank\">在这里</a> 如果你有账户。"
+"生成API密钥 <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">在这里</a> 如果您有账户。"
 
 #: .\accounts\models.py:62
 msgid "last readwise update"
-msgstr "上次的 readwise 更新"
+msgstr "最后的 readwise 更新"
 
 #: .\accounts\models.py:70
 msgid "use readwise for study materials"
@@ -61,19 +61,19 @@ msgid ""
 "href=\"https://readwise.io/access_token\" target=\"_blank\">API key</a> is "
 "available."
 msgstr ""
-"如果<a href=\"https://readwise.io/access_token\" target=\"_blank\">API "
-"密钥</a>可用请将学习材料发送到<a href=\"https://readwise.io/\" "
-"target=\"_blank\">Readwise</a>（而不是电子邮件）"
+"将学习材料发送到 <a href=\"https://readwise.io/\" target=\"_blank\">Readwise</a> "
+"（而不是电子邮件）如果 <a href=\"https://readwise.io/access_token\" "
+"target=\"_blank\">API密钥</a> 可用。"
 
 #: .\accounts\models.py:77
 msgid "retrieve native language from readwise"
-msgstr "从Readwise获取母语"
+msgstr "从Readwise中检索母语"
 
 #: .\accounts\models.py:80
 msgid ""
 "By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
 "on to import from your native language as well."
-msgstr "默认情况下，只有外语词汇会从 Readwise 中提取。打开此选项以从您的母语中导入。"
+msgstr "默认情况下，仅从 Readwise 中检索外语词汇。 开启此功能以便从您的母语中导入。"
 
 #: .\main\models.py:15
 msgid "created"
@@ -81,7 +81,7 @@ msgstr "创建"
 
 #: .\main\models.py:18
 msgid "modified"
-msgstr "修改过的"
+msgstr "已修改"
 
 #: .\main\models.py:21
 msgid "user"
@@ -89,7 +89,7 @@ msgstr "用户"
 
 #: .\main\models.py:23
 msgid "Raw text"
-msgstr "原始文本"
+msgstr "原文文本"
 
 #: .\main\models.py:24 .\main\templates\practice_translation.html:176
 msgid "Phrase"
@@ -97,7 +97,7 @@ msgstr "短语"
 
 #: .\main\models.py:25
 msgid "example sentence"
-msgstr "例句"
+msgstr "示例句子"
 
 #: .\main\models.py:26
 msgid "definition"
@@ -138,7 +138,7 @@ msgstr "练习翻译这个短语"
 #: .\main\templates\create_study_materials.html:86
 #: .\templates\admin\base_site.html:13
 msgid "Create Study Materials"
-msgstr "创建学习材料"
+msgstr "创建学习资料"
 
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
@@ -150,28 +150,28 @@ msgstr "设置"
 msgid ""
 "The text you type here will be sent without modification i.e., you already "
 "have the text for an article and just want to send it to a reader app"
-msgstr "您在这里输入的文本将不经过修改发送 即您已经拥有一篇文章的文本并且只想将其发送给阅读应用"
+msgstr "您在此处输入的文本将不作修改 即您已经拥有文章的文本并且只是想将其发送给阅读应用程序"
 
 #: .\main\templates\create_study_materials.html:119
 msgid ""
 "The text you type here will be sent after passing it through an LLM model "
 "e.g., history of cats in A2 level Spanish"
-msgstr "你在这里输入的文本将在通过LLM模型后发送例如猫的历史 A2级西班牙语"
+msgstr "你在这里输入的文本将通过一个 LLM 模型发送 例如 猫的历史 在 A2 级别的西班牙语"
 
 #: .\main\templates\create_study_materials.html:124
 msgid ""
 "You can leave this space blank and an LLM model will build an article that "
 "utilizes your phrase list.  However, you can also pass additional context "
 "here."
-msgstr "您可以将此空间留空，LLM模型将构建一篇利用您的短语列表的文章。然而，您也可以在此处传递额外的上下文。"
+msgstr "您可以将此空白处留空，一个LLM模型将构建一篇利用您的短语列表的文章不过，您也可以在这里提供额外的上下文。"
 
 #: .\main\templates\practice_translation.html:143
 msgid "Skip This Phrase"
-msgstr "跳过此短语"
+msgstr "跳过这个短语"
 
 #: .\main\templates\practice_translation.html:144
 msgid "Edit This Phrase"
-msgstr "编辑这个短语"
+msgstr "编辑这句话"
 
 #: .\main\templates\practice_translation.html:148
 msgid "Sign In"
@@ -179,7 +179,7 @@ msgstr "登录"
 
 #: .\main\templates\practice_translation.html:149
 msgid "Email host to request credentials"
-msgstr "邮件主机请求凭证"
+msgstr "电子邮件主机以请求凭据"
 
 #: .\main\templates\practice_translation.html:157
 msgid "Continue"
@@ -191,7 +191,7 @@ msgstr "重复这个短语"
 
 #: .\main\templates\practice_translation.html:180
 msgid "Score"
-msgstr "得分"
+msgstr "分数"
 
 #: .\main\templates\practice_translation.html:184
 msgid "Model"
@@ -199,19 +199,19 @@ msgstr "模型"
 
 #: .\main\views\create_study_materials.py:95
 msgid "Don't filter through GPT"
-msgstr "不要通过GPT筛选"
+msgstr "不要通过GPT过滤"
 
 #: .\main\views\create_study_materials.py:96
 msgid "Filter through GPT First"
-msgstr "先通过GPT筛选"
+msgstr "先通过GPT过滤"
 
 #: .\main\views\create_study_materials.py:97
 msgid "Focus on My Phrase List"
-msgstr "关注我的短语列表"
+msgstr "专注于我的短语列表"
 
 #: .\templates\admin\base_site.html:4
 msgid "Django site admin"
-msgstr "Django网站管理员"
+msgstr "Django 网站管理员"
 
 #: .\templates\admin\base_site.html:7
 msgid "Django administration"
@@ -219,7 +219,7 @@ msgstr "Django 管理界面"
 
 #: .\templates\admin\base_site.html:18
 msgid "Practice Translation"
-msgstr "练习翻译"
+msgstr "实践翻译"
 
 #: .\templates\admin\base_site.html:23
 msgid "Documentation"
@@ -235,7 +235,7 @@ msgstr "报告问题"
 
 #: .\templates\admin\base_site.html:33
 msgid "Log out"
-msgstr "注销"
+msgstr "登出"
 
 #: .\templates\admin\change_list_object_tools.html:8
 #, python-format
@@ -244,15 +244,15 @@ msgstr "添加 %(name)s"
 
 #: .\templates\admin\change_list_object_tools.html:25
 msgid "Import Phrases from Readwise"
-msgstr "从 Readwise 导入短语"
+msgstr "从Readwise导入短语"
 
 #: .\templates\admin\change_list_object_tools.html:31
 msgid "Export Phrases to CSV File ⬇"
-msgstr "导出短语到CSV文件⬇"
+msgstr "导出短语到 CSV 文件 ⬇"
 
 #: .\templates\admin\change_list_object_tools.html:37
 msgid "My Level 💡"
-msgstr "我的水平💡"
+msgstr "我的等级 💡"
 
 #: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
 msgid "Save"

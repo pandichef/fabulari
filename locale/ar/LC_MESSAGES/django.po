@@ -1,18 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the Django package.
 #
-#, fuzzy
+# Translators:
+# Bashar Al-Abdulhadi, 2015-2016,2018,2020-2021
+# Bashar Al-Abdulhadi, 2014
+# Eyad Toma <d.eyad.t@gmail.com>, 2013
+# Jannis Leidel <jannis@leidel.info>, 2011
+# Muaaz Alsaied, 2020
+# Tony xD <tony23dz@gmail.com>, 2020
+# صفا الفليج <safaalfulaij@hotmail.com>, 2020
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 04:20-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2024-09-15 04:55-0500\n"
+"PO-Revision-Date: 2021-10-15 21:11+0000\n"
+"Last-Translator: Bashar Al-Abdulhadi\n"
+"Language-Team: Arabic (http://www.transifex.com/django/django/language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,8 +28,8 @@ msgid ""
 "        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
 "        "
 msgstr ""
-"مستخدم لإنشاء مواد دراسية وردود الفعل على الترجمة  \n"
-"تقديرات التكلفة كما هو في سبتمبر 2024 لاحظ أن gpt-4o-mini مستخدم للترجمة البسيطة ومهام التصنيف"
+"مستخدم لإنشاء مواد الدراسة وتغذية الراجعة للترجمة  \n"
+"        التقديرات التكلفة اعتبارًا من سبتمبر 2024 لاحظ أن gpt-4o-mini يستخدم لمهام الترجمة والتصنيف البسيطة"
 
 #: .\accounts\models.py:35
 msgid "OpenAI LLM Model"
@@ -53,7 +57,7 @@ msgstr "آخر تحديث لريدوايز"
 
 #: .\accounts\models.py:70
 msgid "use readwise for study materials"
-msgstr "استخدم ريدوايز لمواد الدراسة"
+msgstr "استخدم ريد وايز لمواد الدراسة"
 
 #: .\accounts\models.py:73
 msgid ""
@@ -65,19 +69,19 @@ msgstr ""
 "أرسل مواد الدراسة إلى <a href=\"https://readwise.io/\" "
 "target=\"_blank\">Readwise</a> (بدلاً من البريد الإلكتروني) إذا كان <a "
 "href=\"https://readwise.io/access_token\" target=\"_blank\">مفتاح API</a> "
-"متاحًا"
+"متاحًا."
 
 #: .\accounts\models.py:77
 msgid "retrieve native language from readwise"
-msgstr "استرجاع اللغة الأم من ريد وايز"
+msgstr "استرجاع اللغة الأم من ريدوايز"
 
 #: .\accounts\models.py:80
 msgid ""
 "By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
 "on to import from your native language as well."
 msgstr ""
-"بشكل افتراضي، يتم استرداد المفردات الأجنبية فقط من ريدوايز. قم بتفعيل ذلك "
-"للاستيراد من لغتك الأم أيضًا"
+"افتراضيًا يتم استرجاع المفردات الأجنبية فقط من Readwise قم بتفعيل ذلك "
+"لاستيراد من لغتك الأم أيضًا"
 
 #: .\main\models.py:15
 msgid "created"
@@ -89,7 +93,7 @@ msgstr "معدل"
 
 #: .\main\models.py:21
 msgid "user"
-msgstr "مستخدم"
+msgstr "المستخدم"
 
 #: .\main\models.py:23
 msgid "Raw text"
@@ -104,8 +108,10 @@ msgid "example sentence"
 msgstr "جملة مثال"
 
 #: .\main\models.py:26
+#, fuzzy
+#| msgid "Addition"
 msgid "definition"
-msgstr "تعريف"
+msgstr "إضافة"
 
 #: .\main\models.py:28
 msgid "language"
@@ -113,7 +119,7 @@ msgstr "لغة"
 
 #: .\main\models.py:33
 msgid "Dectected from text if blank"
-msgstr "اكتشف من النص إذا كان فارغا"
+msgstr "تم الكشف عن النص إذا كان فارغاً"
 
 #: .\main\templates\add_multiple_phrases.html:4
 #: .\templates\admin\change_list_object_tools.html:17
@@ -124,15 +130,17 @@ msgstr "إضافة عبارات متعددة"
 #: .\main\templates\create_study_materials.html:84
 #: .\main\templates\practice_translation.html:145
 msgid "Go Back to Phrase List"
-msgstr "العودة إلى قائمة العبارات"
+msgstr "ارجع إلى قائمة العبارات"
 
 #: .\main\templates\add_multiple_phrases.html:114
 msgid "Language"
 msgstr "لغة"
 
 #: .\main\templates\add_multiple_phrases.html:115
+#, fuzzy
+#| msgid "Add %(name)s"
 msgid "Add Phrases"
-msgstr "إضافة عبارات"
+msgstr "أضف %(name)s"
 
 #: .\main\templates\admin\change_form_with_bulk_add_button.html:12
 msgid "Practice Translation on This Phrase"
@@ -148,23 +156,23 @@ msgstr "إنشاء مواد دراسية"
 #: .\main\templates\practice_translation.html:146
 #: .\templates\admin\base_site.html:30
 msgid "Settings"
-msgstr "إعدادات"
+msgstr "الإعدادات"
 
 #: .\main\templates\create_study_materials.html:114
 msgid ""
 "The text you type here will be sent without modification i.e., you already "
 "have the text for an article and just want to send it to a reader app"
 msgstr ""
-"النص الذي تكتبه هنا سيتم إرساله دون تعديل أي أنك بالفعل تمتلك النص لمقال "
-"وتريد فقط إرساله إلى تطبيق القراءة"
+"النص الذي تكتبه هنا سيتم إرساله دون تعديل أي أنك لديك بالفعل النص لمقال "
+"وتريد فقط إرساله إلى تطبيق قارئ"
 
 #: .\main\templates\create_study_materials.html:119
 msgid ""
 "The text you type here will be sent after passing it through an LLM model "
 "e.g., history of cats in A2 level Spanish"
 msgstr ""
-"النص الذي تكتبه هنا سيتم إرساله بعد مروره عبر نموذج LLM مثل تاريخ القطط "
-"بمستوى A2 في الإسبانية"
+"سيرسل النص الذي تكتبه هنا بعد تمريره عبر نموذج LLM على سبيل المثال تاريخ "
+"القطط بمستوى A2 في الإسبانية"
 
 #: .\main\templates\create_study_materials.html:124
 msgid ""
@@ -172,16 +180,16 @@ msgid ""
 "utilizes your phrase list.  However, you can also pass additional context "
 "here."
 msgstr ""
-"يمكنك ترك هذه المساحة فارغة وسينشئ نموذج LLM مقالة تستخدم قائمة عباراتك. ومع"
-" ذلك يمكنك أيضًا تمرير سياق إضافي هنا"
+"يمكنك ترك هذا الفراغ فارغًا وسيلجأ نموذج LLM لبناء مقال يستخدم قائمة "
+"العبارات الخاصة بك. ومع ذلك، يمكنك أيضًا تمرير سياق إضافي هنا."
 
 #: .\main\templates\practice_translation.html:143
 msgid "Skip This Phrase"
-msgstr "تخطى هذه العبارة"
+msgstr "تجاوز هذه العبارة"
 
 #: .\main\templates\practice_translation.html:144
 msgid "Edit This Phrase"
-msgstr "حرر هذه العبارة"
+msgstr "عدل هذه العبارة"
 
 #: .\main\templates\practice_translation.html:148
 msgid "Sign In"
@@ -189,11 +197,11 @@ msgstr "تسجيل الدخول"
 
 #: .\main\templates\practice_translation.html:149
 msgid "Email host to request credentials"
-msgstr "البريد الإلكتروني للمضيف لطلب بيانات الاعتماد"
+msgstr "اتصل بمضيف البريد الإلكتروني لطلب بيانات الاعتماد"
 
 #: .\main\templates\practice_translation.html:157
 msgid "Continue"
-msgstr "تابع"
+msgstr "استمر"
 
 #: .\main\templates\practice_translation.html:160
 msgid "Repeat This Phrase"
@@ -201,7 +209,7 @@ msgstr "كرر هذه العبارة"
 
 #: .\main\templates\practice_translation.html:180
 msgid "Score"
-msgstr "درجات"
+msgstr "نقاط"
 
 #: .\main\templates\practice_translation.html:184
 msgid "Model"
@@ -209,19 +217,19 @@ msgstr "نموذج"
 
 #: .\main\views\create_study_materials.py:95
 msgid "Don't filter through GPT"
-msgstr "لا تُصفّي عبر GPT"
+msgstr "لا تصفح عبر GPT"
 
 #: .\main\views\create_study_materials.py:96
 msgid "Filter through GPT First"
-msgstr "تصفية من خلال جي بي تي أولاً"
+msgstr "تصفية من خلال GPT أولا"
 
 #: .\main\views\create_study_materials.py:97
 msgid "Focus on My Phrase List"
-msgstr "ركز على قائمة عباراتى"
+msgstr "ركز على قائمة عباراتي"
 
 #: .\templates\admin\base_site.html:4
 msgid "Django site admin"
-msgstr "مدير موقع جانغو"
+msgstr "إدارة موقع جانغو"
 
 #: .\templates\admin\base_site.html:7
 msgid "Django administration"
@@ -233,15 +241,15 @@ msgstr "ممارسة الترجمة"
 
 #: .\templates\admin\base_site.html:23
 msgid "Documentation"
-msgstr "توثيق"
+msgstr "الوثائق"
 
 #: .\templates\admin\base_site.html:28
 msgid "Change password"
-msgstr "تغيير كلمة المرور"
+msgstr "غيّر كلمة المرور"
 
 #: .\templates\admin\base_site.html:32
 msgid "Report Issues"
-msgstr "الإبلاغ عن المشكلات"
+msgstr "الإبلاغ عن المشاكل"
 
 #: .\templates\admin\base_site.html:33
 msgid "Log out"
@@ -254,7 +262,7 @@ msgstr "أضف %(name)s"
 
 #: .\templates\admin\change_list_object_tools.html:25
 msgid "Import Phrases from Readwise"
-msgstr "استورد العبارات من ريد وايز"
+msgstr "استيراد العبارات من ريدوايز"
 
 #: .\templates\admin\change_list_object_tools.html:31
 msgid "Export Phrases to CSV File ⬇"
@@ -266,7 +274,7 @@ msgstr "مستواي 💡"
 
 #: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
 msgid "Save"
-msgstr "حفظ"
+msgstr "احفظ"
 
 #: .\templates\admin\submit_line.html:11
 msgid "Delete"
@@ -282,8 +290,618 @@ msgstr "احفظ وأضف آخر"
 
 #: .\templates\admin\submit_line.html:19
 msgid "Save and view"
-msgstr "احفظ وعرض"
+msgstr "احفظ واستعرض"
 
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
-msgstr "قريب"
+msgstr "إغلاق"
+
+#~ msgid "Delete selected %(verbose_name_plural)s"
+#~ msgstr "احذف %(verbose_name_plural)s المحدّدة"
+
+#~ msgid "Successfully deleted %(count)d %(items)s."
+#~ msgstr "نجح حذف %(count)d من %(items)s."
+
+#~ msgid "Cannot delete %(name)s"
+#~ msgstr "تعذّر حذف %(name)s"
+
+#~ msgid "Are you sure?"
+#~ msgstr "هل أنت متأكد؟"
+
+#~ msgid "Administration"
+#~ msgstr "الإدارة"
+
+#~ msgid "All"
+#~ msgstr "الكل"
+
+#~ msgid "Yes"
+#~ msgstr "نعم"
+
+#~ msgid "No"
+#~ msgstr "لا"
+
+#~ msgid "Unknown"
+#~ msgstr "مجهول"
+
+#~ msgid "Any date"
+#~ msgstr "أي تاريخ"
+
+#~ msgid "Today"
+#~ msgstr "اليوم"
+
+#~ msgid "Past 7 days"
+#~ msgstr "الأيام السبعة الماضية"
+
+#~ msgid "This month"
+#~ msgstr "هذا الشهر"
+
+#~ msgid "This year"
+#~ msgstr "هذه السنة"
+
+#~ msgid "No date"
+#~ msgstr "لا يوجد أي تاريخ"
+
+#~ msgid "Has date"
+#~ msgstr "به تاريخ"
+
+#~ msgid "Empty"
+#~ msgstr "فارغ"
+
+#~ msgid "Not empty"
+#~ msgstr "غير فارغ"
+
+#~ msgid ""
+#~ "Please enter the correct %(username)s and password for a staff account. Note"
+#~ " that both fields may be case-sensitive."
+#~ msgstr ""
+#~ "من فضلك أدخِل قيمة %(username)s الصحيحة وكلمة السر لحساب الطاقم الإداري. "
+#~ "الحقلين حسّاسين لحالة الأحرف."
+
+#~ msgid "Action:"
+#~ msgstr "الإجراء:"
+
+#~ msgid "Add another %(verbose_name)s"
+#~ msgstr "أضِف %(verbose_name)s آخر"
+
+#~ msgid "Remove"
+#~ msgstr "أزِل"
+
+#~ msgid "Change"
+#~ msgstr "تعديل"
+
+#~ msgid "Deletion"
+#~ msgstr "حذف"
+
+#~ msgid "action time"
+#~ msgstr "وقت الإجراء"
+
+#~ msgid "content type"
+#~ msgstr "نوع المحتوى"
+
+#~ msgid "object id"
+#~ msgstr "معرّف الكائن"
+
+#~ msgid "object repr"
+#~ msgstr "التمثيل البصري للكائن"
+
+#~ msgid "action flag"
+#~ msgstr "راية الإجراء"
+
+#~ msgid "change message"
+#~ msgstr "رسالة التغيير"
+
+#~ msgid "log entry"
+#~ msgstr "مدخلة سجلات"
+
+#~ msgid "log entries"
+#~ msgstr "مدخلات السجلات"
+
+#~ msgid "Added “%(object)s”."
+#~ msgstr "أُضيف ”%(object)s“."
+
+#~ msgid "Changed “%(object)s” — %(changes)s"
+#~ msgstr "عُدّل ”%(object)s“ — %(changes)s"
+
+#~ msgid "Deleted “%(object)s.”"
+#~ msgstr "حُذف ”%(object)s“."
+
+#~ msgid "LogEntry Object"
+#~ msgstr "كائن LogEntry"
+
+#~ msgid "Added {name} “{object}”."
+#~ msgstr "أُضيف {name} ‏”{object}“."
+
+#~ msgid "Added."
+#~ msgstr "أُضيف."
+
+#~ msgid "and"
+#~ msgstr "و"
+
+#~ msgid "Changed {fields} for {name} “{object}”."
+#~ msgstr "تغيّرت {fields} ‏{name} ‏”{object}“."
+
+#~ msgid "Changed {fields}."
+#~ msgstr "تغيّرت {fields}."
+
+#~ msgid "Deleted {name} “{object}”."
+#~ msgstr "حُذف {name} ‏”{object}“."
+
+#~ msgid "No fields changed."
+#~ msgstr "لم يتغيّر أي حقل."
+
+#~ msgid "None"
+#~ msgstr "بلا"
+
+#~ msgid "Hold down “Control”, or “Command” on a Mac, to select more than one."
+#~ msgstr ""
+#~ "اضغط مفتاح ”Contrl“ (أو ”Command“ على أجهزة ماك) مطوّلًا لتحديد أكثر من "
+#~ "عنصر."
+
+#~ msgid "The {name} “{obj}” was added successfully."
+#~ msgstr "نجحت إضافة {name} ‏”{obj}“."
+
+#~ msgid "You may edit it again below."
+#~ msgstr "يمكنك تعديله ثانيةً أسفله."
+
+#~ msgid ""
+#~ "The {name} “{obj}” was added successfully. You may add another {name} below."
+#~ msgstr "نجحت إضافة {name} ‏”{obj}“. يمكنك إضافة {name} آخر أسفله."
+
+#~ msgid ""
+#~ "The {name} “{obj}” was changed successfully. You may edit it again below."
+#~ msgstr "نجح تعديل {name} ‏”{obj}“. يمكنك تعديله ثانيةً أسفله."
+
+#~ msgid ""
+#~ "The {name} “{obj}” was added successfully. You may edit it again below."
+#~ msgstr "نجحت إضافة {name} ‏”{obj}“. يمكنك تعديله ثانيةً أسفله."
+
+#~ msgid ""
+#~ "The {name} “{obj}” was changed successfully. You may add another {name} "
+#~ "below."
+#~ msgstr "تمت إضافة {name} “{obj}” بنجاح، يمكنك إضافة {name} أخر بالأسفل."
+
+#~ msgid "The {name} “{obj}” was changed successfully."
+#~ msgstr "نجحت إضافة {name} ‏”{obj}“."
+
+#~ msgid ""
+#~ "Items must be selected in order to perform actions on them. No items have "
+#~ "been changed."
+#~ msgstr "عليك تحديد العناصر لتطبيق الإجراءات عليها. لم يتغيّر أيّ عنصر."
+
+#~ msgid "No action selected."
+#~ msgstr "لا إجراء محدّد."
+
+#~ msgid "The %(name)s “%(obj)s” was deleted successfully."
+#~ msgstr "نجح حذف %(name)s ‏”%(obj)s“."
+
+#~ msgid "%(name)s with ID “%(key)s” doesn’t exist. Perhaps it was deleted?"
+#~ msgstr "ما من %(name)s له المعرّف ”%(key)s“. لربّما حُذف أساسًا؟"
+
+#~ msgid "Add %s"
+#~ msgstr "إضافة %s"
+
+#~ msgid "Change %s"
+#~ msgstr "تعديل %s"
+
+#~ msgid "View %s"
+#~ msgstr "عرض %s"
+
+#~ msgid "Database error"
+#~ msgstr "خطـأ في قاعدة البيانات"
+
+#~ msgid "%(count)s %(name)s was changed successfully."
+#~ msgid_plural "%(count)s %(name)s were changed successfully."
+#~ msgstr[0] "لم يتم تغيير أي شيء"
+#~ msgstr[1] "تم تغيير %(count)s %(name)s بنجاح."
+#~ msgstr[2] "تم تغيير %(count)s %(name)s بنجاح."
+#~ msgstr[3] "تم تغيير %(count)s %(name)s بنجاح."
+#~ msgstr[4] "تم تغيير %(count)s %(name)s بنجاح."
+#~ msgstr[5] "تم تغيير %(count)s %(name)s بنجاح."
+
+#~ msgid "%(total_count)s selected"
+#~ msgid_plural "All %(total_count)s selected"
+#~ msgstr[0] "لم يتم تحديد أي شيء"
+#~ msgstr[1] "تم تحديد %(total_count)s"
+#~ msgstr[2] "تم تحديد %(total_count)s"
+#~ msgstr[3] "تم تحديد %(total_count)s"
+#~ msgstr[4] "تم تحديد %(total_count)s"
+#~ msgstr[5] "تم تحديد %(total_count)s"
+
+#~ msgid "0 of %(cnt)s selected"
+#~ msgstr "لا شيء محدد من %(cnt)s"
+
+#~ msgid "Change history: %s"
+#~ msgstr "تاريخ التغيير: %s"
+
+#~ msgid "%(class_name)s %(instance)s"
+#~ msgstr "%(class_name)s %(instance)s"
+
+#~ msgid ""
+#~ "Deleting %(class_name)s %(instance)s would require deleting the following "
+#~ "protected related objects: %(related_objects)s"
+#~ msgstr ""
+#~ "حذف %(class_name)s %(instance)s سيتسبب أيضاً بحذف العناصر المرتبطة التالية: "
+#~ "%(related_objects)s"
+
+#~ msgid "Site administration"
+#~ msgstr "إدارة الموقع"
+
+#~ msgid "Log in"
+#~ msgstr "ادخل"
+
+#~ msgid "%(app)s administration"
+#~ msgstr "إدارة %(app)s "
+
+#~ msgid "Page not found"
+#~ msgstr "تعذر العثور على الصفحة"
+
+#~ msgid "We’re sorry, but the requested page could not be found."
+#~ msgstr "نحن آسفون، لكننا لم نعثر على الصفحة المطلوبة."
+
+#~ msgid "Home"
+#~ msgstr "الرئيسية"
+
+#~ msgid "Server error"
+#~ msgstr "خطأ في المزود"
+
+#~ msgid "Server error (500)"
+#~ msgstr "خطأ في المزود (500)"
+
+#~ msgid "Server Error <em>(500)</em>"
+#~ msgstr "خطأ في المزود <em>(500)</em>"
+
+#~ msgid ""
+#~ "There’s been an error. It’s been reported to the site administrators via "
+#~ "email and should be fixed shortly. Thanks for your patience."
+#~ msgstr ""
+#~ "لقد حدث خطأ. تم إبلاغ مسؤولي الموقع عبر البريد الإلكتروني وسيتم إصلاحه "
+#~ "قريبًا. شكرا لصبرك."
+
+#~ msgid "Run the selected action"
+#~ msgstr "نفذ الإجراء المحدّد"
+
+#~ msgid "Go"
+#~ msgstr "نفّذ"
+
+#~ msgid "Click here to select the objects across all pages"
+#~ msgstr "اضغط هنا لتحديد جميع العناصر في جميع الصفحات"
+
+#~ msgid "Select all %(total_count)s %(module_name)s"
+#~ msgstr "اختيار %(total_count)s %(module_name)s جميعها"
+
+#~ msgid "Clear selection"
+#~ msgstr "إزالة الاختيار"
+
+#~ msgid "Models in the %(name)s application"
+#~ msgstr "النماذج في تطبيق %(name)s"
+
+#~ msgid "Add"
+#~ msgstr "أضف"
+
+#~ msgid "View"
+#~ msgstr "استعراض"
+
+#~ msgid "You don’t have permission to view or edit anything."
+#~ msgstr "ليست لديك الصلاحية لاستعراض أو لتعديل أي شيء."
+
+#~ msgid ""
+#~ "First, enter a username and password. Then, you’ll be able to edit more user"
+#~ " options."
+#~ msgstr ""
+#~ "أولاً ، أدخل اسم المستخدم وكلمة المرور. بعد ذلك ، ستتمكن من تعديل المزيد من "
+#~ "خيارات المستخدم."
+
+#~ msgid "Enter a username and password."
+#~ msgstr "أدخل اسم مستخدم وكلمة مرور."
+
+#~ msgid "Please correct the error below."
+#~ msgstr "الرجاء تصحيح الأخطاء أدناه."
+
+#~ msgid "Please correct the errors below."
+#~ msgstr "الرجاء تصحيح الأخطاء أدناه."
+
+#~ msgid "Enter a new password for the user <strong>%(username)s</strong>."
+#~ msgstr "أدخل كلمة مرور جديدة للمستخدم <strong>%(username)s</strong>."
+
+#~ msgid "Welcome,"
+#~ msgstr "أهلا، "
+
+#~ msgid "View site"
+#~ msgstr "عرض الموقع"
+
+#~ msgid "History"
+#~ msgstr "تاريخ"
+
+#~ msgid "View on site"
+#~ msgstr "مشاهدة على الموقع"
+
+#~ msgid "Filter"
+#~ msgstr "مرشّح"
+
+#~ msgid "Clear all filters"
+#~ msgstr "مسح جميع المرشحات"
+
+#~ msgid "Remove from sorting"
+#~ msgstr "إزالة من الترتيب"
+
+#~ msgid "Sorting priority: %(priority_number)s"
+#~ msgstr "أولوية الترتيب: %(priority_number)s"
+
+#~ msgid "Toggle sorting"
+#~ msgstr "عكس الترتيب"
+
+#~ msgid ""
+#~ "Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
+#~ "related objects, but your account doesn't have permission to delete the "
+#~ "following types of objects:"
+#~ msgstr ""
+#~ "حذف العنصر %(object_name)s '%(escaped_object)s' سيتسبب بحذف العناصر المرتبطة"
+#~ " به، إلا أنك لا تملك صلاحية حذف العناصر التالية:"
+
+#~ msgid ""
+#~ "Deleting the %(object_name)s '%(escaped_object)s' would require deleting the"
+#~ " following protected related objects:"
+#~ msgstr ""
+#~ "حذف %(object_name)s '%(escaped_object)s' سيتسبب أيضاً بحذف العناصر المرتبطة،"
+#~ " إلا أن حسابك ليس لديه صلاحية حذف أنواع العناصر التالية:"
+
+#~ msgid ""
+#~ "Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
+#~ "All of the following related items will be deleted:"
+#~ msgstr ""
+#~ "متأكد أنك تريد حذف العنصر %(object_name)s \"%(escaped_object)s\"؟ سيتم حذف "
+#~ "جميع العناصر التالية المرتبطة به:"
+
+#~ msgid "Objects"
+#~ msgstr "عناصر"
+
+#~ msgid "Yes, I’m sure"
+#~ msgstr "نعم، أنا متأكد"
+
+#~ msgid "No, take me back"
+#~ msgstr "لا, تراجع للخلف"
+
+#~ msgid "Delete multiple objects"
+#~ msgstr "حذف عدّة عناصر"
+
+#~ msgid ""
+#~ "Deleting the selected %(objects_name)s would result in deleting related "
+#~ "objects, but your account doesn't have permission to delete the following "
+#~ "types of objects:"
+#~ msgstr ""
+#~ "حذف عناصر %(objects_name)s المُحدّدة سيتسبب بحذف العناصر المرتبطة، إلا أن "
+#~ "حسابك ليس له صلاحية حذف أنواع العناصر التالية:"
+
+#~ msgid ""
+#~ "Deleting the selected %(objects_name)s would require deleting the following "
+#~ "protected related objects:"
+#~ msgstr ""
+#~ "حذف عناصر %(objects_name)s المحدّدة قد يتطلب حذف العناصر المحميّة المرتبطة "
+#~ "التالية:"
+
+#~ msgid ""
+#~ "Are you sure you want to delete the selected %(objects_name)s? All of the "
+#~ "following objects and their related items will be deleted:"
+#~ msgstr ""
+#~ "أأنت متأكد أنك تريد حذف عناصر %(objects_name)s المحددة؟ جميع العناصر التالية"
+#~ " والعناصر المرتبطة بها سيتم حذفها:"
+
+#~ msgid "Delete?"
+#~ msgstr "احذفه؟"
+
+#~ msgid " By %(filter_title)s "
+#~ msgstr " حسب %(filter_title)s "
+
+#~ msgid "Summary"
+#~ msgstr "ملخص"
+
+#~ msgid "Recent actions"
+#~ msgstr "آخر الإجراءات"
+
+#~ msgid "My actions"
+#~ msgstr "إجراءاتي"
+
+#~ msgid "None available"
+#~ msgstr "لا يوجد"
+
+#~ msgid "Unknown content"
+#~ msgstr "مُحتوى مجهول"
+
+#~ msgid ""
+#~ "Something’s wrong with your database installation. Make sure the appropriate"
+#~ " database tables have been created, and make sure the database is readable "
+#~ "by the appropriate user."
+#~ msgstr ""
+#~ "هنالك أمر خاطئ في تركيب قاعدة بياناتك، تأكد من أنه تم انشاء جداول قاعدة "
+#~ "البيانات الملائمة، وأن قاعدة البيانات قابلة للقراءة من قبل المستخدم الملائم."
+
+#~ msgid ""
+#~ "You are authenticated as %(username)s, but are not authorized to access this"
+#~ " page. Would you like to login to a different account?"
+#~ msgstr ""
+#~ "أنت مسجل الدخول بإسم المستخدم  %(username)s, ولكنك غير مخول للوصول لهذه "
+#~ "الصفحة. هل ترغب بتسجيل الدخول بحساب آخر؟"
+
+#~ msgid "Forgotten your password or username?"
+#~ msgstr "نسيت كلمة المرور أو اسم المستخدم الخاص بك؟"
+
+#~ msgid "Toggle navigation"
+#~ msgstr "تغيير التصفّح"
+
+#~ msgid "Start typing to filter…"
+#~ msgstr "ابدأ الكتابة للتصفية ..."
+
+#~ msgid "Filter navigation items"
+#~ msgstr "تصفية عناصر التصفح"
+
+#~ msgid "Date/time"
+#~ msgstr "التاريخ/الوقت"
+
+#~ msgid "User"
+#~ msgstr "المستخدم"
+
+#~ msgid "Action"
+#~ msgstr "إجراء"
+
+#~ msgid ""
+#~ "This object doesn’t have a change history. It probably wasn’t added via this"
+#~ " admin site."
+#~ msgstr ""
+#~ "ليس لهذا العنصر سجلّ تغييرات، على الأغلب أنه لم يُنشأ من خلال نظام إدارة "
+#~ "الموقع."
+
+#~ msgid "Show all"
+#~ msgstr "أظهر الكل"
+
+#~ msgid "Popup closing…"
+#~ msgstr "جاري إغلاق النافذة المنبثقة..."
+
+#~ msgid "Search"
+#~ msgstr "ابحث"
+
+#~ msgid "%(counter)s result"
+#~ msgid_plural "%(counter)s results"
+#~ msgstr[0] "لا نتائج"
+#~ msgstr[1] "نتيجة واحدة"
+#~ msgstr[2] "نتيجتان"
+#~ msgstr[3] "%(counter)s نتائج"
+#~ msgstr[4] "%(counter)s نتيجة"
+#~ msgstr[5] "%(counter)s نتيجة"
+
+#~ msgid "%(full_result_count)s total"
+#~ msgstr "المجموع %(full_result_count)s"
+
+#~ msgid "Save and continue editing"
+#~ msgstr "احفظ واستمر بالتعديل"
+
+#~ msgid "Change selected %(model)s"
+#~ msgstr "تغيير %(model)s المختارة"
+
+#~ msgid "Add another %(model)s"
+#~ msgstr "أضف %(model)s آخر"
+
+#~ msgid "Delete selected %(model)s"
+#~ msgstr "حذف %(model)s المختارة"
+
+#~ msgid "Thanks for spending some quality time with the web site today."
+#~ msgstr "شكرا لقضاء بعض الوقت الجيد في الموقع اليوم."
+
+#~ msgid "Log in again"
+#~ msgstr "ادخل مجدداً"
+
+#~ msgid "Password change"
+#~ msgstr "غيّر كلمة مرورك"
+
+#~ msgid "Your password was changed."
+#~ msgstr "تمّ تغيير كلمة مرورك."
+
+#~ msgid ""
+#~ "Please enter your old password, for security’s sake, and then enter your new"
+#~ " password twice so we can verify you typed it in correctly."
+#~ msgstr ""
+#~ "رجاءً أدخل كلمة المرور القديمة، للأمان، ثم أدخل كلمة المرور الجديدة مرتين "
+#~ "لنتأكد بأنك قمت بإدخالها بشكل صحيح."
+
+#~ msgid "Change my password"
+#~ msgstr "غيّر كلمة مروري"
+
+#~ msgid "Password reset"
+#~ msgstr "استعادة كلمة المرور"
+
+#~ msgid "Your password has been set.  You may go ahead and log in now."
+#~ msgstr "تم تعيين كلمة مرورك. يمكن الاستمرار وتسجيل دخولك الآن."
+
+#~ msgid "Password reset confirmation"
+#~ msgstr "تأكيد استعادة كلمة المرور"
+
+#~ msgid ""
+#~ "Please enter your new password twice so we can verify you typed it in "
+#~ "correctly."
+#~ msgstr "رجاءً أدخل كلمة مرورك الجديدة مرتين كي تتأكّد من كتابتها بشكل صحيح."
+
+#~ msgid "New password:"
+#~ msgstr "كلمة المرور الجديدة:"
+
+#~ msgid "Confirm password:"
+#~ msgstr "أكّد كلمة المرور:"
+
+#~ msgid ""
+#~ "The password reset link was invalid, possibly because it has already been "
+#~ "used.  Please request a new password reset."
+#~ msgstr ""
+#~ "رابط استعادة كلمة المرور غير صحيح، ربما لأنه استُخدم من قبل. رجاءً اطلب "
+#~ "استعادة كلمة المرور مرة أخرى."
+
+#~ msgid ""
+#~ "We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+#~ msgstr ""
+#~ "تم إرسال بريد إلكتروني بالتعليمات لضبط كلمة المرور الخاصة بك، وذلك في حال "
+#~ "تواجد حساب بنفس البريد الإلكتروني الذي أدخلته. سوف تستقبل البريد الإلكتروني "
+#~ "قريباً"
+
+#~ msgid ""
+#~ "If you don’t receive an email, please make sure you’ve entered the address "
+#~ "you registered with, and check your spam folder."
+#~ msgstr ""
+#~ "في حال عدم إستقبال البريد الإلكتروني، الرجاء التأكد من إدخال عنوان بريدك "
+#~ "الإلكتروني الخاص بحسابك ومراجعة مجلد الرسائل غير المرغوب بها."
+
+#~ msgid ""
+#~ "You're receiving this email because you requested a password reset for your "
+#~ "user account at %(site_name)s."
+#~ msgstr ""
+#~ "لقد قمت بتلقى هذه الرسالة لطلبك بإعادة تعين كلمة المرور لحسابك الشخصي على "
+#~ "%(site_name)s."
+
+#~ msgid "Please go to the following page and choose a new password:"
+#~ msgstr "رجاءً اذهب إلى الصفحة التالية واختر كلمة مرور جديدة:"
+
+#~ msgid "Your username, in case you’ve forgotten:"
+#~ msgstr "اسم المستخدم الخاص بك، في حال كنت قد نسيته:"
+
+#~ msgid "Thanks for using our site!"
+#~ msgstr "شكراً لاستخدامك موقعنا!"
+
+#~ msgid "The %(site_name)s team"
+#~ msgstr "فريق %(site_name)s"
+
+#~ msgid ""
+#~ "Forgotten your password? Enter your email address below, and we’ll email "
+#~ "instructions for setting a new one."
+#~ msgstr ""
+#~ "هل نسيت كلمة المرور؟ أدخل عنوان بريدك الإلكتروني أدناه وسوف نقوم بإرسال "
+#~ "تعليمات للحصول على كلمة مرور جديدة."
+
+#~ msgid "Email address:"
+#~ msgstr "عنوان البريد الإلكتروني:"
+
+#~ msgid "Reset my password"
+#~ msgstr "استعد كلمة مروري"
+
+#~ msgid "All dates"
+#~ msgstr "كافة التواريخ"
+
+#~ msgid "Select %s"
+#~ msgstr "اختر %s"
+
+#~ msgid "Select %s to change"
+#~ msgstr "اختر %s لتغييره"
+
+#~ msgid "Select %s to view"
+#~ msgstr "اختر %s للاستعراض"
+
+#~ msgid "Date:"
+#~ msgstr "التاريخ:"
+
+#~ msgid "Time:"
+#~ msgstr "الوقت:"
+
+#~ msgid "Lookup"
+#~ msgstr "ابحث"
+
+#~ msgid "Currently:"
+#~ msgstr "حالياً:"
+
+#~ msgid "Change:"
+#~ msgstr "تغيير:"
