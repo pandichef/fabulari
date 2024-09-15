@@ -19,6 +19,8 @@ django_admin_locale_path = os.path.join(
 PA_USERNAME = os.environ["PYTHONANYWHERE_USERNAME"]
 PA_API_TOKEN = os.environ["PYTHONANYWHERE_API_KEY"]
 DOMAIN_NAME = PA_USERNAME + ".pythonanywhere.com"
+FABULARI_USERNAME = os.environ["FABULARI_USERNAME"]
+FABULARI_PASSWORD = os.environ["FABULARI_PASSWORD"]
 
 
 # Step 0: Get account status
@@ -196,6 +198,24 @@ def reload_web_app():
 #     modified_files = result.stdout.splitlines()
 #     return modified_files
 
+from requests.auth import HTTPBasicAuth
+
+
+def download_file_with_basic_auth(url, username, password, output_filename):
+    # Send a GET request with basic authentication
+    response = requests.get(url, auth=HTTPBasicAuth(username, password))
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Save the file
+        with open(output_filename, "wb") as f:
+            f.write(response.content)
+        print(f"File downloaded successfully and saved as {output_filename}")
+        return True
+    else:
+        print(f"Failed to download the file. Status code: {response.status_code}")
+        return False
+
 
 # Main script flow
 def main():
@@ -240,6 +260,9 @@ def main():
         "python manage.py collectstatic --no-input", console_id
     )
     run_pythonanywhere_console_command("python manage.py compilemessages", console_id)
+    run_pythonanywhere_console_command(
+        "python manage.py dumpdata > ../dbbackup.json", console_id
+    )
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     # print("Collecting static files...")
@@ -248,6 +271,13 @@ def main():
     # Step 4: Reload the web application
     print("Reloading the web app...")
     reload_web_app()
+    print("Retrieving dbbackup.json...")
+    download_file_with_basic_auth(
+        url="https://" + DOMAIN_NAME + "/download_dbbackup_json",
+        username=FABULARI_USERNAME,
+        password=FABULARI_PASSWORD,
+        output_filename="../dbbackup.json",
+    )
 
 
 if __name__ == "__main__":

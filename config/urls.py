@@ -13,13 +13,50 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+import json
+
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
 from main import views
 from main.views.export_phrases_to_csv import export_phrases_to_csv_view
 from django.conf.urls.i18n import i18n_patterns
+from django.http import JsonResponse, HttpResponse
+from django.http import FileResponse, Http404
+from django.contrib.auth.decorators import login_required, user_passes_test
+import base64
+from django.contrib.auth import authenticate
+
+
+def download_dbbackup_json(request):
+    def extract_username_and_password(request):
+        auth_header = request.META.get("HTTP_AUTHORIZATION")
+        assert auth_header.startswith("Basic "), "Only basic authenticated is supported"
+        encoded_credentials = auth_header.split(" ")[1]
+        decoded_credentials = base64.b64decode(encoded_credentials).decode("utf-8")
+        username, password = decoded_credentials.split(":", 1)
+        return username, password
+
+    username, password = extract_username_and_password(request)
+    user = authenticate(request, username=username, password=password)
+    assert user.is_superuser, "Only superusers can access this API"
+    file_path = os.path.join(settings.BASE_DIR, "..", "dbbackup.json")
+
+    # Check if the file exists
+    if os.path.exists(file_path):
+        # Use FileResponse to send the file for download
+        response = FileResponse(open(file_path, "rb"))
+        return response
+    else:
+        # Raise 404 if the file does not exist
+        raise Http404("File does not exist")
+
 
 urlpatterns = i18n_patterns(
+    path(
+        "download_dbbackup_json/", download_dbbackup_json, name="download_dbbackup_json"
+    ),
     # 0
     path("admin/", admin.site.urls),  # this is like an add_one_phrase app
     # 1
