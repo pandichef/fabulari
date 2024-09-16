@@ -1,34 +1,41 @@
-import pytest
-from unittest.mock import patch
 from ..assess_cefr_level import assess_cefr_level
-import requests
-from types import SimpleNamespace
 
-# Assume the assess_cefr_level function is imported from the correct module
+# from .patch_openai_api import set_openai_completion
+from ..assess_cefr_level import assess_cefr_level
+from .patch_openai_api import set_openai_completion
 
-mock_response = SimpleNamespace(
-    choices=[
-        SimpleNamespace(
-            message=SimpleNamespace(
-                content="Your CEFR level is B1 for Spanish.\nYou know some phrases well but find new words challenging, placing you at an intermediate level."
-            )
-        )
-    ]
+
+@set_openai_completion(
+    {
+        "assess_cefr_level": "Your estimated CEFR level is A2 for Spanish. You know some basic phrases but need more practice."
+    }
 )
-
-
-def test_assess_cefr_level():
+def test_assess_cefr_level_a2():
     word_list = [("casa", 0.80), ("perro", None), ("hijo", 0.5)]
     language = "Spanish"
     model = "gpt-4o-mini"
 
-    with patch(
-        "purepython.practice_translation.client.chat.completions.create",
-        return_value=mock_response,
-    ):
-        # mocked_get.return_value = "mocked return value"
+    result = assess_cefr_level(word_list, language, model)
 
-        # result = requests.get("https://www.nytimes.com")
-        result = assess_cefr_level(word_list, language, model)
-        assert result == mock_response.choices[0].message.content
-        # assert result == "mocked return value"
+    assert (
+        result
+        == "Your estimated CEFR level is A2 for Spanish. You know some basic phrases but need more practice."
+    )
+
+
+# @set_openai_completion(
+#     {
+#         "assess_cefr_level": "Your estimated CEFR level is C1 for Spanish. You have a good command of complex phrases."
+#     }
+# )
+# def test_assess_cefr_level_c1():
+#     word_list = [("casa", 0.80), ("perro", None), ("hijo", 0.5)]
+#     language = "Spanish"
+#     model = "gpt-4o-mini"
+
+#     result = assess_cefr_level(word_list, language, model)
+
+#     assert (
+#         result
+#         == "Your estimated CEFR level is C1 for Spanish. You have a good command of complex phrases."
+#     )
