@@ -34,7 +34,7 @@ def check_for_new_migrations():
     )
 
     if result.returncode != 0:
-        raise Exception(
+        raise SystemExit(
             "New migrations would be created.  Make migrations and try deployment again."
         )
     else:
@@ -51,11 +51,24 @@ def check_for_unapplied_migrations():
 
     # Step 3: If there's anything without an [X], it means the migration has not been applied
     if any(line.strip().startswith(" [ ]") for line in result.stdout.splitlines()):
-        raise Exception(
+        raise SystemExit(
             "There are unapplied migrations.  Run migrations and try deployment again."
         )
     else:
         print("All migrations have been applied.")
+
+
+def check_for_failing_tests():
+    result = subprocess.run(
+        ["pytest", "--cov=."],  # Runs pytest
+        # capture_output=False,
+        # text=False,  # Ensures output is in text format (optional)
+    )
+
+    if result.returncode != 0:
+        raise SystemExit("Some tests failed. Fix the issues and try deployment again.")
+    else:
+        print("All tests passed successfully.")
 
 
 # Call the function
@@ -268,6 +281,7 @@ def main():
     #     print("No untracked files.")
     check_for_new_migrations()
     check_for_unapplied_migrations()
+    check_for_failing_tests()
 
     print("Updating locale files...")
     update_locale_files()

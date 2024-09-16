@@ -1,5 +1,5 @@
 from typing import List, Any, Dict
-from .parallel_map import threadpool_map
+from ..parallel_map import threadpool_map
 
 # Test cases for the parallel_map function
 def test_parallel_map_addition():

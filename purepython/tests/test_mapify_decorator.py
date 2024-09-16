@@ -1,5 +1,5 @@
 from typing import List, Any, Dict
-from .parallel_map import threadpool_map
+from ..parallel_map import threadpool_map, mapify
 
 
 def mock_api(*args: Any, **kwargs: Any) -> Dict[str, Any]:
@@ -17,7 +17,7 @@ def get_data_from_api(
     return input_dict
 
 
-from .parallel_map import mapify
+# from .parallel_map import mapify
 
 
 # @mapify
