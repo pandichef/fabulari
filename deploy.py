@@ -23,6 +23,45 @@ FABULARI_USERNAME = os.environ["FABULARI_USERNAME"]
 FABULARI_PASSWORD = os.environ["FABULARI_PASSWORD"]
 
 
+import subprocess
+
+
+def check_for_new_migrations():
+    result = subprocess.run(
+        ["python", "manage.py", "makemigrations", "--check", "--dry-run"],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        raise Exception(
+            "New migrations would be created.  Make migrations and try deployment again."
+        )
+    else:
+        print("No new migrations needed.")
+
+
+def check_for_unapplied_migrations():
+    # Step 2: Check if there are unapplied migrations
+    result = subprocess.run(
+        ["python", "manage.py", "showmigrations", "--plan"],
+        capture_output=True,
+        text=True,
+    )
+
+    # Step 3: If there's anything without an [X], it means the migration has not been applied
+    if any(line.strip().startswith(" [ ]") for line in result.stdout.splitlines()):
+        raise Exception(
+            "There are unapplied migrations.  Run migrations and try deployment again."
+        )
+    else:
+        print("All migrations have been applied.")
+
+
+# Call the function
+# check_for_new_migrations()
+
+
 # Step 0: Get account status
 def get_pythonanywhere_account_status():
     response = requests.get(
@@ -227,6 +266,8 @@ def main():
     #     print("Untracked files:", untracked_files)
     # else:
     #     print("No untracked files.")
+    check_for_new_migrations()
+    check_for_unapplied_migrations()
 
     print("Updating locale files...")
     update_locale_files()
