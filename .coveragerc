@@ -6,3 +6,4 @@ omit =
     */tests.py
     deploy.py
     */asgi.py
+    */test_settings.py
