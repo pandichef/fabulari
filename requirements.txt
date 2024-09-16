@@ -2,4 +2,6 @@ Django==4.0.6
 openai==1.43.0
 numpy==1.23.5
 markdown2==2.5.0
-
+pytest-socket==0.7.0
+pytest-django==4.9.0
+pytest-cov==4.1.0

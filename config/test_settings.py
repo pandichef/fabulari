@@ -9,3 +9,5 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {app_label: None for app_label in INSTALLED_APPS}
+
+SECRET_KEY = "a_very_secretive_key"
