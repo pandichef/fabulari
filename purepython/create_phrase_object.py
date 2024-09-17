@@ -10,10 +10,22 @@ from .settings import LANGUAGE_CHOICE_DICT
 
 def clean_phrase(
     phrase: str,  # e.g., "tener"
-    working_on: str,  # e.g., Spanish
+    working_on_verbose: str,  # e.g., Spanish
     openai_model: str,  # e.g., "gpt-4o-mini"
 ) -> str | None:
+    # print(working_on_verbose)
+    # print(working_on_verbose)
+    # print(working_on_verbose)
+    # print(working_on_verbose)
+
     """User is assumed to input imperfect phrase.  This function sanitizes the phrase."""
+    if working_on_verbose == "Hebrew":
+        semitic_language_extra = "Moreover, The response phrase should include the vowel characters for pedagogic purposes.  For example, the reponse should be בַּיִת instead of בית."
+    elif working_on_verbose == "Arabic":
+        semitic_language_extra = "Moreover, The response phrase should include the vowel characters for pedagogic purposes.  For example, the reponse should be مَنْزِل instead of منزل."
+    else:
+        semitic_language_extra = ""
+
     completion = client.chat.completions.create(
         model=openai_model,
         messages=[
@@ -21,7 +33,8 @@ def clean_phrase(
                 "role": "system",
                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
                 "content": f"""
-You take potentially sloppily written words or phrases in {working_on} and return a cleaned up version of the same word or phrase.
+You take potentially sloppily written words or phrases in {working_on_verbose} and return a cleaned up version of the same word or phrase.
+The repsonse phrase should also be in {working_on_verbose}. {semitic_language_extra}
 If the input word is a conjugated verb, convert the word to its infinitive.
 If the input word is a plural noun, convert the word to its singular version.
 Do not include extra commentary e.g., don't response with something like "vaca (singular form of vacas)".
@@ -63,7 +76,7 @@ def get_phrase_metadata(
     if len(phrase) < 2:  # at least 2 characters
         return None
     cleaned_phrase = clean_phrase(
-        phrase=phrase, working_on=working_on_verbose, openai_model=openai_model
+        phrase=phrase, working_on_verbose=working_on_verbose, openai_model=openai_model
     )
     if "(proper name)" in cleaned_phrase:
         return None
