@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,32 +97,36 @@ msgstr "modificatus"
 msgid "user"
 msgstr "usus"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "Textus rudis"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "Hoc potest esse in quolibet sermone quem elige."
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Frasa"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "exemplum sententiae"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 msgid "definition"
 msgstr "definitio"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "lingua"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "Detecta de texto si vacio"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr "\"Utitur tua lingua 'operando' si relinquetur vacua. Vide Instantes\""
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "Phrases"
 
@@ -291,3 +295,6 @@ msgstr "Salva et vide"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "Claudere"
+
+msgid "Dectected from text if blank"
+msgstr "Detecta de texto si vacio"

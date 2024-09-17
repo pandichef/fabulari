@@ -181,7 +181,7 @@ def practice_translation_view(request, phrase_id=None):
 
     full_working_on_sentence = generate_full_sentence(
         phrase=next_phrase.raw_text,
-        working_on=working_on,
+        working_on_verbose=working_on,
         openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
     )
     equivalent_native_language_sentence = to_native_language(

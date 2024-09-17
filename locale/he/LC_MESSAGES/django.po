@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: 2021-11-02 07:48+0000\n"
 "Last-Translator: Menachem G.\n"
 "Language-Team: Hebrew (http://www.transifex.com/django/django/language/he/)\n"
@@ -100,34 +100,38 @@ msgstr "לְשַׁנּוֹת"
 msgid "user"
 msgstr "משתמש"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "טקסט גולמי"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "זה יכול להיות בכל שפה שתבחר."
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "ביטוי"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "משפט דוגמה"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 #, fuzzy
 #| msgid "Addition"
 msgid "definition"
 msgstr "הוספה"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "שפה"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "זוהה מהטקסט אם ריק"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr "\"משתמש בשפה שלך 'עובד על' אם נשאר ריק. ראה הגדרות.\""
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "ביטויים"
 
@@ -299,6 +303,9 @@ msgstr "שמירה וצפיה"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "סגירה"
+
+msgid "Dectected from text if blank"
+msgstr "זוהה מהטקסט אם ריק"
 
 msgid "Delete selected %(verbose_name_plural)s"
 msgstr "מחק %(verbose_name_plural)s שנבחרו"

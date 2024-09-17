@@ -75,127 +75,214 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             return fields
 
-    def save_model(self, request, obj, form, change) -> bool:
-        if change:  # if the object is being created
+    def save_model(self, request, obj, form, change):
+        #
+        if obj.id:
             last_obj = Phrase.objects.get(id=obj.id)
-            raw_text_changed = (
-                last_obj.raw_text != obj.raw_text
-                or not last_obj.definition
-                or not last_obj.example_sentence
+            do_nothing = (
+                last_obj.raw_text == obj.raw_text
+                and last_obj.language == obj.language
+                and last_obj.definition  # e.g., if object created via add_multiple_phrases
+                and last_obj.example_sentence  # e.g., if object created via add_multiple_phrases
             )
-        else:
-            raw_text_changed = False
-            obj.user = request.user
-            detected_language_code = detect(
-                phrase=obj.raw_text,
+            if do_nothing:
+                print("return True")
+                return None
+
+        # print("super().save_model(request, obj, form, change)")
+        # super().save_model(request, obj, form, change)
+
+        raw_text_language = detect(
+            phrase=obj.raw_text,
+            openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        )
+        if not obj.language:
+            obj.language = request.user.working_on
+        if obj.language != raw_text_language:
+            translated_raw_text = from_native_language(
+                sentence=obj.raw_text,
+                working_on_verbose=dict(LANGUAGE_CHOICES)[obj.language],
+                native_language_verbose=dict(LANGUAGE_CHOICES)[raw_text_language],
                 openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
             )
-            # print(request.user.working_on)
-            # print(detected_language_code)
-            raw_text_for_metadata = obj.raw_text
-            if not obj.language:
-                if detected_language_code == request.user.native_language:
-                    obj.language = request.user.working_on
+        else:
+            translated_raw_text = obj.raw_text
 
-                    raw_text_for_metadata = from_native_language(
-                        obj.raw_text,
-                        working_on_verbose=obj.language,
-                        native_language_verbose=detected_language_code,
-                        openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
-                    )
-                else:
-                    if not detected_language_code in SUPPORTED_LANGUAGES:
-                        obj.language = request.user.working_on
-                    else:
-                        obj.language = detected_language_code
-            else:
-                if detected_language_code != obj.language:
+        native_language_metadata = list(
+            get_phrase_metadata(
+                [
+                    {
+                        "translated_raw_text": translated_raw_text,
+                        "language": obj.language,
+                    }
+                ],
+                native_language=request.user.native_language,
+                openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+            )
+        )[0]
 
-                    if self:
-                        self.message_user(
-                            request,
-                            f"The text you typed does not appear to be {dict(LANGUAGE_CHOICES)[obj.language]}.",
-                        )
-                    obj.language = detected_language_code
-            # elif obj.language != request.user.native_language:
-            #     from purepython.gptsrs import from_native_language
+        from pprint import pprint
 
-            #     obj.text = from_native_language(
-            #         obj.text,
-            #         working_on=obj.language,
-            #         native_language=detected_language_code,
-            #         openai_model=OPENAI_LLM_MODEL,
-            #     )
+        pprint(native_language_metadata)
 
-        # get openai data if new object or raw_text changed
-        if not change or raw_text_changed:
-            native_language_metadata = list(
-                get_phrase_metadata(
-                    # [{"raw_text": obj.raw_text, "language": obj.language}],
-                    [{"raw_text": raw_text_for_metadata, "language": obj.language}],
-                    native_language=request.user.native_language,
-                    openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
-                )
-            )[0]
-            if native_language_metadata:
-                # (cleaned_text, example_sentence, definition) = native_language_metadata
-                cleaned_text = native_language_metadata["cleaned_text"]
-                example_sentence = native_language_metadata["example_sentence"]
-                definition = native_language_metadata["definition"]
-                if raw_text_changed:
-                    obj.cleaned_text = cleaned_text
-                    obj.example_sentence = example_sentence
-                    obj.definition = definition
-                    obj.save()
-                    if self:
-                        self.message_user(
-                            request,
-                            f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
-                        )
+        obj.cleaned_text = native_language_metadata["cleaned_text"]
+        obj.example_sentence = native_language_metadata["example_sentence"]
+        obj.definition = native_language_metadata["definition"]
+        obj.user = request.user
+        obj.save()
 
-                if not change:
-                    existing_object = Phrase.objects.filter(
-                        cleaned_text=cleaned_text, user=request.user
-                    ).first()
-                    if existing_object:
-                        # just redirect if the object already exists
-                        # this line of code is needed for the response_add method
-                        obj.existing_obj_id = existing_object.id
-                        # existing_object.text = obj.text
-                        # existing_object.save()
-                        return False
-                    else:
-                        obj.cleaned_text = cleaned_text
-                        obj.example_sentence = example_sentence
-                        obj.definition = definition
-                        obj.save()
-                        if self:
-                            self.message_user(
-                                request,
-                                f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
-                            )
-            else:
-                obj.cleaned_text = "(proper noun)"  # hack
-                if self:
-                    self.message_user(request, f"Not saved.  Contains proper noun.")
-                return False
+        #     # if change:  # if the object is being created
+        #     last_obj = Phrase.objects.get(id=obj.id)
+        #     raw_text_changed = (
+        #         last_obj.raw_text != obj.raw_text
+        #         or last_obj.language != obj.language
+        #         or not last_obj.definition  # e.g., if object created via add_multiple_phrases
+        #         or not last_obj.example_sentence  # e.g., if object created via add_multiple_phrases
+        #     )
 
+        # # get raw_text_in_working_on_language
+        # detected_language_code = detect(
+        #     phrase=obj.raw_text,
+        #     openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        # )
+        # if detected_language_code != obj.language:
+        #     raw_text_in_working_on_language = from_native_language(
+        #         obj.raw_text,
+        #         working_on_verbose=obj.language,
+        #         native_language_verbose=detected_language_code,
+        #         openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        #     )
         # else:
-        # Do nothing
-        # existing_object = Phrase.objects.filter(
-        #     cleaned_text=obj.text, user=request.user
-        # ).first()
+        #     raw_text_in_working_on_language = obj.raw_text  # setup
 
-        # if existing_object:
-        #     obj.existing_obj_id = existing_object.id
+        # ##########
+        # if change:  # if the object is being created
+        #     last_obj = Phrase.objects.get(id=obj.id)
+        #     raw_text_changed = (
+        #         last_obj.raw_text != obj.raw_text
+        #         or last_obj.language != obj.language
+        #         or not last_obj.definition  # e.g., if object created via add_multiple_phrases
+        #         or not last_obj.example_sentence  # e.g., if object created via add_multiple_phrases
+        #     )
         # else:
-        #     obj.cleaned_text = cleaned_text
-        #     obj.example_sentence = example_sentence
-        #     obj.definition = definition
-        #     obj.save()
-        if change:
-            super().save_model(request, obj, form, change)
-        return True
+        #     raw_text_changed = False
+        #     obj.user = request.user
+        #     if not obj.language:
+        #         if detected_language_code == request.user.native_language:
+        #             obj.language = request.user.working_on
+
+        #             raw_text_in_working_on_language = from_native_language(
+        #                 obj.raw_text,
+        #                 working_on_verbose=obj.language,
+        #                 native_language_verbose=detected_language_code,
+        #                 openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        #             )
+        #         else:
+        #             if not detected_language_code in SUPPORTED_LANGUAGES:
+        #                 obj.language = request.user.working_on
+        #             else:
+        #                 obj.language = detected_language_code
+        #     else:
+        #         if detected_language_code == request.user.native_language:
+        #             # obj.language
+
+        #             raw_text_in_working_on_language = from_native_language(
+        #                 obj.raw_text,
+        #                 working_on_verbose=obj.language,
+        #                 native_language_verbose=detected_language_code,
+        #                 openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        #             )
+        #         elif detected_language_code != obj.language:
+        #             if self:
+        #                 self.message_user(
+        #                     request,
+        #                     f"The text you typed does not appear to be {dict(LANGUAGE_CHOICES)[obj.language]}.",
+        #                 )
+        #             obj.language = detected_language_code
+        #     # elif obj.language != request.user.native_language:
+        #     #     from purepython.gptsrs import from_native_language
+
+        #     #     obj.text = from_native_language(
+        #     #         obj.text,
+        #     #         working_on=obj.language,
+        #     #         native_language=detected_language_code,
+        #     #         openai_model=OPENAI_LLM_MODEL,
+        #     #     )
+
+        # # get openai data if new object or raw_text changed
+        # if not change or raw_text_changed:
+        #     native_language_metadata = list(
+        #         get_phrase_metadata(
+        #             # [{"raw_text": obj.raw_text, "language": obj.language}],
+        #             [
+        #                 {
+        #                     "raw_text": raw_text_in_working_on_language,
+        #                     "language": obj.language,
+        #                 }
+        #             ],
+        #             native_language=request.user.native_language,
+        #             openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        #         )
+        #     )[0]
+        #     if native_language_metadata:
+        #         # (cleaned_text, example_sentence, definition) = native_language_metadata
+        #         cleaned_text = native_language_metadata["cleaned_text"]
+        #         example_sentence = native_language_metadata["example_sentence"]
+        #         definition = native_language_metadata["definition"]
+        #         if raw_text_changed:
+        #             obj.cleaned_text = cleaned_text
+        #             obj.example_sentence = example_sentence
+        #             obj.definition = definition
+        #             obj.save()
+        #             if self:
+        #                 self.message_user(
+        #                     request,
+        #                     f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
+        #                 )
+
+        #         if not change:
+        #             existing_object = Phrase.objects.filter(
+        #                 cleaned_text=cleaned_text, user=request.user
+        #             ).first()
+        #             if existing_object:
+        #                 # just redirect if the object already exists
+        #                 # this line of code is needed for the response_add method
+        #                 obj.existing_obj_id = existing_object.id
+        #                 # existing_object.text = obj.text
+        #                 # existing_object.save()
+        #                 return False
+        #             else:
+        #                 obj.cleaned_text = cleaned_text
+        #                 obj.example_sentence = example_sentence
+        #                 obj.definition = definition
+        #                 obj.save()
+        #                 if self:
+        #                     self.message_user(
+        #                         request,
+        #                         f"Retrieved values from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS}.",
+        #                     )
+        #     else:
+        #         obj.cleaned_text = "(proper noun)"  # hack
+        #         if self:
+        #             self.message_user(request, f"Not saved.  Contains proper noun.")
+        #         return False
+
+        # # else:
+        # # Do nothing
+        # # existing_object = Phrase.objects.filter(
+        # #     cleaned_text=obj.text, user=request.user
+        # # ).first()
+
+        # # if existing_object:
+        # #     obj.existing_obj_id = existing_object.id
+        # # else:
+        # #     obj.cleaned_text = cleaned_text
+        # #     obj.example_sentence = example_sentence
+        # #     obj.definition = definition
+        # #     obj.save()
+        # if change:
+        #     super().save_model(request, obj, form, change)
+        # return True
 
     def response_add(self, request, obj):
         if obj.cleaned_text == "(proper noun)":

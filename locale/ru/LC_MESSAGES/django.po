@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: 2020-07-21 09:32+0000\n"
 "Last-Translator: crazyzubr <hjcnbckfd@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/django/django/language/ru/)\n"
@@ -106,34 +106,40 @@ msgstr "изменённый"
 msgid "user"
 msgstr "пользователь"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "Сырые данные"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "Это может быть на любом языке, который вы выберете"
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Фраза"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "пример предложения"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 #, fuzzy
 #| msgid "Addition"
 msgid "definition"
 msgstr "Добавление"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "язык"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "Обнаружено по тексту если пусто"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr ""
+"\"Использует ваш язык \"в работе\" если оставлено пустым. Смотрите "
+"Настройки.\""
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "Фразы"
 
@@ -307,6 +313,9 @@ msgstr "Сохранить и просмотреть"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "Закрыть"
+
+msgid "Dectected from text if blank"
+msgstr "Обнаружено по тексту если пусто"
 
 msgid "Successfully deleted %(count)d %(items)s."
 msgstr "Успешно удалены %(count)d %(items)s."

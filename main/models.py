@@ -20,7 +20,11 @@ class Phrase(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=False, blank=False, verbose_name=_("user")
     )
-    raw_text = models.CharField(max_length=255, verbose_name=_("Raw text"))
+    raw_text = models.CharField(
+        max_length=255,
+        verbose_name=_("Raw text"),
+        help_text=_("This can be in any language you choose."),
+    )
     cleaned_text = models.CharField(max_length=255, verbose_name=_("Phrase"))
     example_sentence = models.CharField(_("example sentence"), max_length=255)
     definition = models.CharField(_("definition"), max_length=255)
@@ -30,7 +34,9 @@ class Phrase(models.Model):
         choices=LANGUAGE_CHOICES,
         null=False,
         blank=True,
-        help_text=_("""Dectected from text if blank"""),
+        help_text=_(
+            """"Uses your "working on" language if left blank.  See Settings."""
+        ),
     )
     cosine_similarity = models.DecimalField(
         null=True, blank=False, max_digits=5, decimal_places=4

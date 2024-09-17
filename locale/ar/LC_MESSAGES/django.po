@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: 2021-10-15 21:11+0000\n"
 "Last-Translator: Bashar Al-Abdulhadi\n"
 "Language-Team: Arabic (http://www.transifex.com/django/django/language/ar/)\n"
@@ -103,34 +103,38 @@ msgstr "معدل"
 msgid "user"
 msgstr "المستخدم"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "نص خام"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "يمكن أن تكون هذه بأي لغة تختارها"
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "عبارة"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "جملة مثال"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 #, fuzzy
 #| msgid "Addition"
 msgid "definition"
 msgstr "إضافة"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "لغة"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "تم الكشف عن النص إذا كان فارغًا"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr "\"يستخدم لغتك \"العمل على\" إذا تركت فارغاً  راجع الإعدادات"
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "عبارات"
 
@@ -300,6 +304,9 @@ msgstr "احفظ واستعرض"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "إغلاق"
+
+msgid "Dectected from text if blank"
+msgstr "تم الكشف عن النص إذا كان فارغًا"
 
 msgid "Delete selected %(verbose_name_plural)s"
 msgstr "احذف %(verbose_name_plural)s المحدّدة"

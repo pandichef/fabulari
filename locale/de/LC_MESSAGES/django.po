@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: 2022-01-15 11:22+0000\n"
 "Last-Translator: Florian Apolloner <florian@apolloner.eu>\n"
 "Language-Team: German (http://www.transifex.com/django/django/language/de/)\n"
@@ -104,34 +104,38 @@ msgstr "modifiziert"
 msgid "user"
 msgstr "Benutzer"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "Rohtext"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "Das kann in jeder Sprache sein, die Sie wählen."
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Phrase"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "beispielsatz"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 #, fuzzy
 #| msgid "Addition"
 msgid "definition"
 msgstr "Hinzugefügt"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "Sprache"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "Erkannt aus Text wenn leer"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr "Verwendet Ihre \"Aktiv\"-Sprache wenn leer.  Siehe Einstellungen."
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "Phrasen"
 
@@ -305,6 +309,9 @@ msgstr "Sichern und ansehen"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "Schließen"
+
+msgid "Dectected from text if blank"
+msgstr "Erkannt aus Text wenn leer"
 
 msgid "Delete selected %(verbose_name_plural)s"
 msgstr "Ausgewählte %(verbose_name_plural)s löschen"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 21:22-0500\n"
+"POT-Creation-Date: 2024-09-16 23:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,32 +95,36 @@ msgstr "修改过的"
 msgid "user"
 msgstr "用户"
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Raw text"
 msgstr "原始文本"
 
-#: .\main\models.py:24 .\main\models.py:41
+#: .\main\models.py:26
+msgid "This can be in any language you choose."
+msgstr "这可以用你选择的任何语言表达"
+
+#: .\main\models.py:28 .\main\models.py:47
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "短语"
 
-#: .\main\models.py:25
+#: .\main\models.py:29
 msgid "example sentence"
 msgstr "示例句子"
 
-#: .\main\models.py:26
+#: .\main\models.py:30
 msgid "definition"
 msgstr "定义"
 
-#: .\main\models.py:28
+#: .\main\models.py:32
 msgid "language"
 msgstr "语言"
 
-#: .\main\models.py:33
-msgid "Dectected from text if blank"
-msgstr "从文本中检测是否为空"
+#: .\main\models.py:38
+msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgstr "“如果留空则使用您的“正在使用”的语言。请查看设置。”"
 
-#: .\main\models.py:42
+#: .\main\models.py:48
 msgid "Phrases"
 msgstr "短语"
 
@@ -284,3 +288,6 @@ msgstr "保存并查看"
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
 msgstr "关闭"
+
+msgid "Dectected from text if blank"
+msgstr "从文本中检测是否为空"
