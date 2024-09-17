@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 23:56-0500\n"
+"POT-Creation-Date: 2024-09-17 00:25-0500\n"
 "PO-Revision-Date: 2021-11-09 07:39+0000\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: French (http://www.transifex.com/django/django/language/fr/)\n"
@@ -148,6 +148,11 @@ msgstr "Ajouter plusieurs phrases"
 #: .\main\templates\practice_translation.html:145
 msgid "Go Back to Phrase List"
 msgstr "Retourner à la liste des phrases"
+
+#: .\main\templates\add_multiple_phrases.html:112
+msgid ""
+"Paste your phrases here.  Each word/phrase should be on a separate line."
+msgstr "Please provide the phrases you would like me to translate."
 
 #: .\main\templates\add_multiple_phrases.html:114
 msgid "Language"

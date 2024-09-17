@@ -96,12 +96,16 @@ def get_pythonanywhere_account_status():
 def update_locale_files():
     def populate_pofile(language: str):
         language_verbose = LANGUAGE_CHOICE_DICT[language]
-        po = pofile(f"locale/{language}/LC_MESSAGES/django.po")
+        po_file_location = f"locale/{language}/LC_MESSAGES/django.po"
+        po = pofile(po_file_location)
+
+        # Flag to track if any msgstr was updated
+        updated = False
 
         # Loop through each msgid and translate if msgstr is empty
         for entry in po:
             if entry.obsolete:
-                # script was marking this obsolete before
+                # script was marking this obsolete before for some reason
                 entry.obsolete = False
 
             if not entry.msgstr:
@@ -123,7 +127,12 @@ def update_locale_files():
                 print(language, " | ", entry.msgid, " | ", translated_text)
                 if translated_text:
                     entry.msgstr = translated_text
-        po.save()
+                    updated = True  # Mark as updated if translation occurred
+
+        if updated:
+            po.save()
+        else:
+            subprocess.run(["git", "checkout", "--", po_file_location], check=True)
 
     # os.chdir(REPO_PATH)
     supported_languages_excluding_english = copy(SUPPORTED_LANGUAGES)
