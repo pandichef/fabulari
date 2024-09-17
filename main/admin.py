@@ -92,11 +92,12 @@ class PhraseAdmin(admin.ModelAdmin):
             )
             # print(request.user.working_on)
             # print(detected_language_code)
+            raw_text_for_metadata = obj.raw_text
             if not obj.language:
                 if detected_language_code == request.user.native_language:
                     obj.language = request.user.working_on
 
-                    obj.raw_text = from_native_language(
+                    raw_text_for_metadata = from_native_language(
                         obj.raw_text,
                         working_on_verbose=obj.language,
                         native_language_verbose=detected_language_code,
@@ -130,7 +131,8 @@ class PhraseAdmin(admin.ModelAdmin):
         if not change or raw_text_changed:
             native_language_metadata = list(
                 get_phrase_metadata(
-                    [{"raw_text": obj.raw_text, "language": obj.language}],
+                    # [{"raw_text": obj.raw_text, "language": obj.language}],
+                    [{"raw_text": raw_text_for_metadata, "language": obj.language}],
                     native_language=request.user.native_language,
                     openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
                 )
