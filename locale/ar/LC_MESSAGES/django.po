@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 23:13-0500\n"
+"POT-Creation-Date: 2024-09-16 23:41-0500\n"
 "PO-Revision-Date: 2021-10-15 21:11+0000\n"
 "Last-Translator: Bashar Al-Abdulhadi\n"
 "Language-Team: Arabic (http://www.transifex.com/django/django/language/ar/)\n"
@@ -23,28 +23,32 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: .\accounts\models.py:25
+#, fuzzy
+#| msgid ""
+#| "Used for creating study materials and translation feedback.\n"
+#| "        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+#| "        "
 msgid ""
-"Used for creating study materials and translation feedback.\n"
-"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
-"        "
+"Used for translations and exercise feedback.  Note that gpt-4o-mini is used "
+"for classification tasks."
 msgstr ""
 "استخدم لإنشاء مواد الدراسة وتعليقات الترجمة  \n"
 "        تقديرات التكلفة اعتبارًا من سبتمبر 2024 لاحظ أن gpt-4o-mini يستخدم لمهام الترجمة والتصنيف البسيطة  \n"
 "        "
 
-#: .\accounts\models.py:35
+#: .\accounts\models.py:33
 msgid "OpenAI LLM Model"
 msgstr "نموذج LLM من OpenAI"
 
-#: .\accounts\models.py:38
+#: .\accounts\models.py:36
 msgid "native language"
 msgstr "اللغة الأم"
 
-#: .\accounts\models.py:46
+#: .\accounts\models.py:44
 msgid "working on"
 msgstr "يعمل على"
 
-#: .\accounts\models.py:58
+#: .\accounts\models.py:56
 msgid ""
 "Generate API key <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">here</a> if you have an account."
@@ -52,15 +56,15 @@ msgstr ""
 "إنشاء مفتاح API <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">هنا</a> إذا كان لديك حساب."
 
-#: .\accounts\models.py:62
+#: .\accounts\models.py:60
 msgid "last readwise update"
 msgstr "آخر تحديث ريدوايز"
 
-#: .\accounts\models.py:70
+#: .\accounts\models.py:68
 msgid "use readwise for study materials"
 msgstr "استخدم ريدوايز لمواد الدراسة"
 
-#: .\accounts\models.py:73
+#: .\accounts\models.py:71
 msgid ""
 "Send study materials to <a href=\"https://readwise.io/\" "
 "target=\"_blank\">Readwise</a> (instead of email) if <a "
@@ -72,11 +76,11 @@ msgstr ""
 "href=\"https://readwise.io/access_token\" target=\"_blank\">مفتاح API</a> "
 "متاحًا."
 
-#: .\accounts\models.py:77
+#: .\accounts\models.py:75
 msgid "retrieve native language from readwise"
 msgstr "استرجاع اللغة الأم من ريدوايز"
 
-#: .\accounts\models.py:80
+#: .\accounts\models.py:78
 msgid ""
 "By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
 "on to import from your native language as well."
@@ -84,7 +88,7 @@ msgstr ""
 "بشكل افتراضي يتم استرجاع المفردات الأجنبية فقط من Readwise  قم بتفعيل هذا "
 "لاستيراد من لغتك الأم أيضًا"
 
-#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
 #: .\templates\admin\base_site.html:30

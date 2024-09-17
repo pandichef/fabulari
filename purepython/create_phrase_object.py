@@ -88,7 +88,9 @@ def get_phrase_metadata(
     if "(proper name)" in cleaned_text:
         return None
     example_sentence = generate_full_sentence(
-        cleaned_text, working_on_verbose=working_on_verbose, openai_model=openai_model
+        cleaned_text,
+        working_on_verbose=working_on_verbose,
+        openai_llm_model=openai_model,
     )
     # definition_prompt =
 

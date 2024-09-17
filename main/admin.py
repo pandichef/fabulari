@@ -103,7 +103,8 @@ class PhraseAdmin(admin.ModelAdmin):
                 sentence=obj.raw_text,
                 working_on_verbose=dict(LANGUAGE_CHOICES)[obj.language],
                 native_language_verbose=dict(LANGUAGE_CHOICES)[raw_text_language],
-                openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                # openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                openai_llm_model=request.user.openai_llm_model_complex_tasks,
             )
         else:
             translated_raw_text = obj.raw_text
@@ -117,7 +118,8 @@ class PhraseAdmin(admin.ModelAdmin):
                     }
                 ],
                 native_language=request.user.native_language,
-                openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                openai_model=request.user.openai_llm_model_complex_tasks,
             )
         )[0]
 

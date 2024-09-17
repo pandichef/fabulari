@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 23:13-0500\n"
+"POT-Creation-Date: 2024-09-16 23:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: .\accounts\models.py:25
+#, fuzzy
+#| msgid ""
+#| "Used for creating study materials and translation feedback.\n"
+#| "        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
+#| "        "
 msgid ""
-"Used for creating study materials and translation feedback.\n"
-"        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.\n"
-"        "
+"Used for translations and exercise feedback.  Note that gpt-4o-mini is used "
+"for classification tasks."
 msgstr ""
 "用于创建学习材料和翻译反馈  \n"
 "        成本估算截至2024年9月 请注意 gpt-4o-mini 用于简单翻译和分类任务"
 
-#: .\accounts\models.py:35
+#: .\accounts\models.py:33
 msgid "OpenAI LLM Model"
 msgstr "OpenAI LLM 模型"
 
-#: .\accounts\models.py:38
+#: .\accounts\models.py:36
 msgid "native language"
 msgstr "母语"
 
-#: .\accounts\models.py:46
+#: .\accounts\models.py:44
 msgid "working on"
 msgstr "正在进行"
 
-#: .\accounts\models.py:58
+#: .\accounts\models.py:56
 msgid ""
 "Generate API key <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">here</a> if you have an account."
@@ -46,15 +50,15 @@ msgstr ""
 "生成API密钥 <a href=\"https://readwise.io/access_token\" "
 "target=\"_blank\">在这里</a> 如果您有账户。"
 
-#: .\accounts\models.py:62
+#: .\accounts\models.py:60
 msgid "last readwise update"
 msgstr "最后一次readwise更新"
 
-#: .\accounts\models.py:70
+#: .\accounts\models.py:68
 msgid "use readwise for study materials"
 msgstr "使用 Readwise 进行学习材料"
 
-#: .\accounts\models.py:73
+#: .\accounts\models.py:71
 msgid ""
 "Send study materials to <a href=\"https://readwise.io/\" "
 "target=\"_blank\">Readwise</a> (instead of email) if <a "
@@ -66,17 +70,17 @@ msgstr ""
 "target=\"_blank\">Readwise</a>（而不是电子邮件），当<a "
 "href=\"https://readwise.io/access_token\" target=\"_blank\">API密钥</a>可用时。"
 
-#: .\accounts\models.py:77
+#: .\accounts\models.py:75
 msgid "retrieve native language from readwise"
 msgstr "从readwise中提取母语"
 
-#: .\accounts\models.py:80
+#: .\accounts\models.py:78
 msgid ""
 "By default, only foreign vocabulary is retrieved from Readwise.  Turn this "
 "on to import from your native language as well."
 msgstr "默认情况下，仅从 Readwise 检索外语词汇。开启此功能以从您的母语导入。"
 
-#: .\accounts\models.py:85 .\accounts\models.py:86
+#: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
 #: .\templates\admin\base_site.html:30

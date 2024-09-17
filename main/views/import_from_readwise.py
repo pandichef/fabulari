@@ -72,7 +72,8 @@ Note that Readwise is not a free service."""
             get_phrase_metadata(
                 filtered_digest_dicts,
                 native_language=request.user.native_language,
-                openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                openai_model=request.user.openai_llm_model_complex_tasks,
             )
         )
         new_phrase_objects = [

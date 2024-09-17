@@ -10,7 +10,7 @@ LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 class CustomUser(AbstractUser):
     openai_llm_model_complex_tasks = models.CharField(  # https://openai.com/api/pricing/
         max_length=100,
-        default="gpt-4o-mini",
+        default="gpt-4o",
         null=False,
         blank=False,
         choices=[
@@ -22,9 +22,7 @@ class CustomUser(AbstractUser):
             ),
         ],
         help_text=_(
-            f"""Used for creating study materials and translation feedback.
-        Cost estimates are as of September 2024. Note that gpt-4o-mini is used for simple translation and classification tasks.
-        """
+            f"""Used for translations and exercise feedback.  Note that gpt-4o-mini is used for classification tasks."""
         ),
         # help_text=_(
         #     f"""Used for creating study materials and translation feedback.

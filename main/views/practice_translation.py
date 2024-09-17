@@ -21,6 +21,11 @@ zero_to_ten_multiplier = 10  # score from 0 to 10 is more intuitive
 
 
 def practice_translation_view(request, phrase_id=None):
+    if request.user.is_authenticated:
+        openai_llm_model = request.user.openai_llm_model_complex_tasks
+    else:
+        openai_llm_model = settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+
     # if request.method == "POST" and phrase_id:
     #     return redirect("https://www.nytimes.com")
     if request.method == "POST":
@@ -44,10 +49,10 @@ def practice_translation_view(request, phrase_id=None):
         )
         cosine_similarity = compute_cosine_similarity(embeddings[0], embeddings[1])
         # print(attempted_translation)
-        if request.user.is_authenticated:
-            openai_llm_model = request.user.openai_llm_model_complex_tasks
-        else:
-            openai_llm_model = settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+        # if request.user.is_authenticated:
+        #     openai_llm_model = request.user.openai_llm_model_complex_tasks
+        # else:
+        #     openai_llm_model = settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
 
         feedback = get_feedback(
             request.session.get("equivalent_native_language_sentence", ""),
@@ -182,13 +187,17 @@ def practice_translation_view(request, phrase_id=None):
     full_working_on_sentence = generate_full_sentence(
         phrase=next_phrase.raw_text,
         working_on_verbose=working_on,
-        openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        openai_llm_model=openai_llm_model,
+        # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        # openai_model=request.user.openai_llm_model_complex_tasks,
     )
     equivalent_native_language_sentence = to_native_language(
         sentence=full_working_on_sentence,
         working_on_verbose=working_on,
         native_language_verbose=native_language,
-        openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        # openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+        openai_llm_model=openai_llm_model,
+        # openai_llm_model=request.user.openai_llm_model_complex_tasks,
     )
 
     # store session variables

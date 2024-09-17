@@ -18,29 +18,31 @@ client = OpenAI()
 def generate_full_sentence(
     phrase: str,  # e.g., tener
     working_on_verbose: str,  # ="Spanish",
-    openai_model: str,  # ="gpt-4o-mini"
+    openai_llm_model: str,  # ="gpt-4o-mini"
 ) -> str | None:
     hebrew_arabic_suffix = """
 Even if the original {working_on} word or phrase doesn't have vowels, add the vowels in the output."""
     if working_on_verbose == "Hebrew":
-        openai_model = "gpt-4o"  # hack; gpt-4o-mini works terribly with Hebrew
+        # openai_llm_model = "gpt-4o"  # hack; gpt-4o-mini works terribly with Hebrew
         hebrew_arabic_suffix = (
             hebrew_arabic_suffix.format(working_on=working_on_verbose)
             + """\nFor example, if the user types בית, the clean phrase would be בַּיִת.  If the user types לישון, the clean phrase would be לִישׁוֹן."""
         )
     elif working_on_verbose == "Arabic":
-        openai_model = "gpt-4o"  # hack; gpt-4o-mini works terribly with Arabic
+        # openai_llm_model = "gpt-4o"  # hack; gpt-4o-mini works terribly with Arabic
         hebrew_arabic_suffix = (
             hebrew_arabic_suffix.format(working_on=working_on_verbose)
             + """\nFor example, if the user types منزل, the clean phrase would be مَنْزِل.  If the user types للنوم, the clean phrase would be لِلنَّوْمِ."""
         )
     elif working_on_verbose in []:
-        openai_model = "gpt-4o"  # hack; gpt-4o-mini works terribly in these languages
+        openai_llm_model = (
+            "gpt-4o"  # hack; gpt-4o-mini works terribly in these languages
+        )
     else:
         hebrew_arabic_suffix = ""
 
     completion = client.chat.completions.create(
-        model=openai_model,
+        model=openai_llm_model,
         messages=[
             {
                 "role": "system",

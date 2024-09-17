@@ -48,7 +48,7 @@ def add_multiple_phrases_view(request):
         # Phrase.objects.bulk_create(list_of_phrase_objects)
         messages.success(
             request,
-            f"""Added {added_count} new {language} words out of {total_count}.  ({total_count-added_count} already existed in the database.)  Note that metadata is not retrieved from {settings.OPENAI_LLM_MODEL_SIMPLE_TASKS} when adding data in bulk.""",
+            f"""Added {added_count} new {language} words out of {total_count}.  ({total_count-added_count} already existed in the database.)  Note that metadata is not retrieved from {request.user.openai_llm_model_complex_tasks} when adding data in bulk.""",
         )
         # from  django.urls import reverse
         return redirect(reverse("admin:main_phrase_changelist"))

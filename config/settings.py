@@ -26,7 +26,8 @@ ON_PYTHONANYWHERE = True if os.getenv("PYTHONANYWHERE_DOMAIN") else False
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if ON_PYTHONANYWHERE else True
+# DEBUG = False if ON_PYTHONANYWHERE else True
+DEBUG = True
 
 # if os.name == "posix":
 if ON_PYTHONANYWHERE:
