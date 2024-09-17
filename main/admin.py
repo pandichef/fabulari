@@ -7,13 +7,26 @@ from purepython.create_phrase_object import get_phrase_metadata
 from purepython.practice_translation import detect_language_code as detect
 from purepython.practice_translation import from_native_language
 from .models import Phrase
+from django import forms
 
 LANGUAGE_CHOICES = settings.LANGUAGE_CHOICES
 SUPPORTED_LANGUAGES = [code for code, _ in LANGUAGE_CHOICES]
 
 
+class PhraseForm(forms.ModelForm):
+    class Meta:
+        model = Phrase
+        fields = "__all__"  # or specify the fields you want
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set autofocus on a specific field
+        self.fields["raw_text"].widget.attrs.update({"autofocus": "autofocus"})
+
+
 @admin.register(Phrase)
 class PhraseAdmin(admin.ModelAdmin):
+    form = PhraseForm
     # change_list_template = "change_list_with_readwise_import.html"
     # change_form_template = "change_form_without_history.html"
     change_form_template = "admin/change_form_with_bulk_add_button.html"
