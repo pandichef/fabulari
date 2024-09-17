@@ -45,7 +45,13 @@ class CustomUserAdmin(UserAdmin):
         # )
         return self.changeform_view(request, None, form_url, extra_context)
 
-    list_display = ["username", "is_staff", "native_language", "working_on"]
+    list_display = [
+        "username",
+        "is_staff",
+        "native_language",
+        "working_on",
+        "openai_llm_model_complex_tasks",
+    ]
     fieldsets = (
         ("App Settings", {"fields": ("native_language", "working_on")}),
         ("Username/Password", {"fields": ("username", "password", "email")}),
