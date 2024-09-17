@@ -90,6 +90,8 @@ class PhraseAdmin(admin.ModelAdmin):
                 phrase=obj.raw_text,
                 openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
             )
+            # print(request.user.working_on)
+            # print(detected_language_code)
             if not obj.language:
                 if detected_language_code == request.user.native_language:
                     obj.language = request.user.working_on
