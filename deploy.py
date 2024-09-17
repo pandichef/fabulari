@@ -321,12 +321,12 @@ def main():
     run_pythonanywhere_console_command("git pull", console_id)
     run_pythonanywhere_console_command("python manage.py migrate", console_id)
     run_pythonanywhere_console_command(
+        "python manage.py dumpdata > ../dbbackup.json", console_id
+    )
+    run_pythonanywhere_console_command(
         "python manage.py collectstatic --no-input", console_id
     )
     run_pythonanywhere_console_command("python manage.py compilemessages", console_id)
-    run_pythonanywhere_console_command(
-        "python manage.py dumpdata > ../dbbackup.json", console_id
-    )
 
     # Step 3: Collect static files (optional step, you can comment it out if not needed)
     # print("Collecting static files...")
