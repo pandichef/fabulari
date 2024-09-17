@@ -49,3 +49,11 @@ class Phrase(models.Model):
 
     def __str__(self):
         return f"{self.cleaned_text}"
+        # from django.utils.safestring import mark_safe
+
+        # # RTL languages like Arabic and Hebrew
+        # if self.language in ["ar", "he"]:
+        #     return mark_safe(
+        #         f'<div dir="rtl" style="text-align: left;">{self.cleaned_text}</div>'
+        #     )
+        # return self.cleaned_text  # Default for LTR languages

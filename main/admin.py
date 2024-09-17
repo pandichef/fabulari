@@ -1,3 +1,4 @@
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -31,6 +32,21 @@ class PhraseAdmin(admin.ModelAdmin):
     # change_form_template = "change_form_without_history.html"
     change_form_template = "admin/change_form_with_bulk_add_button.html"
 
+    # def get_form(self, request, obj=None, **kwargs):
+    #     # Call the base implementation to get the form
+    #     form = super().get_form(request, obj, **kwargs)
+
+    #     # If the object exists and has a 'language' field set to 'ar' or 'he'
+    #     if obj and obj.language in ["ar", "he"]:
+    #         # Add 'dir' attribute to the 'your_field' form field
+    #         # form.base_fields["cleaned_text"].widget.attrs.update({"dir": "rtl"})
+    #         # form.base_fields["raw_text"].widget.attrs.update({"dir": "rtl"})
+    #         form.base_fields["raw_text"].widget.attrs.update({"dir": "rtl"})
+
+    #     return form
+
+    # def render
+
     def change_view(self, request, object_id, form_url="", extra_context=None):
         obj = self.get_object(request, object_id)
         extra_context = extra_context or {}
@@ -50,7 +66,7 @@ class PhraseAdmin(admin.ModelAdmin):
         return self.changeform_view(request, None, form_url, extra_context)
 
     list_display = (
-        "cleaned_text",
+        "formatted_cleaned_text",  # for RTL Languages
         "definition",
         "cosine_similarity",
         "language",
@@ -67,26 +83,90 @@ class PhraseAdmin(admin.ModelAdmin):
     search_fields = ("cleaned_text",)
     fields = (
         "raw_text",
-        "example_sentence",
+        "_example_sentence",
         "definition",
         "language",
         "cosine_similarity",
     )
+
+    # def st
 
     def get_readonly_fields(self, request, obj=None):
         fields = [
             "cosine_similarity",
             "user",
             "cleaned_text",
-            "example_sentence",
+            "_example_sentence",
             "definition",
         ]
+        return fields
+        # if obj:
+        #     return fields
+        # else:
+        #     return fields
 
-        if obj:
-            # return fields + ["language"]
-            return fields
+    def formatted_cleaned_text(self, obj):
+        # Check if the language is Arabic or Hebrew
+        if obj.language in ["ar", "he"]:
+            # Apply RTL formatting with left alignment
+            return mark_safe(
+                f'<div dir="rtl" style="text-align: left;">{obj.cleaned_text}</div>'
+            )
+        return obj.cleaned_text
+
+    # Column name in list display
+    formatted_cleaned_text.short_description = "Phrase"
+
+    def _example_sentence(self, obj):
+        from django.utils.safestring import mark_safe
+
+        if obj.language in ["ar", "he"]:
+            # return obj.example_sentence
+            return mark_safe(
+                f'<div dir="rtl" style="text-align: left;">{obj.example_sentence}</div>'
+            )
         else:
-            return fields
+            return obj.example_sentence
+
+    _example_sentence.short_description = "Example sentence"
+
+    # def get_object(self, request, object_id, from_field=None):
+    #     from django.utils.safestring import mark_safe
+
+    #     obj = super().get_object(request, object_id, from_field)
+
+    #     if obj and obj.language in ["ar", "he"]:
+    #         # Apply RTL formatting for the object's __str__ in the header
+    #         obj.display_str = mark_safe(
+    #             f'<div dir="rtl" style="text-align: left;">{obj.cleaned_text}</div>'
+    #         )
+    #     else:
+    #         obj.display_str = "Add Phrase"
+
+    #     return obj
+
+    def changeform_view(self, request, object_id=None, form_url="", extra_context=None):
+        # for RTL Languages
+
+        obj = self.get_object(request, object_id)
+
+        # Add extra context to display the formatted __str__ at the top and breadcrumbs
+        if obj:
+            extra_context = extra_context or {}
+            extra_context["title"] = "Phrase:"  # str(obj) if obj else "Change Object"
+            if obj and obj.language in ["ar", "he"]:
+                # Apply RTL formatting for the object's __str__ in the header
+                extra_context["subtitle"] = mark_safe(
+                    f'<div dir="rtl" style="text-align: left;">{str(obj)}</div>'
+                )
+            else:
+                extra_context["subtitle"] = str(obj)
+                # obj.display_str = "Add Phrase"
+            # extra_context["subtitle"] = str(obj) if obj else "Change Object"
+
+        return super().changeform_view(
+            request, object_id, form_url, extra_context=extra_context
+        )
 
     def save_model(self, request, obj, form, change):
         #
