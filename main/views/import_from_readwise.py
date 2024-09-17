@@ -46,8 +46,8 @@ Note that Readwise is not a free service."""
             updated_after=request.user.last_readwise_update.isoformat(),
             token=request.user.readwise_api_key,
         )
-        print("all_data")
-        pprint(all_data)
+        # print("all_data")
+        # pprint(all_data)
         digest = make_digest_multithreaded(
             all_data,
             supported_language_codes=SUPPORTED_LANGUAGES,
@@ -61,7 +61,8 @@ Note that Readwise is not a free service."""
             or request.user.retrieve_native_language_from_readwise
         ]
         filtered_digest_dicts = [
-            {"raw_text": item[0], "language": item[1]} for item in filtered_digest
+            {"translated_raw_text": item[0], "language": item[1]}
+            for item in filtered_digest
         ]
         from purepython.create_phrase_object import get_phrase_metadata
 
@@ -78,7 +79,7 @@ Note that Readwise is not a free service."""
         )
         new_phrase_objects = [
             Phrase(
-                raw_text=item["raw_text"],
+                raw_text=item["translated_raw_text"],
                 language=item["language"],
                 cleaned_text=item["cleaned_text"],
                 example_sentence=item["example_sentence"],
