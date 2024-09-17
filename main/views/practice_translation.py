@@ -21,6 +21,7 @@ zero_to_ten_multiplier = 10  # score from 0 to 10 is more intuitive
 
 
 def practice_translation_view(request, phrase_id=None):
+    # Don't waste money on unauthenticated users
     if request.user.is_authenticated:
         openai_llm_model = request.user.openai_llm_model_complex_tasks
     else:
@@ -92,24 +93,28 @@ def practice_translation_view(request, phrase_id=None):
         )
 
     ########################################################################
+    ########################################################################
+    ########################################################################
     # GET
     # Get most relevant phrase
     # print(request.user)
 
     if request.user.is_authenticated:
-        native_language_code = request.user.native_language
-        working_on_code = request.user.working_on
-        qs = Phrase.objects.filter(user=request.user, language=working_on_code)
+        native_language = request.user.native_language
+        working_on = request.user.working_on
+        qs = Phrase.objects.filter(user=request.user, language=working_on)
     else:
-        native_language_code = "en"
-        working_on_code = "es"
-        qs = Phrase.objects.filter(language=working_on_code)
+        native_language = "en"
+        working_on = "es"
+        qs = Phrase.objects.filter(language=working_on)
         qs = qs.filter(cosine_similarity__isnull=False)
-    native_language = dict(LANGUAGE_CHOICES)[native_language_code]
-    working_on = dict(LANGUAGE_CHOICES)[working_on_code]
+    native_language_verbose = dict(LANGUAGE_CHOICES)[native_language]
+    working_on_verbose = dict(LANGUAGE_CHOICES)[working_on]
 
     if phrase_id:
         next_phrase = Phrase.objects.get(id=phrase_id)
+        working_on_verbose = dict(LANGUAGE_CHOICES)[next_phrase.language]
+        print(working_on_verbose)
         # random_value = request.session["random_value"]
     else:
 
@@ -186,15 +191,15 @@ def practice_translation_view(request, phrase_id=None):
 
     full_working_on_sentence = generate_full_sentence(
         phrase=next_phrase.raw_text,
-        working_on_verbose=working_on,
+        working_on_verbose=working_on_verbose,
         openai_llm_model=openai_llm_model,
         # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
         # openai_model=request.user.openai_llm_model_complex_tasks,
     )
     equivalent_native_language_sentence = to_native_language(
         sentence=full_working_on_sentence,
-        working_on_verbose=working_on,
-        native_language_verbose=native_language,
+        working_on_verbose=working_on_verbose,
+        native_language_verbose=native_language_verbose,
         # openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
         openai_llm_model=openai_llm_model,
         # openai_llm_model=request.user.openai_llm_model_complex_tasks,
@@ -207,8 +212,8 @@ def practice_translation_view(request, phrase_id=None):
     request.session[
         "equivalent_native_language_sentence"
     ] = equivalent_native_language_sentence
-    request.session["working_on"] = working_on
-    request.session["native_language"] = native_language
+    request.session["working_on"] = working_on_verbose
+    request.session["native_language"] = native_language_verbose
 
     return render(
         request,
@@ -217,7 +222,7 @@ def practice_translation_view(request, phrase_id=None):
             "host_email": settings.EMAIL_HOST_USER,
             "phrase_id": phrase_id,
             "english_sentence": request.session["equivalent_native_language_sentence"],
-            "working_on": working_on,
+            "working_on": working_on_verbose,
             # "last_cosine_similarity": round(
             #     request.session.get("prev_cosine_similarity") * zero_to_ten_multiplier,
             #     1,

@@ -153,12 +153,13 @@ class PhraseAdmin(admin.ModelAdmin):
         # Add extra context to display the formatted __str__ at the top and breadcrumbs
         if obj:
             extra_context = extra_context or {}
-            extra_context["title"] = "Phrase:"  # str(obj) if obj else "Change Object"
+            extra_context["title"] = "Phrase"  # str(obj) if obj else "Change Object"
             if obj and obj.language in ["ar", "he"]:
                 # Apply RTL formatting for the object's __str__ in the header
-                extra_context["subtitle"] = mark_safe(
-                    f'<div dir="rtl" style="text-align: left;">{str(obj)}</div>'
-                )
+                extra_context["subtitle"] = self.formatted_cleaned_text(obj)
+                # extra_context["subtitle"] =  mark_safe(
+                #     f'<div dir="rtl" style="text-align: left;">{str(obj)}</div>'
+                # )
             else:
                 extra_context["subtitle"] = str(obj)
                 # obj.display_str = "Add Phrase"

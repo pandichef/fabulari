@@ -35,7 +35,7 @@ class Phrase(models.Model):
         null=False,
         blank=True,
         help_text=_(
-            """"Uses your "working on" language if left blank.  See Settings."""
+            """Uses your "working on" language if left blank.  See Settings."""
         ),
     )
     cosine_similarity = models.DecimalField(
