@@ -141,9 +141,14 @@ class CustomUserAdmin(UserAdmin):
     def response_change(self, request, obj):
 
         # Redirect to the same page with the new language
-        return redirect(
-            f"/{obj.native_language}/admin/accounts/customuser/{obj.id}/change/"
-        )
+        if request.user.is_superuser:
+            return redirect(
+                f"/{request.user.native_language}/admin/accounts/customuser/{obj.id}/change/"
+            )
+        else:
+            return redirect(
+                f"/{obj.native_language}/admin/accounts/customuser/{obj.id}/change/"
+            )
 
     def get_readonly_fields(self, request, obj=None):
         fields = [
