@@ -172,7 +172,8 @@ class PhraseAdmin(admin.ModelAdmin):
         )
 
     def save_model(self, request, obj, form, change):
-        #
+        self.detected_a_supported_language = True
+
         if obj.id:
             last_obj = Phrase.objects.get(id=obj.id)
             do_nothing = (
@@ -193,16 +194,29 @@ class PhraseAdmin(admin.ModelAdmin):
             phrase=obj.raw_text,
             openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
         )
+        print(raw_text_language)
+        print(raw_text_language)
+        print(raw_text_language)
+        print(raw_text_language)
+
         if not obj.language:
             obj.language = request.user.working_on
+
         if obj.language != raw_text_language:
-            translated_raw_text = from_native_language(
-                sentence=obj.raw_text,
-                working_on_verbose=dict(LANGUAGE_CHOICES)[obj.language],
-                native_language_verbose=dict(LANGUAGE_CHOICES)[raw_text_language],
-                # openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
-                openai_llm_model=request.user.openai_llm_model_complex_tasks,
-            )
+            try:
+                translated_raw_text = from_native_language(
+                    sentence=obj.raw_text,
+                    working_on_verbose=dict(LANGUAGE_CHOICES)[obj.language],
+                    native_language_verbose=dict(LANGUAGE_CHOICES).get(
+                        raw_text_language, "language with ISO code " + raw_text_language
+                    ),
+                    # openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
+                    openai_llm_model=request.user.openai_llm_model_complex_tasks,
+                )
+            except KeyError:
+                self.detected_a_supported_language = False
+                translated_raw_text = obj.raw_text  # hack
+                # return None
         else:
             translated_raw_text = obj.raw_text
 
@@ -220,16 +234,29 @@ class PhraseAdmin(admin.ModelAdmin):
             )
         )[0]
 
-        from pprint import pprint
+        # from pprint import pprint
 
-        pprint(native_language_metadata)
+        # pprint(native_language_metadata)
 
-        obj.cleaned_text = native_language_metadata["cleaned_text"]
-        obj.example_sentence = native_language_metadata["example_sentence"]
-        obj.definition = native_language_metadata["definition"]
-        obj.sanity_check = native_language_metadata["sanity_check"]
-        obj.user = request.user
-        obj.save()
+        self.existing_object = Phrase.objects.filter(
+            cleaned_text=native_language_metadata["cleaned_text"], user=request.user
+        ).first()
+        print(native_language_metadata["cleaned_text"])
+        print(native_language_metadata["cleaned_text"])
+        print(native_language_metadata["cleaned_text"])
+        print(self.existing_object)
+        print(self.existing_object)
+        print(self.existing_object)
+        if self.existing_object and self.existing_object.id == obj.id:
+            self.existing_object = None
+
+        if not self.existing_object:
+            obj.cleaned_text = native_language_metadata["cleaned_text"]
+            obj.example_sentence = native_language_metadata["example_sentence"]
+            obj.definition = native_language_metadata["definition"]
+            obj.sanity_check = native_language_metadata["sanity_check"]
+            obj.user = request.user
+            obj.save()
 
         #     # if change:  # if the object is being created
         #     last_obj = Phrase.objects.get(id=obj.id)
@@ -385,20 +412,58 @@ class PhraseAdmin(admin.ModelAdmin):
         # return True
 
     def response_add(self, request, obj):
-        if obj.cleaned_text == "(proper noun)":
-            list_url = reverse(
-                "admin:main_phrase_changelist",  # Replace 'appname' with your app's name
-            )
-            return redirect(list_url)
-        elif obj.cleaned_text:
+        # if obj.cleaned_text == "(proper noun)":
+        #     list_url = reverse(
+        #         "admin:main_phrase_changelist",  # Replace 'appname' with your app's name
+        #     )
+        #     return redirect(list_url)
+        print(11111)
+        print(11111)
+        print(11111)
+        print(11111)
+        if not self.existing_object:
             return super().response_add(request, obj)
+        elif not self.detected_a_supported_language:
+            self.message_user(
+                request,
+                f"Detected language code {obj.language}, which is not supported currently.",
+            )
+            return redirect(reverse("admin:main_phrase_add"))
         else:
             self.message_user(request, "This term already exists.  Redirecting.")
 
             change_url = reverse(
                 "admin:main_phrase_change",  # Replace 'appname' with your app's name
-                args=[obj.existing_obj_id],
+                args=[self.existing_object.id],
             )
+            return redirect(change_url)
+
+    def response_change(self, request, obj):
+        # if obj.cleaned_text == "(proper noun)":
+        #     list_url = reverse(
+        #         "admin:main_phrase_changelist",  # Replace 'appname' with your app's name
+        #     )
+        #     return redirect(list_url)
+        if not self.existing_object:
+            return super().response_change(request, obj)
+        elif not self.detected_a_supported_language:
+            self.message_user(
+                request,
+                f"Detected language code {obj.language}, which is not supported currently.",
+            )
+            return redirect(reverse("admin:myapp_mymodel_change", args=[obj.id]))
+        else:
+            self.message_user(
+                request,
+                f"This term already exists.  Redirecting to object {self.existing_object.id} and deleting object {obj.id}.",
+            )
+            # self.message_user(request, "This term already exists.  Redirecting.")
+
+            change_url = reverse(
+                "admin:main_phrase_change",  # Replace 'appname' with your app's name
+                args=[self.existing_object.id],
+            )
+            obj.delete()  # this is the only difference between response_add and response_change
             return redirect(change_url)
 
     def get_queryset(self, request):

@@ -123,6 +123,12 @@ The response should mimic the punctuation of the original text as much as possib
     return completion.choices[0].message.content
 
 
+# from .settings import SUPPORTED_LANGUAGES
+
+# The response should be one of the follow language codes:
+# {','.join(SUPPORTED_LANGUAGES)}
+
+
 def detect_language_code(phrase: str, openai_llm_model: str):  # e.g., "gpt-4o-mini",
     completion = client.chat.completions.create(
         model=openai_llm_model,
