@@ -85,6 +85,7 @@ class PhraseAdmin(admin.ModelAdmin):
         "raw_text",
         "_example_sentence",
         "definition",
+        "sanity_check",
         "language",
         "cosine_similarity",
     )
@@ -98,6 +99,7 @@ class PhraseAdmin(admin.ModelAdmin):
             "cleaned_text",
             "_example_sentence",
             "definition",
+            "sanity_check",
         ]
         return fields
         # if obj:
@@ -225,6 +227,7 @@ class PhraseAdmin(admin.ModelAdmin):
         obj.cleaned_text = native_language_metadata["cleaned_text"]
         obj.example_sentence = native_language_metadata["example_sentence"]
         obj.definition = native_language_metadata["definition"]
+        obj.sanity_check = native_language_metadata["sanity_check"]
         obj.user = request.user
         obj.save()
 

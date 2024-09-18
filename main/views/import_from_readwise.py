@@ -84,6 +84,7 @@ Note that Readwise is not a free service."""
                 cleaned_text=item["cleaned_text"],
                 example_sentence=item["example_sentence"],
                 definition=item["definition"],
+                sanity_check=item["sanity_check"],
                 user=request.user,
             )
             for item in obj_datas

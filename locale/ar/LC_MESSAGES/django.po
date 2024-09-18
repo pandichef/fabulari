@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 00:25-0500\n"
+"POT-Creation-Date: 2024-09-18 00:07-0500\n"
 "PO-Revision-Date: 2021-10-15 21:11+0000\n"
 "Last-Translator: Bashar Al-Abdulhadi\n"
 "Language-Team: Arabic (http://www.transifex.com/django/django/language/ar/)\n"
@@ -91,7 +91,7 @@ msgstr ""
 #: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
+#: .\templates\admin\base_site.html:33
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -115,7 +115,7 @@ msgstr "نص خام"
 msgid "This can be in any language you choose."
 msgstr "يمكن أن تكون هذه بأي لغة تختارها"
 
-#: .\main\models.py:28 .\main\models.py:47
+#: .\main\models.py:28 .\main\models.py:48
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "عبارة"
@@ -130,15 +130,21 @@ msgstr "جملة مثال"
 msgid "definition"
 msgstr "إضافة"
 
-#: .\main\models.py:32
+#: .\main\models.py:31
+msgid "sanity check"
+msgstr "فحص الصحة"
+
+#: .\main\models.py:33
 msgid "language"
 msgstr "لغة"
 
-#: .\main\models.py:38
-msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+#: .\main\models.py:39
+#, fuzzy
+#| msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgid "Uses your \"working on\" language if left blank.  See Settings."
 msgstr "\"يستخدم لغتك \"العمل على\" إذا تركت فارغاً  راجع الإعدادات"
 
-#: .\main\models.py:48
+#: .\main\models.py:49
 msgid "Phrases"
 msgstr "عبارات"
 
@@ -176,7 +182,7 @@ msgstr "ممارسة الترجمة على هذه العبارة"
 
 #: .\main\templates\create_study_materials.html:8
 #: .\main\templates\create_study_materials.html:86
-#: .\templates\admin\base_site.html:13
+#: .\templates\admin\base_site.html:16
 msgid "Create Study Materials"
 msgstr "إنشاء مواد دراسية"
 
@@ -247,31 +253,31 @@ msgstr "تصفية من خلال GPT أولاً"
 msgid "Focus on My Phrase List"
 msgstr "ركز على قائمة عباراتى"
 
-#: .\templates\admin\base_site.html:4
+#: .\templates\admin\base_site.html:7
 msgid "Django site admin"
 msgstr "إدارة موقع جانغو"
 
-#: .\templates\admin\base_site.html:7
+#: .\templates\admin\base_site.html:10
 msgid "Django administration"
 msgstr "إدارة جانغو"
 
-#: .\templates\admin\base_site.html:18
+#: .\templates\admin\base_site.html:21
 msgid "Practice Translation"
 msgstr "ممارسة الترجمة"
 
-#: .\templates\admin\base_site.html:23
+#: .\templates\admin\base_site.html:26
 msgid "Documentation"
 msgstr "الوثائق"
 
-#: .\templates\admin\base_site.html:28
+#: .\templates\admin\base_site.html:31
 msgid "Change password"
 msgstr "غيّر كلمة المرور"
 
-#: .\templates\admin\base_site.html:32
+#: .\templates\admin\base_site.html:35
 msgid "Report Issues"
 msgstr "الإبلاغ عن المشاكل"
 
-#: .\templates\admin\base_site.html:33
+#: .\templates\admin\base_site.html:36
 msgid "Log out"
 msgstr "تسجيل الخروج"
 
@@ -292,7 +298,7 @@ msgstr "تصدير العبارات إلى ملف CSV ⬇"
 msgid "My Level 💡"
 msgstr "مستواي 💡"
 
-#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:14
 msgid "Save"
 msgstr "احفظ"
 
@@ -305,12 +311,12 @@ msgid "Save as new"
 msgstr "احفظ كجديد"
 
 #: .\templates\admin\submit_line.html:14
-msgid "Save and add another"
-msgstr "احفظ وأضف آخر"
-
-#: .\templates\admin\submit_line.html:19
 msgid "Save and view"
 msgstr "احفظ واستعرض"
+
+#: .\templates\admin\submit_line.html:15
+msgid "Save and add another"
+msgstr "احفظ وأضف آخر"
 
 #: .\templates\admin\submit_line.html:20
 msgid "Close"

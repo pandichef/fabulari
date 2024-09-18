@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 00:25-0500\n"
+"POT-Creation-Date: 2024-09-18 00:07-0500\n"
 "PO-Revision-Date: 2021-11-09 07:39+0000\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: French (http://www.transifex.com/django/django/language/fr/)\n"
@@ -87,7 +87,7 @@ msgstr ""
 #: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
+#: .\templates\admin\base_site.html:33
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -111,7 +111,7 @@ msgstr "Texte brut"
 msgid "This can be in any language you choose."
 msgstr "Cela peut être dans n'importe quelle langue de votre choix"
 
-#: .\main\models.py:28 .\main\models.py:47
+#: .\main\models.py:28 .\main\models.py:48
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Phrase"
@@ -126,15 +126,21 @@ msgstr "phrase exemple"
 msgid "definition"
 msgstr "Ajout"
 
-#: .\main\models.py:32
+#: .\main\models.py:31
+msgid "sanity check"
+msgstr "vérification de la cohérence"
+
+#: .\main\models.py:33
 msgid "language"
 msgstr "langue"
 
-#: .\main\models.py:38
-msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+#: .\main\models.py:39
+#, fuzzy
+#| msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgid "Uses your \"working on\" language if left blank.  See Settings."
 msgstr "\"Utilise votre langue « en cours » si laissée vide. Voir Paramètres.\""
 
-#: .\main\models.py:48
+#: .\main\models.py:49
 msgid "Phrases"
 msgstr "Phrases"
 
@@ -170,7 +176,7 @@ msgstr "Pratique de traduction sur cette phrase"
 
 #: .\main\templates\create_study_materials.html:8
 #: .\main\templates\create_study_materials.html:86
-#: .\templates\admin\base_site.html:13
+#: .\templates\admin\base_site.html:16
 msgid "Create Study Materials"
 msgstr "Créer des Supports d'Étude"
 
@@ -245,31 +251,31 @@ msgstr "Filtrer à travers GPT d'abord"
 msgid "Focus on My Phrase List"
 msgstr "Concentrez-vous sur ma liste de phrases"
 
-#: .\templates\admin\base_site.html:4
+#: .\templates\admin\base_site.html:7
 msgid "Django site admin"
 msgstr "Site d’administration de Django"
 
-#: .\templates\admin\base_site.html:7
+#: .\templates\admin\base_site.html:10
 msgid "Django administration"
 msgstr "Administration de Django"
 
-#: .\templates\admin\base_site.html:18
+#: .\templates\admin\base_site.html:21
 msgid "Practice Translation"
 msgstr "Pratique de traduction"
 
-#: .\templates\admin\base_site.html:23
+#: .\templates\admin\base_site.html:26
 msgid "Documentation"
 msgstr "Documentation"
 
-#: .\templates\admin\base_site.html:28
+#: .\templates\admin\base_site.html:31
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: .\templates\admin\base_site.html:32
+#: .\templates\admin\base_site.html:35
 msgid "Report Issues"
 msgstr "Signaler des problèmes"
 
-#: .\templates\admin\base_site.html:33
+#: .\templates\admin\base_site.html:36
 msgid "Log out"
 msgstr "Déconnexion"
 
@@ -290,7 +296,7 @@ msgstr "Exporter les phrases vers un fichier CSV ⬇"
 msgid "My Level 💡"
 msgstr "Mon Niveau 💡"
 
-#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:14
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -303,12 +309,12 @@ msgid "Save as new"
 msgstr "Enregistrer en tant que nouveau"
 
 #: .\templates\admin\submit_line.html:14
-msgid "Save and add another"
-msgstr "Enregistrer et ajouter un nouveau"
-
-#: .\templates\admin\submit_line.html:19
 msgid "Save and view"
 msgstr "Enregistrer et afficher"
+
+#: .\templates\admin\submit_line.html:15
+msgid "Save and add another"
+msgstr "Enregistrer et ajouter un nouveau"
 
 #: .\templates\admin\submit_line.html:20
 msgid "Close"

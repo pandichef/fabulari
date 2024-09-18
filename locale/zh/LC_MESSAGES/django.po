@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 00:25-0500\n"
+"POT-Creation-Date: 2024-09-18 00:07-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgstr "默认情况下，仅从 Readwise 检索外语词汇。开启此功能�
 #: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
+#: .\templates\admin\base_site.html:33
 msgid "Settings"
 msgstr "设置"
 
@@ -107,7 +107,7 @@ msgstr "原始文本"
 msgid "This can be in any language you choose."
 msgstr "这可以用你选择的任何语言表达"
 
-#: .\main\models.py:28 .\main\models.py:47
+#: .\main\models.py:28 .\main\models.py:48
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "短语"
@@ -120,15 +120,21 @@ msgstr "示例句子"
 msgid "definition"
 msgstr "定义"
 
-#: .\main\models.py:32
+#: .\main\models.py:31
+msgid "sanity check"
+msgstr "合理性检查"
+
+#: .\main\models.py:33
 msgid "language"
 msgstr "语言"
 
-#: .\main\models.py:38
-msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+#: .\main\models.py:39
+#, fuzzy
+#| msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgid "Uses your \"working on\" language if left blank.  See Settings."
 msgstr "“如果留空则使用您的“正在使用”的语言。请查看设置。”"
 
-#: .\main\models.py:48
+#: .\main\models.py:49
 msgid "Phrases"
 msgstr "短语"
 
@@ -162,7 +168,7 @@ msgstr "练习翻译这个短语"
 
 #: .\main\templates\create_study_materials.html:8
 #: .\main\templates\create_study_materials.html:86
-#: .\templates\admin\base_site.html:13
+#: .\templates\admin\base_site.html:16
 msgid "Create Study Materials"
 msgstr "创建学习材料"
 
@@ -229,31 +235,31 @@ msgstr "首先通过GPT过滤"
 msgid "Focus on My Phrase List"
 msgstr "关注我的短语列表"
 
-#: .\templates\admin\base_site.html:4
+#: .\templates\admin\base_site.html:7
 msgid "Django site admin"
 msgstr "Django 网站管理员"
 
-#: .\templates\admin\base_site.html:7
+#: .\templates\admin\base_site.html:10
 msgid "Django administration"
 msgstr "Django 管理 "
 
-#: .\templates\admin\base_site.html:18
+#: .\templates\admin\base_site.html:21
 msgid "Practice Translation"
 msgstr "练习翻译"
 
-#: .\templates\admin\base_site.html:23
+#: .\templates\admin\base_site.html:26
 msgid "Documentation"
 msgstr "文档"
 
-#: .\templates\admin\base_site.html:28
+#: .\templates\admin\base_site.html:31
 msgid "Change password"
 msgstr "更改密码"
 
-#: .\templates\admin\base_site.html:32
+#: .\templates\admin\base_site.html:35
 msgid "Report Issues"
 msgstr "报告问题"
 
-#: .\templates\admin\base_site.html:33
+#: .\templates\admin\base_site.html:36
 msgid "Log out"
 msgstr "登出"
 
@@ -274,7 +280,7 @@ msgstr "导出短语到CSV文件⬇"
 msgid "My Level 💡"
 msgstr "我的等级 💡"
 
-#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:14
 msgid "Save"
 msgstr "保存"
 
@@ -287,12 +293,12 @@ msgid "Save as new"
 msgstr "另存为新文件"
 
 #: .\templates\admin\submit_line.html:14
-msgid "Save and add another"
-msgstr "保存并添加另一个"
-
-#: .\templates\admin\submit_line.html:19
 msgid "Save and view"
 msgstr "保存并查看"
+
+#: .\templates\admin\submit_line.html:15
+msgid "Save and add another"
+msgstr "保存并添加另一个"
 
 #: .\templates\admin\submit_line.html:20
 msgid "Close"

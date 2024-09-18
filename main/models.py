@@ -28,6 +28,7 @@ class Phrase(models.Model):
     cleaned_text = models.CharField(max_length=255, verbose_name=_("Phrase"))
     example_sentence = models.CharField(_("example sentence"), max_length=255)
     definition = models.CharField(_("definition"), max_length=255)
+    sanity_check = models.TextField(_("sanity check"))
     language = models.CharField(
         _("language"),
         max_length=10,

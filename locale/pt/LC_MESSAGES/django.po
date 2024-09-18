@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 20:11-0500\n"
+"POT-Creation-Date: 2024-09-18 00:07-0500\n"
 "PO-Revision-Date: 2019-01-18 00:36+0000\n"
 "Last-Translator: Ramiro Morales\n"
 "Language-Team: Portuguese (http://www.transifex.com/django/django/language/pt/)\n"
@@ -109,7 +109,7 @@ msgstr "Texto bruto"
 msgid "This can be in any language you choose."
 msgstr "Isto pode ser em qualquer idioma que você escolher"
 
-#: .\main\models.py:28 .\main\models.py:47
+#: .\main\models.py:28 .\main\models.py:48
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Frase"
@@ -124,15 +124,19 @@ msgstr "exemplo de frase"
 msgid "definition"
 msgstr "Adição"
 
-#: .\main\models.py:32
+#: .\main\models.py:31
+msgid "sanity check"
+msgstr "verificação de sanidade"
+
+#: .\main\models.py:33
 msgid "language"
 msgstr "língua"
 
-#: .\main\models.py:38
+#: .\main\models.py:39
 msgid "Uses your \"working on\" language if left blank.  See Settings."
 msgstr "Use sua língua \"trabalhando em\" se deixado em branco Veja Configurações"
 
-#: .\main\models.py:48
+#: .\main\models.py:49
 msgid "Phrases"
 msgstr "Frases"
 

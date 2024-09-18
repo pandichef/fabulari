@@ -66,6 +66,61 @@ from purepython.parallel_map import mapify
 # get_phrase_metadata_multithreaded = mapify(get_phrase_metadata)
 
 
+def get_definition(
+    cleaned_text: str,
+    example_sentence: str,
+    working_on_verbose: str,
+    native_language_verbose: str,
+    openai_model: str,
+):
+    completion = client.chat.completions.create(
+        model=openai_model,
+        messages=[
+            {
+                "role": "system",
+                # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
+                "content": f"You translate phrases from {working_on_verbose} to {native_language_verbose}.",
+            },
+            {
+                "role": "user",
+                "content": f"""I am a native {native_language_verbose} speaker trying to learn {working_on_verbose}.
+
+Please translate the {working_on_verbose} word or phrase "{cleaned_text}" to {native_language_verbose} as it was used in the following sentence:
+{example_sentence}
+
+Do not include extra punctuation like leading and trailing quotes in the completion.
+Do not provide a translation of the example sentence, only a translation of the word or phrase above.
+""",
+            },
+        ],
+    )
+    return completion.choices[0].message.content
+
+
+def get_sanity_check(
+    cleaned_text: str,
+    # example_sentence: str,
+    working_on_verbose: str,
+    native_language_verbose: str,
+    openai_model: str,
+):
+    completion = client.chat.completions.create(
+        model=openai_model,
+        messages=[
+            {
+                "role": "system",
+                # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
+                "content": f"You provide a sanity check on whether a {working_on_verbose} word or phrase is commonly used.  The reponse should  always be in {native_language_verbose}.",
+            },
+            {
+                "role": "user",
+                "content": f"""Is "{cleaned_text}" a common {working_on_verbose} word or phrase?  Provide the reponse in {native_language_verbose}.  Do not start the reponse with "yes" or "no".  Just provide the assessment.""",
+            },
+        ],
+    )
+    return completion.choices[0].message.content
+
+
 @mapify
 def get_phrase_metadata(
     input_dict: Dict[str, Any],
@@ -102,33 +157,44 @@ def get_phrase_metadata(
     # cleanup up phrase, definition, example sentence
     # return (1,)
 
-    completion = client.chat.completions.create(
-        model=openai_model,
-        messages=[
-            {
-                "role": "system",
-                # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
-                "content": f"You translate phrases from {working_on_verbose} to {native_language_verbose}.",
-            },
-            {
-                "role": "user",
-                "content": f"""I am a native {native_language_verbose} speaker trying to learn {working_on_verbose}.
+    #     completion = client.chat.completions.create(
+    #         model=openai_model,
+    #         messages=[
+    #             {
+    #                 "role": "system",
+    #                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
+    #                 "content": f"You translate phrases from {working_on_verbose} to {native_language_verbose}.",
+    #             },
+    #             {
+    #                 "role": "user",
+    #                 "content": f"""I am a native {native_language_verbose} speaker trying to learn {working_on_verbose}.
 
-Please translate the {working_on_verbose} word or phrase "{cleaned_text}" to {native_language_verbose} as it was used in the following sentence:
-{example_sentence}
+    # Please translate the {working_on_verbose} word or phrase "{cleaned_text}" to {native_language_verbose} as it was used in the following sentence:
+    # {example_sentence}
 
-Do not include extra punctuation like leading and trailing quotes in the completion.
-Do not provide a translation of the example sentence, only a translation of the word or phrase above.
-""",
-            },
-        ],
+    # Do not include extra punctuation like leading and trailing quotes in the completion.
+    # Do not provide a translation of the example sentence, only a translation of the word or phrase above.
+    # """,
+    #             },
+    #         ],
+    #     )
+    #     definition = completion.choices[0].message.content
+    definition = get_definition(
+        cleaned_text,
+        example_sentence,
+        working_on_verbose,
+        native_language_verbose,
+        openai_model,
     )
-    definition = completion.choices[0].message.content
-    print(definition)
+    sanity_check = get_sanity_check(
+        cleaned_text, working_on_verbose, native_language_verbose, openai_model
+    )
+    # print(definition)
     return_dict = {
         "cleaned_text": cleaned_text,
         "example_sentence": example_sentence,
         "definition": definition,
+        "sanity_check": sanity_check,
     }
     input_dict.update(return_dict)
     return input_dict

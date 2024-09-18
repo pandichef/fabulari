@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 00:25-0500\n"
+"POT-Creation-Date: 2024-09-18 00:07-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgstr ""
 #: .\accounts\models.py:83 .\accounts\models.py:84
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
-#: .\templates\admin\base_site.html:30
+#: .\templates\admin\base_site.html:33
 msgid "Settings"
 msgstr "Instalaciones"
 
@@ -109,7 +109,7 @@ msgstr "Textus rudis"
 msgid "This can be in any language you choose."
 msgstr "Hoc potest esse in quolibet sermone quem elige."
 
-#: .\main\models.py:28 .\main\models.py:47
+#: .\main\models.py:28 .\main\models.py:48
 #: .\main\templates\practice_translation.html:176
 msgid "Phrase"
 msgstr "Frasa"
@@ -122,15 +122,21 @@ msgstr "exemplum sententiae"
 msgid "definition"
 msgstr "definitio"
 
-#: .\main\models.py:32
+#: .\main\models.py:31
+msgid "sanity check"
+msgstr "verificatio sanitatis"
+
+#: .\main\models.py:33
 msgid "language"
 msgstr "lingua"
 
-#: .\main\models.py:38
-msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+#: .\main\models.py:39
+#, fuzzy
+#| msgid "\"Uses your \"working on\" language if left blank.  See Settings."
+msgid "Uses your \"working on\" language if left blank.  See Settings."
 msgstr "\"Utitur tua lingua 'operando' si relinquetur vacua. Vide Instantes\""
 
-#: .\main\models.py:48
+#: .\main\models.py:49
 msgid "Phrases"
 msgstr "Phrases"
 
@@ -164,7 +170,7 @@ msgstr "Practicare Translationem in Hac Phrases"
 
 #: .\main\templates\create_study_materials.html:8
 #: .\main\templates\create_study_materials.html:86
-#: .\templates\admin\base_site.html:13
+#: .\templates\admin\base_site.html:16
 msgid "Create Study Materials"
 msgstr "Creare materia studii"
 
@@ -236,31 +242,31 @@ msgstr "Filtra per GPT Prima"
 msgid "Focus on My Phrase List"
 msgstr "Concentrate in mea lista locutionum"
 
-#: .\templates\admin\base_site.html:4
+#: .\templates\admin\base_site.html:7
 msgid "Django site admin"
 msgstr "Django situs admin"
 
-#: .\templates\admin\base_site.html:7
+#: .\templates\admin\base_site.html:10
 msgid "Django administration"
 msgstr "Django administratio"
 
-#: .\templates\admin\base_site.html:18
+#: .\templates\admin\base_site.html:21
 msgid "Practice Translation"
 msgstr "Practicare Translation"
 
-#: .\templates\admin\base_site.html:23
+#: .\templates\admin\base_site.html:26
 msgid "Documentation"
 msgstr "Documentatio"
 
-#: .\templates\admin\base_site.html:28
+#: .\templates\admin\base_site.html:31
 msgid "Change password"
 msgstr "Mutare tessera"
 
-#: .\templates\admin\base_site.html:32
+#: .\templates\admin\base_site.html:35
 msgid "Report Issues"
 msgstr "Referre quaestiones"
 
-#: .\templates\admin\base_site.html:33
+#: .\templates\admin\base_site.html:36
 msgid "Log out"
 msgstr "Disconnectere"
 
@@ -281,7 +287,7 @@ msgstr "Exportare Phasium ad Fasciculum CSV ⬇"
 msgid "My Level 💡"
 msgstr "Meus Latus 💡"
 
-#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:19
+#: .\templates\admin\submit_line.html:8 .\templates\admin\submit_line.html:14
 msgid "Save"
 msgstr "Servare"
 
@@ -294,12 +300,12 @@ msgid "Save as new"
 msgstr "Salva ut novum"
 
 #: .\templates\admin\submit_line.html:14
-msgid "Save and add another"
-msgstr "Salva et adde aliud"
-
-#: .\templates\admin\submit_line.html:19
 msgid "Save and view"
 msgstr "Salva et vide"
+
+#: .\templates\admin\submit_line.html:15
+msgid "Save and add another"
+msgstr "Salva et adde aliud"
 
 #: .\templates\admin\submit_line.html:20
 msgid "Close"
