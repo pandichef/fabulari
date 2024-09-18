@@ -39,6 +39,7 @@ The reponse should always be a commonly used word or phrase.  The reponse should
 The resonse should use similar to the input.  For example, if the input is "He won", the response should be "to win", not "to vanquish".
 The repsonse phrase should also be in {working_on_verbose}. {semitic_language_extra}
 If the input phrase is a conjugated verb, convert the word to its infinitive and add the appropriate preposition.
+For example, the input "ellos consintieron" should become "consentir a", not merely "consentir" without the preposition.
 The reponse should be in the default gender for a given language.  For example, masculine is the default for Spanish.
 Hence, the cleaned phrase for "pequeña" should be "pequeño" and not "pequeña".
 In general, add the requisite preposition or articles to a phrase.  For example, in Spanish "tengo ganas de comer" should become "tener ganas de", not just "tener ganas".
