@@ -167,6 +167,18 @@ def create_study_materials_view(request):
 
             article_in_html = markdown(convert_to_markdown_if_plain_text(article))
 
+            from purepython.practice_translation import detect_language_code as detect
+
+            article_language = detect(
+                article_in_html, openai_llm_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS
+            )
+            if article_language in ["he", "ar"]:
+                article_in_html = f"""<div dir="rtl" style="text-align: right;">{article_in_html}</div>"""
+                subject = "\u200F" + str(subject)
+                subject_for_browser = f"""<div dir="rtl" style="text-align: right;"><h3>{subject}</h3></div>"""
+            else:
+                subject_for_browser = f"<h3>{subject}</h3>"
+
         if action == "preview_first":
             request.session["article_title"] = subject
             request.session["article_in_html"] = article_in_html
@@ -175,7 +187,8 @@ def create_study_materials_view(request):
                 "create_study_materials.html",
                 {
                     "form": UseGPTRadioButtonForm(),
-                    "article": f"<h3>{subject}</h3>" + article_in_html,
+                    # f"""<div dir="rtl" style="text-align: right;">{article_in_html}</div>"""
+                    "article": subject_for_browser + article_in_html,
                     "preview_page": True,
                 },
             )
@@ -219,14 +232,25 @@ def create_study_materials_view(request):
                 success = False
                 while not success:
                     try:
-                        send_mail(
-                            # "[summary] " + subject,
+                        from django.utils.html import strip_tags
+                        from django.core.mail import EmailMultiAlternatives
+
+                        email = EmailMultiAlternatives(
                             subject,
-                            article_in_html,
+                            strip_tags(article_in_html),
                             "from@example.com",
                             [request.user.email],
-                            fail_silently=False,
                         )
+                        email.attach_alternative(article_in_html, "text/html")
+                        email.send(fail_silently=False)
+                        # send_mail(
+                        #     # "[summary] " + subject,
+                        #     subject,
+                        #     strip_tags(article_in_html),
+                        #     "from@example.com",
+                        #     [request.user.email],
+                        #     fail_silently=False,
+                        # )
                         success = True
                     except:
                         pass

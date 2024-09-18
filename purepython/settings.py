@@ -8,6 +8,7 @@ LANGUAGE_CHOICES = [
     ("de", "German"),
     ("la", "Latin"),
     ("fr", "French"),
+    ("pt", "Portuguese")
     # Add more languages as needed
 ]
 
