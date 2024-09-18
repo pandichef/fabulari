@@ -54,6 +54,7 @@ The cleaned phrase can be "chica bonita", not "chica bonito".
 The cleaned phrase can be "how are you today" but not "how be you today".
 The cleaned phrase can be "como estas hoy" but not "como estar hoy".
 Do not include any excess punctuation e.g., the clean phrase should not be "(jainism)", just "jainism".
+Do not capitalize any letters unless there is a proper noun or the capitalization is core element of the phrase.
 """,
             },
             {"role": "user", "content": phrase},
