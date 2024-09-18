@@ -35,6 +35,9 @@ def clean_text(
                 # "content": f"You translate {'phrases' if phrase else 'sentences'} from {working_on} to {native_language}.",
                 "content": f"""
 You take potentially sloppily written words or phrases in {working_on_verbose} and return a cleaned up version of the same word or phrase.
+The reponse should always be a commonly used word or phrase.
+The reponse should always be in the appropriate person and number.  For example, "tener muchas ganas" and not "tener mucha gana".
+The resonse should use similar to the input.  For example, if the input is "He won", the response should be "to win", not "to vanquish".
 The repsonse phrase should also be in {working_on_verbose}. {semitic_language_extra}
 If the input phrase is a conjugated verb, convert the word to its infinitive.
 However, if the input phrase merely contains a verb, use the original form so it will be grammatically correct.

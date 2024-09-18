@@ -179,6 +179,7 @@ class PhraseAdmin(admin.ModelAdmin):
                 and last_obj.definition  # e.g., if object created via add_multiple_phrases
                 and last_obj.example_sentence  # e.g., if object created via add_multiple_phrases
             )
+            do_nothing = False  # hack; in highsight, this was a bad idea
             if do_nothing:
                 print("return True")
                 return None
