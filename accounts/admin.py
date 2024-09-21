@@ -53,7 +53,7 @@ class CustomUserAdmin(UserAdmin):
         "openai_llm_model_complex_tasks",
     ]
     fieldsets = (
-        ("App Settings", {"fields": ("native_language", "working_on")}),
+        ("App Settings", {"fields": ("native_language", "working_on", "use_raw_text")}),
         ("Username/Password", {"fields": ("username", "password", "email")}),
         # ("Personal info", {"fields": ("first_name", "last_name", "email")}),
         (

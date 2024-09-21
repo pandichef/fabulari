@@ -75,6 +75,7 @@ Note that Readwise is not a free service."""
                 native_language=request.user.native_language,
                 # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
                 openai_model=request.user.openai_llm_model_complex_tasks,
+                use_raw_text=request.user.use_raw_text,
             )
         )
         new_phrase_objects = [

@@ -99,7 +99,7 @@ def from_native_language(
     working_on_verbose: str,  # ="Spanish",
     native_language_verbose: str,  # ="English",
     openai_llm_model: str,  # ="gpt-4o-mini",
-    is_phrases=False,
+    is_phrases=False,  # I believe this for the i18n in Django
 ) -> str | None:
     if is_phrases:  # for deploy.py
         system_content = f"""You translate phrases from {native_language_verbose} to {working_on_verbose}.  
@@ -111,7 +111,8 @@ The response should mimic the punctuation of the original text as much as possib
 "Guardar como nuevo" not "guardar como nuevo".
 """
     else:
-        system_content = f"You translate sentences from {native_language_verbose} to {working_on_verbose}."
+        system_content = f""""You translate sentences from {native_language_verbose} to {working_on_verbose}.  
+If the {native_language_verbose} sentence lacks certain punctuation, the {working_on_verbose} version should mirror the lack of punctuation."""
 
     completion = client.chat.completions.create(
         model=openai_llm_model,

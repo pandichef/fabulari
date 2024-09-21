@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 00:07-0500\n"
+"POT-Creation-Date: 2024-09-20 23:19-0500\n"
 "PO-Revision-Date: 2020-07-21 09:32+0000\n"
 "Last-Translator: crazyzubr <hjcnbckfd@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/django/django/language/ru/)\n"
@@ -91,7 +91,21 @@ msgstr ""
 "По умолчанию извлекается только иностранная лексика из Readwise. Включите "
 "это, чтобы импортировать также из вашего родного языка."
 
-#: .\accounts\models.py:83 .\accounts\models.py:84
+#: .\accounts\models.py:82
+#, fuzzy
+#| msgid "Raw text"
+msgid "use raw text"
+msgstr "Сырые данные"
+
+#: .\accounts\models.py:85
+msgid ""
+"By default, raw text input is cleaned before saving a phrase.  To disable "
+"this, click here."
+msgstr ""
+"По умолчанию необработанный текст очищается перед сохранением фразы. Чтобы "
+"отключить это нажмите здесь"
+
+#: .\accounts\models.py:90 .\accounts\models.py:91
 #: .\main\templates\create_study_materials.html:85
 #: .\main\templates\practice_translation.html:146
 #: .\templates\admin\base_site.html:33

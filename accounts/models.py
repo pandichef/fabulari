@@ -78,6 +78,13 @@ class CustomUser(AbstractUser):
             "By default, only foreign vocabulary is retrieved from Readwise.  Turn this on to import from your native language as well."
         ),
     )
+    use_raw_text = models.BooleanField(
+        _("use raw text"),
+        default=False,
+        help_text=_(
+            "By default, raw text input is cleaned before saving a phrase.  To disable this, click here."
+        ),
+    )
 
     class Meta:
         verbose_name = _("Settings")

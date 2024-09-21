@@ -220,6 +220,7 @@ class PhraseAdmin(admin.ModelAdmin):
         else:
             translated_raw_text = obj.raw_text
 
+        # asdf = get_phrase_metadata()
         native_language_metadata = list(
             get_phrase_metadata(
                 [
@@ -231,6 +232,7 @@ class PhraseAdmin(admin.ModelAdmin):
                 native_language=request.user.native_language,
                 # openai_model=settings.OPENAI_LLM_MODEL_SIMPLE_TASKS,
                 openai_model=request.user.openai_llm_model_complex_tasks,
+                use_raw_text=request.user.use_raw_text,
             )
         )[0]
 

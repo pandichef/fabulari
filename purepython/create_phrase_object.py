@@ -53,8 +53,10 @@ Ensure that the cleaned phrase is syntactically correct.  Examples:
 The cleaned phrase can be "chica bonita", not "chica bonito".
 The cleaned phrase can be "how are you today" but not "how be you today".
 The cleaned phrase can be "como estas hoy" but not "como estar hoy".
-Do not include any excess punctuation e.g., the clean phrase should not be "(jainism)", just "jainism".
 Do not capitalize any letters unless there is a proper noun or the capitalization is core element of the phrase.
+Do not include any excess punctuation.  Examples:
+the clean phrase should be "jainism", not "(jainism)".
+the clean phrase should be "amar", not "amar." (i.e., exclude the extra period character).
 """,
             },
             {"role": "user", "content": phrase},
@@ -131,7 +133,8 @@ def get_phrase_metadata(
     # phrase: str,
     # working_on_code: str,  # = "es",
     native_language: str,  # = "en",
-    openai_model: str  # = "gpt-4o-mini",
+    openai_model: str,  # = "gpt-4o-mini",
+    use_raw_text: bool
     # phrase=None,
 ) -> Dict[str, Any] | None:
 
@@ -142,13 +145,19 @@ def get_phrase_metadata(
     """Gets extra data e.g., cleaned_phrase, definition, example sentence"""
     if len(translated_raw_text) < 2:  # at least 2 characters
         return None
-    cleaned_text = clean_text(
-        phrase=translated_raw_text,
-        working_on_verbose=working_on_verbose,
-        openai_model=openai_model,
-    )
+
+    if use_raw_text:
+        cleaned_text = translated_raw_text
+    else:
+        cleaned_text = clean_text(
+            phrase=translated_raw_text,
+            working_on_verbose=working_on_verbose,
+            openai_model=openai_model,
+        )
+
     if "(proper name)" in cleaned_text:
         return None
+
     example_sentence = generate_full_sentence(
         cleaned_text,
         working_on_verbose=working_on_verbose,
